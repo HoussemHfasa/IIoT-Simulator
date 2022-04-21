@@ -1,10 +1,10 @@
-# Programmierprojekt: IIoT-Simulator
+﻿# Programmierprojekt: IIoT-Simulator
 
 * Teammitglieder:
 	1. <Name1>
 	2. Houssem Hfasa
 	3. Paul Schult
-	4. Aleksandr Terekhov
+	4. Aleksandr Terekhov.
 * Team: 5
 * Semester: Sommersemester 2022
 
