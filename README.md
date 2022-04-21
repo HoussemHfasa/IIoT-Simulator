@@ -4,7 +4,7 @@
 	1. <Name1>
 	2. Houssem Hfasa
 	3. Paul Schult
-	4. <Name4>
+	4. Aleksandr Terekhov
 * Team: 5
 * Semester: Sommersemester 2022
 
