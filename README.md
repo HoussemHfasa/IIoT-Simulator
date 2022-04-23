@@ -1,7 +1,7 @@
-﻿# Programmierprojekt: IIoT-Simulator
+# Programmierprojekt: IIoT-Simulator
 
 * Teammitglieder:
-	1. <Name1>
+	1. Mjellma Salihi
 	2. Houssem Hfasa
 	3. Paul Schult
 	4. Aleksandr Terekhov.
