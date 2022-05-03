@@ -1,1 +1,1 @@
-In diesem Verzeichnis sollen Sie Ihr Visual-Studio Projekt verwalten.
+In diesem Verzeichnis sollen Sie Ihr Visual-Studio Projekt verwalten..
