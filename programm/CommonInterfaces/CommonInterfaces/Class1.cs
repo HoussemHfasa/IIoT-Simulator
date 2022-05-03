@@ -24,26 +24,70 @@ namespace CommonInterfaces
     public interface ISensorDataSimulator
 
     {
-        // Alle Klassen, die diese Schnittstelle implementieren, besitzen einen Konstruktor,
-        // der alle für diesen speziellen Simulator benötigten Nutzereingaben aufnimmt,
-        // eine Liste mit Werten und eine Funktion "SimulateValues". 
+ 
 
 
-        bool SimulateValues(int Amount);
+        List<double> Normalverteilung(double Mittelwert, double Standardabweichung, int Werteanzahl, double Fehlerhäufigkeit,
+                                int Fehlerdauer, double MaximalwertFehler, double MinimalwertFehler);
+
+        List<bool> Zufallsbool(double Wechselwarscheinlichkeit);
+
+        List<double> Exponential(double Basis, double Exponent, double Faktor);
+
+        List<double> Linear(double Steigung, double VerschiebungXAchse);
 
 
-        //würde nur für double Werte funktionieren.. wie kann man Int Werte und bools zurückgeben
-        //List<double> getdoubleValues();
-
-        //List<int> getIntValues();
-
-        //List<bool> getBoolValues();
-
-        //oder über die den Standard-getter?
-
-        //Idee: Eine große Simulatorklasse mit einzelnen Funktionen für Normalverteilung, Linear, exponential, bool..!!
 
 
+        // Idee:
+        // Über Methode void/bool SetFehlerParameter die Fehlerparameter entgegennehmen und intern abspeichern.
+        // bool SetFehlerParameter( double Fehlerhäufigkeit,int Fehlerdauer, double MaximalwertFehler, double MinimalwertFehler)
+        // Fehlerparameter-Variablen nur mit public getter. Müssten die Variablen hier mit aufgeführt werden?
+
+
+        // Dadurch werden Methodenaufrufe übersichtlicher/vereinfacht
+        // Aktuell favorisierte Variante!
+        // 
+
+
+
+
+        // ALTERNATIVE:
+        // Zur Vereinfachung der Nutzung und Lesbarkeit oben genannter Methoden werden die Fehlerparameter in eigener Klasse zusammengefasst
+        // Dann würde für die Fehlergenerierung ein Objekt der Klasse Fehlerparameter genügen. 
+        /*
+          class FehlerParameter
+        {
+            double Fehlerhäufigkeit { get; }
+
+            int Fehlerdauer { get; }
+            double MaximalwertFehler { get; }
+            double MinimalwertFehler { get; }
+
+            bool IsFehler { get; }
+
+            //Wenn Fehler vorhanden, dieser Konstruktor
+            public FehlerParameter(double Fehlerhäufigkeit,
+                                int Fehlerdauer, double MaximalwertFehler, double MinimalwertFehler)
+            {
+                this.Fehlerhäufigkeit = Fehlerhäufigkeit;
+                this.Fehlerdauer = Fehlerdauer;
+                this.MaximalwertFehler = MaximalwertFehler;
+                this.MinimalwertFehler = MinimalwertFehler;
+                this.IsFehler = true;
+            }
+
+            //Wenn kein Fehler vorhanden, dieser Konstruktor
+            public FehlerParameter()
+            {
+                this.IsFehler = false;
+            }
+
+
+        */
+        }
+        
+        
        
     }
 }
