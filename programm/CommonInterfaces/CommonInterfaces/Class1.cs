@@ -21,22 +21,30 @@ namespace CommonInterfaces
 
     }
 
+  
     public interface ISensorDataSimulator
 
     {
- 
 
-
+        //Dokumentation vervollständigen
+        /// <summary>
+        /// Die Methode erzeugt eine Liste mit double Werten. Im Normalfall sind die Werte stetig und normalverteilt. Es können Fehler eingebaut werden
+        /// </summary>
+        /// <param name="Mittelwert"> </param>
+        /// <returns>Liste zufälliger, normalverteilter double Werte</returns>
         List<double> Normalverteilung(double Mittelwert, double Standardabweichung, int Werteanzahl, double Fehlerhäufigkeit,
                                 int Fehlerdauer, double MaximalwertFehler, double MinimalwertFehler);
 
-        List<bool> Zufallsbool(double Wechselwarscheinlichkeit);
-
-        List<double> Exponential(double Basis, double Exponent, double Faktor);
-
-        List<double> Linear(double Steigung, double VerschiebungXAchse);
+        List<bool> Zufallsbool(double Wechselwarscheinlichkeit, int Werteanzahl);
 
 
+        List<double> Exponential(double Basis, double Exponent, int Werteanzahl, double Fehlerhäufigkeit,
+                                int Fehlerdauer, double MaximalwertFehler, double MinimalwertFehler);
+
+        List<double> Linear(double Steigung, double VerschiebungXAchse, int Werteanzahl, double Fehlerhäufigkeit,
+                                int Fehlerdauer, double MaximalwertFehler, double MinimalwertFehler);
+
+        
 
 
         // Idee:
@@ -46,6 +54,8 @@ namespace CommonInterfaces
 
 
         // Dadurch werden Methodenaufrufe übersichtlicher/vereinfacht
+        // Problem: Wenn die Fehlerparameter gesetzt wurden und andere Funktion aufgerufen wird, sind die Parameter weiterhin hinterlegt. Das kann 
+        // zu ungewolltem Output mit Fehlern führen.
         // Aktuell favorisierte Variante!
         // 
 
@@ -90,4 +100,4 @@ namespace CommonInterfaces
         
        
     }
-}
+
