@@ -9,7 +9,7 @@ namespace CommonInterfaces
 
     }
 
-    public interface IBrokerComm
+    public interface IMQTTCommunicator
     {
 
 
