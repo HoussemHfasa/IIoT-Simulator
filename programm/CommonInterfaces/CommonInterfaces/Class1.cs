@@ -5,7 +5,112 @@ namespace CommonInterfaces
 {
     public interface IDatamanager
     {
+        // Idee:
+        //string AdressBaum{get; set;}
+        //string[] SensorIds{set; set;}
+        //void sensorhinzufuegen(){}
+        //void sensorloeschen(){}
 
+
+
+
+        /*class Sensorgruppen
+        {
+            string Adresse { get; set; }
+            string[] SensorIds { get; set; }
+            public Sensorgruppen(string adresse, string[] sensorids )
+            {
+                Adresse = adresse;
+                for(int i=0; i<sensorids.Length; i++)
+                {
+                    SensorIds[i] = sensorids[i];
+                }
+            }
+        
+        public void Sensorhinzufuegen()
+        { }
+
+        public void Sensorloeschen()
+        { }
+        }
+         public abstract class  Sensor 
+        {
+            public string[,] Id_Adresse { get; set; }
+            public string Sensortype { get; set; }
+            public string Einheit { get; set; }
+            public DateTime CreationDate { get; }
+            public TimeSpan CreationTime { get; }
+            public int Werteanzahl { get; }
+            public int Timeinterval { get; }
+
+            public abstract  getvalues(); ??
+            public abstract  setvalues();
+            
+        }
+
+        class TemperatureSensor : IDatamanager.Sensor
+        {
+            public string Sensor_id { get; set; }
+            private double[]
+            public void getvalues()
+            { }
+            public void setvalues()
+            { }
+        }
+        class Feuchtigkeitssensor : IDatamanager.Sensor
+        {
+            public string Sensor_id { get; set; }
+            private double[]
+           public void getvalues()
+            { }
+            public void setvalues()
+            { }
+        }
+        class Feuersensor : IDatamanager.Sensor
+        {
+            public string Sensor_id { get; set; }
+            private double[]
+          public void getvalues()
+            { }
+            public void setvalues()
+            { }
+        }
+        class Dehnungssensor : IDatamanager.Sensor
+        {
+            public string Sensor_id { get; set; }
+            private double[]
+          public void getvalues()
+            { }
+            public void setvalues()
+            { }
+        }
+         class Lichtsensor : IDatamanager.Sensor
+        {
+            public string Sensor_id { get; set; }
+            private double[]
+           public void getvalues()
+            { }
+            public void setvalues()
+            { }
+        }
+        class DrehmomentSensor : IDatamanager.Sensor
+        {
+            public string Sensor_id { get; set; }
+            private double[]
+         public void getvalues()
+            { }
+            public void setvalues()
+            { }
+        }
+        class FuellstandsSensor : IDatamanager.Sensor
+        {
+            public string Sensor_id { get; set; }
+            private double[]
+          public void getvalues()
+            { }
+            public void setvalues()
+            { }
+        }*/
 
     }
 
