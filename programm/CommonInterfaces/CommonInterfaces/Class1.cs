@@ -11,7 +11,25 @@ namespace CommonInterfaces
 
     public interface IMQTTCommunicator
     {
+        public void registerClient()
+        {
 
+        }
+        public void SubscribeTopic(string name)
+        {
+
+        }
+        public void CreateTopic(string name)
+        {
+
+        }
+        public void PublishToTopic(string name)
+        {
+
+        }
+
+        //public void SetQoS(int ServiceLevel)
+        //
 
     }
 
