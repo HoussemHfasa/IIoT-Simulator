@@ -14,7 +14,7 @@ namespace CommonInterfaces
 
 
 
-        /*class Sensorgruppen
+        class Sensorgruppen
         {
             string Adresse { get; set; }
             string[] SensorIds { get; set; }
@@ -33,7 +33,7 @@ namespace CommonInterfaces
         public void Sensorloeschen()
         { }
         }
-         public abstract class  Sensor 
+         public abstract class  Sensor<T> 
         {
             public string[,] Id_Adresse { get; set; }
             public string Sensortype { get; set; }
@@ -43,72 +43,87 @@ namespace CommonInterfaces
             public int Werteanzahl { get; }
             public int Timeinterval { get; }
 
-            public abstract  getvalues(); ??
-            public abstract  setvalues();
+            public abstract T[] getvalues(); 
+            public abstract void setvalues();
             
         }
 
-        class TemperatureSensor : IDatamanager.Sensor
+        class TemperatureSensor : IDatamanager.Sensor<double>
         {
             public string Sensor_id { get; set; }
-            private double[]
-            public void getvalues()
-            { }
-            public void setvalues()
+            private double[] values;
+            public override double[] getvalues()
+            {
+                return new double[] { } ;
+            }
+            public override void setvalues()
             { }
         }
-        class Feuchtigkeitssensor : IDatamanager.Sensor
+        class Feuchtigkeitssensor : IDatamanager.Sensor<double>
         {
             public string Sensor_id { get; set; }
-            private double[]
-           public void getvalues()
-            { }
-            public void setvalues()
+            private double[] values;
+          public override double[] getvalues()
+            {
+                return new double[] { };
+            }
+            public override void setvalues()
             { }
         }
-        class Feuersensor : IDatamanager.Sensor
+        class Feuersensor : IDatamanager.Sensor<bool>
         {
             public string Sensor_id { get; set; }
-            private double[]
-          public void getvalues()
-            { }
-            public void setvalues()
+            private double[] values;
+          public override bool[] getvalues()
+            {
+                return new bool[] { };
+            }
+            public override void setvalues()
             { }
         }
-        class Dehnungssensor : IDatamanager.Sensor
+        class Dehnungssensor : IDatamanager.Sensor<int>
         {
             public string Sensor_id { get; set; }
-            private double[]
-          public void getvalues()
-            { }
-            public void setvalues()
+            private double[] values;
+            public override int[] getvalues()
+            {
+                return new int[] { };
+            }
+            public override void setvalues()
             { }
         }
-         class Lichtsensor : IDatamanager.Sensor
+         class Lichtsensor : IDatamanager.Sensor<int>
         {
             public string Sensor_id { get; set; }
-            private double[]
-           public void getvalues()
-            { }
-            public void setvalues()
+            private double[] values;
+            public override int[] getvalues()
+            {
+                return new int[] { };
+            }
+            public override void setvalues()
             { }
         }
-        class DrehmomentSensor : IDatamanager.Sensor
+        class DrehmomentSensor : IDatamanager.Sensor<double>
         {
             public string Sensor_id { get; set; }
-            private double[]
-         public void getvalues()
-            { }
-            public void setvalues()
+            private double[] values;
+            public override double[] getvalues()
+            {
+                return new double[] { };
+            }
+            public override void setvalues()
             { }
         }
-        class FuellstandsSensor : IDatamanager.Sensor
+        class FuellstandsSensor : IDatamanager.Sensor<double>
         {
             public string Sensor_id { get; set; }
-            private double[]
-          public void getvalues()
-            { }
-            public void setvalues()
+            private double[] Gasvalues;
+            private double[] Gasvalues;
+            public override double[] getvalues()
+            {
+                return new double[] { };
+            }
+            public override void setvalues()
             { }
         }*/
 
