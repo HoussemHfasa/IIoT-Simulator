@@ -12,7 +12,11 @@ namespace CommonInterfaces
         //void sensorloeschen(){}
 
 
-
+        // Methodennamen mit Großbuchstaben beginnen /Paul
+        /* Interfaces enthalten normalerweise keine Klassen!
+         * Vorschlag: Unterteilung des Interface IDatamanager in ISensorGroup und ISensor.
+         * dort jeweils die benötigten Methoden und Eigenschaften deklarieren (nicht implementieren!) /Paul
+         */
 
         class Sensorgruppen
         {
@@ -45,7 +49,7 @@ namespace CommonInterfaces
 
             public abstract T[] getvalues(); 
             public abstract void setvalues();
-            
+            //Übergabeparameter (Liste der Werte) fehlt?  
         }
 
         class TemperatureSensor : IDatamanager.Sensor<double>
@@ -131,18 +135,25 @@ namespace CommonInterfaces
 
     public interface IMQTTCommunicator
     {
+        //Welche Informationen werden zur Registrierung des Clients benoetigt? /Paul
         public void registerClient()
         {
 
         }
+
+        //  "name" in diesem Kontext nicht selbsterklärend /Paul
         public void SubscribeTopic(string name)
         {
 
         }
+
+        // "name" nicht selbsterklärend
         public void CreateTopic(string name)
         {
 
         }
+
+        // wird "name" gepublished?
         public void PublishToTopic(string name)
         {
 
@@ -151,6 +162,7 @@ namespace CommonInterfaces
         //public void SetQoS(int ServiceLevel)
         //
 
+        // die geschweiften Klammern entfernen, nur Methoden deklarieren /Paul
     }
 
     public interface IDatastorage
@@ -163,24 +175,37 @@ namespace CommonInterfaces
     public interface ISensorDataSimulator
 
     {
+        // Nutzereingaben zur Berechnung der Messwerte, setzen nur über Methoden möglich
+        public double Mittelwert { get; }
+        public double Standardabweichung { get; }
+        public int Werteanzahl { get; }
+        public double Fehlerhäufigkeit { get; }
+        public double Fehlerdauer { get; }
+        public double MaximalwertFehler { get; }
+        public double MinimalwertFehler { get; }
 
-        //Dokumentation vervollständigen
+        //Einstellung des Messfehlers/Signalfehlers
+        bool SetzeSignalfehler(double Fehlerhäufigkeit, int Fehlerdauer, double MaximalwertFehler, double MinimalwertFehler);
+        bool SignalfehlerZurücksetzen();
+
+      
+
+        //Funktionen zur Erzeugung von Messwerten
+
         /// <summary>
-        /// Die Methode erzeugt eine Liste mit double Werten. Im Normalfall sind die Werte stetig und normalverteilt. Es können Fehler eingebaut werden
+        /// Erzeugt eine Liste mit stetigen, normalverteilten double Werten. Sollte SetzeSignalfehler eingestellt sein, werden nichtstetige Fehler eingefügt
         /// </summary>
         /// <param name="Mittelwert"> </param>
         /// <returns>Liste zufälliger, normalverteilter double Werte</returns>
-        List<double> Normalverteilung(double Mittelwert, double Standardabweichung, int Werteanzahl, double Fehlerhäufigkeit,
-                                int Fehlerdauer, double MaximalwertFehler, double MinimalwertFehler);
+        List<double> Normalverteilung(double Mittelwert, double Standardabweichung, int Werteanzahl);
+
 
         List<bool> Zufallsbool(double Wechselwarscheinlichkeit, int Werteanzahl);
 
 
-        List<double> Exponential(double Basis, double Exponent, int Werteanzahl, double Fehlerhäufigkeit,
-                                int Fehlerdauer, double MaximalwertFehler, double MinimalwertFehler);
+        List<double> Exponential(double Basis, double Exponent, int Werteanzahl);
 
-        List<double> Linear(double Steigung, double VerschiebungXAchse, int Werteanzahl, double Fehlerhäufigkeit,
-                                int Fehlerdauer, double MaximalwertFehler, double MinimalwertFehler);
+        List<double> Linear(double Steigung, double VerschiebungXAchse, int Werteanzahl);
 
         
 
