@@ -66,8 +66,17 @@ namespace CommonInterfaces
 
     public interface IDatastorage
     {
+        // die Daten die von der Sensoren kommt
+        public object Data { get; set; }
+        //Dateipfad der Datei
+        public string filepath { get; set; }
+        public void JsonSerialize(object data, string filepath);
+        public object JsonDeserialize(string filepath);
 
-
+        public void LoadSensorgroup(string filepath);
+        public void LoadBrockerProfile(string filepath);
+        public void SaveSensorgroup(object data, string filepath);
+        public void SavebrockerProfile(object data, string filepath);
     }
 
   
