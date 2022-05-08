@@ -35,33 +35,23 @@ namespace CommonInterfaces
     public interface IMQTTCommunicator
     {
         //Welche Informationen werden zur Registrierung des Clients benoetigt? /Paul
-        public void RegisterClient()
-        {
+        public void RegisterClient(string clientId, bool isGroup);
 
-        }
 
         //  "name" in diesem Kontext nicht selbsterklärend /Paul
-        public void SubscribeTopic(string name)
-        {
-
-        }
+        public void SubscribeTopic(string clientId, string topicName);
 
         // "name" nicht selbsterklärend
-        public void CreateTopic(string name)
-        {
-
-        }
+        public void CreateTopic(string clientId, string topicName);
 
         // wird "name" gepublished?
-        public void PublishToTopic(string name)
-        {
+        public void PublishToTopic(string clientId, string topicName, dynamic value);
 
-        }
+        public void SetNewBroker(dynamic Host, int Port);
+
 
         //public void SetQoS(int ServiceLevel)
         //
-
-        // die geschweiften Klammern entfernen, nur Methoden deklarieren /Paul
     }
 
     public interface IDatastorage
