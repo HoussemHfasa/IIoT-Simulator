@@ -73,8 +73,8 @@ namespace CommonInterfaces
         public void JsonSerialize(object data, string filepath);
         public object JsonDeserialize(string filepath);
 
-        public void LoadSensorgroup(string filepath);
-        public void LoadBrockerProfile(string filepath);
+        public object LoadSensorgroup(string filepath);
+        public object LoadBrockerProfile(string filepath);
         public void SaveSensorgroup(object data, string filepath);
         public void SavebrockerProfile(object data, string filepath);
     }
