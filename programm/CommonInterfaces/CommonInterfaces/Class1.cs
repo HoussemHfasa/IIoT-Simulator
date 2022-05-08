@@ -3,55 +3,40 @@ using System.Collections.Generic;
 
 namespace CommonInterfaces
 {
-    public interface IDatamanager
+    public interface ISenor<T>
     {
+        public string Sensor_id { get; set; }
+        public string[,] Id_Adresse { get; set; }
+        public string Sensortype { get; set; }
+        public string Einheit { get; set; }
+        public DateTime CreationDate { get; }
+        public TimeSpan CreationTime { get; }
+        public int Werteanzahl { get; }
+        public int Timeinterval { get; }
+
+        public abstract T[] Getvalues();
+        public abstract void Setvalues(List<T> Values);
+        //Übergabeparameter (Liste der Werte) fehlt? 
+    }
+    public interface ISensorGroups
+    {
+
+        string Adresse { get; set; }
+        string[] SensorIds { get; set; }
+
+        public void Sensorhinzufuegen();
+
+        public void Sensorloeschen();
+
+
+
         // Idee:
         //string AdressBaum{get; set;}
         //string[] SensorIds{set; set;}
         //void sensorhinzufuegen(){}
         //void sensorloeschen(){}
 
-
-        // Methodennamen mit Großbuchstaben beginnen /Paul
-        /* Interfaces enthalten normalerweise keine Klassen!
-         * Vorschlag: Unterteilung des Interface IDatamanager in ISensorGroup und ISensor.
-         * dort jeweils die benötigten Methoden und Eigenschaften deklarieren (nicht implementieren!) /Paul
-         */
-
-        class Sensorgruppen
-        {
-            string Adresse { get; set; }
-            string[] SensorIds { get; set; }
-            public Sensorgruppen(string adresse, string[] sensorids )
-            {
-                Adresse = adresse;
-                for(int i=0; i<sensorids.Length; i++)
-                {
-                    SensorIds[i] = sensorids[i];
-                }
-            }
-        
-        public void Sensorhinzufuegen()
-        { }
-
-        public void Sensorloeschen()
-        { }
-        }
-         public abstract class  Sensor<T> 
-        {
-            public string[,] Id_Adresse { get; set; }
-            public string Sensortype { get; set; }
-            public string Einheit { get; set; }
-            public DateTime CreationDate { get; }
-            public TimeSpan CreationTime { get; }
-            public int Werteanzahl { get; }
-            public int Timeinterval { get; }
-
-            public abstract T[] getvalues(); 
-            public abstract void setvalues();
-            //Übergabeparameter (Liste der Werte) fehlt?  
-        }
-
+/*
         class TemperatureSensor : IDatamanager.Sensor<double>
         {
             public string Sensor_id { get; set; }
@@ -130,13 +115,13 @@ namespace CommonInterfaces
             public override void setvalues()
             { }
         }
-
+*/
     }
 
     public interface IMQTTCommunicator
     {
         //Welche Informationen werden zur Registrierung des Clients benoetigt? /Paul
-        public void registerClient()
+        public void RegisterClient()
         {
 
         }
