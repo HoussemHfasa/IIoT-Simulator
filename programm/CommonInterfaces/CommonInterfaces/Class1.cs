@@ -122,14 +122,14 @@ namespace CommonInterfaces
         {
             public string Sensor_id { get; set; }
             private double[] Gasvalues;
-            private double[] Gasvalues;
+
             public override double[] getvalues()
             {
                 return new double[] { };
             }
             public override void setvalues()
             { }
-        }*/
+        }
 
     }
 
