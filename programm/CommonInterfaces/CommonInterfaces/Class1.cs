@@ -176,17 +176,24 @@ namespace CommonInterfaces
 
     {
         // Nutzereingaben zur Berechnung der Messwerte, setzen nur über Methoden möglich
-        public double Mittelwert { get; }
-        public double Standardabweichung { get; }
-        public int Werteanzahl { get; }
-        public double Fehlerhäufigkeit { get; }
-        public double Fehlerdauer { get; }
-        public double MaximalwertFehler { get; }
-        public double MinimalwertFehler { get; }
+        //Mittelwert
+        public double Mean { get; }
+        //Standardabweichung
+        public double StandardDeviation { get; }
+        //Werteanzahl
+        public int AmmountofValues { get; }
+        //Fehlerrate
+        public double ErrorRatio { get; }
+        // Fehlerdauer
+        public int ErrorLength { get; }
+        //FehlerMaximum
+        public double ErrorMax { get; }
+        //FehlerMinimum
+        public double ErrorMin { get; }
 
         //Einstellung des Messfehlers/Signalfehlers
-        bool SetzeSignalfehler(double Fehlerhäufigkeit, int Fehlerdauer, double MaximalwertFehler, double MinimalwertFehler);
-        bool SignalfehlerZurücksetzen();
+        bool SetSensorErrors(double ErrorRatio, int ErrorLength, double ErrorMax, double ErrorMin);
+        bool ResetSensorErrors();
 
       
 
@@ -197,15 +204,19 @@ namespace CommonInterfaces
         /// </summary>
         /// <param name="Mittelwert"> </param>
         /// <returns>Liste zufälliger, normalverteilter double Werte</returns>
-        List<double> Normalverteilung(double Mittelwert, double Standardabweichung, int Werteanzahl);
+        List<double> GetStandardDeviationValues(double Mean, double StandardDeviation, int AmmountofValues);
 
 
-        List<bool> Zufallsbool(double Wechselwarscheinlichkeit, int Werteanzahl);
+        List<bool> GetRandomBoolValues(double Wechselwarscheinlichkeit, int Werteanzahl);
 
 
-        List<double> Exponential(double Basis, double Exponent, int Werteanzahl);
+        List<double> GetExponentialValues(double Basis, double Exponent, int Werteanzahl);
 
-        List<double> Linear(double Steigung, double VerschiebungXAchse, int Werteanzahl);
+        List<double> GetLinearValues(double Steigung, double VerschiebungXAchse, int Werteanzahl);
+
+        List<double> GetHarmonicOscillation(double Amplitude, double Frequency, double Phase);
+
+        List<double> GetDampedOscillation(double Amplitude, double Dampingratio, double Frequency, double Phase);
 
         
 
