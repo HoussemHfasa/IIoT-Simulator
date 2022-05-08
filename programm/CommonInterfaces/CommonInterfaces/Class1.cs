@@ -172,16 +172,8 @@ namespace CommonInterfaces
     }
 
   
-    public interface ISensorDataSimulator
-
+    public interface ISensorDataErrors<T>  
     {
-        // Nutzereingaben zur Berechnung der Messwerte, setzen nur über Methoden möglich
-        //Mittelwert
-        public double Mean { get; }
-        //Standardabweichung
-        public double StandardDeviation { get; }
-        //Werteanzahl
-        public int AmmountofValues { get; }
         //Fehlerrate
         public double ErrorRatio { get; }
         // Fehlerdauer
@@ -191,11 +183,22 @@ namespace CommonInterfaces
         //FehlerMinimum
         public double ErrorMin { get; }
 
-        //Einstellung des Messfehlers/Signalfehlers
+         
+        //Einstellung des Messfehlers/Signalfehlers, Fehlerwerte werden ebenfalls beim Konstruktor als Parameter übergeben
         bool SetSensorErrors(double ErrorRatio, int ErrorLength, double ErrorMax, double ErrorMin);
         bool ResetSensorErrors();
 
-      
+        List<T> GetSensorDataWithErrors(List<T> SensorDataWithoutErorrs);
+
+
+
+    }
+    public interface ISensorDataSimulator
+
+    {
+
+        public int AmmountofValues { get; }
+                       
 
         //Funktionen zur Erzeugung von Messwerten
 
@@ -206,17 +209,17 @@ namespace CommonInterfaces
         /// <returns>Liste zufälliger, normalverteilter double Werte</returns>
         List<double> GetStandardDeviationValues(double Mean, double StandardDeviation, int AmmountofValues);
 
+        List<bool> GetRandomBoolValues(double Wechselwarscheinlichkeit, int AmountofValues);
 
-        List<bool> GetRandomBoolValues(double Wechselwarscheinlichkeit, int Werteanzahl);
+        List<double> GetExponentialValues(double Basis, double Exponent, int AmountofValues);
 
+        List<double> GetLinearValues(double Slope, double XShift, int AmmountofValues);
 
-        List<double> GetExponentialValues(double Basis, double Exponent, int Werteanzahl);
+        List<double> GetHarmonicOscillation(double Amplitude, double Frequency, double Phase, int AmmountofValues);
 
-        List<double> GetLinearValues(double Steigung, double VerschiebungXAchse, int Werteanzahl);
+        List<double> GetDampedOscillation(double Amplitude, double Dampingratio, double Frequency, double Phase, int AmmountofValues);
 
-        List<double> GetHarmonicOscillation(double Amplitude, double Frequency, double Phase);
-
-        List<double> GetDampedOscillation(double Amplitude, double Dampingratio, double Frequency, double Phase);
+        List<double> GetSuperposition(List<double> Oscillation1, List<double> Oscillation2);
 
         
 
