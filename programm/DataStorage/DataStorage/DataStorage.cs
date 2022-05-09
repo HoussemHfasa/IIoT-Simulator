@@ -14,24 +14,25 @@ namespace DataStorage
     {
         public object Data { get; set; }
         public string filepath { get; set; }
-        public string filename { get; set; }
+   
 
 
-        public object JsonDeserialize(Type dataType,string filepath)
+        public JObject JsonDeserialize(string filepath)
         {
             JObject obj = null;
             var serializer = new JsonSerializer();
-            using (TextReader reader = File.OpenText(filename))
+            using (TextReader reader = File.OpenText(filepath))
             {
-                obj = serializer.Deserialize(reader, dataType) as JObject;
+                obj = serializer.Deserialize(reader,typeof(object)) as JObject;
             }
-            return Data;
+            
+            return obj;
         }
 
         public void JsonSerialize(object data, string filepath)
         {
             var serializer = new JsonSerializer();
-            using (TextWriter writer = File.CreateText(filename))
+            using (TextWriter writer = File.CreateText(filepath))
             {
                 serializer.Serialize(writer, data);
             }
