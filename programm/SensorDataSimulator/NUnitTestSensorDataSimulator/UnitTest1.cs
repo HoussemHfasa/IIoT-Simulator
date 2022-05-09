@@ -5,29 +5,42 @@ namespace NUnitTestSensorDataSimulator
 {
     public class Tests
     {
+        private SensorDataSimulator.SensorDataSimulator TestSimulator;
         [SetUp]
         public void Setup()
         {
+            //ARRANGE
+            TestSimulator = new SensorDataSimulator.SensorDataSimulator();
         }
 
         [Test]
-        public void Using_Normalverteilung_Updates_properties()
+        public void Using_GetStandardDeviation_Updates_properties()
         {
             // ARRANGE
             double TestMean = 15;
             double TestDeviation = 7;
             int TestCount = 100;
-            DataSimulator TestSimulator = new DataSimulator();
+            
 
             // ACT
-            TestSimulator.Normalverteilung(TestMean, TestDeviation, TestCount);
+            TestSimulator.GetStandardDeviationValues(TestMean, TestDeviation, TestCount);
 
             // ASSERT
-            Assert.AreEqual(TestMean, TestSimulator.Standardabweichung);
-            Assert.AreEqual(TestSimulator.Standardabweichung, TestDeviation);
-            Assert.AreEqual(TestSimulator.Werteanzahl, TestCount);
 
-            
+            Assert.AreEqual(TestSimulator.AmmountofValues, TestCount);
+
+
+        }
+
+
+
+        [Test]
+        public void Using_SetSensorErrors_ErrorRatio_OutofBounds_NotSetting_Errors()
+        {
+
+
+
+
         }
     }
 }
