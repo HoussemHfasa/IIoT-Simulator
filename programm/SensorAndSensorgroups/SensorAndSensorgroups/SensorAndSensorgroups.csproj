@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="C:\Users\49176\Desktop\Mema\Programmierprojekt\SourceTree\programm\DummyKomponenten\SensorGroup.cs" Link="SensorGroup.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CommonInterfaces\CommonInterfaces\CommonInterfaces.csproj" />
+  </ItemGroup>
+
+</Project>
