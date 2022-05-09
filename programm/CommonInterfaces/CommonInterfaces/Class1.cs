@@ -96,80 +96,60 @@ namespace CommonInterfaces
     {
 
         public int AmmountofValues { get; }
-                       
+
 
         //Funktionen zur Erzeugung von Messwerten
 
         /// <summary>
-        /// Erzeugt eine Liste mit stetigen, normalverteilten double Werten. Sollte SetzeSignalfehler eingestellt sein, werden nichtstetige Fehler eingefügt
+        /// Erzeugt eine Liste mit stetigen, normalverteilten double Werten der Anzahl AmmountofValues. 
         /// </summary>
-        /// <param name="Mittelwert"> </param>
+        /// <param name="Mean"> Mittelwert </param>
+        /// <param name="StandardDeviation"> Standardabweichung </param>
         /// <returns>Liste zufälliger, normalverteilter double Werte</returns>
         List<double> GetStandardDeviationValues(double Mean, double StandardDeviation, int AmmountofValues);
 
-        List<bool> GetRandomBoolValues(double Wechselwarscheinlichkeit, int AmountofValues);
+        /// <summary>
+        /// Erzeugt eine Liste mit zufällig erzeugten bool Werten 
+        /// </summary>
+        /// <param name="Toggleprobability"> Wert zw. 0-1. Umschaltwarscheinlichkeit 0 -> 1 bzw. 1 -> 0 </param>
+        List<bool> GetRandomBoolValues(double Toggleprobability, int AmountofValues);
 
+        /// <summary>
+        /// Erzeugt Mithilfe einer Exponentialfunktion eine Liste an double Werten. 
+        /// </summary>
         List<double> GetExponentialValues(double Basis, double Exponent, int AmountofValues);
 
+        /// <summary>
+        /// Erzeugt Mithilfe einer Linearfunktion eine Liste an double Werten
+        /// </summary>
+        /// <param name="Slope"> Steigung </param>
         List<double> GetLinearValues(double Slope, double XShift, int AmmountofValues);
 
+        /// <summary>
+        /// Erzeugt Mithilfe einer harmonischen Schwingungsgleichung eine Liste an double Werten
+        /// </summary>
+        /// <param name="Amplitude"> Amplitude </param>
+        /// <param name="Frequency"> Frequenz </param>
+        /// <param name="Phase"> Phasenverschiebung </param>
         List<double> GetHarmonicOscillation(double Amplitude, double Frequency, double Phase, int AmmountofValues);
 
+        /// <summary>
+        /// Erzeugt Mithilfe einer gedämüften harmonischen Schwingungsgleichung eine Liste an double Werten
+        /// </summary>
+        /// <param name="Amplitude"> Amplitude </param>
+        /// <param name="Frequency"> Frequenz </param>
+        /// <param name="Dampingratio"> Dämpfungsrate </param>
+        /// <param name="Phase"> Phasenverschiebung </param>
         List<double> GetDampedOscillation(double Amplitude, double Dampingratio, double Frequency, double Phase, int AmmountofValues);
 
+
+        /// <summary>
+        /// Überlagerung zweier Schwingungen/Messwertreihen 
+        /// </summary>
+        /// <param name="Oscillation1"> Liste mit Sensordaten, bevorzugt schwingende Messwerte </param>
         List<double> GetSuperposition(List<double> Oscillation1, List<double> Oscillation2);
 
         
-
-
-        // Idee:
-        // Über Methode void/bool SetFehlerParameter die Fehlerparameter entgegennehmen und intern abspeichern.
-        // bool SetFehlerParameter( double Fehlerhäufigkeit,int Fehlerdauer, double MaximalwertFehler, double MinimalwertFehler)
-        // Fehlerparameter-Variablen nur mit public getter. Müssten die Variablen hier mit aufgeführt werden?
-
-
-        // Dadurch werden Methodenaufrufe übersichtlicher/vereinfacht
-        // Problem: Wenn die Fehlerparameter gesetzt wurden und andere Funktion aufgerufen wird, sind die Parameter weiterhin hinterlegt. Das kann 
-        // zu ungewolltem Output mit Fehlern führen.
-        // Aktuell favorisierte Variante!
-        // 
-
-
-
-
-        // ALTERNATIVE:
-        // Zur Vereinfachung der Nutzung und Lesbarkeit oben genannter Methoden werden die Fehlerparameter in eigener Klasse zusammengefasst
-        // Dann würde für die Fehlergenerierung ein Objekt der Klasse Fehlerparameter genügen. 
-        /*
-          class FehlerParameter
-        {
-            double Fehlerhäufigkeit { get; }
-
-            int Fehlerdauer { get; }
-            double MaximalwertFehler { get; }
-            double MinimalwertFehler { get; }
-
-            bool IsFehler { get; }
-
-            //Wenn Fehler vorhanden, dieser Konstruktor
-            public FehlerParameter(double Fehlerhäufigkeit,
-                                int Fehlerdauer, double MaximalwertFehler, double MinimalwertFehler)
-            {
-                this.Fehlerhäufigkeit = Fehlerhäufigkeit;
-                this.Fehlerdauer = Fehlerdauer;
-                this.MaximalwertFehler = MaximalwertFehler;
-                this.MinimalwertFehler = MinimalwertFehler;
-                this.IsFehler = true;
-            }
-
-            //Wenn kein Fehler vorhanden, dieser Konstruktor
-            public FehlerParameter()
-            {
-                this.IsFehler = false;
-            }
-
-
-        */
         }
         
         
