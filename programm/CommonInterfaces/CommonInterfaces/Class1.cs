@@ -15,7 +15,7 @@ namespace CommonInterfaces
         public int Timeinterval { get; }
 
         public abstract T[] Getvalues();
-        public abstract void Setvalues(List<T> Values);
+        public abstract void SetParameter(List<T> Values);
         //Übergabeparameter (Liste der Werte) fehlt? 
     }
     public interface ISensorGroups
