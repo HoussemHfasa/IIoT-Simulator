@@ -81,11 +81,28 @@ namespace CommonInterfaces
         //FehlerMinimum
         public double ErrorMin { get; }
 
-         
+
         //Einstellung des Messfehlers/Signalfehlers, Fehlerwerte werden ebenfalls beim Konstruktor als Parameter übergeben
+        /// <summary>
+        /// Setzt die Parameter für Fehlerwerte
+        /// </summary>
+        /// <param name="ErrorRatio"> Fehlerhäufigkeit. Wert muss zwischen 0.0 und 1.0 liegen </param>
+        /// <param name="ErrorLength"> Länge des Fehlers </param>
+        /// <param name="ErrorMax"> Maximalwert des Fehlers</param>
+        /// <param name="ErrorMin"> Minimalwert des Fehlers</param>
         bool SetSensorErrors(double ErrorRatio, int ErrorLength, double ErrorMax, double ErrorMin);
+
+       
+        /// <summary>
+        /// Setzt die Parameter für Fehlerwerte zurück auf 0
+        /// </summary>
         bool ResetSensorErrors();
 
+        /// <summary>
+        /// Nimmt eine Liste von Messwerten mit double Werten, baut Fehler/Rauschen ein und gibt die editierte Liste zurück. Fehlererzeugungart siehe KlassenDokumentation
+        /// </summary>
+        /// <param name="SensorDataWithoutErorrs"> ursprüngliche Sensordaten/Messwerte </param>
+       
         List<T> GetSensorDataWithErrors(List<T> SensorDataWithoutErorrs);
 
 
