@@ -61,7 +61,7 @@ namespace CommonInterfaces
         //Dateipfad der Datei
         public string filepath { get; set; }
         public void JsonSerialize(object data, string filepath);
-        public object JsonDeserialize(string filepath);
+        public object JsonDeserialize(Type dataType, string filepath);
 
         public object LoadSensorgroup(string filepath);
         public object LoadBrockerProfile(string filepath);

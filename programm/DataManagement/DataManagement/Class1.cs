@@ -3,7 +3,7 @@ using CommonInterfaces;
 
 namespace DataManagement
 {
-    public class SensorandSensorgroups : ISenor<T>, ISensorGroups
+    public class SensorandSensorgroups<T> : ISenor<T> , ISensorGroups
     {
         public string Sensor_id { get; set; }
         public string[,] Id_Adresse { get; set; }
