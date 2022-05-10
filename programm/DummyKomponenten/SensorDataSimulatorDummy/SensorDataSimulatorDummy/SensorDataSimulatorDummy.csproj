@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="C:\Users\49176\Desktop\Mema\Programmierprojekt\SourceTree\programm\DummyKomponenten\SensorDataSimulator.cs" Link="SensorDataSimulator.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\CommonInterfaces\CommonInterfaces\CommonInterfaces.csproj" />
   </ItemGroup>
 

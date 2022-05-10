@@ -1,13 +1,20 @@
 ﻿using System;
 using CommonInterfaces;
-
-namespace DummySensorandSensorgroups
+namespace SensorAndSensorgroups
 {
-    public class Sensorgroup : ISensorGroups
+    public class SensorGroups : ISensorGroups
     {
-        public string Adresse { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string[] SensorIds { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Adresse { get { return this.Adresse; } set { this.Adresse = "funktioniert"; } }
+        public string[] SensorIds
+        {
+            get { return this.SensorIds; }
+            set
+            {
+                string[] test = { "funktioniert" };
+                this.SensorIds = test;
 
+            }
+        }
         public void Sensorhinzufuegen()
         {
             throw new NotImplementedException();
@@ -19,3 +26,4 @@ namespace DummySensorandSensorgroups
         }
     }
 }
+
