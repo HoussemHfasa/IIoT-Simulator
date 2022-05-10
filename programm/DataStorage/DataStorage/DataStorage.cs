@@ -17,7 +17,7 @@ namespace DataStorage
    
 
 
-        public JObject JsonDeserialize(string filepath)
+        public object JsonDeserialize(string filepath)
         {
             JObject obj = null;
             var serializer = new JsonSerializer();

@@ -13,19 +13,29 @@ namespace CommonInterfaces
         public TimeSpan CreationTime { get; }
         public int Werteanzahl { get; }
         public int Timeinterval { get; }
-
+        //bekommt die Daten von der Sensoren
         public abstract T[] Getvalues();
  
     }
     public interface ISensorGroups
     {
-
+        // algemeine Adresse für die Sensorgruppe
         string Adresse { get; set; }
+        // alle Ids die in diesem Gruppe sind
         string[] SensorIds { get; set; }
+        /// <summary>
+        /// Ein Sensor_Id in der SensorIds Liste hinzufügen
+        /// </summary>
+        /// <param name="sensorids"> die Liste von Sensorids </param>
+        /// <param name="sensorid"> das id zu hinzufugen zur Id_liste </param>
+        public void Sensorhinzufuegen(string[] sensorids, string sensorid);
 
-        public void Sensorhinzufuegen();
-
-        public void Sensorloeschen();
+        /// <summary>
+        /// Ein Sensor_Id von der SensorIds Liste loeschen
+        /// </summary>
+        /// <param name="sensorids"> die Liste von Sensorids </param>
+        /// <param name="sensorid"> das id zu loeschen von der Liste </param>
+        public void Sensorloeschen(string[] sensorids, string sensorid);
 
 
 
@@ -55,12 +65,38 @@ namespace CommonInterfaces
         public object Data { get; set; }
         //Dateipfad der Datei
         public string filepath { get; set; }
+        /// <summary>
+        /// serialise die Daten zu Textdatei
+        /// </summary>
+        /// <param name="data"> die Daten zu speichern </param>
+        /// <param name="filepath"> Dateipfad, wo die Daten werden gespeichert </param>
         public void JsonSerialize(object data, string filepath);
-        public object JsonDeserialize(string filepath);
-
+        /// <summary>
+        /// deserialise Textdatei zu Json datei ,um die gespeicherte Datei zu laden
+        /// </summary>
+        /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
+        public Object JsonDeserialize(string filepath);
+        /// <summary>
+        /// deserialise Textdatei zu Json datei ,um die gespeicherte sensorgruppe zu laden
+        /// </summary>
+        /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
         public object LoadSensorgroup(string filepath);
+        /// <summary>
+        /// deserialise Textdatei zu Json datei ,um die gespeicherte BrockerProfile zu laden
+        /// </summary>
+        /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
         public object LoadBrockerProfile(string filepath);
+        /// <summary>
+        /// speichern die Sensorgruppe
+        /// </summary>
+        ///  <param name="data"> die liste mit der Sensor_ids des gruppes </param>
+        /// <param name="filepath"> Dateipfad, wo die Sensorgroup werden gespeichert </param>
         public void SaveSensorgroup(object data, string filepath);
+        /// <summary>
+        /// speichern die BrockerProfile
+        /// </summary>
+        ///  <param name="data"> die BrockerProfileDaten </param>
+        /// <param name="filepath"> Dateipfad, wo die BrockerProfileDaten werden gespeichert </param>
         public void SavebrockerProfile(object data, string filepath);
     }
 
