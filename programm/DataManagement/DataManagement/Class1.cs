@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Linq;
+using System.Text;
+using System.IO;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using CommonInterfaces;
 
 namespace DataManagement
 {
-    public class SensorandSensorgroups : ISenor<T>, ISensorGroups
+    public class SensorandSensorgroups<T> : ISenor<T> , ISensorGroups
     {
         public string Sensor_id { get; set; }
         public string[,] Id_Adresse { get; set; }
@@ -29,19 +34,25 @@ namespace DataManagement
         {
             throw new NotImplementedException();
         }
-
+        //allgemeine Adresse für die Sensoren ,die in der Liste sind
         public string Adresse { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        //List von Sensoren
         public string[] SensorIds { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
 
-        public void Sensorhinzufuegen()
+        public void Sensorhinzufuegen(string[] sensorids,string sensorid)
         {
-            throw new NotImplementedException();
+            sensorids.Append(sensorid);
         }
 
-        public void Sensorloeschen()
+        public void Sensorloeschen(string[] sensorids, string sensorid)
         {
-            throw new NotImplementedException();
+            if (sensorids.Contains(sensorid))
+            {
+                
+            }
         }
+
+    
     }
 }

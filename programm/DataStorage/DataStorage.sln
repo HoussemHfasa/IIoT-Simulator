@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32407.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStorage", "DataStorage\DataStorage.csproj", "{2E35E5CF-4D57-48D7-8E11-3A0138DB1D29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStorage", "DataStorage\DataStorage.csproj", "{2E35E5CF-4D57-48D7-8E11-3A0138DB1D29}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonInterfaces", "..\CommonInterfaces\CommonInterfaces\CommonInterfaces.csproj", "{E3AAE910-2AE4-4467-8F76-BF2C0FDE0482}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NunitTestDatastorage", "NunitTestDatastorage\NunitTestDatastorage.csproj", "{E217A3A2-9CB0-424A-8D9D-FC79623A26D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{2E35E5CF-4D57-48D7-8E11-3A0138DB1D29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E35E5CF-4D57-48D7-8E11-3A0138DB1D29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E35E5CF-4D57-48D7-8E11-3A0138DB1D29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3AAE910-2AE4-4467-8F76-BF2C0FDE0482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3AAE910-2AE4-4467-8F76-BF2C0FDE0482}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3AAE910-2AE4-4467-8F76-BF2C0FDE0482}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3AAE910-2AE4-4467-8F76-BF2C0FDE0482}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E217A3A2-9CB0-424A-8D9D-FC79623A26D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E217A3A2-9CB0-424A-8D9D-FC79623A26D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E217A3A2-9CB0-424A-8D9D-FC79623A26D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E217A3A2-9CB0-424A-8D9D-FC79623A26D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
