@@ -11,7 +11,7 @@ namespace SensorDataSimulator
     {
         public int AmmountofValues => throw new NotImplementedException();
 
-        public List<double> GetDampedOscillation(double Amplitude, double Dampingratio, double Frequency, double Phase, int AmmountofValues)
+        public List<double> GetDampedOscillation(double Amplitude, double Dampingratio, double Period, double Phase, int AmmountofValues)
         {
             throw new NotImplementedException();
         }
@@ -21,7 +21,7 @@ namespace SensorDataSimulator
             throw new NotImplementedException();
         }
 
-        public List<double> GetHarmonicOscillation(double Amplitude, double Frequency, double Phase, int AmmountofValues)
+        public List<double> GetHarmonicOscillation(double Amplitude, double Period, double Phase, int AmmountofValues)
         {
             throw new NotImplementedException();
         }
