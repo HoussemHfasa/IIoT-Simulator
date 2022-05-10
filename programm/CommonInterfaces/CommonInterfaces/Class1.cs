@@ -37,21 +37,14 @@ namespace CommonInterfaces
         //Welche Informationen werden zur Registrierung des Clients benoetigt? /Paul
         public void RegisterClient(string clientId, bool isGroup);
 
-
-        //  "name" in diesem Kontext nicht selbsterklärend /Paul
         public void SubscribeTopic(string clientId, string topicName);
 
-        // "name" nicht selbsterklärend
         public void CreateTopic(string clientId, string topicName);
 
-        // wird "name" gepublished?
         public void PublishToTopic(string clientId, string topicName, dynamic value);
 
         public void SetNewBroker(dynamic Host, int Port);
 
-
-        //public void SetQoS(int ServiceLevel)
-        //
     }
 
     public interface IDatastorage
