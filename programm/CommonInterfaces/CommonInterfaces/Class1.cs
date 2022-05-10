@@ -24,9 +24,9 @@ namespace CommonInterfaces
         string Adresse { get; set; }
         string[] SensorIds { get; set; }
 
-        public void Sensorhinzufuegen();
+        public void Sensorhinzufuegen(string[] sensorids, string sensorid);
 
-        public void Sensorloeschen();
+        public void Sensorloeschen(string[] sensorids, string sensorid);
 
 
 
