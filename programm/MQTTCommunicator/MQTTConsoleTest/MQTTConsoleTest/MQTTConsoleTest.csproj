@@ -8,6 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\CommonInterfaces\CommonInterfaces\CommonInterfaces.csproj" />
     <ProjectReference Include="..\..\..\DummyKomponenten\MQTTCommunicatorDummy\MQTTCommunicatorDummy\MQTTCommunicatorDummy.csproj" />
+    <ProjectReference Include="..\..\MQTTCommunicator\MQTTCommunicator.csproj" />
   </ItemGroup>
 
 </Project>
