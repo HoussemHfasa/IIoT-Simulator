@@ -141,18 +141,18 @@ namespace CommonInterfaces
         /// Erzeugt Mithilfe einer harmonischen Schwingungsgleichung eine Liste an double Werten
         /// </summary>
         /// <param name="Amplitude"> Amplitude </param>
-        /// <param name="Frequency"> Frequenz </param>
+        /// <param name="Period"> Periodendauer </param>
         /// <param name="Phase"> Phasenverschiebung </param>
-        List<double> GetHarmonicOscillation(double Amplitude, double Frequency, double Phase, int AmmountofValues);
+        List<double> GetHarmonicOscillation(double Amplitude, double Period, double Phase, int AmmountofValues);
 
         /// <summary>
         /// Erzeugt Mithilfe einer gedämüften harmonischen Schwingungsgleichung eine Liste an double Werten
         /// </summary>
         /// <param name="Amplitude"> Amplitude </param>
-        /// <param name="Frequency"> Frequenz </param>
+        /// <param name="Period"> Periodendauer </param>
         /// <param name="Dampingratio"> Dämpfungsrate </param>
         /// <param name="Phase"> Phasenverschiebung </param>
-        List<double> GetDampedOscillation(double Amplitude, double Dampingratio, double Frequency, double Phase, int AmmountofValues);
+        List<double> GetDampedOscillation(double Amplitude, double Dampingratio, double Period, double Phase, int AmmountofValues);
 
 
         /// <summary>
