@@ -23,9 +23,9 @@ namespace CommonInterfaces
         string Adresse { get; set; }
         string[] SensorIds { get; set; }
 
-        public void Sensorhinzufuegen(string[] sensorids, string sensorid);
+        public void Sensorhinzufuegen();
 
-        public void Sensorloeschen(string[] sensorids, string sensorid);
+        public void Sensorloeschen();
 
 
 
@@ -43,6 +43,9 @@ namespace CommonInterfaces
         public void PublishToTopic(string clientId, string topicName, dynamic value);
 
         public void SetNewBroker(dynamic Host, int Port);
+
+        public List<string> GetTopics();
+        public List<string> GetClients();
 
     }
 

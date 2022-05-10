@@ -15,6 +15,16 @@ namespace MQTTCommunicatorDummy
             throw new NotImplementedException();
         }
 
+        public List<string> GetClients()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<string> GetTopics()
+        {
+            throw new NotImplementedException();
+        }
+
         public void PublishToTopic(string clientId, string topicName, dynamic value)
         {
             throw new NotImplementedException();
