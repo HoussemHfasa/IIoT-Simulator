@@ -18,7 +18,7 @@ namespace DataStorageDummy
         {
             data = 5;
             filepath = "funktioniert";
-            Console.WriteLine((string)data, filepath);
+            Console.WriteLine((string)data,filepath);
         }
 
         public object LoadBrockerProfile(string filepath)
@@ -37,7 +37,7 @@ namespace DataStorageDummy
         {
             data = 5;
             filepath = "funktioniert";
-            Console.WriteLine((string)data, filepath);
+            Console.WriteLine((string)data,filepath);
         }
 
         public void SaveSensorgroup(object data, string filepath)

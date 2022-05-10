@@ -15,8 +15,7 @@ namespace CommonInterfaces
         public int Timeinterval { get; }
 
         public abstract T[] Getvalues();
-        public abstract void SetParameter(List<T> Values);
-        //Übergabeparameter (Liste der Werte) fehlt? 
+ 
     }
     public interface ISensorGroups
     {
@@ -55,7 +54,7 @@ namespace CommonInterfaces
         // die Daten die von der Sensoren kommt
         public object Data { get; set; }
         //Dateipfad der Datei
-      
+        public string filepath { get; set; }
         public void JsonSerialize(object data, string filepath);
         public object JsonDeserialize(string filepath);
 
