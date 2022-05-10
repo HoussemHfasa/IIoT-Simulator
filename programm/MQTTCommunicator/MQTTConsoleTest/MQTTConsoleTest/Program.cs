@@ -1,5 +1,6 @@
 ﻿using System;
 using MQTTCommunicatorDummy;
+using CommonInterfaces;
 
 namespace MQTTConsoleTest
 {
@@ -7,7 +8,7 @@ namespace MQTTConsoleTest
     {
         static void Main(string[] args)
         {
-            MQTTCommunicator comm1 = new MQTTCommunicator();
+            MQTTCommunicator.MQTTCommunicator comm1 = new MQTTCommunicator.MQTTCommunicator();
             int menuNumber;
             Console.WriteLine("Test menu:");
             Console.WriteLine("1. for CreateTopic");
