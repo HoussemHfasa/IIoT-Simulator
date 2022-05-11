@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataManagement\DataManagement.csproj" />
+    <ProjectReference Include="..\DataManagement\SensorAndSensorgroup.csproj" />
   </ItemGroup>
 
 </Project>

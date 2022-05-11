@@ -21,9 +21,10 @@ namespace SensorDataSimulator
             throw new NotImplementedException();
         }
 
+        // Für Unittest falsche Implementierung zum testen.
         public List<double> GetHarmonicOscillation(double Amplitude, double Period, double Phase, int AmmountofValues)
         {
-            throw new NotImplementedException();
+            return new List<double> { 1.0, 2.0, 3.0 };
         }
 
         public List<double> GetLinearValues(double Slope, double XShift, int AmmountofValues)

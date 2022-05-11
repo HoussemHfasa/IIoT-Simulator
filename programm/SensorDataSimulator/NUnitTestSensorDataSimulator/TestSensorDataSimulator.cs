@@ -19,7 +19,7 @@ namespace NUnitTestSensorDataSimulator
             
         }
 
-
+        [Test]
 
         public void Testing_GetHarmonicOscillation()
         {
@@ -32,10 +32,11 @@ namespace NUnitTestSensorDataSimulator
             int TestValueCount = 2500; 
             List<double> Testlist = TestSimulator.GetHarmonicOscillation(Testamplitude, TestPeriod, Testphase, TestValueCount);
 
-             
+
             // 1. Amplitude abgleichen
-            Assert.AreEqual(Testamplitude, Testlist.Max());
             Console.WriteLine("Amplitude sollte {0} sein, Amplitude ist {1}.", Testamplitude, Testlist.Max());
+            Assert.AreEqual(Testamplitude, Testlist.Max());
+            
 
 
             // 2. Werteanzahl korrekt?
