@@ -6,36 +6,52 @@ namespace CommonInterfaces
     public interface ISenor<T>
     {
         public string Sensor_id { get; set; }
+
+        // 2 Dimensionales Array
         public string[,] Id_Adresse { get; set; }
-        public string Sensortype { get; set; }
+        public string Sensortype { get; }
         public string Einheit { get; set; }
         public DateTime CreationDate { get; }
         public TimeSpan CreationTime { get; }
         public int Werteanzahl { get; }
         public int Timeinterval { get; }
         //bekommt die Daten von der Sensoren
-        public abstract T[] Getvalues();
+        public abstract List<T> Getvalues();
  
     }
-    public interface ISensorGroups
+    public interface ISensorGroups<T> where T : ISenor<T> 
     {
         // algemeine Adresse für die Sensorgruppe
         string Adresse { get; set; }
-        // alle Ids die in diesem Gruppe sind
+
+        // Das Verzeichnis, welche Sensoren sich wo befinden. (vorläufig)
+        List<List<object>> GroupDirectory { get; set; }
+        
+        // alle Ids die in diesem Gruppe sind, evtl nicht mehr benötigt
         string[] SensorIds { get; set; }
+
         /// <summary>
         /// Ein Sensor_Id in der SensorIds Liste hinzufügen
         /// </summary>
         /// <param name="sensorids"> die Liste von Sensorids </param>
         /// <param name="sensorid"> das id zu hinzufugen zur Id_liste </param>
-        public void Sensorhinzufuegen(string[] sensorids, string sensorid);
+        public void Sensorhinzufuegen( T Sensor);
 
         /// <summary>
         /// Ein Sensor_Id von der SensorIds Liste loeschen
         /// </summary>
         /// <param name="sensorids"> die Liste von Sensorids </param>
         /// <param name="sensorid"> das id zu loeschen von der Liste </param>
-        public void Sensorloeschen(string[] sensorids, string sensorid);
+        public void Sensorloeschen(string sensorid);
+
+        //Stamm hinzufügen
+        public void AddBase(string BaseName);
+
+        // Unterordner hinzufügen
+        public void AddNode(string NodeName, string[] NodeAdress);
+
+        //Löschen von Stamm/Unterordner
+        public void DeleteNodeBase(string[] Adress);
 
 
 
@@ -43,7 +59,10 @@ namespace CommonInterfaces
 
     public interface IMQTTCommunicator
     {
+        // Überlegung ob Rückgabewerte benötigt wird für Rückmeldung von Erfolg/Nichterfolg
         //Welche Informationen werden zur Registrierung des Clients benoetigt? /Paul
+        public void ConnectToBroker(dynamic Host, int Port);
+        
         public void RegisterClient(string clientId, bool isGroup);
 
         public void SubscribeTopic(string clientId, string topicName);
@@ -62,9 +81,9 @@ namespace CommonInterfaces
     public interface IDatastorage
     {
         // die Daten die von der Sensoren kommt
-        public object Data { get; set; }
+        public object Data { get; }
         //Dateipfad der Datei
-        public string filepath { get; set; }
+        public string filepath { get; }
         /// <summary>
         /// serialise die Daten zu Textdatei
         /// </summary>
@@ -101,7 +120,7 @@ namespace CommonInterfaces
     }
 
   
-    public interface ISensorDataErrors<T>  
+    public interface ISensorDataErrors  
     {
         //Fehlerrate
         public double ErrorRatio { get; }
@@ -134,7 +153,7 @@ namespace CommonInterfaces
         /// </summary>
         /// <param name="SensorDataWithoutErorrs"> ursprüngliche Sensordaten/Messwerte </param>
        
-        List<T> GetSensorDataWithErrors(List<T> SensorDataWithoutErorrs);
+        List<double> GetSensorDataWithErrors(List<double> SensorDataWithoutErorrs);
 
 
 
@@ -162,16 +181,7 @@ namespace CommonInterfaces
         /// <param name="Toggleprobability"> Wert zw. 0-1. Umschaltwarscheinlichkeit 0 -> 1 bzw. 1 -> 0 </param>
         List<bool> GetRandomBoolValues(double Toggleprobability, int AmountofValues);
 
-        /// <summary>
-        /// Erzeugt Mithilfe einer Exponentialfunktion eine Liste an double Werten. 
-        /// </summary>
-        List<double> GetExponentialValues(double Basis, double Exponent, int AmountofValues);
-
-        /// <summary>
-        /// Erzeugt Mithilfe einer Linearfunktion eine Liste an double Werten
-        /// </summary>
-        /// <param name="Slope"> Steigung </param>
-        List<double> GetLinearValues(double Slope, double XShift, int AmmountofValues);
+       
 
         /// <summary>
         /// Erzeugt Mithilfe einer harmonischen Schwingungsgleichung eine Liste an double Werten
