@@ -6,6 +6,11 @@ namespace MQTTCommunicator
 {
     public class MQTTCommunicator : IMQTTCommunicator
     {
+        public void ConnectToBroker(dynamic Host, int Port)
+        {
+            throw new NotImplementedException();
+        }
+
         public void CreateTopic(string clientId, string topicName)
         {
             throw new NotImplementedException();
