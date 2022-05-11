@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32407.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataManagement", "DataManagement\DataManagement.csproj", "{2386D761-273E-4795-B1AD-CF9922A6F9B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SensorAndSensorgroup", "DataManagement\SensorAndSensorgroup.csproj", "{2386D761-273E-4795-B1AD-CF9922A6F9B2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonInterfaces", "..\CommonInterfaces\CommonInterfaces\CommonInterfaces.csproj", "{DC0299C0-9B15-4E54-ADF5-415ED0ADB5BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NunitTestDatamanagement", "NunitTestDatamanagement\NunitTestDatamanagement.csproj", "{2F65780E-5974-4291-8C1A-518E9E389A2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NunitTestDatamanagement", "NunitTestDatamanagement\NunitTestDatamanagement.csproj", "{2F65780E-5974-4291-8C1A-518E9E389A2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
