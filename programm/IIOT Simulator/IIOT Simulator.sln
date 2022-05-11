@@ -3,7 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32407.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IIOT Simulator", "IIOT Simulator\IIOT Simulator.csproj", "{854747D8-DE94-4B2A-8D31-8FA77186FAE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IIOT Simulator", "IIOT Simulator\IIOT Simulator.csproj", "{854747D8-DE94-4B2A-8D31-8FA77186FAE4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStorageDummy", "..\DummyKomponenten\DataStorageDummy\DataStorageDummy\DataStorageDummy.csproj", "{D7FBC223-6B1F-4A51-A24D-02A640FC18F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DummySensorandSensorgroups", "..\DummyKomponenten\DummySensorandSensorgroups\DummySensorandSensorgroups\DummySensorandSensorgroups.csproj", "{9399D1BB-18DD-4E85-8804-ACE99589982C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQTTCommunicatorDummy", "..\DummyKomponenten\MQTTCommunicatorDummy\MQTTCommunicatorDummy\MQTTCommunicatorDummy.csproj", "{CEF6D2FB-F22C-4CD1-9282-272631BE9C3D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonInterfaces", "..\CommonInterfaces\CommonInterfaces\CommonInterfaces.csproj", "{7485072B-9208-4EB1-A78B-86FCFEF04F80}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAnalysisDummy", "..\DummyKomponenten\DataAnalysisDummy\DataAnalysisDummy\DataAnalysisDummy.csproj", "{170C9C9F-19EF-44DD-846B-E5F266636931}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SensorDataSimulatorDummy", "..\DummyKomponenten\SensorDataSimulatorDummy\SensorDataSimulatorDummy\SensorDataSimulatorDummy.csproj", "{823A2034-3E79-4776-B081-84B63490D93C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +27,30 @@ Global
 		{854747D8-DE94-4B2A-8D31-8FA77186FAE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{854747D8-DE94-4B2A-8D31-8FA77186FAE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{854747D8-DE94-4B2A-8D31-8FA77186FAE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7FBC223-6B1F-4A51-A24D-02A640FC18F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7FBC223-6B1F-4A51-A24D-02A640FC18F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7FBC223-6B1F-4A51-A24D-02A640FC18F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7FBC223-6B1F-4A51-A24D-02A640FC18F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9399D1BB-18DD-4E85-8804-ACE99589982C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9399D1BB-18DD-4E85-8804-ACE99589982C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9399D1BB-18DD-4E85-8804-ACE99589982C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9399D1BB-18DD-4E85-8804-ACE99589982C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEF6D2FB-F22C-4CD1-9282-272631BE9C3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEF6D2FB-F22C-4CD1-9282-272631BE9C3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEF6D2FB-F22C-4CD1-9282-272631BE9C3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEF6D2FB-F22C-4CD1-9282-272631BE9C3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7485072B-9208-4EB1-A78B-86FCFEF04F80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7485072B-9208-4EB1-A78B-86FCFEF04F80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7485072B-9208-4EB1-A78B-86FCFEF04F80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7485072B-9208-4EB1-A78B-86FCFEF04F80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{170C9C9F-19EF-44DD-846B-E5F266636931}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{170C9C9F-19EF-44DD-846B-E5F266636931}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{170C9C9F-19EF-44DD-846B-E5F266636931}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{170C9C9F-19EF-44DD-846B-E5F266636931}.Release|Any CPU.Build.0 = Release|Any CPU
+		{823A2034-3E79-4776-B081-84B63490D93C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{823A2034-3E79-4776-B081-84B63490D93C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{823A2034-3E79-4776-B081-84B63490D93C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{823A2034-3E79-4776-B081-84B63490D93C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

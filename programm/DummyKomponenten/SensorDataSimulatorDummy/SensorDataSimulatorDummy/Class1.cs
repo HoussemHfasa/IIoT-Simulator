@@ -26,7 +26,7 @@ namespace SensorDataSimulatorDummy
 
         public List<double> GetLinearValues(double Slope, double XShift, int AmmountofValues)
         {
-            return new List<double> { 1.1, 2.2, 3.3, 4.4, 5 };,
+            return new List<double> { 1.1, 2.2, 3.3, 4.4, 5 };
         }
 
         public List<bool> GetRandomBoolValues(double Wechselwarscheinlichkeit, int AmountofValues)
