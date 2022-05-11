@@ -23,7 +23,8 @@ namespace DataManagement
 
         public int Timeinterval => throw new NotImplementedException();
 
-        public T[] Getvalues()
+
+        List<T> ISenor<T>.Getvalues()
         {
             throw new NotImplementedException();
         }

@@ -35,7 +35,7 @@ namespace CommonInterfaces
         /// </summary>
         /// <param name="sensorids"> die Liste von Sensorids </param>
         /// <param name="sensorid"> das id zu hinzufugen zur Id_liste </param>
-        public void Sensorhinzufuegen( T Sensor);
+        public void Sensorhinzufuegen( string Sensor);
 
         /// <summary>
         /// Ein Sensor_Id von der SensorIds Liste loeschen

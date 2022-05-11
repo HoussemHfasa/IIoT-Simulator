@@ -9,19 +9,20 @@ using CommonInterfaces;
 using DataManagement;
 
 
+
 namespace NunitTestDatamanagement
 {
     public class Sensorgroupsnunittest
     {
         
         
-        private DataManagement.Sensorgroups SensorgroupsTest;
+        private DataManagement.Sensorgroups<T> SensorgroupsTest;
         [SetUp]
         public void Setup()
         {
            
            
-            SensorgroupsTest = new Sensorgroups();
+            SensorgroupsTest = new Sensorgroups<T>();
         }
 
         [Test]
@@ -45,7 +46,7 @@ namespace NunitTestDatamanagement
             string Id = "123456";
 
             //Act
-            SensorgroupsTest.Sensorloeschen(SensorList, Id);
+            SensorgroupsTest.Sensorloeschen<T>(SensorList, Id);
 
             //Assert
             Assert.Pass();
