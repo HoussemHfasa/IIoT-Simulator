@@ -49,7 +49,7 @@ namespace SensorDataSimulator
 
     }
 
-    public abstract class SensorDataErrors : ISensorDataErrors<double>
+    public abstract class SensorDataErrors : ISensorDataErrors
     {
         public double ErrorRatio => throw new NotImplementedException();
 
@@ -72,7 +72,7 @@ namespace SensorDataSimulator
         }
 
     }
-    public class RandomValuesError : SensorDataErrors, CommonInterfaces.ISensorDataErrors<double>
+    public class RandomValuesError : SensorDataErrors, CommonInterfaces.ISensorDataErrors
     {
         double MaxError;
         double MinError;
@@ -88,7 +88,7 @@ namespace SensorDataSimulator
         }
     }
 
-    public class RandomZeroesError : SensorDataErrors, CommonInterfaces.ISensorDataErrors<double>
+    public class RandomZeroesError : SensorDataErrors, CommonInterfaces.ISensorDataErrors
     {
 
         public RandomZeroesError()
@@ -103,7 +103,7 @@ namespace SensorDataSimulator
         }
     }
 
-    public class AdditiveNoise : SensorDataErrors, CommonInterfaces.ISensorDataErrors<double>
+    public class AdditiveNoise : SensorDataErrors, CommonInterfaces.ISensorDataErrors
     {
         public AdditiveNoise(List<double> Noise)
         {
@@ -116,7 +116,7 @@ namespace SensorDataSimulator
         }
     }
 
-    public class BurstNoise : SensorDataErrors, CommonInterfaces.ISensorDataErrors<double>
+    public class BurstNoise : SensorDataErrors, CommonInterfaces.ISensorDataErrors
     {
         public BurstNoise(double Burstvalue, int Burstduration)
         {
@@ -130,7 +130,7 @@ namespace SensorDataSimulator
     }
 
 
-    public class TransientNoise : SensorDataErrors, CommonInterfaces.ISensorDataErrors<double>
+    public class TransientNoise : SensorDataErrors, CommonInterfaces.ISensorDataErrors
     {
         public TransientNoise(List<double> Puls, int DecayTime)
         {

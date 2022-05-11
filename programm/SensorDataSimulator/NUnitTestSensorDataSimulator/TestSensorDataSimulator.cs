@@ -34,7 +34,7 @@ namespace NUnitTestSensorDataSimulator
 
              
             // 1. Amplitude abgleichen
-            Assert.AreEqual(Testamplitude, Testlist.Max();
+            Assert.AreEqual(Testamplitude, Testlist.Max());
             Console.WriteLine("Amplitude sollte {0} sein, Amplitude ist {1}.", Testamplitude, Testlist.Max());
 
 
@@ -53,7 +53,11 @@ namespace NUnitTestSensorDataSimulator
             }
             Assert.True(TestPassed);
 
-            // Es fehlt noch die Textausgabe
+            Console.WriteLine("Methode sollte "
+                               + String.Join(", ", Ergebnis)
+                               + "erzeugen. Es wurde "
+                               + String.Join(", ", Testlist2)
+                               + "erzeugt");
 
         }
 
@@ -91,7 +95,7 @@ namespace NUnitTestSensorDataSimulator
 
         [Test]
 
-        [Test]
+        
         public void Using_GetStandardDeviation_Updates_properties()
         {
             // ARRANGE
