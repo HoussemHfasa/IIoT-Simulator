@@ -7,23 +7,36 @@ using System.Linq;
 
 namespace NUnitTestSensorDataSimulator
 {
+    [TestFixture]
     class TestSensorDataSimulator
     {
         private SensorDataSimulator.SensorDataSimulator TestSimulator;
+        
+        // Idee: Test mit zufällig erzeugten Werten, in Setup() mit Werten versehen
+        Random rand = new Random();
+        double RandomDampingRatio;
+        double RandomAmplitude;
+        double RandomPeriod;
+        double RandomPhase;
+        int RandomValueCount;
 
         [SetUp]
         public void Setup()
         {
             //ARRANGE
             TestSimulator = new SensorDataSimulator.SensorDataSimulator();
+            RandomDampingRatio = rand.NextDouble()*0.5;
+            RandomAmplitude = rand.NextDouble() * 2500;
+            RandomPeriod = rand.Next(1, 8);
+            RandomPhase = 0.0;
+            RandomValueCount = rand.Next(8,5000);
 
-          
         }
 
         [Test]
         public void GetHarmonicOscillation_Amplitudetest()
         {
-
+            
             double Testamplitude = 25.0;
             double TestPeriod = 8.0;
             double Testphase = 0.0;
@@ -53,7 +66,7 @@ namespace NUnitTestSensorDataSimulator
         public void GetHarmonicOscillation_ResultTest()
         {
 
-
+            
             // Idee: Zufallswerte?
             double Testamplitude = 25.0;
             double TestPeriod = 5.0;
@@ -76,16 +89,62 @@ namespace NUnitTestSensorDataSimulator
             Assert.True(AreListsEqual(Ergebnis, Testlist2));
         }
 
+        [Test]
+
+        public void GetHarmonicOscillation_negativeAmplitude_Throws()
+        {
+            // Negative Amplitude
+            RandomAmplitude = RandomAmplitude * -1.0;
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => TestSimulator.GetHarmonicOscillation(RandomAmplitude, RandomPeriod, RandomPhase, RandomValueCount));
+
+        }
+
+        [Test]
+
+        public void GetHarmonicOscillation_negativePeriod_Throws()
+        {
+            // Negative Periodendauer
+            RandomPeriod = RandomPeriod * -1.0;
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => TestSimulator.GetHarmonicOscillation(RandomAmplitude, RandomPeriod, RandomPhase, RandomValueCount));
+
+        }
+
+        [Test]
+        public void GetHarmonicOscillation_negativeValueCount_Throws()
+        {
+            // Negative Werteanzahl
+            RandomValueCount = RandomValueCount * -1;
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => TestSimulator.GetHarmonicOscillation(RandomAmplitude, RandomPeriod, RandomPhase, RandomValueCount));
+
+
+        }
+
 
 
         [Test]
 
-        public void Testing_GetDampedOscillation()
+        public void GetDampedOscillation_Counttest()
         {
+
+        }
+
+        [Test]
+
+        public void GetDampedOscillation_ResultTest()
+        {
+
+            //Arrange
             double TestAmplitude = 250.0;
             double TestDampingRatio = 0.05;
             double TestPeriod = 10.0;
             int TestAmmountofVaulues = 250;
+            List<double> Expected = new List<double>
+                                    { 0, 139.78, 215.14, 204.65, 120.31, 0, -108.86, -167.55, -159.38, -93.70, 0 };
+
+            // Act
             List<double> DampedTest = TestSimulator.GetDampedOscillation(TestAmplitude, TestDampingRatio, TestPeriod, 0, TestAmmountofVaulues);
 
             
@@ -98,11 +157,11 @@ namespace NUnitTestSensorDataSimulator
 
             // 4. Negative Amplitude, Dämpfung, Frequenz, Wertezahl erzeugt Out of Bounce Exception
 
+
             // 5. Werte eingeben und mit vorher berechnetem Ergebnis vergleichen
 
-            List<double> Expected = new List<double> 
-                                    { 0, 139.78, 215.14, 204.65, 120.31, 0, -108.86, -167.55, -159.38, -93.70, 0 };
-
+            
+            // Assert
 
             Console.WriteLine("Methode sollte \n "
                    + String.Join(", ", Expected)
