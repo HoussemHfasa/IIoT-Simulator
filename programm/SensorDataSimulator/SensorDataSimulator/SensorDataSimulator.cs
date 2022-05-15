@@ -13,24 +13,42 @@ namespace SensorDataSimulator
 
         public List<double> GetDampedOscillation(double Amplitude, double Dampingratio, double Period, double Phase, int AmmountofValues)
         {
-            throw new NotImplementedException();
+            List<double> Result = new List<double>();
+
+            // Achtung, hier wird die Harmonische nur auf 2 Kommastellen genau geliefert...
+            // evtl harmonische in extra Funktion errechnen, GetHarmonicOscillation müsste dann noch runden.
+            List<double> HarmonicPart = GetHarmonicOscillation(Amplitude, Period, Phase, AmmountofValues);
+            for( int i = 0; i< AmmountofValues; i++)
+            {
+                Result.Add(Math.Round(HarmonicPart[i] * Math.Exp(-1.0*Dampingratio * i),2));
+            }
+
+            return Result;
         }
 
-        public List<double> GetExponentialValues(double Basis, double Exponent, int AmountofValues)
-        {
-            throw new NotImplementedException();
-        }
 
         // Für Unittest falsche Implementierung zum testen.
         public List<double> GetHarmonicOscillation(double Amplitude, double Period, double Phase, int AmmountofValues)
         {
-            return new List<double> { 1.0, 2.0, 3.0 };
+            List<double> Result = new List<double>();
+            double CatchNegativZero;
+
+            //Werteerzeugung
+            for( int i = 0; i < AmmountofValues; i++)
+            {
+                // Gleichung für harmonische Schwingung. Hier entsteht durch Rundung teilweise -0 als Wert!
+                CatchNegativZero = Math.Round(Amplitude * Math.Sin((2 * Math.PI / Period) * i + Phase), 2);
+
+                // Daher diesen Fall abfangen
+                if(CatchNegativZero == -0d)
+                {
+                    CatchNegativZero = 0d;
+                }
+                Result.Add(CatchNegativZero);
+            }
+            return Result;
         }
 
-        public List<double> GetLinearValues(double Slope, double XShift, int AmmountofValues)
-        {
-            throw new NotImplementedException();
-        }
 
         public List<bool> GetRandomBoolValues(double Wechselwarscheinlichkeit, int AmountofValues)
         {
