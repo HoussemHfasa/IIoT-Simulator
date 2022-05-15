@@ -11,27 +11,22 @@ namespace SensorDataSimulator
     {
         public int AmmountofValues => throw new NotImplementedException();
 
-        public List<double> GetDampedOscillation(double Amplitude, double Dampingratio, double Period, double Phase, int AmmountofValues)
-        {
-            List<double> Result = new List<double>();
+        
 
-            // Achtung, hier wird die Harmonische nur auf 2 Kommastellen genau geliefert...
-            // evtl harmonische in extra Funktion errechnen, GetHarmonicOscillation müsste dann noch runden.
-            List<double> HarmonicPart = GetHarmonicOscillation(Amplitude, Period, Phase, AmmountofValues);
-            for( int i = 0; i< AmmountofValues; i++)
-            {
-                Result.Add(Math.Round(HarmonicPart[i] * Math.Exp(-1.0*Dampingratio * i),2));
-            }
-
-            return Result;
-        }
-
-
-        // Für Unittest falsche Implementierung zum testen.
+      
         public List<double> GetHarmonicOscillation(double Amplitude, double Period, double Phase, int AmmountofValues)
         {
             List<double> Result = new List<double>();
             double CatchNegativZero;
+
+            // Überprüfung, ob Parameter in korrektem Wertebereich liegen. Falls nicht -> Exception
+            if (Amplitude < 0.0)
+                throw new ArgumentOutOfRangeException("Amplitude darf nicht negativ sein!");
+            if (Period < 0.0)
+                throw new ArgumentOutOfRangeException("Periodendauer darf nicht negativ sein");
+            // oder über uint..
+            if (AmmountofValues < 0)
+                throw new ArgumentOutOfRangeException("Werteanzahl darf nicht negativ sein");
 
             //Werteerzeugung
             for( int i = 0; i < AmmountofValues; i++)
@@ -48,6 +43,22 @@ namespace SensorDataSimulator
             }
             return Result;
         }
+
+        public List<double> GetDampedOscillation(double Amplitude, double Dampingratio, double Period, double Phase, int AmmountofValues)
+        {
+            List<double> Result = new List<double>();
+
+            // Achtung, hier wird die Harmonische nur auf 2 Kommastellen genau geliefert...
+            // evtl harmonische in extra Funktion errechnen, GetHarmonicOscillation müsste dann noch runden.
+            List<double> HarmonicPart = GetHarmonicOscillation(Amplitude, Period, Phase, AmmountofValues);
+            for (int i = 0; i < AmmountofValues; i++)
+            {
+                Result.Add(Math.Round(HarmonicPart[i] * Math.Exp(-1.0 * Dampingratio * i), 2));
+            }
+
+            return Result;
+        }
+
 
 
         public List<bool> GetRandomBoolValues(double Wechselwarscheinlichkeit, int AmountofValues)
