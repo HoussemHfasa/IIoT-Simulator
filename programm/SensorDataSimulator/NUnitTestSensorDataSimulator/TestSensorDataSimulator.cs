@@ -19,6 +19,7 @@ namespace NUnitTestSensorDataSimulator
         double RandomPeriod;
         double RandomPhase;
         int RandomValueCount;
+        List<double> TestList;
 
         [SetUp]
         public void Setup()
@@ -45,6 +46,7 @@ namespace NUnitTestSensorDataSimulator
             List<double> Testlist = TestSimulator.GetHarmonicOscillation(Testamplitude, TestPeriod, Testphase, TestValueCount);
             // 1. Amplitude abgleichen
             Console.WriteLine("Amplitude sollte {0} sein, Amplitude ist {1}.", Testamplitude, Testlist.Max());
+            // Wenn Amplitude zwischen zwei Werten liegt, würde der Test fehlschlagen.. anders überprüfen
             Assert.AreEqual(Testamplitude, Testlist.Max());
 
         }
@@ -124,15 +126,109 @@ namespace NUnitTestSensorDataSimulator
 
 
 
-        [Test]
 
+
+
+        
+        [Test]
+        // 1. Test: Maximale Amplitude nicht größer als angegebene Amplitude
+        public void GetDampedOscillation_Amplitudetest()
+        {
+            TestList = TestSimulator.GetDampedOscillation(RandomAmplitude, RandomDampingRatio, RandomPeriod, RandomPhase, RandomValueCount);
+            Console.WriteLine("Amplitude sollte  kleiner oder gleich {0} sein. Amplitude ist {1}.", RandomAmplitude, TestList.Max());
+            Assert.LessOrEqual(TestList.Max(),RandomAmplitude);
+        }
+
+        [Test]
+        // 2. Test: Werteanzahl korrekt?
         public void GetDampedOscillation_Counttest()
         {
+            TestList = TestSimulator.GetDampedOscillation(RandomAmplitude, RandomDampingRatio, RandomPeriod, RandomPhase, RandomValueCount);
+            Console.WriteLine("Methode sollte {0} Werte liefern, Methode hat {1} Werte geliefert", RandomValueCount, TestList.Count());
+            Assert.AreEqual(RandomValueCount, TestList.Count());
+
+        }
+
+
+        [Test]
+        // 3. Test: 1. Schwingung > z.b. 3 Schwingung
+        public void GetDampedOscillation_Dampes_Amplitude()
+        {
+            //Exception, wenn zu wenig Werte geliefert sind
+            if (RandomPeriod*2 > RandomValueCount)
+            {
+                Assert.Fail("Die Werteanzahl ist zu kleine für eine Überprüfung");
+            }
+                
+            
+            // Wenn mehr als 2 vollständige Schwingungen vorhanden sind
+            
+
+            TestList = TestSimulator.GetDampedOscillation(RandomAmplitude, RandomDampingRatio, RandomPeriod, RandomPhase, RandomValueCount);
+            for(int i = 0; i<RandomPeriod; i++)
+            {
+                if(Math.Abs(TestList[i]) < Math.Abs(TestList[i+(int)RandomPeriod]))
+                {
+                    // Keine Dämpfung vorhanden
+                    Assert.Fail("2. Schwingung ist größer als die 1. Schwingung");
+                }
+            }
+
+            //Dämpfung vorhanden
+            Assert.Pass("Die Schwingung wird gedämpft");
+        }
+
+
+
+        [Test]
+        public void GetDampedOscillation_negativeAmplitude_Throws()
+        {
+            // Negative Amplitude
+            RandomAmplitude = RandomAmplitude * -1.0;
+
+            // Löst Exception aus?
+            Assert.Throws<ArgumentOutOfRangeException>(() => TestSimulator.GetDampedOscillation(RandomAmplitude,RandomDampingRatio ,RandomPeriod, RandomPhase, RandomValueCount));
+
+        }
+
+
+        [Test] 
+
+        public void GetDampedOscillation_negativeDampingratio_Throws()
+        {
+            // Negative Dämpfung 
+            RandomDampingRatio = RandomDampingRatio * -1.0;
+
+            // Löst Exception aus?
+            Assert.Throws<ArgumentOutOfRangeException>(() => TestSimulator.GetDampedOscillation(RandomAmplitude, RandomDampingRatio, RandomPeriod, RandomPhase, RandomValueCount));
 
         }
 
         [Test]
 
+        public void GetDampedOscillation_negativePeriod_Throws()
+        {
+            // Negative Periodendauer
+            RandomPeriod = RandomPeriod * -1.0;
+            // Löst Exception aus?
+            Assert.Throws<ArgumentOutOfRangeException>(() => TestSimulator.GetDampedOscillation(RandomAmplitude,RandomDampingRatio, RandomPeriod, RandomPhase, RandomValueCount));
+
+        }
+
+        [Test]
+        public void GetDampedOscillation_negativeValueCount_Throws()
+        {
+            // Negative Werteanzahl
+            RandomValueCount = RandomValueCount * -1;
+            // Löst Exception aus?
+            Assert.Throws<ArgumentOutOfRangeException>(() => TestSimulator.GetDampedOscillation(RandomAmplitude,RandomDampingRatio, RandomPeriod, RandomPhase, RandomValueCount));
+
+
+        }
+
+
+        [Test]
+        // 5. Werte eingeben und mit vorher berechnetem Ergebnis vergleichen
         public void GetDampedOscillation_ResultTest()
         {
 
@@ -146,19 +242,6 @@ namespace NUnitTestSensorDataSimulator
 
             // Act
             List<double> DampedTest = TestSimulator.GetDampedOscillation(TestAmplitude, TestDampingRatio, TestPeriod, 0, TestAmmountofVaulues);
-
-            
-
-            // 1. Test: Maximale Amplitude nicht größer als angegebene Amplitude
-
-            // 2. Test: Werteanzahl korrekt?
-
-            // 3. Test: 1. Schwingung > z.b. 3 Schwingung
-
-            // 4. Negative Amplitude, Dämpfung, Frequenz, Wertezahl erzeugt Out of Bounce Exception
-
-
-            // 5. Werte eingeben und mit vorher berechnetem Ergebnis vergleichen
 
             
             // Assert
