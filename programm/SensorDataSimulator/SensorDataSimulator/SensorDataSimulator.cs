@@ -48,6 +48,10 @@ namespace SensorDataSimulator
         {
             List<double> Result = new List<double>();
 
+            // Überprüfung, Dämpfungsrate im erlaubten Bereich liegt. Falls nicht -> Exception
+            if (Dampingratio < 0.0)
+                throw new ArgumentOutOfRangeException("Dämpfungsrate darf nicht negativ sein!");
+
             // Achtung, hier wird die Harmonische nur auf 2 Kommastellen genau geliefert...
             // evtl harmonische in extra Funktion errechnen, GetHarmonicOscillation müsste dann noch runden.
             List<double> HarmonicPart = GetHarmonicOscillation(Amplitude, Period, Phase, AmmountofValues);
