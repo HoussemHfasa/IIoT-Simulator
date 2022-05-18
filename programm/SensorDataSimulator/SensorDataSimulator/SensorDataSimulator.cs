@@ -1,6 +1,8 @@
 ﻿using CommonInterfaces;
 using System;
 using System.Collections.Generic;
+using MathNet.Numerics.Distributions;
+using MathNet.Numerics.Random;
 
 namespace SensorDataSimulator
 {
@@ -9,11 +11,32 @@ namespace SensorDataSimulator
 
     public class SensorDataSimulator : ISensorDataSimulator
     {
-        public int AmmountofValues => throw new NotImplementedException();
 
-        
+        private Random Rand;
 
-      
+        // interne Variablen zur Berechnung Standardabweichung
+        private double Mean;
+        private double StandardDeviation;
+        // Maximale WerteÄnderung
+        private double MaxValueChange;
+        // Tatsächliche WertÄnderung
+        private double Prefix;
+
+
+        private double CurrentValue;
+
+        public int AmmountofValues
+        {
+            get;
+            set;
+        }
+
+
+        public SensorDataSimulator()
+        {
+            Rand = new Random();
+        }
+
         public List<double> GetHarmonicOscillation(double Amplitude, double Period, double Phase, int AmmountofValues)
         {
             List<double> Result = new List<double>();
@@ -29,13 +52,13 @@ namespace SensorDataSimulator
                 throw new ArgumentOutOfRangeException("Werteanzahl darf nicht negativ sein");
 
             //Werteerzeugung
-            for( int i = 0; i < AmmountofValues; i++)
+            for (int i = 0; i < AmmountofValues; i++)
             {
                 // Gleichung für harmonische Schwingung. Hier entsteht durch Rundung teilweise -0 als Wert!
                 CatchNegativZero = Math.Round(Amplitude * Math.Sin((2 * Math.PI / Period) * i + Phase), 2);
 
                 // Daher diesen Fall abfangen
-                if(CatchNegativZero == -0d)
+                if (CatchNegativZero == -0d)
                 {
                     CatchNegativZero = 0d;
                 }
@@ -65,22 +88,151 @@ namespace SensorDataSimulator
 
 
 
-        public List<bool> GetRandomBoolValues(double Wechselwarscheinlichkeit, int AmountofValues)
+        public List<bool> GetRandomBoolValues(double Toggleprobability, int AmountofValues)
         {
-            throw new NotImplementedException();
+            List<bool> Result = new List<bool>();
+
+            // Wechselwarscheinlichkeit zwischen 0.0 und 1.0, daher Exception Handling?
+            if (Toggleprobability > 1.0 ^ Toggleprobability < 0.0)
+            {
+                throw new ArgumentOutOfRangeException("Wechselwarscheinlichkeit darf nicht unter 0 oder über 1 liegen");
+            }
+
+            // Erzeugung erster Wert
+            Result.Add(Convert.ToBoolean(Rand.Next(0, 2)));
+
+            //Werteerzeugung mit Wechselwarscheinlichkeit, i = 1, da bereits ein Wert erzeugt wurde
+            for (int i = 1; i < AmountofValues; i++)
+            {
+
+                // Zufalls Double kleiner als Wechselwarscheinlichkeit -> Wert wechselt
+                if (Rand.NextDouble() <= Toggleprobability)
+                {
+                    Result.Add(!Result[i - 1]);
+                }
+
+                // Sonst: gleicher Wert
+                else
+                {
+                    Result.Add(Result[i - 1]);
+                }
+            }
+
+
+            return Result;
         }
 
-        public List<double> GetStandardDeviationValues(double Mean, double StandardDeviation, int AmmountofValues)
+        public List<double> GetStandardDeviationValues(double MeanInput, double StandardDeviationInput, int AmmountofValues)
         {
-            throw new NotImplementedException();
+            // Standardabweichung darf nicht negativ sein..?!
+            // Info: Standardabweichung kann nur mit genügender Menge Werte erreicht werden
+
+            // Ergebnis A
+            List<double> Result = new List<double>();
+
+            // Intern abspeichern damit NextValue() darauf zugreifen kann
+            Mean = MeanInput;
+            StandardDeviation = StandardDeviationInput;
+            //Maximale Werteänderung zum Vorhergehenden Wert, 15 ist willkürlich gewählt
+            MaxValueChange = StandardDeviation / 15;
+            return Result = (List<double>)Normal.Samples(Mean, StandardDeviation);
+            // Ersten Wert setzen.. vlt nicht immer Mean nehmen?
+            CurrentValue = Mean;
+            Result.Add(CurrentValue);
+
+            // Restliche Werte erzeugen
+            for (int i = 1; i < AmmountofValues; i++)
+            {
+                Result.Add(NextValue());
+            }
+            
+            return Result;
         }
 
         public List<double> GetSuperposition(List<double> Oscillation1, List<double> Oscillation2)
         {
-            throw new NotImplementedException();
+            List<double> Result = new List<double>();
+            List<double> ShortList;
+            List<double> LongList;
+
+            // Herausfinden, welche die kürzere Liste ist
+            if (Oscillation1.Count <= Oscillation2.Count)
+            {
+                ShortList = Oscillation1;
+                LongList = Oscillation2;
+            }
+            else
+            {
+
+                ShortList = Oscillation2;
+                LongList = Oscillation1;
+            }
+
+            for (int i = 0; i < LongList.Count; i++)
+            {
+                // Die kurze Liste hat an der Stelle keine Werte mehr
+                if (i >= ShortList.Count)
+                {
+                    Result.Add(LongList[i]);
+                }
+                else
+                {
+                    Result.Add(ShortList[i] + LongList[i]);
+                }
+
+
+            }
+            return Result;
         }
 
+        private double NextValue()
+        {
+            // Um wieviel soll sich Wert ändern
+            double ActualValueChange = MaxValueChange * Rand.NextDouble();
 
+            // Soll Änderung addiert oder subtrahiert werden?
+            Prefix = PlusorMinusOne();
+
+
+            CurrentValue = CurrentValue + ActualValueChange * Prefix;
+
+            return CurrentValue;
+        }
+
+        private double PlusorMinusOne()
+        {
+            //double DistanceToDev = Math.Abs(CurrentValue - StandardDeviation - Mean);
+            double DistanceToMean = Math.Abs(CurrentValue - Mean);
+
+            // Wenn die DistancetoDev größer ist als die Standardabweichung, soll der Wert tendenziell näher zur Standardabweichung
+            // Bei Standardabweichung = DistanceToDev 50/50 Warscheinlichkeit.
+
+            // Noch unsicher ob hier gewünschte Normalverteilung entsteht...HIER IST DENKFEHLER
+            //double Propability = StandardDeviation / (DistanceToDev * 2);
+            double Propability = ((StandardDeviation - DistanceToMean/10) / 2);
+           
+
+            // Stanarddeviation entspricht 100%. 0.0 = 0%, jetzt zufälligen Wert normiert auf StandardDeviation erstellen
+            double CompareValue = Rand.NextDouble() * StandardDeviation;
+            
+            //Wird hier der Wert verglichen oder die Adresse?!
+            if(Prefix == 1)
+            {
+                if (Propability > CompareValue)
+                    return 1.0;
+                else
+                    return -1.0;
+            }
+            else
+            {
+                if (Propability > CompareValue)
+                    return -1.0;
+                else
+                    return 1.0;
+            }
+
+           
+        }
     }
 
     public abstract class SensorDataErrors : ISensorDataErrors
