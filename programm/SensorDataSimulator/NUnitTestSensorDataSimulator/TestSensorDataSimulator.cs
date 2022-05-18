@@ -275,13 +275,14 @@ namespace NUnitTestSensorDataSimulator
             double TestMean = 15;
             double TestDeviation = 7;
             int TestCount = 100;
+            List<double> Testresult;
 
 
             // ACT
-            TestSimulator.GetStandardDeviationValues(TestMean, TestDeviation, TestCount);
+            Testresult = TestSimulator.GetStandardDeviationValues(TestMean, TestDeviation, TestCount);
 
             // ASSERT
-
+            Console.WriteLine(String.Join(", ", Testresult)); 
             Assert.AreEqual(TestSimulator.AmmountofValues, TestCount);
 
 

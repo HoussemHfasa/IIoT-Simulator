@@ -9,8 +9,7 @@ namespace NUnitTestSensorDataSimulator
 
         public void ErrorTest()
         {
-            Assert.Pass(" Test erfolgreich");
-            Assert.Pass();
+
         }
 
         
