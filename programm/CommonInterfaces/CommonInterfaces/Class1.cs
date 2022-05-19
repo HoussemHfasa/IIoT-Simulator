@@ -81,7 +81,7 @@ namespace CommonInterfaces
     public interface IDatastorage
     {
         // die Daten die von der Sensoren kommt
-        public object Data { get; }
+        public Dictionary<DateTime, object[]> Data { get; set; }
         //Dateipfad der Datei
         public string filepath { get; }
         /// <summary>
@@ -89,12 +89,12 @@ namespace CommonInterfaces
         /// </summary>
         /// <param name="data"> die Daten zu speichern </param>
         /// <param name="filepath"> Dateipfad, wo die Daten werden gespeichert </param>
-        public void JsonSerialize(object data, string filepath);
+        public void JsonSerialize(Dictionary<DateTime, object[]> data, string filepath);
         /// <summary>
         /// deserialise Textdatei zu Json datei ,um die gespeicherte Datei zu laden
         /// </summary>
         /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
-        public Object JsonDeserialize(string filepath);
+        public Dictionary<DateTime, object[]> JsonDeserialize(string filepath);
         /// <summary>
         /// deserialise Textdatei zu Json datei ,um die gespeicherte sensorgruppe zu laden
         /// </summary>

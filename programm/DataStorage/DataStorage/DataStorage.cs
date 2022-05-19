@@ -12,24 +12,25 @@ namespace DataStorage
 {
     public class DataStorage : IDatastorage
     {
-        public object Data { get; set; }
+        public Dictionary<DateTime,object[]> Data { get; set; }
         public string filepath { get; set; }
    
 
 
-        public object JsonDeserialize(string filepath)
+        public Dictionary<DateTime, object[]> JsonDeserialize(string filepath)
         {
-            JObject obj = null;
+            string obj = null;
             var serializer = new JsonSerializer();
             using (TextReader reader = File.OpenText(filepath))
             {
-                obj = serializer.Deserialize(reader,typeof(object)) as JObject;
+                
+                obj = serializer.Deserialize(reader,typeof(Dictionary<DateTime, object[]>)) as string;
             }
-            
-            return obj;
+            Dictionary<DateTime, object[]> values = JsonConvert.DeserializeObject<Dictionary<DateTime, object[]>>(obj);
+            return values;
         }
 
-        public void JsonSerialize(object data, string filepath)
+        public void JsonSerialize(Dictionary<DateTime, object[]> data, string filepath)
         {
             var serializer = new JsonSerializer();
             using (TextWriter writer = File.CreateText(filepath))

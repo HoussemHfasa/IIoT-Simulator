@@ -1,6 +1,15 @@
 using NUnit.Framework;
 using DataStorage;
 using Newtonsoft.Json;
+using System;
+using System.Linq;
+using System.Text;
+using System.IO;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using CommonInterfaces;
+using Newtonsoft.Json.Linq;
+
 
 namespace NunitTestDatastorage
 {
@@ -18,7 +27,9 @@ namespace NunitTestDatastorage
         {
             //Arrange
             string filepath = @"C:\Users\houss\Documents\gitlab\programm\DataStorage\Tests\teststorage.txt";
-            double[] data = { 1, 2, 3, 6, 5, 47 };
+            Dictionary<DateTime, object[]> data = new Dictionary<DateTime, object[]>();
+            data.Add(DateTime.Parse("01 02 2000"),new object[] { 1, 2, 4, 8, 96 });
+            
 
             //Act
             Storagetest.JsonSerialize(data, filepath);
@@ -45,11 +56,11 @@ namespace NunitTestDatastorage
         {
             //Arrange
             string filepath = @"C:\Users\houss\Documents\gitlab\programm\DataStorage\Tests\teststorage.txt";
-            double[] data = { 1, 2, 3, 6, 5, 47 };
-            
+            Dictionary<DateTime, object[]> data = new Dictionary<DateTime, object[]>();
+            data.Add(DateTime.Parse("01 02 2000"), new object[] { 1, 2, 4, 8, 96 });
+
             //Act
-            var json = JsonConvert.SerializeObject(Storagetest.JsonDeserialize(filepath)) ;
-            var data1 = JsonConvert.DeserializeObject<double[]>(json);
+            Dictionary<DateTime, object[]> data1 = Storagetest.JsonDeserialize(filepath);
 
             //Assert
             Assert.That(data1, Is.EqualTo(data));
