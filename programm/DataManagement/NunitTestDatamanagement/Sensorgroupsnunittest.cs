@@ -6,7 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using CommonInterfaces;
-using DataManagement;
+using SensorAndSensorgroup;
 
 
 
@@ -16,13 +16,13 @@ namespace NunitTestDatamanagement
     {
         
         
-        private DataManagement.Sensorgroups<T> SensorgroupsTest;
+        private SensorAndSensorgroup.Sensorgroups<T> SensorgroupsTest;
         [SetUp]
         public void Setup()
         {
            
            
-            SensorgroupsTest = new Sensorgroups<T>();
+           // SensorgroupsTest = new Sensorgroups<T>();
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace NunitTestDatamanagement
             string Id = "123456";
 
             //Act
-            SensorgroupsTest.Sensorloeschen<T>(SensorList, Id);
+         //   SensorgroupsTest.Sensorloeschen<T>(SensorList, Id);
 
             //Assert
             Assert.Pass();

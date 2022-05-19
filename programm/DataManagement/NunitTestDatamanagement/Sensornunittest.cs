@@ -6,7 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using CommonInterfaces;
-using DataManagement;
+using SensorAndSensorgroup;
 
 
 namespace NunitTestDatamanagement
@@ -14,13 +14,13 @@ namespace NunitTestDatamanagement
     public class Sensornunittest
     {
 
-        private DataManagement.Sensor<List> SensorTest;
+        private SensorAndSensorgroup.Sensor<List> SensorTest;
   
         [SetUp]
         public void Setup()
         {
 
-            SensorTest = new DataManagement.Sensor<List>();
+           // SensorTest = new SensorAndSensorgroup.Sensor<List>();
             
         }
 

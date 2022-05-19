@@ -6,28 +6,29 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using CommonInterfaces;
 
-namespace DataManagement
+namespace SensorAndSensorgroup
 {
-    public class Sensor<T> : ISenor<T>
+    public abstract class Sensor<T> : ISenor<T>
     {
-        public string Sensor_id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string[,] Id_Adresse { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Sensortype { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Sensor_id { get ; set ; }
+        public string[,] Id_Adresse { get ; set ; }
+        public string Sensortype { get ; set ; }
         public string Einheit { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public DateTime CreationDate => throw new NotImplementedException();
+        public DateTime CreationDate { get; }
 
-        public TimeSpan CreationTime => throw new NotImplementedException();
+        public TimeSpan CreationTime { get; }
 
-        public int Werteanzahl => throw new NotImplementedException();
+        public int Werteanzahl { get; }
 
-        public int Timeinterval => throw new NotImplementedException();
+        public int Timeinterval { get; }
 
-
-        List<T> ISenor<T>.Getvalues()
+        public List<T> Getvalues()
         {
             throw new NotImplementedException();
         }
+        public abstract Dictionary<DateTime, T[]> Getvalue();
+        
     }
 }
 

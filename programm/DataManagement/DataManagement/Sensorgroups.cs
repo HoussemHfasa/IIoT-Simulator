@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using CommonInterfaces;
 
-namespace DataManagement
+namespace SensorAndSensorgroup
 {
      public class Sensorgroups<T> : ISensorGroups<T> where T : ISenor<T>
     {
