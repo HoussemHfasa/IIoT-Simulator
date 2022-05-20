@@ -39,6 +39,8 @@ namespace SensorDataSimulator
 
         public List<double> GetHarmonicOscillation(double Amplitude, double Period, double Phase, int AmmountofValues)
         {
+
+            //Ohne Rundungen
             List<double> Result = new List<double>();
             double CatchNegativZero;
 
@@ -93,7 +95,7 @@ namespace SensorDataSimulator
             List<bool> Result = new List<bool>();
 
             // Wechselwarscheinlichkeit zwischen 0.0 und 1.0, daher Exception Handling?
-            if (Toggleprobability > 1.0 ^ Toggleprobability < 0.0)
+            if (Toggleprobability > 1.0 || Toggleprobability < 0.0)
             {
                 throw new ArgumentOutOfRangeException("Wechselwarscheinlichkeit darf nicht unter 0 oder über 1 liegen");
             }

@@ -304,6 +304,7 @@ namespace NUnitTestSensorDataSimulator
         {
             for (int i = 0; i < FirstList.Count; i++)
             {
+                // Math.Abs(x-y) < 1e-12 , Keine Rundungen
                 //Kann verbessert werden
                 if (FirstList[i].Equals(SecondList[i]))
                 { }
