@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStorage", "DataStorage\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonInterfaces", "..\CommonInterfaces\CommonInterfaces\CommonInterfaces.csproj", "{E3AAE910-2AE4-4467-8F76-BF2C0FDE0482}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NunitTestDatastorage", "NunitTestDatastorage\NunitTestDatastorage.csproj", "{E217A3A2-9CB0-424A-8D9D-FC79623A26D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NunitTestDatastorage", "NunitTestDatastorage\NunitTestDatastorage.csproj", "{E217A3A2-9CB0-424A-8D9D-FC79623A26D1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SensorAndSensorgroup", "..\DataManagement\DataManagement\SensorAndSensorgroup.csproj", "{1CC059C6-DC25-4C37-B4B4-1024C7DDAF97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{E217A3A2-9CB0-424A-8D9D-FC79623A26D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E217A3A2-9CB0-424A-8D9D-FC79623A26D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E217A3A2-9CB0-424A-8D9D-FC79623A26D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CC059C6-DC25-4C37-B4B4-1024C7DDAF97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CC059C6-DC25-4C37-B4B4-1024C7DDAF97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CC059C6-DC25-4C37-B4B4-1024C7DDAF97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CC059C6-DC25-4C37-B4B4-1024C7DDAF97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

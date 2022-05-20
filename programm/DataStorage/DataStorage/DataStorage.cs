@@ -19,15 +19,15 @@ namespace DataStorage
 
         public Dictionary<DateTime, object[]> JsonDeserialize(string filepath)
         {
-            string obj = null;
+            Dictionary<DateTime, object[]> data;
             var serializer = new JsonSerializer();
             using (TextReader reader = File.OpenText(filepath))
             {
-                
-                obj = serializer.Deserialize(reader,typeof(Dictionary<DateTime, object[]>)) as string;
+                data = (Dictionary<DateTime, object[]>)serializer.Deserialize(reader, typeof(Dictionary<DateTime, object[]>));
+
             }
-            Dictionary<DateTime, object[]> values = JsonConvert.DeserializeObject<Dictionary<DateTime, object[]>>(obj);
-            return values;
+
+            return data;
         }
 
         public void JsonSerialize(Dictionary<DateTime, object[]> data, string filepath)
