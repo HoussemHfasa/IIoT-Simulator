@@ -32,7 +32,7 @@ namespace SensorDataSimulator
         }
 
 
-        public SensorDataSimulator()
+        public SensorDataSimulator( uint AmmoutofValues)
         {
             Rand = new Random();
         }

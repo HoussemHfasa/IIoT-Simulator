@@ -162,7 +162,7 @@ namespace CommonInterfaces
 
     {
 
-        public int AmmountofValues { get; }
+        public uint AmmountofValues { get; set; }
 
 
         //Funktionen zur Erzeugung von Messwerten
@@ -173,13 +173,13 @@ namespace CommonInterfaces
         /// <param name="Mean"> Mittelwert </param>
         /// <param name="StandardDeviation"> Standardabweichung </param>
         /// <returns>Liste zufälliger, normalverteilter double Werte</returns>
-        List<double> GetStandardDeviationValues(double Mean, double StandardDeviation, int AmmountofValues);
+        List<double> GetStandardDeviationValues(double Mean, double StandardDeviation);
 
         /// <summary>
         /// Erzeugt eine Liste mit zufällig erzeugten bool Werten 
         /// </summary>
         /// <param name="Toggleprobability"> Wert zw. 0-1. Umschaltwarscheinlichkeit 0 -> 1 bzw. 1 -> 0 </param>
-        List<bool> GetRandomBoolValues(double Toggleprobability, int AmountofValues);
+        List<bool> GetRandomBoolValues(double Toggleprobability);
 
        
 
@@ -189,7 +189,7 @@ namespace CommonInterfaces
         /// <param name="Amplitude"> Amplitude </param>
         /// <param name="Period"> Periodendauer </param>
         /// <param name="Phase"> Phasenverschiebung </param>
-        List<double> GetHarmonicOscillation(double Amplitude, double Period, double Phase, int AmmountofValues);
+        List<double> GetHarmonicOscillation(double Amplitude, double Period, double Phase);
 
         /// <summary>
         /// Erzeugt Mithilfe einer gedämüften harmonischen Schwingungsgleichung eine Liste an double Werten
@@ -198,7 +198,7 @@ namespace CommonInterfaces
         /// <param name="Period"> Periodendauer </param>
         /// <param name="Dampingratio"> Dämpfungsrate </param>
         /// <param name="Phase"> Phasenverschiebung </param>
-        List<double> GetDampedOscillation(double Amplitude, double Dampingratio, double Period, double Phase, int AmmountofValues);
+        List<double> GetDampedOscillation(double Amplitude, double Dampingratio, double Period, double Phase);
 
 
         /// <summary>
