@@ -18,17 +18,28 @@ namespace SensorAndSensorgroup
 
         public void AddBase(string BaseName)
         {
-            throw new NotImplementedException();
+            string folderPath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\" +BaseName;
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath); 
+
+            }
         }
 
-        public void AddNode(string NodeName, string[] NodeAdress)
+        public void AddNode(string NodeName, string Basename)
         {
-            throw new NotImplementedException();
+            string folderPath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\" + Basename+NodeName;
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+
+            }
         }
 
-        public void DeleteNodeBase(string[] Adress)
+        public void DeleteNodeBase(string NodeName, string Basename)
         {
-            throw new NotImplementedException();
+            string folderPath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\" + Basename + NodeName;
+            Directory.Delete(folderPath);
         }
 
         public void Sensorhinzufuegen(string[] sensorids, string sensorid)

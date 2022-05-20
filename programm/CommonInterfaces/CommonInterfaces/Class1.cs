@@ -48,10 +48,10 @@ namespace CommonInterfaces
         public void AddBase(string BaseName);
 
         // Unterordner hinzufügen
-        public void AddNode(string NodeName, string[] NodeAdress);
+        public void AddNode(string NodeName, string Basename);
 
         //Löschen von Stamm/Unterordner
-        public void DeleteNodeBase(string[] Adress);
+        public void DeleteNodeBase(string NodeName, string Basename);
 
 
 
