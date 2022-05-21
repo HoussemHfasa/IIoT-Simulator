@@ -8,12 +8,16 @@ using CommonInterfaces;
 
 namespace SensorAndSensorgroup
 {
-     public class Sensorgroups<T> : ISensorGroups<T> where T : ISenor<T>
+    public class Sensorgroups<T> : ISensorGroups<T> where T : ISenor<T>
     {
         //allgemeine Adresse für die Sensoren ,die in der Liste sind
-        public string Adresse { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Adresse { get; set; }
         //List von Sensoren
-        public string[] SensorIds { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string[] SensorIds { get; }
+        public Sensorgroups(string adresse)
+            {
+            Adresse = adresse;
+            }
         public List<List<object>> GroupDirectory { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void AddBase(string BaseName)
@@ -47,15 +51,12 @@ namespace SensorAndSensorgroup
             sensorids.Append(sensorid);
         }
 
-        public void Sensorhinzufuegen(string Sensor)
-        {
-            throw new NotImplementedException();
-        }
+        
 
-
-        public void Sensorloeschen(string sensorid)
+        public void Sensorloeschen(string[] sensorids,string sensorid)
         {
-            throw new NotImplementedException();
+            string[] sensors = sensorids.Where(w => w != sensorid).ToArray();
+            sensorids = sensors;
         }
     }
 }

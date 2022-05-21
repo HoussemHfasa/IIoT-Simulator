@@ -15,11 +15,11 @@ namespace NunitTestDatastorage
 {
     public class Tests
     {
-        private DataStorage.DataStorage Storagetest;
+        private DataStorage.DataStorage<double> Storagetest=new DataStorage<double>();
         [SetUp]
         public void Setup()
         {
-            Storagetest = new DataStorage.DataStorage();
+            Storagetest = new DataStorage.DataStorage<double>();
         }
 
         [Test]
@@ -27,9 +27,8 @@ namespace NunitTestDatastorage
         {
             //Arrange
             string filepath = @"C:\Users\houss\Documents\gitlab\programm\DataStorage\Tests\teststorage.txt";
-            Dictionary<DateTime, object[]> data = new Dictionary<DateTime, object[]>();
-            data.Add(DateTime.Parse("01 02 2000"),new object[] { 1, 2, 4, 8, 96 });
-            
+            Dictionary<DateTime, List<double>> data = new Dictionary<DateTime, List<double>>();
+            data.Add(DateTime.Parse("01 02 2000"), new List<double> { 1, 2, 4, 8, 96, 1457 });
 
             //Act
             Storagetest.JsonSerialize(data, filepath);
@@ -57,14 +56,15 @@ namespace NunitTestDatastorage
             //Arrange
             //teststorage.txt (file://DESKTOP-SV477UP/Users/houss/Documents/gitlab/programm/DataStorage/Tests/teststorage.txt)
             string filepath = @"C:\Users\houss\Documents\gitlab\programm\DataStorage\Tests\teststorage.txt";
-            Dictionary<DateTime, object[]> data = new Dictionary<DateTime, object[]>();
-            data.Add(DateTime.Parse("01 02 2000"), new object[] { 1, 2, 4, 8, 96 });
+            Dictionary<DateTime, List<double>> data = new Dictionary<DateTime, List<double>>();
+            data.Add(DateTime.Parse("01 02 2000"), new List<double> { 1, 2, 4, 8, 96, 1457 });
 
             //Act
-            Dictionary<DateTime, object[]> data1 = Storagetest.JsonDeserialize(filepath);
+            Dictionary<DateTime, List<double>> data1 = Storagetest.JsonDeserialize(filepath);
 
             //Assert
-            Assert.That(data1, Is.EqualTo(data));
+            Assert.That(data1.Values, Is.EqualTo(data.Values));
+            Assert.That(data1.Keys, Is.EqualTo(data.Keys));
             
         }
     }

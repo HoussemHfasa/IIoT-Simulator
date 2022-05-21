@@ -19,7 +19,7 @@ namespace CommonInterfaces
         public abstract List<T> Getvalues();
  
     }
-    public interface ISensorGroups<T> where T : ISenor<T> 
+    public interface ISensorGroups<T> where T: ISenor<T>
     {
         // algemeine Adresse für die Sensorgruppe
         string Adresse { get; set; }
@@ -28,21 +28,21 @@ namespace CommonInterfaces
         List<List<object>> GroupDirectory { get; set; }
         
         // alle Ids die in diesem Gruppe sind, evtl nicht mehr benötigt
-        string[] SensorIds { get; set; }
+        string[] SensorIds { get;  }
 
         /// <summary>
         /// Ein Sensor_Id in der SensorIds Liste hinzufügen
         /// </summary>
         /// <param name="sensorids"> die Liste von Sensorids </param>
         /// <param name="sensorid"> das id zu hinzufugen zur Id_liste </param>
-        public void Sensorhinzufuegen( string Sensor);
+        public void Sensorhinzufuegen(string[] sensorids, string sensorid);
 
         /// <summary>
         /// Ein Sensor_Id von der SensorIds Liste loeschen
         /// </summary>
         /// <param name="sensorids"> die Liste von Sensorids </param>
         /// <param name="sensorid"> das id zu loeschen von der Liste </param>
-        public void Sensorloeschen(string sensorid);
+        public void Sensorloeschen(string[] sensorids, string sensorid)
 
         //Stamm hinzufügen
         public void AddBase(string BaseName);
@@ -78,10 +78,10 @@ namespace CommonInterfaces
 
     }
 
-    public interface IDatastorage
+    public interface IDatastorage<T> 
     {
         // die Daten die von der Sensoren kommt
-        public Dictionary<DateTime, object[]> Data { get; set; }
+        public Dictionary<DateTime, List<T>> Data { get; set; }
         //Dateipfad der Datei
         public string filepath { get; }
         /// <summary>
@@ -89,12 +89,12 @@ namespace CommonInterfaces
         /// </summary>
         /// <param name="data"> die Daten zu speichern </param>
         /// <param name="filepath"> Dateipfad, wo die Daten werden gespeichert </param>
-        public void JsonSerialize(Dictionary<DateTime, object[]> data, string filepath);
+        public void JsonSerialize(Dictionary<DateTime, List<T>> data, string filepath);
         /// <summary>
         /// deserialise Textdatei zu Json datei ,um die gespeicherte Datei zu laden
         /// </summary>
         /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
-        public Dictionary<DateTime, object[]> JsonDeserialize(string filepath);
+        public Dictionary<DateTime, List<T>> JsonDeserialize(string filepath);
         /// <summary>
         /// deserialise Textdatei zu Json datei ,um die gespeicherte sensorgruppe zu laden
         /// </summary>

@@ -10,44 +10,38 @@ using Newtonsoft.Json.Linq;
 
 namespace DataStorage
 {
-    public class DataStorage : IDatastorage
+    public class DataStorage<T> : IDatastorage<T> 
     {
-        public Dictionary<DateTime,object[]> Data { get; set; }
+        public Dictionary<DateTime,List<T>> Data { get; set; }
         public string filepath { get; set; }
-   
 
 
-        public Dictionary<DateTime, object[]> JsonDeserialize(string filepath)
+        // Ladung der Daten in der Dateipfad
+        public Dictionary<DateTime, List<T>> JsonDeserialize(string filepath)
         {
-            Dictionary<DateTime, object[]> data;
+
+            Dictionary<DateTime, List<T>> data;
             var serializer = new JsonSerializer();
             using (TextReader reader = File.OpenText(filepath))
             {
-                data = (Dictionary<DateTime, object[]>)serializer.Deserialize(reader, typeof(Dictionary<DateTime, object[]>));
+                data = (Dictionary<DateTime, List<T>>)serializer.Deserialize(reader, typeof(Dictionary<DateTime, List<T>>));
 
             }
 
             return data;
         }
-
-        public void JsonSerialize(Dictionary<DateTime, object[]> data, string filepath)
+        // Speicherung der Daten in der Dateipfad
+        public void JsonSerialize(Dictionary<DateTime, List<T>> data, string filepath)
         {
             var serializer = new JsonSerializer();
             using (TextWriter writer = File.CreateText(filepath))
             {
                 serializer.Serialize(writer, data);
             }
-           /* JsonSerializer jsonSerializer= new JsonSerializer();
-            if (File.Exists(filepath)) File.Delete(filepath);
-            StreamWriter sw = new StreamWriter(filepath);
-            JsonWriter jsonWriter = new JsonTextWriter(sw);
-
-            jsonSerializer.Serialize(jsonWriter, data);
-
-            jsonWriter.Close();
-            sw.Close();*/
-        }
-
+        
+        
+    }
+       
         public object LoadBrockerProfile(string filepath)
         {
             throw new NotImplementedException();
