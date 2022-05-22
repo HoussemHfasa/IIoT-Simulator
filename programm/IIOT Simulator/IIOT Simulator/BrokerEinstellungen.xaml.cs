@@ -26,6 +26,13 @@ namespace IIOT_Simulator
         {
            MessageBox.Show("Erfolgreich mit dem Broker verbunden");
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Startseite objectStartseite = new Startseite();
+            this.Visibility = Visibility.Hidden; //So wird das aktuelle Fenster dann geschlossen
+            objectStartseite.Show();
+        }
     }
     
 }

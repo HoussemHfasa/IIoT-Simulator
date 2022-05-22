@@ -18,9 +18,9 @@ namespace IIOT_Simulator
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Startseite : Window
     {
-        public MainWindow()
+        public Startseite()
         {
             InitializeComponent();
         }

@@ -75,6 +75,7 @@
 
         <!-- Button zum Abbrechen um zurück zur Startseite zu gelangen-->
         <Button 
+            Click="Button_Click_1"
             Content="Abbrechen" 
             HorizontalAlignment="Left" 
             Margin="632,378,0,0" 
