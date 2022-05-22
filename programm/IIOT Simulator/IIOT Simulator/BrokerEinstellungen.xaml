@@ -1,0 +1,92 @@
+﻿<Window x:Class="IIOT_Simulator.BrokerEinstellungen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IIOT_Simulator"
+        mc:Ignorable="d"
+        Title="BrokerEinstellungen" Height="450" Width="800">
+
+    <Grid Background="#FF39383C">
+        <!-- Broker Name Label-->
+        <Label 
+            Content="Broker Name" 
+            HorizontalAlignment="Left" 
+            Margin="63,129,0,0" 
+            VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="#FFF9F3F3"/>
+
+        <!--Textbox zum Eingeben des Broker Namens-->
+        <TextBox Margin="189,124,427,274" BorderBrush="#FF565F7C">
+        </TextBox>
+
+        <!-- Label für den Port-->
+        <Label Content="Port" 
+               HorizontalAlignment="Left" 
+               Margin="95,241,0,0" 
+               VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="#FFFAF3F3">
+        </Label>
+
+        <!-- TextBox um den Port einzugeben-->
+        <TextBox 
+            HorizontalAlignment="Left" 
+            Margin="189,236,0,0"  
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="184" Height="36"/>
+
+        <!-- Label für den Nutzernamen-->
+        <Label 
+            Content="Nutzername" 
+            HorizontalAlignment="Left" 
+            Margin="447,129,0,0" 
+            VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="#FFF7F5F5"/>
+
+        <!-- Label für das Passwort-->
+        <Label 
+            Content="Passwort" 
+            HorizontalAlignment="Left" 
+            Margin="456,241,0,0" 
+            VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="#FFF6ECEC"/>
+
+        <!-- PasswortBox zum Eingeben des Passworts-->
+        <PasswordBox 
+            HorizontalAlignment="Left" 
+            Margin="572,238,0,0" 
+            VerticalAlignment="Top" 
+            Width="120" 
+            Height="34"/>
+
+        <!-- Textbox zum eingeben des Nutzernamens-->
+        <TextBox 
+            HorizontalAlignment="Left" 
+            Margin="572,124,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="120" 
+            Height="36"/>
+
+        <!-- Button zum Verbinden-->
+        <Button 
+            Click="ErfolgreicheBrokerVerbindung"
+            Content="Verbinden" 
+            HorizontalAlignment="Left"
+            Margin="492,378,0,0"
+            VerticalAlignment="Top" FontSize="16" Width="110"/>
+
+        <!-- Button zum Abbrechen um zurück zur Startseite zu gelangen-->
+        <Button 
+            Content="Abbrechen" 
+            HorizontalAlignment="Left" 
+            Margin="632,378,0,0" 
+            VerticalAlignment="Top" FontSize="16" Width="110"/>
+
+
+
+    </Grid>
+
+
+
+
+
+
+</Window>

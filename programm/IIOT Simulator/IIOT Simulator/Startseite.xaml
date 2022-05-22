@@ -1,0 +1,36 @@
+﻿<Window x:Class="IIOT_Simulator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IIOT_Simulator"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel  Background="#FF39383C">
+        <!--Überschrift-->
+        <TextBlock HorizontalAlignment="Center" Margin="50" FontSize="37" Foreground="#FFE6DFDF" FontWeight="Bold">
+            IIOT Simulator
+        </TextBlock>
+
+        <!--Buttons erstellen-->
+        
+        <!--Broker Einstellungen Button-->
+        <Button Height="50" Width="200" FontSize="17" PreviewMouseLeftButtonUp ="BrokerSettingsClick" Click="OpenWindow">
+            Broker Einstellungen
+        </Button>
+        
+        <!--Neue Sensorgruppe erstellen Button-->
+        <Button Height="50" Width="300" FontSize="17" Margin="30" PreviewMouseLeftButtonUp ="NewSensorGroupClick">
+            Neue Sensorgruppe erstellen
+        </Button>
+
+        <!--Bestehende Sensorgruppe laden Button-->
+        <Button Height="50" Width="300" FontSize="17" PreviewMouseLeftButtonUp ="PresentSensorGroupClick">
+            Bestehende Sensorgruppe laden
+        </Button>
+
+    </StackPanel>
+   
+   
+    
+</Window>
