@@ -11,7 +11,6 @@ namespace SensorAndSensorgroup
     public abstract class Sensor<T> : ISenor<T>
     {
         public string Sensor_id { get ; set ; }
-        public string[,] Id_Adresse { get ; set ; }
         public string Sensortype { get ; set ; }
         public string Einheit { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
@@ -27,7 +26,7 @@ namespace SensorAndSensorgroup
         {
             throw new NotImplementedException();
         }
-        public abstract Dictionary<DateTime, T[]> Getvalue();
+        public abstract Dictionary<DateTime, List<T>> Getvalue();
         
     }
 }

@@ -8,7 +8,7 @@ namespace CommonInterfaces
         public string Sensor_id { get; set; }
 
         // 2 Dimensionales Array
-        public string[,] Id_Adresse { get; set; }
+
         public string Sensortype { get; }
         public string Einheit { get; set; }
         public DateTime CreationDate { get; }
@@ -21,28 +21,31 @@ namespace CommonInterfaces
     }
     public interface ISensorGroups<T> where T: ISenor<T>
     {
+        
         // algemeine Adresse für die Sensorgruppe
         string Adresse { get; set; }
 
         // Das Verzeichnis, welche Sensoren sich wo befinden. (vorläufig)
         List<List<object>> GroupDirectory { get; set; }
-        
+        // Unterordner Name
+        public string Node { get; set; }
+
         // alle Ids die in diesem Gruppe sind, evtl nicht mehr benötigt
-        string[] SensorIds { get;  }
+        public Dictionary<string, string> SensorIds { get; }
 
         /// <summary>
         /// Ein Sensor_Id in der SensorIds Liste hinzufügen
         /// </summary>
         /// <param name="sensorids"> die Liste von Sensorids </param>
         /// <param name="sensorid"> das id zu hinzufugen zur Id_liste </param>
-        public void Sensorhinzufuegen(string[] sensorids, string sensorid);
+        public void Sensorhinzufuegen(List<string> sensorids, string sensorid);
 
         /// <summary>
         /// Ein Sensor_Id von der SensorIds Liste loeschen
         /// </summary>
         /// <param name="sensorids"> die Liste von Sensorids </param>
         /// <param name="sensorid"> das id zu loeschen von der Liste </param>
-        public void Sensorloeschen(string[] sensorids, string sensorid)
+         public void Sensorloeschen(List<string> sensorids, string sensorid);
 
         //Stamm hinzufügen
         public void AddBase(string BaseName);
@@ -99,7 +102,7 @@ namespace CommonInterfaces
         /// deserialise Textdatei zu Json datei ,um die gespeicherte sensorgruppe zu laden
         /// </summary>
         /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
-        public object LoadSensorgroup(string filepath);
+        public List<string> LoadSensorgroup(string Base, string Node);
         /// <summary>
         /// deserialise Textdatei zu Json datei ,um die gespeicherte BrockerProfile zu laden
         /// </summary>
@@ -110,7 +113,7 @@ namespace CommonInterfaces
         /// </summary>
         ///  <param name="data"> die liste mit der Sensor_ids des gruppes </param>
         /// <param name="filepath"> Dateipfad, wo die Sensorgroup werden gespeichert </param>
-        public void SaveSensorgroup(object data, string filepath);
+        public void SaveSensorgroup(List<string> SensorListe, string Base, string Node);
         /// <summary>
         /// speichern die BrockerProfile
         /// </summary>
