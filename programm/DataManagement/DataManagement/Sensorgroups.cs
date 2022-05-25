@@ -12,13 +12,17 @@ namespace SensorAndSensorgroup
     {
         //allgemeine Adresse für die Sensoren ,die in der Liste sind
         public string Adresse { get; set; }
-        //List von Sensoren
-        public string[] SensorIds { get; }
-        public Sensorgroups(string adresse)
+        //List von Sensoren und ihren Type
+        public Dictionary<string,string> SensorIds { get; }
+        // Unterordner Name
+        public string Node { get; set; }
+        public Sensorgroups(string adresse,string node)
             {
+            Node = node;
             Adresse = adresse;
+            
             }
-        public List<List<object>> GroupDirectory { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+     
 
         public void AddBase(string BaseName)
         {
@@ -46,17 +50,16 @@ namespace SensorAndSensorgroup
             Directory.Delete(folderPath);
         }
 
-        public void Sensorhinzufuegen(string[] sensorids, string sensorid)
+        public void Sensorhinzufuegen(List<string> sensorids, string sensorid)
         {
             sensorids.Append(sensorid);
         }
 
         
 
-        public void Sensorloeschen(string[] sensorids,string sensorid)
+        public void Sensorloeschen(List<string> sensorids,string sensorid)
         {
-            string[] sensors = sensorids.Where(w => w != sensorid).ToArray();
-            sensorids = sensors;
+            sensorids.Remove(sensorid);
         }
     }
 }

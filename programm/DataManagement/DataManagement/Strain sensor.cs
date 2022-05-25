@@ -6,12 +6,12 @@ namespace SensorAndSensorgroup
 {
     class Strain_sensor: Sensor<ushort>
     {
-        public ushort[] values;
+        public List<ushort> values;
 
 
-        public override Dictionary<DateTime, ushort[]> Getvalue()
+        public override Dictionary<DateTime, List<ushort>> Getvalue()
         {
-            Dictionary<DateTime, ushort[]> Sensorvalues = new Dictionary<DateTime, ushort[]>();
+            Dictionary<DateTime, List<ushort>> Sensorvalues = new Dictionary<DateTime, List<ushort>>();
             Sensorvalues.Add(CreationDate, values);
             return Sensorvalues;
         }

@@ -6,12 +6,12 @@ namespace SensorAndSensorgroup
 {
     class Torque_sensor:Sensor<double>
     {
-        public double[] values;
+        public List<double> values;
 
 
-        public override Dictionary<DateTime, double[]> Getvalue()
+        public override Dictionary<DateTime, List<double>> Getvalue()
         {
-            Dictionary<DateTime, double[]> Sensorvalues = new Dictionary<DateTime, double[]>();
+            Dictionary<DateTime, List<double>> Sensorvalues = new Dictionary<DateTime, List<double>>();
             Sensorvalues.Add(CreationDate, values);
             return Sensorvalues;
         }

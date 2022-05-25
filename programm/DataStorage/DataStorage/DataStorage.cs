@@ -47,9 +47,18 @@ namespace DataStorage
             throw new NotImplementedException();
         }
 
-        public object LoadSensorgroup(string filepath)
+        public List<string> LoadSensorgroup(string Base, string Node)
         {
-            throw new NotImplementedException();
+            string Filepath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\" + Base + "\\" + Node;
+            List<string> data;
+            var serializer = new JsonSerializer();
+            using (TextReader reader = File.OpenText(Filepath))
+            {
+                data = (List<string>)serializer.Deserialize(reader, typeof(List<string>));
+
+            }
+
+            return data;
         }
 
         public void SavebrockerProfile(object data, string filepath)
@@ -57,9 +66,15 @@ namespace DataStorage
             throw new NotImplementedException();
         }
 
-        public void SaveSensorgroup(object data, string filepath)
+        public void SaveSensorgroup(List<string> SensorListe,string Base, string Node)
         {
-            throw new NotImplementedException();
+            string Filepath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\" + Base + "\\" + Node;
+            var serializer = new JsonSerializer();
+            using (TextWriter writer = File.CreateText(Filepath))
+            {
+                serializer.Serialize(writer, SensorListe);
+            }
+
         }
     }
 }
