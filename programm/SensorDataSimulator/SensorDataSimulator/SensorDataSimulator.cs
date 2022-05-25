@@ -25,19 +25,20 @@ namespace SensorDataSimulator
 
         private double CurrentValue;
 
-        public int AmmountofValues
+        public uint AmmountofValues
         {
             get;
             set;
         }
 
 
-        public SensorDataSimulator( uint AmmoutofValues)
+        public SensorDataSimulator( uint ValueCount)
         {
             Rand = new Random();
+            AmmountofValues = ValueCount;
         }
 
-        public List<double> GetHarmonicOscillation(double Amplitude, double Period, double Phase, int AmmountofValues)
+        public List<double> GetHarmonicOscillation(double Amplitude, double Period, double Phase)
         {
 
             //Ohne Rundungen
@@ -69,7 +70,7 @@ namespace SensorDataSimulator
             return Result;
         }
 
-        public List<double> GetDampedOscillation(double Amplitude, double Dampingratio, double Period, double Phase, int AmmountofValues)
+        public List<double> GetDampedOscillation(double Amplitude, double Dampingratio, double Period, double Phase)
         {
             List<double> Result = new List<double>();
 
@@ -90,7 +91,7 @@ namespace SensorDataSimulator
 
 
 
-        public List<bool> GetRandomBoolValues(double Toggleprobability, int AmountofValues)
+        public List<bool> GetRandomBoolValues(double Toggleprobability)
         {
             List<bool> Result = new List<bool>();
 
@@ -104,7 +105,7 @@ namespace SensorDataSimulator
             Result.Add(Convert.ToBoolean(Rand.Next(0, 2)));
 
             //Werteerzeugung mit Wechselwarscheinlichkeit, i = 1, da bereits ein Wert erzeugt wurde
-            for (int i = 1; i < AmountofValues; i++)
+            for (int i = 1; i < AmmountofValues; i++)
             {
 
                 // Zufalls Double kleiner als Wechselwarscheinlichkeit -> Wert wechselt
@@ -124,7 +125,7 @@ namespace SensorDataSimulator
             return Result;
         }
 
-        public List<double> GetStandardDeviationValues(double MeanInput, double StandardDeviationInput, int AmmountofValues)
+        public List<double> GetStandardDeviationValues(double MeanInput, double StandardDeviationInput)
         {
             // Standardabweichung darf nicht negativ sein..?!
             // Info: Standardabweichung kann nur mit genügender Menge Werte erreicht werden
