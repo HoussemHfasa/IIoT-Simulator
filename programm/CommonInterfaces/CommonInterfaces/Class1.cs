@@ -25,12 +25,11 @@ namespace CommonInterfaces
         // algemeine Adresse für die Sensorgruppe
         string Adresse { get; set; }
 
-        // Das Verzeichnis, welche Sensoren sich wo befinden. (vorläufig)
-        List<List<object>> GroupDirectory { get; set; }
+       
         // Unterordner Name
         public string Node { get; set; }
 
-        // alle Ids die in diesem Gruppe sind, evtl nicht mehr benötigt
+        // Das Verzeichnis, welche Sensoren sich wo befinden. 
         public Dictionary<string, string> SensorIds { get; }
 
         /// <summary>

@@ -22,7 +22,7 @@ namespace SensorAndSensorgroup
             Adresse = adresse;
             
             }
-        public List<List<object>> GroupDirectory { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+     
 
         public void AddBase(string BaseName)
         {
