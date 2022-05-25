@@ -1,0 +1,60 @@
+﻿<Window x:Class="IIOT_Simulator.NeueSensorgruppeErstellen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IIOT_Simulator"
+        mc:Ignorable="d"
+        Title="NeueSensorgruppeErstellen" Height="450" Width="800">
+    <Grid Background="#FF39383C" Height="434" VerticalAlignment="Top">
+
+        <!-- Button zum Stamm hinzufügen-->
+        <Button 
+            Content="Stamm hinzufügen" 
+            HorizontalAlignment="Left" 
+            Margin="42,319,0,0" 
+            VerticalAlignment="Top" 
+            Height="40" Width="185"
+            />
+
+        <!-- Button zum Sensor hinzufügen-->
+        <Button 
+            Content="Sensor hinzufügen" 
+            HorizontalAlignment="Left" 
+            Margin="251,319,0,0" 
+            VerticalAlignment="Top"
+            Height="40" Width="185"/>
+
+        <!-- Button zum Unterordner hinzufügen-->
+        <Button Content="Unterordner hinzufügen" 
+                HorizontalAlignment="Left" 
+                Margin="42,376,0,0" 
+                VerticalAlignment="Top"
+                Height="40" Width="185"/>
+
+        <!-- Button um die Sensorgruppe zu speichern-->
+        <Button 
+            Content="Sensorgruppe speichern" 
+            HorizontalAlignment="Left" 
+            Margin="459,376,0,0" 
+            VerticalAlignment="Top"
+            Height="40" Width="185"/>
+
+        <!-- Button um alles zu Löschen-->
+        <Button 
+            Content="Alles löschen" 
+            HorizontalAlignment="Left"
+            Margin="251,376,0,0" 
+            VerticalAlignment="Top"
+            Height="40" Width="185"/>
+        
+        <!-- Verzeichnisstruktur -->
+        <TreeView
+            Margin="42,10,531,146"/>
+        
+        <!-- Viewbox zum Beschreiben der Sensortypen<-->
+        <Viewbox
+            Margin="316,10,58,146"/>
+
+    </Grid>
+</Window>
