@@ -14,7 +14,9 @@
             HorizontalAlignment="Left" 
             Margin="42,319,0,0" 
             VerticalAlignment="Top" 
-            Height="40" Width="185"
+            Height="40" Width="185" 
+            Click="StammHinzufuegen"
+            FontSize="15"
             />
 
         <!-- Button zum Sensor hinzufügen-->
@@ -23,14 +25,16 @@
             HorizontalAlignment="Left" 
             Margin="251,319,0,0" 
             VerticalAlignment="Top"
-            Height="40" Width="185"/>
+            Height="40" Width="185"
+            FontSize="15"/>
 
         <!-- Button zum Unterordner hinzufügen-->
         <Button Content="Unterordner hinzufügen" 
                 HorizontalAlignment="Left" 
                 Margin="42,376,0,0" 
                 VerticalAlignment="Top"
-                Height="40" Width="185"/>
+                Height="40" Width="185"
+                FontSize="15"/>
 
         <!-- Button um die Sensorgruppe zu speichern-->
         <Button 
@@ -38,23 +42,32 @@
             HorizontalAlignment="Left" 
             Margin="459,376,0,0" 
             VerticalAlignment="Top"
-            Height="40" Width="185"/>
+            Height="40" Width="185"
+            FontSize="15"/>
 
         <!-- Button um alles zu Löschen-->
-        <Button 
-            Content="Alles löschen" 
+        <Button Click="AllesEntfernen"
+            Content="Alles entfernen" 
             HorizontalAlignment="Left"
             Margin="251,376,0,0" 
             VerticalAlignment="Top"
-            Height="40" Width="185"/>
+            Height="40" Width="185"
+            FontSize="15"/>
         
         <!-- Verzeichnisstruktur -->
         <TreeView
-            Margin="42,10,531,146"/>
-        
-        <!-- Viewbox zum Beschreiben der Sensortypen<-->
-        <Viewbox
-            Margin="316,10,58,146"/>
+            x:Name="Sensoren"
+            Margin="42,10,531,146">
+            <TreeViewItem Header="Stamm">
+                <TreeViewItem Header="Unterordner">
+                    <TreeViewItem Header="Sensor1"/>
+                    <TreeViewItem Header="Sensor2"/>
+                    <TreeViewItem Header="Sensor3"/>
+                    <TreeViewItem Header="Sensor4"/>
+                </TreeViewItem>
+            </TreeViewItem>
+
+        </TreeView>
 
     </Grid>
 </Window>

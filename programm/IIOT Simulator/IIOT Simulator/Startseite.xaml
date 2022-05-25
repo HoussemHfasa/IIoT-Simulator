@@ -7,25 +7,47 @@
         mc:Ignorable="d"
         Title="Startseite" Height="450" Width="800">
     <StackPanel Background="#FF39383C">
+        
         <!--Überschrift-->
-        <TextBlock HorizontalAlignment="Center" Margin="50" FontSize="37" Foreground="#FFE6DFDF" FontWeight="Bold">
+        <TextBlock
+            HorizontalAlignment="Center" 
+            Margin="50"
+            FontSize="37"
+            Foreground="#FFE6DFDF" 
+            FontWeight="Bold">
             IIOT Simulator
         </TextBlock>
 
+        
         <!--Buttons erstellen-->
         
         <!--Broker Einstellungen Button-->
-        <Button Height="50" Width="200" FontSize="17" PreviewMouseLeftButtonUp ="BrokerSettingsClick" Click="OpenWindow">
+        <Button
+            Height="50"
+            Width="200"
+            FontSize="17"
+            PreviewMouseLeftButtonUp ="BrokerSettingsClick"
+            Click="BrokerSettingsClick">
             Broker Einstellungen
         </Button>
         
         <!--Neue Sensorgruppe erstellen Button-->
-        <Button Height="50" Width="300" FontSize="17" Margin="30" PreviewMouseLeftButtonUp ="NewSensorGroupClick">
+        <Button Click="NewSensorGroupClick"
+            Height="50" 
+            Width="300" 
+            FontSize="17"
+            Margin="30" 
+            PreviewMouseLeftButtonUp ="NewSensorGroupClick">
+            
             Neue Sensorgruppe erstellen
         </Button>
 
         <!--Bestehende Sensorgruppe laden Button-->
-        <Button Height="50" Width="300" FontSize="17" PreviewMouseLeftButtonUp ="PresentSensorGroupClick">
+        <Button
+            Height="50" 
+            Width="300" 
+            FontSize="17" 
+            PreviewMouseLeftButtonUp ="PresentSensorGroupClick">
             Bestehende Sensorgruppe laden
         </Button>
 

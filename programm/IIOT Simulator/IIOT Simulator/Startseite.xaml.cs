@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace IIOT_Simulator
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Startseite.xaml
     /// </summary>
     public partial class Startseite : Window
     {
@@ -25,26 +25,30 @@ namespace IIOT_Simulator
             InitializeComponent();
         }
 
+
+        //Methode für den Button 'Broker Einstellungen'
+        //Öffnet das Fenster BrokerEinstellungen und schließt die Startseite
         private void BrokerSettingsClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Hier kommt man zu den Broker Einstellungen");
-        }
+            BrokerEinstellungen objectBrokerEinstellungen = new BrokerEinstellungen();
+            this.Visibility = Visibility.Hidden; //So wird das aktuelle Fenster dann geschlossen
+            objectBrokerEinstellungen.Show();
+         }
 
+        //Methode für den Button 'Neue Sensorgruppe erstellen'
+        //Öffnet das Fenster NeueSensorgruppeErstellen und schließt die Startseite
         private void NewSensorGroupClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Hier kann man eine neue Sensorgruppe erstellen");
+            NeueSensorgruppeErstellen objectNeueSensorGruppe = new NeueSensorgruppeErstellen();
+            this.Visibility = Visibility.Hidden; //So wird das aktuelle Fenster dann geschlossen
+            objectNeueSensorGruppe.Show();
         }
 
+        //Methode für den Button 'Bestehende Sensorgruppe laden'
         private void PresentSensorGroupClick(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Hier kann man bestehende Sensorgruppen laden");
         }
 
-        private void OpenWindow(object sender, RoutedEventArgs e)
-        {
-            BrokerEinstellungen objectBrokerEinstellungen = new BrokerEinstellungen();
-            this.Visibility = Visibility.Hidden; //So wird das aktuelle Fenster dann geschlossen
-            objectBrokerEinstellungen.Show();
-        }
     }
 }

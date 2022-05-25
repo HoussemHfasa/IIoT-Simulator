@@ -44,7 +44,7 @@ namespace CommonInterfaces
         /// </summary>
         /// <param name="sensorids"> die Liste von Sensorids </param>
         /// <param name="sensorid"> das id zu loeschen von der Liste </param>
-         public void Sensorloeschen(List<string> sensorids, string sensorid);
+        public void Sensorloeschen(List<string> sensorids, string sensorid);
 
         //Stamm hinzufügen
         public void AddBase(string BaseName);

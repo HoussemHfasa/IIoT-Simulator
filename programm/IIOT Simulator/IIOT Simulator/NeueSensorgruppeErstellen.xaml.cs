@@ -21,5 +21,17 @@ namespace IIOT_Simulator
         {
             InitializeComponent();
         }
+
+        private void AllesEntfernen(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Alles wurde entfernt.");
+        }
+
+        private void StammHinzufuegen(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Stamm wurde hinzugefügt");
+        }
+
+        
     }
 }
