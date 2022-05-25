@@ -13,7 +13,7 @@ namespace DataStorage
     public class DataStorage<T> : IDatastorage<T> 
     {
         public Dictionary<DateTime,List<T>> Data { get; set; }
-        public string filepath { get; set; }
+       // public string filepath { get; set; }
 
 
         // Ladung der Daten in der Dateipfad

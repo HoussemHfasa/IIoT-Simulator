@@ -12,10 +12,11 @@ namespace SensorAndSensorgroup
     {
         //allgemeine Adresse für die Sensoren ,die in der Liste sind
         public string Adresse { get; set; }
-        //List von Sensoren und ihren Type
-        public Dictionary<string,string> SensorIds { get; }
         // Unterordner Name
         public string Node { get; set; }
+        //List von Sensoren und ihren Type
+        public Dictionary<string,string> SensorIds { get; }
+        
         
      
 
