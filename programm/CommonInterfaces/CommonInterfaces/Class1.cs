@@ -19,7 +19,7 @@ namespace CommonInterfaces
         public abstract List<T> Getvalues();
  
     }
-    public interface ISensorGroups<T> where T: ISenor<T>
+    public interface ISensorGroups
     {
         
         // algemeine Adresse für die Sensorgruppe

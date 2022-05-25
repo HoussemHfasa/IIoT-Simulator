@@ -14,29 +14,29 @@ namespace NunitTestDatamanagement
     public class Sensornunittest
     {
 
-        private SensorAndSensorgroup.Sensor<List> SensorTest;
-  
+        private SensorAndSensorgroup.Currentsensor SensorTest = new Currentsensor();
+
         [SetUp]
         public void Setup()
         {
 
-           // SensorTest = new SensorAndSensorgroup.Sensor<List>();
-            
+            SensorTest = new Currentsensor();
+
         }
 
-        [Test]
-        public void test()
-        {
-            // Arrange
-          
+      /*  [Test]
+         public void test()
+         {
+             // Arrange
 
-            //Act
-            
 
-            //Assert
-            Assert.Pass();
-        }
-  
+             //Act
+
+
+             //Assert
+             Assert.Pass();
+         }
+   */
 
     }
 }

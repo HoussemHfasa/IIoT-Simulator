@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CommonInterfaces;
 namespace SensorAndSensorgroups
 {
-    public class SensorGroups : ISensorGroups<double> 
+    public class SensorGroups : ISensorGroups
     {
         public string Adresse { get { return this.Adresse; } set { this.Adresse = "funktioniert"; } }
         public string[] SensorIds
@@ -19,9 +19,8 @@ namespace SensorAndSensorgroups
 
         public string Node { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        Dictionary<string, string> ISensorGroups<T>.SensorIds => throw new NotImplementedException();
 
-        Dictionary<string, string> ISensorGroups<double>.SensorIds => throw new NotImplementedException();
+        Dictionary<string, string> ISensorGroups.SensorIds => throw new NotImplementedException();
 
         public void AddBase(string BaseName)
         {
