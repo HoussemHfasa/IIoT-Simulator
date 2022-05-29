@@ -8,21 +8,17 @@ using CommonInterfaces;
 
 namespace SensorAndSensorgroup
 {
-    public class Sensorgroups<T> : ISensorGroups<T> where T : ISenor<T>
+    public class Sensorgroups : ISensorGroups
     {
         //allgemeine Adresse für die Sensoren ,die in der Liste sind
         public string Adresse { get; set; }
-        //List von Sensoren und ihren Type
-        public Dictionary<string,string> SensorIds { get; }
         // Unterordner Name
         public string Node { get; set; }
-        public Sensorgroups(string adresse,string node)
-            {
-            Node = node;
-            Adresse = adresse;
-            
-            }
-        public List<List<object>> GroupDirectory { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        //List von Sensoren und ihren Type
+        public Dictionary<string,string> SensorIds { get; }
+        
+        
+     
 
         public void AddBase(string BaseName)
         {
@@ -36,7 +32,7 @@ namespace SensorAndSensorgroup
 
         public void AddNode(string NodeName, string Basename)
         {
-            string folderPath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\" + Basename+NodeName;
+            string folderPath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\" + Basename+"\\"+NodeName;
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
@@ -47,15 +43,16 @@ namespace SensorAndSensorgroup
         public void DeleteNodeBase(string NodeName, string Basename)
         {
             string folderPath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\" + Basename + NodeName;
-            Directory.Delete(folderPath);
+            if (Directory.Exists(folderPath))
+            {
+                Directory.Delete(folderPath);
+            }
         }
 
         public void Sensorhinzufuegen(List<string> sensorids, string sensorid)
         {
             sensorids.Append(sensorid);
-        }
-
-        
+        } 
 
         public void Sensorloeschen(List<string> sensorids,string sensorid)
         {

@@ -18,19 +18,20 @@ namespace NUnitTestSensorDataSimulator
         double RandomAmplitude;
         double RandomPeriod;
         double RandomPhase;
-        int RandomValueCount;
+        uint RandomValueCount;
         List<double> TestList;
 
         [SetUp]
         public void Setup()
         {
             //ARRANGE
-            TestSimulator = new SensorDataSimulator.SensorDataSimulator();
+
             RandomDampingRatio = rand.NextDouble()*0.5;
             RandomAmplitude = rand.NextDouble() * 2500;
             RandomPeriod = rand.Next(1, 8);
             RandomPhase = 0.0;
             RandomValueCount = rand.Next(8,5000);
+            TestSimulator = new SensorDataSimulator.SensorDataSimulator(RandomValueCount);
 
         }
 

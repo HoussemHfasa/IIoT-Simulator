@@ -22,16 +22,24 @@ namespace IIOT_Simulator
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        //Methode für den Button 'Verbinden'
+        //Hat die Verbindung mit dem Broker funktioniert wird hier über eine MessageBox die Verbindung bestätigt
+        private void Verbinden(object sender, RoutedEventArgs e)
         {
            MessageBox.Show("Erfolgreich mit dem Broker verbunden");
+            Startseite objectStartseite1 = new Startseite();
+            this.Visibility = Visibility.Hidden; //So wird das aktuelle Fenster dann geschlossen
+            objectStartseite1.Show();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+
+        //Methode für den Button 'Abbrechen'
+        //Man gelangt zurück zur Startseite
+        private void Abbrechen(object sender, RoutedEventArgs e)
         {
-            Startseite objectStartseite = new Startseite();
+            Startseite objectStartseite2 = new Startseite();
             this.Visibility = Visibility.Hidden; //So wird das aktuelle Fenster dann geschlossen
-            objectStartseite.Show();
+            objectStartseite2.Show();
         }
     }
     
