@@ -64,7 +64,12 @@ namespace CommonInterfaces
     {
         // Überlegung ob Rückgabewerte benötigt wird für Rückmeldung von Erfolg/Nichterfolg
         //Welche Informationen werden zur Registrierung des Clients benoetigt? /Paul
-        public void ConnectToBroker(dynamic Host, int Port);
+        /// <summary>
+        /// Erstellung einer Verbindung zum Broker
+        /// </summary>
+        /// <param name="Host">Domainname oder IP-Adresse des Brokers</param>
+        /// <param name="Port">Port des Brokers</param>
+        public void ConnectToBroker(string Host, int Port);
         
         public void RegisterClient(string clientId, bool isGroup);
 
@@ -72,13 +77,12 @@ namespace CommonInterfaces
 
         public void CreateTopic(string clientId, string topicName);
 
-        public void PublishToTopic(string clientId, string topicName, dynamic value);
+        public void PublishToTopic(string clientId, string topicName, string messagePayload);
 
-        public void SetNewBroker(dynamic Host, int Port);
+        public void SetNewBroker(string Host, int Port);
 
         public List<string> GetTopics();
         public List<string> GetClients();
-
     }
 
     public interface IDatastorage<T> 

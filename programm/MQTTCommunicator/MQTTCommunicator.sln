@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQTTCommunicator", "MQTTCom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonInterfaces", "..\CommonInterfaces\CommonInterfaces\CommonInterfaces.csproj", "{94201FBA-8E61-43A0-BAB8-8E1AD0C4256C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQTTConsoleTest", "MQTTConsoleTest\MQTTConsoleTest\MQTTConsoleTest.csproj", "{56E1BDF1-3657-4C79-8EFD-2F43F72ADF26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{94201FBA-8E61-43A0-BAB8-8E1AD0C4256C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94201FBA-8E61-43A0-BAB8-8E1AD0C4256C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94201FBA-8E61-43A0-BAB8-8E1AD0C4256C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56E1BDF1-3657-4C79-8EFD-2F43F72ADF26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56E1BDF1-3657-4C79-8EFD-2F43F72ADF26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56E1BDF1-3657-4C79-8EFD-2F43F72ADF26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56E1BDF1-3657-4C79-8EFD-2F43F72ADF26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
