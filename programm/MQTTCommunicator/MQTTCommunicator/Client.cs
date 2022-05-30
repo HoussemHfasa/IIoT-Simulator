@@ -13,7 +13,7 @@ namespace MQTTCommunicator
     public class Client : Communicator
     {
         private String id;
-        private List<String> subsriptions { get; }
+        private List<String> subscriptions { get; }
         private List<String> publishing { get; }
         private string _clients { get; set; }
 
@@ -22,25 +22,25 @@ namespace MQTTCommunicator
         public Client(string ClientId)
         {
             this.id = ClientId;
-            this.subsriptions = new List<String>();
+            this.subscriptions = new List<String>();
             this.publishing = new List<String>();
         }
 
-        public void addSubscription(String topic)
+        public void AddSubscription(String topic)
         {
-            this.subsriptions.Add(topic);
+            this.subscriptions.Add(topic);
         }
 
-        public void addPublishing(String topic)
+        public void AddPublishing(String topic)
         {
             this.publishing.Add(topic);
         }
 
-        public void unsubscribe(String topic)
+        public void Unsubscribe(String topic)
         {
-            if (this.subsriptions.Contains(topic))
+            if (this.subscriptions.Contains(topic))
             {
-                this.subsriptions.Remove(topic);
+                this.subscriptions.Remove(topic);
             }
             else
             {
@@ -49,7 +49,7 @@ namespace MQTTCommunicator
             }
         }
 
-        public void unpublish(String topic)
+        public void Unpublish(String topic)
         {
             if (this.publishing.Contains(topic))
             {
@@ -62,11 +62,11 @@ namespace MQTTCommunicator
             }
         }
 
-        public bool isSubscribed(String topic){
-            return this.subsriptions.Contains(topic);
+        public bool IsSubscribed(String topic){
+            return this.subscriptions.Contains(topic);
         }
 
-        public bool isPublishing(String topic)
+        public bool IsPublishing(String topic)
         {
             return this.publishing.Contains(topic);
         }
