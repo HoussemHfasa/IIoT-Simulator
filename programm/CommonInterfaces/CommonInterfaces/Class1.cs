@@ -29,8 +29,10 @@ namespace CommonInterfaces
         // Unterordner Name
         public string Node { get; set; }
 
-        // Das Verzeichnis, welche Sensoren sich wo befinden. 
-        public Dictionary<string, string> SensorIds { get; }
+        //List von Sensoren und ihren Node
+        public Dictionary<string, List<string>> SensorIds { get; }
+
+
 
         /// <summary>
         /// Ein Sensor_Id in der SensorIds Liste hinzufügen
@@ -88,8 +90,6 @@ namespace CommonInterfaces
     {
         // die Daten die von der Sensoren kommt
         public Dictionary<DateTime, List<T>> Data { get; set; }
-        //Dateipfad der Datei
-        public string filepath { get; }
         /// <summary>
         /// serialise die Daten zu Textdatei
         /// </summary>
