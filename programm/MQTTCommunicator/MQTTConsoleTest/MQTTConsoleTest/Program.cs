@@ -10,7 +10,7 @@ namespace MQTTConsoleTest
     {
         static void Main(string[] args)
         {
-            /*  MQTTCommunicator.MQTTCommunicator comm1 = new MQTTCommunicator.MQTTCommunicator();
+            /*
               int menuNumber;
               Console.WriteLine("Test menu:");
               Console.WriteLine("1. for CreateTopic");
@@ -55,8 +55,8 @@ namespace MQTTConsoleTest
             Console.WriteLine("Projekt started");
             Communicator communicator = new Communicator();
             communicator.ConnectToBroker("localhost", 1883);
-            /*communicator.PublishToTopic("client1", "test/123", "5");
-            communicator.PublishToTopic("client1", "test/123", "8");
+            communicator.PublishToTopic("client1", "test/124", "5");
+            /*communicator.PublishToTopic("client1", "test/123", "8");
             communicator.PublishToTopic("client1", "test/124", "5");*/
         }
     }
