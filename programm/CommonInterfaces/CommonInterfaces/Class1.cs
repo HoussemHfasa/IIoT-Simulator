@@ -164,13 +164,13 @@ namespace CommonInterfaces
 
 
     }
-    public interface ISensorDataSimulator
+    public interface ISensorDataSimulator<T>
 
     {
 
         public uint AmmountofValues { get; set; }
 
-
+        public List<T> GetSimulatorValues();
         //Funktionen zur Erzeugung von Messwerten
 
         /// <summary>
@@ -179,13 +179,13 @@ namespace CommonInterfaces
         /// <param name="Mean"> Mittelwert </param>
         /// <param name="StandardDeviation"> Standardabweichung </param>
         /// <returns>Liste zufälliger, normalverteilter double Werte</returns>
-        List<double> GetStandardDeviationValues(double Mean, double StandardDeviation);
+        //List<double> GetStandardDeviationValues(double Mean, double StandardDeviation);
 
         /// <summary>
         /// Erzeugt eine Liste mit zufällig erzeugten bool Werten 
         /// </summary>
         /// <param name="Toggleprobability"> Wert zw. 0-1. Umschaltwarscheinlichkeit 0 -> 1 bzw. 1 -> 0 </param>
-        List<bool> GetRandomBoolValues(double Toggleprobability);
+        //List<bool> GetRandomBoolValues(double Toggleprobability);
 
        
 
@@ -195,7 +195,7 @@ namespace CommonInterfaces
         /// <param name="Amplitude"> Amplitude </param>
         /// <param name="Period"> Periodendauer </param>
         /// <param name="Phase"> Phasenverschiebung </param>
-        List<double> GetHarmonicOscillation(double Amplitude, double Period, double Phase);
+        //List<double> GetHarmonicOscillation(double Amplitude, double Period, double Phase);
 
         /// <summary>
         /// Erzeugt Mithilfe einer gedämüften harmonischen Schwingungsgleichung eine Liste an double Werten
@@ -204,19 +204,19 @@ namespace CommonInterfaces
         /// <param name="Period"> Periodendauer </param>
         /// <param name="Dampingratio"> Dämpfungsrate </param>
         /// <param name="Phase"> Phasenverschiebung </param>
-        List<double> GetDampedOscillation(double Amplitude, double Dampingratio, double Period, double Phase);
+        //List<double> GetDampedOscillation(double Amplitude, double Dampingratio, double Period, double Phase);
 
 
         /// <summary>
         /// Überlagerung zweier Schwingungen/Messwertreihen 
         /// </summary>
         /// <param name="Oscillation1"> Liste mit Sensordaten, bevorzugt schwingende Messwerte </param>
-        List<double> GetSuperposition(List<double> Oscillation1, List<double> Oscillation2);
+        //List<double> GetSuperposition(List<double> Oscillation1, List<double> Oscillation2);
 
         
-        }
+    }
         
         
        
-    }
+}
 
