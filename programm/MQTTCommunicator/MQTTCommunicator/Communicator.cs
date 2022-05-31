@@ -38,26 +38,24 @@ namespace MQTTCommunicator
             Console.WriteLine("Connecting to " + Host + " : " + Port);
             try
             {
-                var options = new MqttClientOptionsBuilder()
-                    .WithClientId("TestClient")
-                    .WithTcpServer(Host, Port)
-                    .WithCleanSession()
-                    //.WithTls(tlsOptions)
-                    .WithProtocolVersion(MQTTnet.Formatter.MqttProtocolVersion.V311)
-                    .Build();
-                
-                mqttClient.UseConnectedHandler(e =>
-                {
-                    Console.WriteLine("Connected to the broker");
-                });
+                    var options = new MqttClientOptionsBuilder()
+                        .WithClientId("TestClient")
+                        .WithTcpServer(Host, Port)
+                        .WithCleanSession()
+                        //.WithTls(tlsOptions)
+                        .WithProtocolVersion(MQTTnet.Formatter.MqttProtocolVersion.V311)
+                        .Build();
 
-                await mqttClient.ConnectAsync(options);
-                
+                    mqttClient.UseConnectedHandler(e =>
+                    {
+                        Console.WriteLine("Connected to the broker");
+                    });
+
+                    await mqttClient.ConnectAsync(options);                              
             }
             catch
             {
                     Console.WriteLine("Connection failed");
-                    Console.ReadKey();
             }
             if (mqttClient.IsConnected)
             {
@@ -74,7 +72,7 @@ namespace MQTTCommunicator
             }
             else
             {
-                Console.WriteLine("Connection lost");
+                Console.WriteLine("Broker not connected for sending messages");
             }
          
 
@@ -131,7 +129,7 @@ namespace MQTTCommunicator
                      }
                  }
              }*/
-            //Console.ReadKey();
+            Console.ReadKey();
         }
 
         public void RegisterClient(string clientId, bool isGroup)
