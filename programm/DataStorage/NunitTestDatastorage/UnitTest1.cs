@@ -11,6 +11,7 @@ using CommonInterfaces;
 using Newtonsoft.Json.Linq;
 
 
+
 namespace NunitTestDatastorage
 {
     public class Tests
@@ -26,13 +27,15 @@ namespace NunitTestDatastorage
         public void It_should_serialize()
         {
             //Arrange
-            string filepath = @"C:\Users\houss\Documents\gitlab\programm\DataStorage\Tests\teststorage.txt";
+            string filename = @"teststorage.txt";
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + filename;
             Dictionary<DateTime, List<double>> data = new Dictionary<DateTime, List<double>>();
-            data.Add(DateTime.Parse("01 02 2000"), new List<double> { 1, 2, 4, 8, 96, 1457 });
+            data.Add(DateTime.Parse("01 02 1875"), new List<double> { 1, 2, 4, 8, 96, 1457 });
 
             //Act
-            Storagetest.JsonSerialize(data, filepath);
-           
+            Storagetest.JsonSerialize(data, filePath);
+            Console.WriteLine(filePath);
+
             //Assert
             Assert.Pass();
         }
@@ -54,13 +57,14 @@ namespace NunitTestDatastorage
         public void It_should_deserialize()
         {
             //Arrange
-            //teststorage.txt (file://DESKTOP-SV477UP/Users/houss/Documents/gitlab/programm/DataStorage/Tests/teststorage.txt)
-            string filepath = @"C:\Users\houss\Documents\gitlab\programm\DataStorage\Tests\teststorage.txt";
+           
+            string filename = @"teststorage.txt";
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + filename;
             Dictionary<DateTime, List<double>> data = new Dictionary<DateTime, List<double>>();
-            data.Add(DateTime.Parse("01 02 2000"), new List<double> { 1, 2, 4, 8, 96, 1457 });
+            data.Add(DateTime.Parse("01 02 1875"), new List<double> { 1, 2, 4, 8, 96, 1457 });
 
             //Act
-            Dictionary<DateTime, List<double>> data1 = Storagetest.JsonDeserialize(filepath);
+            Dictionary<DateTime, List<double>> data1 = Storagetest.JsonDeserialize(filePath);
 
             //Assert
             Assert.That(data1.Values, Is.EqualTo(data.Values));

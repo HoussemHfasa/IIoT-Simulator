@@ -14,39 +14,38 @@ namespace SensorAndSensorgroup
         public string Adresse { get; set; }
         // Unterordner Name
         public string Node { get; set; }
-        //List von Sensoren und ihren Type
-        public Dictionary<string,string> SensorIds { get; }
+        //List von Sensoren und ihren Node
+        //Feedback Rodner
+        public Dictionary<string,List<string>> SensorIds { get; }
         
-        
+        //Methode Ordner erstellen
+        //Feedback Rodner
+        public void Create_Folder(string folderpath)
+        {
+            if (!Directory.Exists(folderpath))
+            {
+                Directory.CreateDirectory(folderpath);
+
+            }
+        }
      
 
         public void AddBase(string BaseName)
         {
             string folderPath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\" +BaseName;
-            if (!Directory.Exists(folderPath))
-            {
-                Directory.CreateDirectory(folderPath); 
-
-            }
+            Create_Folder(folderPath);
         }
 
         public void AddNode(string NodeName, string Basename)
         {
             string folderPath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\" + Basename+"\\"+NodeName;
-            if (!Directory.Exists(folderPath))
-            {
-                Directory.CreateDirectory(folderPath);
-
-            }
+            Create_Folder(folderPath);
         }
 
         public void DeleteNodeBase(string NodeName, string Basename)
         {
             string folderPath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\" + Basename + NodeName;
-            if (Directory.Exists(folderPath))
-            {
-                Directory.Delete(folderPath);
-            }
+            Create_Folder(folderPath);
         }
 
         public void Sensorhinzufuegen(List<string> sensorids, string sensorid)

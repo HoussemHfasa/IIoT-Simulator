@@ -12,8 +12,9 @@ namespace DataStorage
 {
     public class DataStorage<T> : IDatastorage<T> 
     {
+        // Die Daten von den Sensoren
         public Dictionary<DateTime,List<T>> Data { get; set; }
-       // public string filepath { get; set; }
+        
 
 
         // Ladung der Daten in der Dateipfad
@@ -25,9 +26,7 @@ namespace DataStorage
             using (TextReader reader = File.OpenText(filepath))
             {
                 data = (Dictionary<DateTime, List<T>>)serializer.Deserialize(reader, typeof(Dictionary<DateTime, List<T>>));
-
             }
-
             return data;
         }
         // Speicherung der Daten in der Dateipfad
