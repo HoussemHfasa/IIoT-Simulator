@@ -88,8 +88,14 @@ namespace CommonInterfaces
 
     public interface IDatastorage<T> 
     {
-        // die Daten die von der Sensoren kommt
-        public Dictionary<DateTime, List<T>> Data { get; set; }
+        public class BrokerProfile
+        {
+            public string HostName_IP { get; set; }
+            public uint Port { get; set; }
+            public string Username { get; set; }
+            public string Password { get; set; }
+        }
+
         /// <summary>
         /// serialise die Daten zu Textdatei
         /// </summary>
@@ -110,7 +116,7 @@ namespace CommonInterfaces
         /// deserialise Textdatei zu Json datei ,um die gespeicherte BrockerProfile zu laden
         /// </summary>
         /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
-        public object LoadBrockerProfile(string filepath);
+        public BrokerProfile LoadBrokerProfile(string filepath);
         /// <summary>
         /// speichern die Sensorgruppe
         /// </summary>
@@ -122,7 +128,7 @@ namespace CommonInterfaces
         /// </summary>
         ///  <param name="data"> die BrockerProfileDaten </param>
         /// <param name="filepath"> Dateipfad, wo die BrockerProfileDaten werden gespeichert </param>
-        public void SavebrockerProfile(object data, string filepath);
+        public void SavebrokerProfile(BrokerProfile data, string filepath);
     }
 
   

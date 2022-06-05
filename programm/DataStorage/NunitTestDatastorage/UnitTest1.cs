@@ -28,9 +28,9 @@ namespace NunitTestDatastorage
         {
             //Arrange
             string filename = @"teststorage.txt";
-            string filePath = AppDomain.CurrentDomain.BaseDirectory + filename;
+           string filePath= Path.Combine(AppDomain.CurrentDomain.BaseDirectory,filename);
             Dictionary<DateTime, List<double>> data = new Dictionary<DateTime, List<double>>();
-            data.Add(DateTime.Parse("01 02 1875"), new List<double> { 1, 2, 4, 8, 96, 1457 });
+            data.Add(DateTime.Parse("01 01 1285"), new List<double> { 1, 2, 4, 8, 946, 1457 });
 
             //Act
             Storagetest.JsonSerialize(data, filePath);
@@ -59,16 +59,16 @@ namespace NunitTestDatastorage
             //Arrange
            
             string filename = @"teststorage.txt";
-            string filePath = AppDomain.CurrentDomain.BaseDirectory + filename;
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);
             Dictionary<DateTime, List<double>> data = new Dictionary<DateTime, List<double>>();
-            data.Add(DateTime.Parse("01 02 1875"), new List<double> { 1, 2, 4, 8, 96, 1457 });
+            data.Add(DateTime.Parse("01 07 1485"), new List<double> { 1, 2, 4, 8, 946, 1457 });
 
             //Act
             Dictionary<DateTime, List<double>> data1 = Storagetest.JsonDeserialize(filePath);
 
             //Assert
-            Assert.That(data1.Values, Is.EqualTo(data.Values));
-            Assert.That(data1.Keys, Is.EqualTo(data.Keys));
+            Assert.That(data1[DateTime.Parse("01 07 1885")], Is.EqualTo(new List<double> { 1, 2, 4, 8, 946, 1457 }));
+           
             
         }
     }
