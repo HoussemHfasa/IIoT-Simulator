@@ -5,6 +5,7 @@ using NUnit.Framework;
 using SensorDataSimulator;
 using System.Linq;
 
+
 namespace NUnitTestSensorDataSimulator
 {
     public class TestDampedOscillation
@@ -132,9 +133,9 @@ namespace NUnitTestSensorDataSimulator
             double TestAmplitude = 250.0;
             double TestDampingRatio = 0.05;
             double TestPeriod = 10.0;
-            uint TestAmmountofVaulues = 250;
+            uint TestAmmountofVaulues = 11;
             List<double> Expected = new List<double>
-                                    { 0, 139.78, 215.14, 204.65, 120.31, 0, -108.86, -167.55, -159.38, -93.70, 0 };
+                                    { 0, 139.7796568169315362, 215.1378806526605608, 204.6454824015336149, 120.309465564290172, 0, -108.860506186478522, -167.5495499206144932, -159.3780619463397845, -93.697105992371412, 0 };
             TestSimulator = new DampedOscillation(TestAmplitude, TestDampingRatio, TestPeriod, 0.0, TestAmmountofVaulues);
             // Act
             List<double> DampedTest = TestSimulator.GetSimulatorValues();
@@ -148,23 +149,12 @@ namespace NUnitTestSensorDataSimulator
                    + String.Join(", ", DampedTest.Take(11))
                    + "\n erzeugt");
 
-            Assert.True(AreListsEqual(Expected, DampedTest));
+            // Das Ergebnis ist zurzeit nur auf 8 Stellen genau
+            Assert.True(TestHarmonicOscillation.AreListsEqual(Expected, DampedTest));
 
 
         }
-        private bool AreListsEqual(List<double> FirstList, List<double> SecondList)
-        {
-            for (int i = 0; i < FirstList.Count; i++)
-            {
-                // Math.Abs(x-y) < 1e-12 , Keine Rundungen
-                //Kann verbessert werden
-                if (FirstList[i].Equals(SecondList[i]))
-                { }
-                else
-                    return false;
-            }
-            return true;
-        }
+     
     }
 
 

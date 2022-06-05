@@ -5,6 +5,7 @@ using NUnit.Framework;
 using SensorDataSimulator;
 using System.Linq;
 
+
 namespace NUnitTestSensorDataSimulator
 {
     public class TestHarmonicOscillation
@@ -68,12 +69,12 @@ namespace NUnitTestSensorDataSimulator
             TestSimulator = new SensorDataSimulator.HarmonicOscillation(Testamplitude, TestPeriod, Testphase, TestValueCount);
             
 
-
+            
 
             // 3. bestimmte Werte eingeben, mit vorher berechnetem Ergebnis abgleichen. Hier könnten Probleme auftreten durch falsche Rundungen
             TestSimulator = new SensorDataSimulator.HarmonicOscillation(2.0, 8.0, 0.0, 9);
             List<double> Testlist2 = TestSimulator.GetSimulatorValues();
-            List<double> Ergebnis = new List<Double> { 0, 1.41, 2, 1.41, 0, -1.41, -2, -1.41, 0 };
+            List<double> Ergebnis = new List<Double> { 0, 1.4142135623730950488016887242097, 2, 1.4142135623730950488016887242097, 0, -1.4142135623730950488016887242097, -2, -1.4142135623730950488016887242097, 0 };
 
 
             Console.WriteLine("Methode sollte "
@@ -81,6 +82,7 @@ namespace NUnitTestSensorDataSimulator
                                + "erzeugen. Es wurde "
                                + String.Join(", ", Testlist2)
                                + "erzeugt");
+          
             Assert.True(AreListsEqual(Ergebnis, Testlist2));
             
         }
@@ -107,13 +109,18 @@ namespace NUnitTestSensorDataSimulator
 
         }
 
-        private bool AreListsEqual(List<double> FirstList, List<double> SecondList)
+        public static bool AreListsEqual(List<double> FirstList, List<double> SecondList)
         {
+            // Die Listen auf gleiche Länge prüfen, bei Ungleichheit -> false
+            if (FirstList.Count != SecondList.Count)
+                return false;
+
+
             for (int i = 0; i < FirstList.Count; i++)
             {
                 // Math.Abs(x-y) < 1e-12 , Keine Rundungen
                 //Kann verbessert werden
-                if (FirstList[i].Equals(SecondList[i]))
+                if (Math.Abs(FirstList[i] - SecondList[i]) < 1e-12)
                 { }
                 else
                     return false;

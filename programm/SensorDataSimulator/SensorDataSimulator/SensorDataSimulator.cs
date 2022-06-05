@@ -32,7 +32,7 @@ namespace SensorDataSimulator
         {
             //Ohne Rundungen
             List<double> Result = new List<double>();
-            double CatchNegativZero;
+            
 
             // Überprüfung, ob Parameter in korrektem Wertebereich liegen. Falls nicht -> Exception
             if (Amplitude < 0.0)
@@ -46,15 +46,7 @@ namespace SensorDataSimulator
             //Werteerzeugung
             for (int i = 0; i < AmmountofValues; i++)
             {
-                // Gleichung für harmonische Schwingung. Hier entsteht durch Rundung teilweise -0 als Wert!
-                CatchNegativZero = Math.Round(Amplitude * Math.Sin((2 * Math.PI / Period) * i + Phase), 2);
-
-                // Daher diesen Fall abfangen
-                if (CatchNegativZero == -0d)
-                {
-                    CatchNegativZero = 0d;
-                }
-                Result.Add(CatchNegativZero);
+                Result.Add(Amplitude * Math.Sin((2 * Math.PI / Period) * i + Phase));
             }
             return Result;
         }
@@ -88,7 +80,7 @@ namespace SensorDataSimulator
             List<double> HarmonicPart = HarmonicPortion.GetSimulatorValues();
             for (int i = 0; i < AmmountofValues; i++)
             {
-                Result.Add(Math.Round(HarmonicPart[i] * Math.Exp(-1.0 * Dampingratio * i), 2));
+                Result.Add(HarmonicPart[i] * Math.Exp(-1.0 * Dampingratio * i));
             }
 
             return Result;
@@ -97,7 +89,7 @@ namespace SensorDataSimulator
 
     public class RandomBool : SensorDataSimualtor<bool>
     {
-        private Random Rand;
+        private Random Rand = new Random();
         private double Toggleprobability;
         public RandomBool(double Toggleprobability, uint AmmountofValues)
         {
@@ -425,13 +417,16 @@ namespace SensorDataSimulator
     */
     public abstract class SensorDataErrors : ISensorDataErrors
     {
-        public double ErrorRatio => throw new NotImplementedException();
+        // kein public set?
+        public double ErrorRatio {
+            get; set;
+        }
 
-        public int ErrorLength => throw new NotImplementedException();
+        public int ErrorLength { get; set; }
 
-        public double ErrorMax => throw new NotImplementedException();
+        public double ErrorMax { get; set; }
 
-        public double ErrorMin => throw new NotImplementedException();
+        public double ErrorMin { get; set; }
 
         public abstract List<double> GetSensorDataWithErrors(List<double> SensorDataWithoutErorrs);
 
@@ -448,16 +443,20 @@ namespace SensorDataSimulator
     }
     public class RandomValuesError : SensorDataErrors, CommonInterfaces.ISensorDataErrors
     {
-        double MaxError;
-        double MinError;
 
-        public RandomValuesError(double MaxError, double MinError)
+
+        private Random Rand = new Random();
+
+        public RandomValuesError(double ErrorRatio, int ErrorLength, double MaxError, double MinError)
         {
-            this.MaxError = MaxError;
-            this.MinError = MinError;
+            this.ErrorMax = MaxError;
+            this.ErrorMin = MinError;
+            this.ErrorRatio = ErrorRatio;
+            this.ErrorLength = ErrorLength;
         }
         public override List<double> GetSensorDataWithErrors(List<double> SensorDataWithoutErorrs)
         {
+            //per Zufall mit Warscheinlichkeit entscheiden, ob Fehler 
             throw new NotImplementedException();
         }
     }
