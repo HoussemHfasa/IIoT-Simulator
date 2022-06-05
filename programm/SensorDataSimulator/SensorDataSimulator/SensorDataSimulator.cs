@@ -454,12 +454,7 @@ namespace SensorDataSimulator
         {
             // Errorlenght auf Uint ändern
 
-            //Eingaben auf Exceptions überprüfen
-            //Fehlerrate zwischen 0 und 1?
-            if (ErrorRatio > 1.0 || ErrorRatio < 0.0)
-            {
-                throw new ArgumentOutOfRangeException("Fehlerwarscheinlichkeit darf nicht unter 0 oder über 1 liegen");
-            }
+
 
             // Wenn Min und Max verwechselt wurde, entsprechend tauschen
 
@@ -479,7 +474,13 @@ namespace SensorDataSimulator
         }
         public override List<double> GetSensorDataWithErrors(List<double> SensorDataWithoutErorrs)
         {
-            
+            //Eingaben auf Exceptions überprüfen
+            //Fehlerrate zwischen 0 und 1?
+            if (ErrorRatio > 1.0 || ErrorRatio < 0.0)
+            {
+                throw new ArgumentOutOfRangeException("Fehlerwarscheinlichkeit darf nicht unter 0 oder über 1 liegen");
+            }
+
             TempList = SensorDataWithoutErorrs;
 
             // Bei Fehlerlänge 0 wird Liste zurückgegeben
