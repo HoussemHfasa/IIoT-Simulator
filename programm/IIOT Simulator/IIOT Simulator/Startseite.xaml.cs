@@ -23,6 +23,8 @@ namespace IIOT_Simulator
         public Startseite()
         {
             InitializeComponent();
+
+            this.SizeToContent = SizeToContent.Manual;
         }
 
 
@@ -47,8 +49,14 @@ namespace IIOT_Simulator
         //Methode für den Button 'Bestehende Sensorgruppe laden'
         private void PresentSensorGroupClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Hier kann man bestehende Sensorgruppen laden");
+            Dataiexplorer objectDateiexplorer = new Dataiexplorer();
+            this.Visibility = Visibility.Hidden; //So wird das aktuelle Fenster dann geschlossen
+            objectDateiexplorer.Show();
         }
 
+        private void StartSimulationClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Simulation wurde gestartet.");
+        }
     }
 }

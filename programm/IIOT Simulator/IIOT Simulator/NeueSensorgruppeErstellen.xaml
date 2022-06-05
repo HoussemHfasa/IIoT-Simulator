@@ -12,7 +12,7 @@
         <Button 
             Content="Stamm hinzufügen" 
             HorizontalAlignment="Left" 
-            Margin="42,319,0,0" 
+            Margin="42,299,0,0" 
             VerticalAlignment="Top" 
             Height="40" Width="185" 
             Click="StammHinzufuegen"
@@ -21,26 +21,30 @@
 
         <!-- Button zum Sensor hinzufügen-->
         <Button 
-            Content="Sensor hinzufügen" 
+            Click="SensorHinzufügen"
+            Content="SensorHinzufügen" 
             HorizontalAlignment="Left" 
-            Margin="251,319,0,0" 
+            Margin="251,299,0,0" 
             VerticalAlignment="Top"
             Height="40" Width="185"
             FontSize="15"/>
 
         <!-- Button zum Unterordner hinzufügen-->
-        <Button Content="Unterordner hinzufügen" 
+        <Button 
+            Click="UnterordnerHinzufügen"
+            Content="UnterordnerHinzufügen" 
                 HorizontalAlignment="Left" 
-                Margin="42,376,0,0" 
+                Margin="42,357,0,0" 
                 VerticalAlignment="Top"
                 Height="40" Width="185"
                 FontSize="15"/>
 
         <!-- Button um die Sensorgruppe zu speichern-->
         <Button 
-            Content="Sensorgruppe speichern" 
+            Click="SensorgruppeSpeichern"
+            Content="SensorgruppeSpeichern" 
             HorizontalAlignment="Left" 
-            Margin="459,376,0,0" 
+            Margin="459,299,0,0" 
             VerticalAlignment="Top"
             Height="40" Width="185"
             FontSize="15"/>
@@ -49,16 +53,29 @@
         <Button Click="AllesEntfernen"
             Content="Alles entfernen" 
             HorizontalAlignment="Left"
-            Margin="251,376,0,0" 
+            Margin="251,357,0,0" 
             VerticalAlignment="Top"
             Height="40" Width="185"
             FontSize="15"/>
-        
+
+        <!--Button zum Abbrechen um zurück zur Startseite zu gelangen-->
+        <Button 
+            Click="AbbrechenButton"
+            Content="Abbrechen" 
+            HorizontalAlignment="Left"
+            Margin="459,357,0,0"
+            VerticalAlignment="Top"
+            Height="40" 
+            Width="185"
+            FontSize=" 15"/>
+
         <!-- Verzeichnisstruktur -->
         <TreeView
             x:Name="Sensoren"
-            Margin="42,10,531,146">
+            Margin="42,10,507,168">
             <TreeViewItem Header="Stamm">
+                <TextBox
+                         BorderThickness="1" Width="144"/>
                 <TreeViewItem Header="Unterordner">
                     <TreeViewItem Header="Sensor1"/>
                     <TreeViewItem Header="Sensor2"/>
@@ -67,7 +84,9 @@
                 </TreeViewItem>
             </TreeViewItem>
 
+
         </TreeView>
+
 
     </Grid>
 </Window>

@@ -13,34 +13,20 @@ using System.Windows.Shapes;
 namespace IIOT_Simulator
 {
     /// <summary>
-    /// Interaktionslogik für BrokerEinstellungen.xaml
+    /// Interaktionslogik für BestehendeSensorgruppeGeladen.xaml
     /// </summary>
-    public partial class BrokerEinstellungen : Window
+    public partial class BestehendeSensorgruppeGeladen : Window
     {
-        public BrokerEinstellungen()
+        public BestehendeSensorgruppeGeladen()
         {
             InitializeComponent();
         }
 
-        //Methode für den Button 'Verbinden'
-        //Hat die Verbindung mit dem Broker funktioniert wird hier über eine MessageBox die Verbindung bestätigt
-        private void Verbinden(object sender, RoutedEventArgs e)
-        {
-           MessageBox.Show("Erfolgreich mit dem Broker verbunden");
-            
-        }
-
-
-        //Methode für den Button 'Abbrechen'
-        //Man gelangt zurück zur Startseite
-        private void Abbrechen(object sender, RoutedEventArgs e)
+        private void AbbrechenButton(object sender, RoutedEventArgs e)
         {
             Startseite objectStartseite2 = new Startseite();
             this.Visibility = Visibility.Hidden; //So wird das aktuelle Fenster dann geschlossen
             objectStartseite2.Show();
         }
-
-       
     }
-    
 }

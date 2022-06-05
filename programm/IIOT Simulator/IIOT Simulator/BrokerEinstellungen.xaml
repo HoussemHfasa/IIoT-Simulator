@@ -12,17 +12,28 @@
         <Label 
             Content="Broker Name" 
             HorizontalAlignment="Left" 
-            Margin="63,129,0,0" 
-            VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="#FFF9F3F3"/>
+            Margin="70,130,0,0" 
+            VerticalAlignment="Top" 
+            FontSize="16" 
+            FontWeight="Normal"
+            Foreground="#FFF9F3F3"/>
 
         <!--Textbox zum Eingeben des Broker Namens-->
-        <TextBox Margin="189,124,427,274" BorderBrush="#FF565F7C">
+        <TextBox 
+            HorizontalAlignment="Left" 
+            Margin="230,134,0,0" 
+            Text=""
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top"
+            Width="140" 
+            Height="25"
+            FontSize="14">
         </TextBox>
 
         <!-- Label für den Port-->
         <Label Content="Port" 
                HorizontalAlignment="Left" 
-               Margin="95,241,0,0" 
+               Margin="450,130,0,0" 
                VerticalAlignment="Top" 
                FontSize="16"
                FontWeight="Normal" 
@@ -30,43 +41,52 @@
         </Label>
 
         <!-- TextBox um den Port einzugeben-->
-        <TextBox 
-            HorizontalAlignment="Left" 
-            Margin="189,236,0,0"  
-            TextWrapping="Wrap" 
-            VerticalAlignment="Top" 
-            Width="184" Height="36"/>
+        <TextBox HorizontalAlignment="Left" 
+                 Margin="600,134,0,0" 
+                 Text="" 
+                 TextWrapping="Wrap" 
+                 VerticalAlignment="Top" 
+                 Width="140" 
+                 Height="25"
+                 FontSize="14">
+        </TextBox>
 
         <!-- Label für den Nutzernamen-->
         <Label 
             Content="Nutzername" 
             HorizontalAlignment="Left" 
-            Margin="447,129,0,0" 
+            Margin="66,238,0,0" 
             VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="#FFF7F5F5"/>
+
+        <!-- Textbox zum eingeben des Nutzernamens-->
+        <TextBox 
+            HorizontalAlignment="Left" 
+            Margin="230,241,0,0" 
+            Text="" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top"
+            Width="140" 
+            Height="25"
+            FontSize="14"/>
 
         <!-- Label für das Passwort-->
         <Label 
             Content="Passwort" 
             HorizontalAlignment="Left" 
-            Margin="456,241,0,0" 
+            Margin="436,238,0,0" 
             VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="#FFF6ECEC"/>
 
         <!-- PasswortBox zum Eingeben des Passworts-->
-        <PasswordBox 
-            HorizontalAlignment="Left" 
-            Margin="572,238,0,0" 
-            VerticalAlignment="Top" 
-            Width="120" 
-            Height="34"/>
 
-        <!-- Textbox zum eingeben des Nutzernamens-->
-        <TextBox 
+        <PasswordBox
             HorizontalAlignment="Left" 
-            Margin="572,124,0,0" 
-            TextWrapping="Wrap" 
-            VerticalAlignment="Top" 
-            Width="120" 
-            Height="36"/>
+            Margin="600,241,0,0"
+            VerticalAlignment="Top"
+            Width="140" 
+            Height="25"
+            FontSize="14"/>
+
+
 
         <!-- Button zum Verbinden-->
         <Button 
@@ -78,11 +98,14 @@
 
         <!-- Button zum Abbrechen um zurück zur Startseite zu gelangen-->
         <Button 
-            Click="Abbrechen"
+          Click="Abbrechen"
             Content="Abbrechen" 
             HorizontalAlignment="Left" 
             Margin="632,378,0,0" 
             VerticalAlignment="Top" FontSize="16" Width="110"/>
+
+
+
 
     </Grid>
 
