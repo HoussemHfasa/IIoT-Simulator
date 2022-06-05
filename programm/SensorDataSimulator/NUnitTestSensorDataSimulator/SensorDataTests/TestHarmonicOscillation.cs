@@ -52,8 +52,8 @@ namespace NUnitTestSensorDataSimulator
             List<double> Testlist = TestSimulator.GetSimulatorValues();
 
             // 2. Werteanzahl korrekt?
-            Console.WriteLine("Methode sollte {0} Werte liefern, Methode hat {1} Werte geliefert", RandomValueCount, Testlist.Count());
-            Assert.AreEqual(RandomValueCount, Testlist.Count());
+            Console.WriteLine("Methode sollte {0} Werte liefern, Methode hat {1} Werte geliefert", RandomValueCount, Testlist.Count);
+            Assert.AreEqual(RandomValueCount, Testlist.Count);
 
         }
         [Test]

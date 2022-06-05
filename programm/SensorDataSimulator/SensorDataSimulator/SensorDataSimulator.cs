@@ -93,6 +93,8 @@ namespace SensorDataSimulator
         private double Toggleprobability;
         public RandomBool(double Toggleprobability, uint AmmountofValues)
         {
+            //
+
             this.Toggleprobability = Toggleprobability;
             this.AmmountofValues = AmmountofValues;
         }
@@ -135,7 +137,7 @@ namespace SensorDataSimulator
     {
         List<double> Oscillation1;
         List<double> Oscillation2;
-        public Superposition(List<double> Oscillation1,List<double> Oscillation2)
+        public Superposition(List<double> Oscillation1, List<double> Oscillation2)
         {
             this.Oscillation1 = Oscillation1;
             this.Oscillation2 = Oscillation2;

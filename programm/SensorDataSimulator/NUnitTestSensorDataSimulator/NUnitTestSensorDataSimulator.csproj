@@ -18,8 +18,4 @@
     <ProjectReference Include="..\SensorDataSimulator\SensorDataSimulator.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="SimulatorTests\" />
-  </ItemGroup>
-
 </Project>

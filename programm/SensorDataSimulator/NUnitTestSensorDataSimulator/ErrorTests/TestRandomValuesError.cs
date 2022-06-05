@@ -3,7 +3,7 @@ using SensorDataSimulator;
 
 namespace NUnitTestSensorDataSimulator
 {
-    public class TestRandomBool
+    public class TestRandomValuesError
     {
         [Test]
 
