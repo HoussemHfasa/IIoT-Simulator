@@ -417,6 +417,7 @@ namespace SensorDataSimulator
     */
     public abstract class SensorDataErrors : ISensorDataErrors
     {
+
         // kein public set?
         public double ErrorRatio {
             get; set;
@@ -444,76 +445,220 @@ namespace SensorDataSimulator
     public class RandomValuesError : SensorDataErrors, CommonInterfaces.ISensorDataErrors
     {
 
-
+        private List<double> TempList;
         private Random Rand = new Random();
 
         public RandomValuesError(double ErrorRatio, int ErrorLength, double MaxError, double MinError)
         {
-            this.ErrorMax = MaxError;
-            this.ErrorMin = MinError;
+            // Errorlenght auf Uint ändern
+
+            //Eingaben auf Exceptions überprüfen
+            //Fehlerrate zwischen 0 und 1?
+            if (ErrorRatio > 1.0 || ErrorRatio < 0.0)
+            {
+                throw new ArgumentOutOfRangeException("Fehlerwarscheinlichkeit darf nicht unter 0 oder über 1 liegen");
+            }
+
+            // Wenn Min und Max verwechselt wurde, entsprechend tauschen
+
+            if(MaxError >= MinError)
+            {
+                this.ErrorMax = MaxError;
+                this.ErrorMin = MinError;
+            }
+            else
+            {
+                this.ErrorMin = MaxError;
+                this.ErrorMax = MinError;
+            }
+
             this.ErrorRatio = ErrorRatio;
             this.ErrorLength = ErrorLength;
         }
         public override List<double> GetSensorDataWithErrors(List<double> SensorDataWithoutErorrs)
         {
+            
+            TempList = SensorDataWithoutErorrs;
+
+            // Bei Fehlerlänge 0 wird Liste zurückgegeben
+            if (ErrorLength == 0)
+                return TempList;
+
             //per Zufall mit Warscheinlichkeit entscheiden, ob Fehler 
-            throw new NotImplementedException();
+            for(int i = 0; i < TempList.Count; i++)
+            {
+                if(Rand.NextDouble() <= ErrorRatio)
+                {
+                    //Fehler einbauen mit angegebener Fehlerlänge
+                    for (int z = 0; z < ErrorLength; z++)
+                    {
+                        TempList[i+z] = Rand.NextDouble() * ErrorMax + ErrorMin;
+                        
+                    }
+                    // die äußere Zählschleife soll die eingebauten Fehlerwerte überspringen
+                    i += ErrorLength - 1;
+                    
+
+                }
+            }
+            return TempList;
         }
     }
 
     public class RandomZeroesError : SensorDataErrors, CommonInterfaces.ISensorDataErrors
     {
+        private List<double> TempList;
+        private Random Rand = new Random();
 
-        public RandomZeroesError()
+        public RandomZeroesError(double ErrorRatio, int ErrorLength)
         {
+            if (ErrorRatio > 1.0 || ErrorRatio < 0.0)
+            {
+                throw new ArgumentOutOfRangeException("Fehlerwarscheinlichkeit darf nicht unter 0 oder über 1 liegen");
+            }
 
+            this.ErrorRatio = ErrorRatio;
+            this.ErrorLength = ErrorLength;
         }
 
 
         public override List<double> GetSensorDataWithErrors(List<double> SensorDataWithoutErorrs)
         {
-            throw new NotImplementedException();
+            TempList = SensorDataWithoutErorrs;
+
+            if (ErrorLength == 0)
+                return TempList;
+
+            
+            for(int i = 0; i < TempList.Count; i++)
+            {
+                if(Rand.NextDouble() <= ErrorRatio)
+                {
+                    // entsprechend der Fehlerlänge Nullen setzen
+                    for (int z = 0; z < ErrorLength; z++)
+                    {
+                        TempList[i+z] = 0.0;
+                    }
+
+                    //äußere Zählschleife soll gesetzte Fehler nicht überschreiben
+                    i += ErrorLength - 1;
+                }
+            }
+            return TempList;
         }
     }
 
     public class AdditiveNoise : SensorDataErrors, CommonInterfaces.ISensorDataErrors
     {
+        List<double> Noise;
         public AdditiveNoise(List<double> Noise)
         {
-
+            this.Noise = Noise;
         }
 
         public override List<double> GetSensorDataWithErrors(List<double> SensorDataWithoutErorrs)
         {
-            
-            throw new NotImplementedException();
+            // Achtung, wenn Noise Daten weniger sind als Sensordaten..
+            List<double> Result = new List<double>();
+            List<double> ShorterList;
+            List<double> LongerList;
+
+            // Herausfinden, welche die kürzere Liste ist
+            if (SensorDataWithoutErorrs.Count <= Noise.Count)
+            {
+                ShorterList = SensorDataWithoutErorrs;
+                LongerList = Noise;
+            }
+            else
+            {
+
+                ShorterList = Noise;
+                LongerList = SensorDataWithoutErorrs;
+            }
+
+            for (int i = 0; i < SensorDataWithoutErorrs.Count; i++)
+            {
+                // Die kurze Liste hat an der Stelle keine Werte mehr
+                if (i >= ShorterList.Count)
+                {
+                    Result.Add(LongerList[i]);
+                }
+                else
+                {
+                    Result.Add(ShorterList[i] + LongerList[i]);
+                }
+
+
+            }
+            return Result;
         }
     }
 
     public class BurstNoise : SensorDataErrors, CommonInterfaces.ISensorDataErrors
     {
-        public BurstNoise(double Burstvalue, int Burstduration)
-        {
+        double BurstValue;
 
+        List<double> TempList;
+        Random Rand = new Random();
+        public BurstNoise(double Burstvalue, int Burstduration, double BurstRatio)
+        {
+            //Exception Handling BurstRatio
+            if (BurstRatio > 1.0 || BurstRatio < 0.0)
+            {
+                throw new ArgumentOutOfRangeException("Burst-Warscheinlichkeit darf nicht unter 0 oder über 1 liegen");
+            }
+
+            // Werte intern abspeichern
+            this.BurstValue = Burstvalue;
+            this.ErrorLength = Burstduration;
+            this.ErrorRatio = BurstRatio;
         }
 
         public override List<double> GetSensorDataWithErrors(List<double> SensorDataWithoutErorrs)
         {
-            throw new NotImplementedException();
+            TempList = SensorDataWithoutErorrs;
+
+            for(int i = 0; i < SensorDataWithoutErorrs.Count; i++)
+            {
+                if(Rand.NextDouble() <= ErrorRatio)
+                {
+                    for (int z = 0; z < ErrorLength; z++)
+                    {
+                        TempList[i + z] = BurstValue;
+                    }
+                    i += ErrorLength - 1;
+                }
+            }
+
+            return TempList;
         }
+
+
     }
 
 
     public class TransientNoise : SensorDataErrors, CommonInterfaces.ISensorDataErrors
     {
+        List<double> Result;
+        List<double> Puls;
+        double DampingRatio;
         public TransientNoise(List<double> Puls, int DecayTime)
         {
-
+            this.Puls = Puls;
+            // DecayTime in Uint?
+            //DecayTime in Dämpfung umrechnen. Gedämpfte Schwingung e-Funktion wird nie 0,
+            //daher soll die Pulsamplitude auf mindestens 1 Hunderttausenstel bis zur Decyatime gedämpft werden.
+            DampingRatio = Math.Log(0.00001) / (DecayTime * -1);
         }
 
         public override List<double> GetSensorDataWithErrors(List<double> SensorDataWithoutErorrs)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < SensorDataWithoutErorrs.Count; i++)
+            {
+                Result.Add(SensorDataWithoutErorrs[i] + Puls[i] * Math.Exp(-1.0 * DampingRatio * i));
+            }
+
+            return Result;
         }
     }
 }
