@@ -69,22 +69,16 @@
             Width="185"
             FontSize=" 15"/>
 
+        <TextBox   
+                x:Name="textBoxStamm"
+                         BorderThickness="1" 
+             Margin="342,239,156,168"
+                />
+
         <!-- Verzeichnisstruktur -->
         <TreeView
-            x:Name="Sensoren"
+            x:Name="TreeView1"
             Margin="42,10,507,168">
-            <TreeViewItem Header= "Stanmm"
-                Name="TreeView1">
-                
-                <!-- Textbox zum Eingeben des Stamm-->
-                <TextBox 
-                    x:Name="textBoxStamm"
-                         BorderThickness="1" Width="144"/>
-                
-
-            </TreeViewItem>
-
-
         </TreeView>
 
 

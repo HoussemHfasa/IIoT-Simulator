@@ -23,7 +23,6 @@ namespace IIOT_Simulator
         }
 
 
-
         //Button um alles zu entfernen
         private void AllesEntfernen(object sender, RoutedEventArgs e)
         {
@@ -32,15 +31,30 @@ namespace IIOT_Simulator
 
 
         //Button um den Stamm hinzuzufügen
-        private void StammHinzufuegen(object sender, RoutedEventArgs e)
+        public void StammHinzufuegen(object sender, RoutedEventArgs e)
         {
-            string stamm = textBoxStamm.Text;
-            TreeView1.Items.Add(new TreeViewItem()
-            {
-                Header = textBoxStamm.Text
-            }) ;
+
+            string stamm = textBoxStamm.Text; //Die Benutzereingabe in einem String speichern
+
+            TreeViewItem StammItem = new TreeViewItem();
+           
+            StammItem.Header = stamm;
+            TreeView1.Items.Add(StammItem);
+            textBoxStamm.Clear();//Funktioniert
         }
 
+        //button zum Unterordner hinzufügen
+        private void UnterordnerHinzufügen(object sender, RoutedEventArgs e)
+        {
+
+            string unterordner = textBoxStamm.Text; //Die Benutzereingabe in einem String speichern
+
+            TreeViewItem UnterordnerItem = new TreeViewItem();
+            UnterordnerItem.Header = unterordner;
+            
+            
+            textBoxStamm.Clear();//Funktioniert noch nicht, einen Weg finden auf den davor festgelegten Stamm zuzugreifen
+        }
 
         //Button um die Sensorgruppe zu speichern
         private void SensorgruppeSpeichern(object sender, RoutedEventArgs e)
@@ -48,12 +62,6 @@ namespace IIOT_Simulator
             MessageBox.Show("Sensorgruppe wurde gespeichert.");
         }
 
-
-        //button zum Unterordner hinzufügen
-        private void UnterordnerHinzufügen(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Unterordner wurde hinzugefügt.");
-        }
 
 
         //Button zum Sensor hinzufügen
