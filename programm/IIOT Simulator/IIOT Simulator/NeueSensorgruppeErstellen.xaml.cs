@@ -34,7 +34,11 @@ namespace IIOT_Simulator
         //Button um den Stamm hinzuzufügen
         private void StammHinzufuegen(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Stamm wurde hinzugefügt.");
+            string stamm = textBoxStamm.Text;
+            TreeView1.Items.Add(new TreeViewItem()
+            {
+                Header = textBoxStamm.Text
+            }) ;
         }
 
 

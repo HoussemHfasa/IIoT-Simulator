@@ -73,15 +73,15 @@
         <TreeView
             x:Name="Sensoren"
             Margin="42,10,507,168">
-            <TreeViewItem Header="Stamm">
-                <TextBox
+            <TreeViewItem Header= "Stanmm"
+                Name="TreeView1">
+                
+                <!-- Textbox zum Eingeben des Stamm-->
+                <TextBox 
+                    x:Name="textBoxStamm"
                          BorderThickness="1" Width="144"/>
-                <TreeViewItem Header="Unterordner">
-                    <TreeViewItem Header="Sensor1"/>
-                    <TreeViewItem Header="Sensor2"/>
-                    <TreeViewItem Header="Sensor3"/>
-                    <TreeViewItem Header="Sensor4"/>
-                </TreeViewItem>
+                
+
             </TreeViewItem>
 
 
