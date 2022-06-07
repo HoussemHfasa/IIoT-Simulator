@@ -2,6 +2,7 @@ using NUnit.Framework;
 using SensorDataSimulator;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NUnitTestSensorDataSimulator
 {
@@ -77,5 +78,58 @@ namespace NUnitTestSensorDataSimulator
             Assert.Throws<ArgumentOutOfRangeException>(() => ErrorGenerator.GetSensorDataWithErrors(TestData));
 
         }
+
+        [Test]
+        public void RandomError_Print_Result_Test()
+        {
+            List<double> TestResult;
+            DataGenerator.AmmountofValues = 25;
+            TestData = DataGenerator.GetSimulatorValues();
+            Console.WriteLine("Die Methode hat folgende Werte erhalten: \n "
+
+                   + String.Join(", ", TestData)
+                   + "\n"
+                   );
+            SensorDataSimulator.RandomValuesError ErrorsGenerator = new SensorDataSimulator.RandomValuesError(0.33, RandomErrorLength, RandomMaxError, RandomMinError);
+            TestResult = ErrorGenerator.GetSensorDataWithErrors(TestData);
+            Console.WriteLine("Die Methode hat folgende Werte erhalten: \n "
+
+                   + String.Join(", ", TestData)
+                   + "\n Die Methode hat daraus folgende Werte geliefert: \n"
+                   + String.Join(", ", TestResult)
+                   + "\x0A erzeugt");
+        }
+
+        //TestIdeen: Errorlength 0 returns die Liste
+
+
+        
+        [Test]
+        public void RandomError_Negative_MinMax_Create_Negtive_Errors()
+        {
+            double TestMinError = -500.0;
+            double TestMaxError = -20.0;
+            List<double> TestResult;
+            DataGenerator.AmmountofValues = 20;
+            TestData = DataGenerator.GetSimulatorValues();
+            SensorDataSimulator.RandomValuesError EGenerator = new SensorDataSimulator.RandomValuesError(0.99, RandomErrorLength, TestMaxError, TestMinError);
+            
+            TestResult = EGenerator.GetSensorDataWithErrors(TestData);
+            Console.WriteLine("Die Fehlerwerte sollten zwischen  \n "
+                   + TestMaxError
+                   + "\n und "
+                   +TestMinError
+                   + "\n liegen."
+
+                   
+                   + "\n Die Methode folgende Fehler erzeugt: \n"
+                   + String.Join(", ", TestResult)
+                   + "\x0A erzeugt");
+
+            Assert.Less(TestResult.Max(), TestMaxError);
+        }
+
+
     }
+
 }
