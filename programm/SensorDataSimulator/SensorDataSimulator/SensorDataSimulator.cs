@@ -492,10 +492,13 @@ namespace SensorDataSimulator
             {
                 if(Rand.NextDouble() <= ErrorRatio)
                 {
-                    //Fehler einbauen mit angegebener Fehlerlänge
-                    for (int z = 0; z < ErrorLength; z++)
+                    //Fehler einbauen mit angegebener Fehlerlänge  
+                    // Hier entstand Index out of Range Fehler, Absprache Rodner
+                    
+                    for (int z = 0; z < ErrorLength && z+i < TempList.Count; z++)
                     {
-                        TempList[i+z] = Rand.NextDouble() * ErrorMax + ErrorMin;
+                        
+                        TempList[i+z] = Rand.NextDouble() * (ErrorMax-ErrorMin) + ErrorMin;
                         
                     }
                     // die äußere Zählschleife soll die eingebauten Fehlerwerte überspringen
