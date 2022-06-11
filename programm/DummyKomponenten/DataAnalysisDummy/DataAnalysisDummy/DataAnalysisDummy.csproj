@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\CommonInterfaces\CommonInterfaces\CommonInterfaces.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -11,8 +11,6 @@ namespace DataStorageDummy
 
         Dictionary<DateTime, List<double>> Data { get { return Data; } set { Data.Add(DateTime.Today, new List<double> { 251, 14, 25, 48, 2.41 }); } }
 
-       // Dictionary<DateTime, List<double>> IDatastorage<double>.Data { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
         Dictionary<DateTime, List<double>> IDatastorage<double>.JsonDeserialize(string filepath)
         {
             Dictionary<DateTime, List<double>> beispiel = new Dictionary<DateTime, List<double>> { };
