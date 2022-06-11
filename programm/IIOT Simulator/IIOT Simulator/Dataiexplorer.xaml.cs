@@ -9,6 +9,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CommonInterfaces;
+using SensorAndSensorgroups;
 
 namespace IIOT_Simulator
 {
@@ -20,6 +22,19 @@ namespace IIOT_Simulator
         public Dataiexplorer()
         {
             InitializeComponent();
+
+
+            //Objekt der Klasse SensorGroups erstellen für die ListView:
+            SensorGroups sensorgroups = new SensorGroups();
+
+            //Eine Liste der Sensorgruppen:
+            List<SensorGroups> sensorgruppenListe = new List<SensorGroups>();
+
+            //ListBox erstellen:
+            ListBox DateiexplorerListe = new ListBox();
+
+            //Der ListBox die SensorgruppenListe übergeben
+            DateiExplorerListe.DataContext = sensorgruppenListe;
         }
 
         private void AbbrechenButton(object sender, RoutedEventArgs e)

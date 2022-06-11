@@ -6,22 +6,15 @@ namespace SensorAndSensorgroups
     public class SensorGroups : ISensorGroups
     {
         public string Adresse { get { return this.Adresse; } set { this.Adresse = "funktioniert"; } }
-        public string[] SensorIds
+     
+
+        public string Node { get { return this.Node; } set { this.Adresse = "funktioniert"; } }
+
+        public Dictionary<string, List<string>> SensorIds
         {
             get { return this.SensorIds; }
-            set
-            {
-                string[] test = { "funktioniert" };
-                this.SensorIds = test;
-
-            }
         }
-
-        public string Node { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-
-        Dictionary<string, string> ISensorGroups.SensorIds => throw new NotImplementedException();
-
+        
         public void AddBase(string BaseName)
         {
             throw new NotImplementedException();

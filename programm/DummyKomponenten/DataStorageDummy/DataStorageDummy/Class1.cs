@@ -4,14 +4,14 @@ using CommonInterfaces;
 
 namespace DataStorageDummy
 {
-    public class DataStorage : IDatastorage<double> 
+    public class DataStorage : IDatastorage<double>
     {
         
         public string filepath { get { return this.filepath; } set { this.filepath = "funktioniert"; } }
 
         Dictionary<DateTime, List<double>> Data { get { return Data; } set { Data.Add(DateTime.Today, new List<double> { 251, 14, 25, 48, 2.41 }); } }
 
-        Dictionary<DateTime, List<double>> IDatastorage<double>.Data { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+       // Dictionary<DateTime, List<double>> IDatastorage<double>.Data { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         Dictionary<DateTime, List<double>> IDatastorage<double>.JsonDeserialize(string filepath)
         {
@@ -65,8 +65,14 @@ namespace DataStorageDummy
             Console.WriteLine(SensorListe.ToString(), filepath);
         }
 
-       
+        IDatastorage<double>.BrokerProfile IDatastorage<double>.LoadBrokerProfile(string filepath)
+        {
+            throw new NotImplementedException();
+        }
 
-       
+        void IDatastorage<double>.SavebrokerProfile(IDatastorage<double>.BrokerProfile data, string filepath)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
