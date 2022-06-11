@@ -23,7 +23,7 @@ namespace CommonInterfaces
     {
         
         // algemeine Adresse für die Sensorgruppe
-        string Adresse { get; set; }
+        string Base { get; set; }
 
        
         // Unterordner Name
@@ -39,14 +39,14 @@ namespace CommonInterfaces
         /// </summary>
         /// <param name="sensorids"> die Liste von Sensorids </param>
         /// <param name="sensorid"> das id zu hinzufugen zur Id_liste </param>
-        public void Sensorhinzufuegen(List<string> sensorids, string sensorid);
+        public void Sensorhinzufuegen(string sensorid, string NodeName, string Basename);
 
         /// <summary>
         /// Ein Sensor_Id von der SensorIds Liste loeschen
         /// </summary>
         /// <param name="sensorids"> die Liste von Sensorids </param>
         /// <param name="sensorid"> das id zu loeschen von der Liste </param>
-        public void Sensorloeschen(List<string> sensorids, string sensorid);
+        public void Sensorloeschen(string sensorid, string NodeName, string Basename);
 
         //Stamm hinzufügen
         public void AddBase(string BaseName);
@@ -111,7 +111,7 @@ namespace CommonInterfaces
         /// deserialise Textdatei zu Json datei ,um die gespeicherte sensorgruppe zu laden
         /// </summary>
         /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
-        public List<string> LoadSensorgroup(string Base, string Node);
+        public Dictionary<string, List<string>> LoadSensorgroup(string Base, string Filepath);
         /// <summary>
         /// deserialise Textdatei zu Json datei ,um die gespeicherte BrockerProfile zu laden
         /// </summary>
@@ -122,7 +122,7 @@ namespace CommonInterfaces
         /// </summary>
         ///  <param name="data"> die liste mit der Sensor_ids des gruppes </param>
         /// <param name="filepath"> Dateipfad, wo die Sensorgroup werden gespeichert </param>
-        public void SaveSensorgroup(List<string> SensorListe, string Base, string Node);
+        public void SaveSensorgroup(Dictionary<string, List<string>> SensorListe, string Base, string Filepath);
         /// <summary>
         /// speichern die BrockerProfile
         /// </summary>

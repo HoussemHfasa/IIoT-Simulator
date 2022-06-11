@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\CommonInterfaces\CommonInterfaces\CommonInterfaces.csproj" />
+    <ProjectReference Include="..\..\DataStorage\DataStorage\DataStorage.csproj" />
   </ItemGroup>
 
 </Project>
