@@ -34,7 +34,7 @@ namespace NunitTestDatastorage
 
             //Act
             Storagetest.JsonSerialize(data, filePath);
-            Console.WriteLine(filePath);
+            
 
             //Assert
             Assert.Pass();

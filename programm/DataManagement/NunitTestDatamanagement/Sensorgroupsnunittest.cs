@@ -10,21 +10,52 @@ using SensorAndSensorgroup;
 
 
 
+
 namespace NunitTestDatamanagement
 {
     public class Sensorgroupsnunittest
     {
+        private SensorAndSensorgroup.Sensorgroups SensorgroupsTests = new Sensorgroups();
+        string Base;
+        string Node;
+        string Id;
+        Dictionary<string, List<string>> Ids = new Dictionary<string, List<string>>();
 
 
-        private SensorAndSensorgroup.Sensorgroups SensorgroupsTest;
         [SetUp]
         public void Setup()
         {
 
-            SensorgroupsTest = new Sensorgroups();
+            Base = "HT";
+            Node = "Zimmer2";
+            Ids.Add(Node,new List<string> {"18485146","1784961","47849525" });
+            Id = "8198419";
         }
-
         [Test]
+        public void It_should_Addbase()
+        {
+
+
+            //Act
+            SensorgroupsTests.AddBase(Base);
+
+
+            //Assert
+            Assert.Pass();
+        }
+        [Test]
+        public void It_should_Addnode()
+        {
+
+
+            //Act
+            SensorgroupsTests.AddNode(Node, Base);
+
+
+            //Assert
+            Assert.IsTrue(Ids.ContainsKey(Node));
+        }
+        /*[Test]
         public void It_should_add_Sensor()
         {
             // Arrange
@@ -64,37 +95,8 @@ namespace NunitTestDatamanagement
             //Assert
             Assert.Contains(Id, SensorList);
         }
-        [Test]
-        public void It_should_Addbase()
-        {
-            // Arrange
-            string folderPath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\";
-            string NewBase = "Wohnung X";
-
-
-            //Act
-            SensorgroupsTest.AddBase(NewBase);
-
-
-            //Assert
-            Assert.IsTrue(Directory.Exists(folderPath));
-        }
-        [Test]
-        public void It_should_Addnode()
-        {
-            // Arrange
-            string folderPath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\";
-            string NewBase = "Wohnung X";
-            string NewNode = "Zimmer Y";
-
-
-            //Act
-            SensorgroupsTest.AddNode(NewNode, NewBase);
-
-
-            //Assert
-            Assert.IsTrue(Directory.Exists(folderPath +NewBase));
-        }
+        
+        
         [Test]
         public void It_should_delete_node()
         {
@@ -112,7 +114,7 @@ namespace NunitTestDatamanagement
             //Assert
             Assert.IsFalse(Directory.Exists(folderPath + $"\\,{NewBase}"));
         }
-       /* public void It_should_delete_Base()
+        public void It_should_delete_Base()
         {
             // Arrange
             string folderPath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\";

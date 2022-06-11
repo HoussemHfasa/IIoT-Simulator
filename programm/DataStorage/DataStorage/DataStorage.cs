@@ -52,18 +52,27 @@ namespace DataStorage
             }
             return data;
         }
-        
-       
-        
-        // Ladung der Sensorgroups Daten(Ids)
-        public List<string> LoadSensorgroup(string Base, string Node)
+        // Speicherung der Sensorgroups Daten(Ids)
+        public void SaveSensorgroup(Dictionary<string, List<string>> SensorListe, string Base,string FolderPath)
         {
-            string Filepath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\" + Base + "\\" + Node;
-            List<string> data;
+            
             var serializer = new JsonSerializer();
-            using (TextReader reader = File.OpenText(Filepath))
+            using (TextWriter writer = File.CreateText(FolderPath+Base))
             {
-                data = (List<string>)serializer.Deserialize(reader, typeof(List<string>));
+                serializer.Serialize(writer, SensorListe);
+            }
+
+        }
+
+        // Ladung der Sensorgroups Daten(Ids)
+        public Dictionary<string, List<string>> LoadSensorgroup(string Base, string FolderPath)
+        {
+            
+            Dictionary<string, List<string>> data;
+            var serializer = new JsonSerializer();
+            using (TextReader reader = File.OpenText(FolderPath))
+            {
+                data = (Dictionary<string, List<string>>)serializer.Deserialize(reader, typeof(Dictionary<string, List<string>>));
 
             }
 
@@ -107,16 +116,7 @@ namespace DataStorage
             return BP;
         }
 
-        public void SaveSensorgroup(List<string> SensorListe,string Base, string Node)
-        {
-            string Filepath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\" + Base + "\\" + Node;
-            var serializer = new JsonSerializer();
-            using (TextWriter writer = File.CreateText(Filepath))
-            {
-                serializer.Serialize(writer, SensorListe);
-            }
-
-        }
+       
 
        
 
