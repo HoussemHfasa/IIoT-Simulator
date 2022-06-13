@@ -12,7 +12,7 @@ namespace SensorAndSensorgroup
         public override Dictionary<DateTime, List<double>> Getvalue()
         {
             Dictionary<DateTime, List<double>> Sensorvalues = new Dictionary<DateTime, List<double>>();
-            Sensorvalues.Add(CreationDate, values);
+            Sensorvalues.Add(CreationDate, va);
             return Sensorvalues;
         }
     }

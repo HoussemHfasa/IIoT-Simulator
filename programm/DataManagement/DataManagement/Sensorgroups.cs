@@ -15,7 +15,7 @@ namespace SensorAndSensorgroup
         public string Base { get; set; }
         // Unterordner Name
         public string Node { get; set; }
-        string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SensorGroups");
+        string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"SensorGroups\");
         //List von Sensoren und ihren Node
         //Feedback Rodner
         DataStorage<string> store = new DataStorage<string>();
@@ -38,7 +38,7 @@ namespace SensorAndSensorgroup
         {
             if (!Directory.Exists(Path.Combine(folderpath,Basename)))
             {
-                TextWriter tw = new StreamWriter(Path.Combine(folderpath, Basename));
+                TextWriter tw = new StreamWriter(folderpath+ Basename);
                 tw.Close();
 
             }
@@ -47,42 +47,73 @@ namespace SensorAndSensorgroup
 
         public void AddBase(string BaseName)
         {
-          //  string folderPath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\NunitTestDatamanagement\bin\Debug\netcoreapp3.1\SensorGroups";
+            if(!File.Exists(folderPath+BaseName))
+            {
+                Create_File(folderPath, BaseName);
+            }
             
-            Create_File(folderPath, BaseName);
         }
 
         public void AddNode(string NodeName, string Basename)
         {
-            
-            if (!File.Exists(Path.Combine(folderPath,Basename)))
+            Dictionary<string, List<string>> Sensorids = new Dictionary<string, List<string>>();
+            if (File.Exists(Path.Combine(folderPath, Basename)))
             {
-                AddBase(Basename);
+                Sensorids = store.LoadSensorgroup(Basename, folderPath);
+                if (!Sensorids.ContainsKey(NodeName))
+                {
+                    Sensorids.Add(NodeName, new List<string> { });
+                    store.SaveSensorgroup(Sensorids, Basename, folderPath);
+                }
             }
-            Dictionary<string, List<string>> Sensorids = store.LoadSensorgroup(Basename, folderPath);
-            Sensorids.Add(NodeName,new List<string> { });
-            store.SaveSensorgroup(Sensorids,Basename,folderPath);
         }
+    
 
         public void DeleteNodeBase(string NodeName, string Basename)
         {
-            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Basename);
-           // Create_File(folderPath);
-            store.SaveSensorgroup(SensorIds, Basename,folderPath);
+            Dictionary<string, List<string>> Sensorids = new Dictionary<string, List<string>>();
+            Sensorids = store.LoadSensorgroup(Basename, folderPath);
+            if (File.Exists(folderPath + Basename))
+            {
+                if (Sensorids.ContainsKey(NodeName))
+                {
+                    Sensorids.Remove(NodeName);
+                }
+                
+                store.SaveSensorgroup(Sensorids, Basename, folderPath);
+            }
+          
         }
 
         public void Sensorhinzufuegen(string sensorid, string NodeName, string Basename)
         {
-            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Basename);
-            SensorIds[NodeName].Add(sensorid);
-            store.SaveSensorgroup(SensorIds,Basename,folderPath);
+            Dictionary<string, List<string>> Sensorids = new Dictionary<string, List<string>>();
+            Sensorids = store.LoadSensorgroup(Basename, folderPath);
+            if ((File.Exists(folderPath + Basename))&& (Sensorids.ContainsKey(NodeName)))
+            {
+                if(!Sensorids[NodeName].Contains(sensorid))
+                {
+                    Sensorids[NodeName].Add(sensorid);
+                }
+
+                store.SaveSensorgroup(Sensorids, Basename, folderPath);
+            }
         } 
 
         public void Sensorloeschen(string sensorid, string NodeName, string Basename)
         {
-            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Basename);
-            SensorIds[NodeName].Remove(sensorid);
-            store.SaveSensorgroup(SensorIds, Basename,folderPath);
+            Dictionary<string, List<string>> Sensorids = new Dictionary<string, List<string>>();
+            Sensorids = store.LoadSensorgroup(Basename, folderPath);
+            if ((File.Exists(folderPath + Basename)) && (Sensorids.ContainsKey(NodeName)))
+            {
+                
+                if (Sensorids[NodeName].Contains(sensorid))
+                {
+                    Sensorids[NodeName].Remove(sensorid);
+                }
+                store.SaveSensorgroup(Sensorids, Basename, folderPath);
+            }
+
         }
     }
 }

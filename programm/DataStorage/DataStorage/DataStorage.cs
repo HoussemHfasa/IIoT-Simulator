@@ -53,30 +53,49 @@ namespace DataStorage
             return data;
         }
         // Speicherung der Sensorgroups Daten(Ids)
-        public void SaveSensorgroup(Dictionary<string, List<string>> SensorListe, string Base,string FolderPath)
+        public void SaveSensorgroup(Dictionary<string, List<string>> SensorListe, string Base, string FolderPath)
         {
-            
-            var serializer = new JsonSerializer();
-            using (TextWriter writer = File.CreateText(FolderPath+Base))
+            if (File.Exists(FolderPath + Base))
             {
-                serializer.Serialize(writer, SensorListe);
-            }
+                Dictionary<string, List<string>> data = new Dictionary<string, List<string>>();
+                data = LoadSensorgroup(Base, FolderPath);
+                File.Delete(FolderPath+Base);
+                
 
+                    var serializer = new JsonSerializer();
+                    using (TextWriter writer = File.CreateText(FolderPath + Base))
+                    {
+                        serializer.Serialize(writer, SensorListe);
+                    
+                }
+
+            }
+            else
+            {
+                var serializer = new JsonSerializer();
+                using (TextWriter writer = File.CreateText(FolderPath + Base))
+                {
+                    serializer.Serialize(writer, SensorListe);
+                }
+            }
         }
 
         // Ladung der Sensorgroups Daten(Ids)
         public Dictionary<string, List<string>> LoadSensorgroup(string Base, string FolderPath)
         {
             
-            Dictionary<string, List<string>> data;
-            var serializer = new JsonSerializer();
-            using (TextReader reader = File.OpenText(FolderPath))
+                Dictionary<string, List<string>> data = new Dictionary<string, List<string>>(); ;
+                var serializer = new JsonSerializer();
+            if (File.Exists(FolderPath + Base))
             {
-                data = (Dictionary<string, List<string>>)serializer.Deserialize(reader, typeof(Dictionary<string, List<string>>));
+                using (TextReader reader = File.OpenText(FolderPath + Base))
+                {
+                    data = (Dictionary<string, List<string>>)serializer.Deserialize(reader, typeof(Dictionary<string, List<string>>));
 
+                }
             }
-
-            return data;
+                return data; 
+            
         }
         
         //Speicherung der Brokerdaten
