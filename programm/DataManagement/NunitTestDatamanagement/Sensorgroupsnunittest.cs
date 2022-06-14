@@ -102,43 +102,24 @@ namespace NunitTestDatamanagement
             //Act
             SensorgroupsTests.Sensorloeschen(Id,Node,Base);
             SensorgroupsTests.Sensorloeschen(Id2, Node, Base);
-            Ids2 = store.LoadSensorgroup(Base, FolderPath);
+            
             //Assert
             Assert.That(!Ids2[Node].Contains(Id2));
         }
-        /* [Test]
+        [Test]
          public void It_should_skip_when_the_id_is_founded()
          {
-             // Arrange
-             List<string> SensorList = new List<string> { "123456", "148456", "189746" };
-             string Id = "123456";
-
-
-             //Act
-             SensorgroupsTest.Sensorhinzufuegen(SensorList, Id);
-
-
-             //Assert
-             Assert.Contains(Id, SensorList);
-         }
-
-
-         
-         public void It_should_delete_Base()
-         {
-             // Arrange
-             string folderPath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\";
-             string NewBase = "Wohnung X";
-             string NewNode = "";
 
 
 
-             //Act
-             SensorgroupsTest.DeleteNodeBase(NewNode, NewBase);
+            //Act
+            SensorgroupsTests.Sensorhinzufuegen(Id, Node, Base);
+            SensorgroupsTests.Sensorhinzufuegen(Id, Node, Base);
+            SensorgroupsTests.Sensorloeschen(Id, Node, Base);
+            Ids2 = store.LoadSensorgroup(Base, FolderPath);
 
-
-             //Assert
-             Assert.IsFalse(Directory.Exists(folderPath + $"\\,{NewBase}"));
-         }*/
+            //Assert
+            Assert.That(!Ids2[Node].Contains(Id));
+        }
     }
 }

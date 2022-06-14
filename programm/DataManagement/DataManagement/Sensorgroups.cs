@@ -11,14 +11,15 @@ namespace SensorAndSensorgroup
 {
     public class Sensorgroups : ISensorGroups
     {
+        DataStorage<string> store = new DataStorage<string>();
         //allgemeine Adresse für die Sensoren ,die in der Liste sind
         public string Base { get; set; }
         // Unterordner Name
         public string Node { get; set; }
+        //Ordnerpfad von die Sensorgruppen gespeichert
         string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"SensorGroups\");
         //List von Sensoren und ihren Node
-        //Feedback Rodner
-        DataStorage<string> store = new DataStorage<string>();
+
         public Dictionary<string,List<string>> SensorIds 
         { 
             get
@@ -27,13 +28,11 @@ namespace SensorAndSensorgroup
             }
             set
             {
-               
                 this.SensorIds = store.LoadSensorgroup(Base,folderPath);
             }
             }
         
         //Methode Ordner erstellen
-        //Feedback Rodner
         public void Create_File(string folderpath,string Basename)
         {
             if (!Directory.Exists(Path.Combine(folderpath,Basename)))
@@ -43,8 +42,8 @@ namespace SensorAndSensorgroup
 
             }
         }
-     
 
+        // allgemeine Adresse für die Sensoren hinzufügen
         public void AddBase(string BaseName)
         {
             if(!File.Exists(folderPath+BaseName))
@@ -53,7 +52,7 @@ namespace SensorAndSensorgroup
             }
             
         }
-
+        // Unterordner hinzufügen unter die Adresse
         public void AddNode(string NodeName, string Basename)
         {
             Dictionary<string, List<string>> Sensorids = new Dictionary<string, List<string>>();
@@ -67,8 +66,8 @@ namespace SensorAndSensorgroup
                 }
             }
         }
-    
 
+        // Unterordner Löschen
         public void DeleteNodeBase(string NodeName, string Basename)
         {
             Dictionary<string, List<string>> Sensorids = new Dictionary<string, List<string>>();
@@ -84,7 +83,7 @@ namespace SensorAndSensorgroup
             }
           
         }
-
+        // Sensor in eimen bestimmten Adresse und Unterordner hinzufügen
         public void Sensorhinzufuegen(string sensorid, string NodeName, string Basename)
         {
             Dictionary<string, List<string>> Sensorids = new Dictionary<string, List<string>>();
@@ -98,8 +97,8 @@ namespace SensorAndSensorgroup
 
                 store.SaveSensorgroup(Sensorids, Basename, folderPath);
             }
-        } 
-
+        }
+        // Sensor von eimen bestimmten Adresse und Unterordner löschen
         public void Sensorloeschen(string sensorid, string NodeName, string Basename)
         {
             Dictionary<string, List<string>> Sensorids = new Dictionary<string, List<string>>();
