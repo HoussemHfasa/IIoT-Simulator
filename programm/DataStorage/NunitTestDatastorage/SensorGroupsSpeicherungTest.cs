@@ -29,7 +29,7 @@ namespace NunitTestDatastorage
             //Arrange
             Base = "HG1";
             Base2 = "HG2";
-            Folderpath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"beispiel\");
+            Folderpath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Tests\");
             List<string> Sensoren = new List<string> { "151546", "18546", "84984" };
             Sensorliste.TryAdd("Zimmer1",Sensoren);
             

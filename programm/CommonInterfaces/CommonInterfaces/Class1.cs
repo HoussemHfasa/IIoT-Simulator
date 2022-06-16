@@ -55,14 +55,15 @@ namespace CommonInterfaces
         public void AddNode(string NodeName, string Basename);
 
         //Löschen von Stamm/Unterordner
-        public void DeleteNodeBase(string NodeName, string Basename);
-
+        public void DeleteNode(string NodeName, string Basename);
+        public void DeleteBase(string BaseName);
 
 
     }
-
+   
     public interface IMQTTCommunicator
     {
+        
         // Überlegung ob Rückgabewerte benötigt wird für Rückmeldung von Erfolg/Nichterfolg
         //Welche Informationen werden zur Registrierung des Clients benoetigt? /Paul
         /// <summary>
@@ -85,10 +86,10 @@ namespace CommonInterfaces
         public List<string> GetTopics();
         public List<string> GetClients();
     }
-
+    
     public interface IDatastorage<T> 
     {
-        public class BrokerProfile
+       public class BrokerProfile
         {
             public string HostName_IP { get; set; }
             public uint Port { get; set; }

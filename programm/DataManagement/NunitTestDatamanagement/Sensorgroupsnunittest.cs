@@ -88,7 +88,7 @@ namespace NunitTestDatamanagement
 
 
             //Act
-            SensorgroupsTests.DeleteNodeBase(Node2, Base);
+            SensorgroupsTests.DeleteNode(Node2, Base);
             Ids2 = store.LoadSensorgroup(Base, FolderPath);
 
             //Assert
@@ -100,9 +100,10 @@ namespace NunitTestDatamanagement
 
 
             //Act
-            SensorgroupsTests.Sensorloeschen(Id,Node,Base);
+            SensorgroupsTests.Sensorhinzufuegen(Id2, Node, Base);
             SensorgroupsTests.Sensorloeschen(Id2, Node, Base);
-            
+            Ids2 = store.LoadSensorgroup(Base, FolderPath);
+
             //Assert
             Assert.That(!Ids2[Node].Contains(Id2));
         }
@@ -115,11 +116,11 @@ namespace NunitTestDatamanagement
             //Act
             SensorgroupsTests.Sensorhinzufuegen(Id, Node, Base);
             SensorgroupsTests.Sensorhinzufuegen(Id, Node, Base);
-            SensorgroupsTests.Sensorloeschen(Id, Node, Base);
+            
             Ids2 = store.LoadSensorgroup(Base, FolderPath);
 
             //Assert
-            Assert.That(!Ids2[Node].Contains(Id));
+            Assert.That(Ids2[Node].Where(s => s != null && s.StartsWith(Id)).Count()<=1);
         }
     }
 }

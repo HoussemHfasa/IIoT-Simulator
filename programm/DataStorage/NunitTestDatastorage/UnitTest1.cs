@@ -21,6 +21,7 @@ namespace NunitTestDatastorage
         string filePath ;
         Dictionary<DateTime, List<double>> data = new Dictionary<DateTime, List<double>>();
         Dictionary<DateTime, List<double>> data2 = new Dictionary<DateTime, List<double>>();
+        Dictionary<DateTime, List<double>> data3 = new Dictionary<DateTime, List<double>>();
 
         [SetUp]
         public void Setup()
@@ -30,14 +31,15 @@ namespace NunitTestDatastorage
             Storagetest = new DataStorage.DataStorage<double>();
          filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Tests\");
         data.TryAdd(DateTime.Parse("01 01 1285"), new List<double> { 1, 2, 4, 8, 946, 1457 });
-    }
+            data3.TryAdd(DateTime.Parse("01 01 1285"), new List<double> { 1, 5152, 4, 8, 946, 1457 });
+        }
 
         [Test]
         public void It_should_serialize()
         {
             //Act
             Storagetest.JsonSerialize(data, filePath,Sensortype);
-
+            Storagetest.JsonSerialize(data3, filePath, Sensortype);
             //Assert
             Assert.That(File.Exists(filePath+Sensortype));
         }

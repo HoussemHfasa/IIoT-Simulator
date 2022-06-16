@@ -27,6 +27,7 @@ namespace DataStorage
                 }
             }
         }
+        
         // Speicherung der SensorDaten in der Dateipfad
         public void JsonSerialize(Dictionary<DateTime, List<T>> data, string filepath,string Sensortype)
         {
@@ -60,14 +61,14 @@ namespace DataStorage
         }
         // Speicherung der Sensorgroups Daten(Ids)
         public void SaveSensorgroup(Dictionary<string, List<string>> SensorListe, string Base, string FolderPath)
-        {
+        {/*
             if (File.Exists(FolderPath + Base))
             {
                 Dictionary<string, List<string>> data = new Dictionary<string, List<string>>();
                 data = LoadSensorgroup(Base, FolderPath);
                 File.Delete(FolderPath+Base);
                 
-
+                //Fehler
                     var serializer = new JsonSerializer();
                     using (TextWriter writer = File.CreateText(FolderPath + Base))
                     {
@@ -77,13 +78,13 @@ namespace DataStorage
 
             }
             else
-            {
+            {*/
                 var serializer = new JsonSerializer();
                 using (TextWriter writer = File.CreateText(FolderPath + Base))
                 {
                     serializer.Serialize(writer, SensorListe);
                 }
-            }
+            
         }
 
         // Ladung der Sensorgroups Daten(Ids)
@@ -107,7 +108,7 @@ namespace DataStorage
         //Speicherung der Brokerdaten
         public void SavebrokerProfile(IDatastorage<T>.BrokerProfile data, string filepath)
         {
-
+            //Als BrokeProfil speichern
             // BrokerProfil Eigenschaften zu Liste konvertieren
             List<string> BP = new List<string>(); 
             BP.Add( data.HostName_IP);
@@ -144,7 +145,7 @@ namespace DataStorage
        
 
        
-
+        //Extra datei
         //BrockerProfileEigenschaften
         public class BrokerProfile
         {

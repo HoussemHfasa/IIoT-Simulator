@@ -18,8 +18,8 @@ namespace SensorAndSensorgroup
         public string Node { get; set; }
         //Ordnerpfad von die Sensorgruppen gespeichert
         string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"SensorGroups\");
-        //List von Sensoren und ihren Node
 
+        //List von Sensoren und ihren Node
         public Dictionary<string,List<string>> SensorIds 
         { 
             get
@@ -52,6 +52,14 @@ namespace SensorAndSensorgroup
             }
             
         }
+        public void DeleteBase(string BaseName)
+        {
+            if (File.Exists(folderPath + BaseName))
+            {
+                File.Delete(folderPath + BaseName);
+            }
+
+        }
         // Unterordner hinzufügen unter die Adresse
         public void AddNode(string NodeName, string Basename)
         {
@@ -68,7 +76,7 @@ namespace SensorAndSensorgroup
         }
 
         // Unterordner Löschen
-        public void DeleteNodeBase(string NodeName, string Basename)
+        public void DeleteNode(string NodeName, string Basename)
         {
             Dictionary<string, List<string>> Sensorids = new Dictionary<string, List<string>>();
             Sensorids = store.LoadSensorgroup(Basename, folderPath);
