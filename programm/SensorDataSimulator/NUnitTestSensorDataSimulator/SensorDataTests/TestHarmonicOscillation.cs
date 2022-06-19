@@ -44,6 +44,8 @@ namespace NUnitTestSensorDataSimulator
             Assert.LessOrEqual(Testlist.Max(), RandomAmplitude);
 
         }
+
+        
         [Test]
         public void GetHarmonicOscillation_Counttest()
         {

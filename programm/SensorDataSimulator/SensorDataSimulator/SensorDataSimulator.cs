@@ -9,28 +9,34 @@ namespace SensorDataSimulator
 
     public abstract class SensorDataSimualtor<T> : ISensorDataSimulator<T>
     {
+        // Werteanzahl, die erzeugt werden soll
         public uint AmmountofValues { get; set; }
-
+        // in abgeleiteten Klasse werden hiermit die Werte erzeugt
         public abstract List<T> GetSimulatorValues();
         
     }
 
     public class HarmonicOscillation : SensorDataSimualtor<double>
     {
+        //Absprache nötig: Werden diese Daten in der Anzeige später gebraucht?
         private double Amplitude;
         private double Period;
         private double Phase;
+
+        //Konstruktor
         public HarmonicOscillation(double Amplitude, double Period, double Phase, uint AmmountofValues )
         {
+            // Parameter intern abspeichern
             this.Amplitude = Amplitude;
             this.Period = Period;
             this.Phase = Phase;
             this.AmmountofValues = AmmountofValues;
         }
 
+
         public override List<double> GetSimulatorValues()
         {
-            //Ohne Rundungen
+           
             List<double> Result = new List<double>();
             
 
@@ -48,6 +54,8 @@ namespace SensorDataSimulator
             {
                 Result.Add(Amplitude * Math.Sin((2 * Math.PI / Period) * i + Phase));
             }
+
+            // Ergebnis zurückgeben
             return Result;
         }
     }
@@ -74,15 +82,17 @@ namespace SensorDataSimulator
             if (Dampingratio < 0.0)
                 throw new ArgumentOutOfRangeException("Dämpfungsrate darf nicht negativ sein!");
 
-            // Achtung, hier wird die Harmonische nur auf 2 Kommastellen genau geliefert...
-            // evtl harmonische in extra Funktion errechnen, GetHarmonicOscillation müsste dann noch runden.
+            // Als Basis die harmonische Schwingung erzeugen
             HarmonicOscillation HarmonicPortion = new HarmonicOscillation(Amplitude, Period, Phase, AmmountofValues);
             List<double> HarmonicPart = HarmonicPortion.GetSimulatorValues();
+
+            // Mit dämpfenden Teil multiplizieren
             for (int i = 0; i < AmmountofValues; i++)
             {
                 Result.Add(HarmonicPart[i] * Math.Exp(-1.0 * Dampingratio * i));
             }
 
+            // Ergebnis zurückgeben
             return Result;
         }
     }
@@ -497,7 +507,7 @@ namespace SensorDataSimulator
                     
                     for (int z = 0; z < ErrorLength && z+i < TempList.Count; z++)
                     {
-                        
+                        //potentieller Corner Case bei maximal und minimal möglichem doublewert entsteht Überlauf?
                         TempList[i+z] = Rand.NextDouble() * (ErrorMax-ErrorMin) + ErrorMin;
                         
                     }
