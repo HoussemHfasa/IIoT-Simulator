@@ -42,6 +42,8 @@
         
         <!-- Liste der Dateien -->
         <ListBox
+            x:Name="DateiExplorerListe"
+           
             Margin="136,70,136,85"
             Background="#FF39383C"/>
 

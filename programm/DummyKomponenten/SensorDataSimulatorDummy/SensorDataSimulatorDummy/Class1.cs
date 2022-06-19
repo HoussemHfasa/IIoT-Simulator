@@ -5,7 +5,7 @@ using CommonInterfaces;
 
 namespace SensorDataSimulatorDummy
 {
-    public class SensorDataSimulator : ISensorDataSimulator
+    public class SensorDataSimulator : ISensorDataSimulator<double>
     {
         public SensorDataSimulator (uint ValueCount)
         {
@@ -46,6 +46,11 @@ namespace SensorDataSimulatorDummy
         public List<double> GetSuperposition(List<double> Oscillation1, List<double> Oscillation2)
         {
             return new List<double> { 1.1, 2.2, 3.3, 4.4, 5 };
+        }
+
+        List<double> ISensorDataSimulator<double>.GetSimulatorValues()
+        {
+            throw new NotImplementedException();
         }
     }
 }

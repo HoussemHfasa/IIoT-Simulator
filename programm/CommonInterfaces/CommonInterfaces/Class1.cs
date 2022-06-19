@@ -23,7 +23,7 @@ namespace CommonInterfaces
     {
         
         // algemeine Adresse für die Sensorgruppe
-        string Adresse { get; set; }
+        string Base { get; set; }
 
        
         // Unterordner Name
@@ -39,14 +39,14 @@ namespace CommonInterfaces
         /// </summary>
         /// <param name="sensorids"> die Liste von Sensorids </param>
         /// <param name="sensorid"> das id zu hinzufugen zur Id_liste </param>
-        public void Sensorhinzufuegen(List<string> sensorids, string sensorid);
+        public void Sensorhinzufuegen(string sensorid, string NodeName, string Basename);
 
         /// <summary>
         /// Ein Sensor_Id von der SensorIds Liste loeschen
         /// </summary>
         /// <param name="sensorids"> die Liste von Sensorids </param>
         /// <param name="sensorid"> das id zu loeschen von der Liste </param>
-        public void Sensorloeschen(List<string> sensorids, string sensorid);
+        public void Sensorloeschen(string sensorid, string NodeName, string Basename);
 
         //Stamm hinzufügen
         public void AddBase(string BaseName);
@@ -55,14 +55,15 @@ namespace CommonInterfaces
         public void AddNode(string NodeName, string Basename);
 
         //Löschen von Stamm/Unterordner
-        public void DeleteNodeBase(string NodeName, string Basename);
-
+        public void DeleteNode(string NodeName, string Basename);
+        public void DeleteBase(string BaseName);
 
 
     }
-
+   
     public interface IMQTTCommunicator
     {
+        
         // Überlegung ob Rückgabewerte benötigt wird für Rückmeldung von Erfolg/Nichterfolg
         //Welche Informationen werden zur Registrierung des Clients benoetigt? /Paul
         /// <summary>
@@ -85,10 +86,10 @@ namespace CommonInterfaces
         public List<string> GetTopics();
         public List<string> GetClients();
     }
-
+    
     public interface IDatastorage<T> 
     {
-        public class BrokerProfile
+       public class BrokerProfile
         {
             public string HostName_IP { get; set; }
             public uint Port { get; set; }
@@ -101,17 +102,17 @@ namespace CommonInterfaces
         /// </summary>
         /// <param name="data"> die Daten zu speichern </param>
         /// <param name="filepath"> Dateipfad, wo die Daten werden gespeichert </param>
-        public void JsonSerialize(Dictionary<DateTime, List<T>> data, string filepath);
+        public void JsonSerialize(Dictionary<DateTime, List<T>> data, string filepath, string Sensortype);
         /// <summary>
         /// deserialise Textdatei zu Json datei ,um die gespeicherte Datei zu laden
         /// </summary>
         /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
-        public Dictionary<DateTime, List<T>> JsonDeserialize(string filepath);
+        public Dictionary<DateTime, List<T>> JsonDeserialize(string filepath, string Sensortype);
         /// <summary>
         /// deserialise Textdatei zu Json datei ,um die gespeicherte sensorgruppe zu laden
         /// </summary>
         /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
-        public List<string> LoadSensorgroup(string Base, string Node);
+        public Dictionary<string, List<string>> LoadSensorgroup(string Base, string Filepath);
         /// <summary>
         /// deserialise Textdatei zu Json datei ,um die gespeicherte BrockerProfile zu laden
         /// </summary>
@@ -122,7 +123,7 @@ namespace CommonInterfaces
         /// </summary>
         ///  <param name="data"> die liste mit der Sensor_ids des gruppes </param>
         /// <param name="filepath"> Dateipfad, wo die Sensorgroup werden gespeichert </param>
-        public void SaveSensorgroup(List<string> SensorListe, string Base, string Node);
+        public void SaveSensorgroup(Dictionary<string, List<string>> SensorListe, string Base, string Filepath);
         /// <summary>
         /// speichern die BrockerProfile
         /// </summary>

@@ -20,6 +20,7 @@ namespace IIOT_Simulator
         public NeueSensorgruppeErstellen()
         {
             InitializeComponent();
+
         }
 
 
@@ -34,26 +35,28 @@ namespace IIOT_Simulator
         public void StammHinzufuegen(object sender, RoutedEventArgs e)
         {
 
-            string stamm = textBoxStamm.Text; //Die Benutzereingabe in einem String speichern
+            string stammText = textBoxEingabe.Text; //Die Benutzereingabe in einem String speichern
 
             TreeViewItem StammItem = new TreeViewItem();
            
-            StammItem.Header = stamm;
+            StammItem.Header = stammText;
             TreeView1.Items.Add(StammItem);
-            textBoxStamm.Clear();//Funktioniert
+            textBoxEingabe.Clear();//Funktioniert
         }
 
         //button zum Unterordner hinzufügen
         private void UnterordnerHinzufügen(object sender, RoutedEventArgs e)
         {
 
-            string unterordner = textBoxStamm.Text; //Die Benutzereingabe in einem String speichern
+            string unterordnerText = textBoxEingabe.Text; //Die Benutzereingabe in einem String speichern
 
             TreeViewItem UnterordnerItem = new TreeViewItem();
-            UnterordnerItem.Header = unterordner;
+            UnterordnerItem.Header = TreeView1.SelectedItem;//Den 'Selected Item' als Stamm festelegen
+
+            UnterordnerItem.Items.Add(new TreeViewItem() { Header = unterordnerText });//Die Nutzereingabe als Unterordner festlegen
             
             
-            textBoxStamm.Clear();//Funktioniert noch nicht, einen Weg finden auf den davor festgelegten Stamm zuzugreifen
+            textBoxEingabe.Clear();//Soltte funktionieren- noch nicht geprüft
         }
 
         //Button um die Sensorgruppe zu speichern

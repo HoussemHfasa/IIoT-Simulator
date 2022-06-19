@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IIOT_Simulator"
         mc:Ignorable="d"
-        Title="NeueSensorgruppeErstellen" Height="450" Width="800">
-    <Grid Background="#FF39383C" Height="434" VerticalAlignment="Top">
+        Title="NeueSensorgruppeErstellen" Height="450" Width="800"
+        
+        WindowStyle="None"
+        ResizeMode="NoResize">
+    <Grid Background="#181735" Height="434" VerticalAlignment="Top">
+        
+        
 
         <!-- Button zum Stamm hinzufügen-->
         <Button 
@@ -70,7 +75,7 @@
             FontSize=" 15"/>
 
         <TextBox   
-                x:Name="textBoxStamm"
+                x:Name="textBoxEingabe"
                          BorderThickness="1" 
              Margin="342,239,156,168"
                 />
