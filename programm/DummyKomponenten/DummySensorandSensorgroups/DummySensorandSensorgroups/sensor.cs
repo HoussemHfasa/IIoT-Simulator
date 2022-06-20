@@ -5,7 +5,7 @@ using CommonInterfaces;
 
 namespace DummySensorandSensorgroups
 {
-    class sensor : ISenor<double>
+    public class Sensor : ISenor<double>
     {
         public string Sensor_id { get { return Sensor_id; } set { this.Sensor_id = "6552778f"; } }
 
