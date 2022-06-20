@@ -10,14 +10,25 @@ namespace CommonInterfaces
         // 2 Dimensionales Array
 
         public string Sensortype { get; }
-        public string Einheit { get; set; }
+        public string Unit { get; set; }
+
+        //Startzeit erster Wert?
         public DateTime CreationDate { get; }
+        //Zeitspanne zwischen zwei Werten?
         public TimeSpan CreationTime { get; }
-        public int Werteanzahl { get; }
+        public int AmmountofValues { get; }
         public int Timeinterval { get; }
-        //bekommt die Daten von der Sensoren
+
+        
+        //Gibt die Sensordaten zurück
         public abstract List<T> Getvalues();
- 
+        
+        //Befüllt die Klasse mit Sensordaten
+        public void SetValues(List<T> Values);
+
+        // oder: // public List<T> Values {get; set;}
+
+
     }
     public interface ISensorGroups
     {
