@@ -6,16 +6,16 @@ using SensorAndSensorgroup;
 
 namespace SensorAndSensorgroup
 {
-    public class Currentsensor : Sensor<double>
+    public class CurrentSensor : Sensor<double>
     {
-        public List<double> values;
-
-
-        public override Dictionary<DateTime, List<double>> Getvalue()
+       public CurrentSensor()
         {
-            Dictionary<DateTime, List<double>> Sensorvalues = new Dictionary<DateTime, List<double>>();
-            Sensorvalues.Add(CreationDate, values);
-            return Sensorvalues;
+            Guid IdGenerator = Guid.NewGuid();
+            // Besonderheiten des Sensors
+            this.Unit = "Strom in A";
+            this.Sensortype = "Stromsensor";
+            this.Sensor_id = IdGenerator.ToString();
         }
+        
     }
 }

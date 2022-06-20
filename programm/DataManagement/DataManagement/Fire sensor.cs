@@ -4,16 +4,16 @@ using System.Text;
 
 namespace SensorAndSensorgroup
 {
-    class Fire_sensor: Sensor<bool>
+    class FireSensor: Sensor<bool>
     {
-        public List<bool> values;
-
-
-        public override Dictionary<DateTime, List<bool>> Getvalue()
+        public FireSensor()
         {
-            Dictionary<DateTime, List<bool>> Sensorvalues = new Dictionary<DateTime, List<bool>>();
-            Sensorvalues.Add(CreationDate, values);
-            return Sensorvalues;
+            Guid IdGenerator = Guid.NewGuid();
+            // Besonderheiten des Sensors
+            this.Unit = "Rauch vorhanden";
+            this.Sensortype = "Rauchmelder";
+            this.Sensor_id = IdGenerator.ToString();
         }
+        
     }
 }

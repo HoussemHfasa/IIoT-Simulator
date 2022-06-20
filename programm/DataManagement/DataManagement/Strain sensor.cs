@@ -4,16 +4,19 @@ using System.Text;
 
 namespace SensorAndSensorgroup
 {
-    class Strain_sensor: Sensor<ushort>
+    //Dehnungssensor
+    class StrainSensor : Sensor<ushort>
     {
-        public List<ushort> values;
-
-
-        public override Dictionary<DateTime, List<ushort>> Getvalue()
+        public StrainSensor()
         {
-            Dictionary<DateTime, List<ushort>> Sensorvalues = new Dictionary<DateTime, List<ushort>>();
-            Sensorvalues.Add(CreationDate, values);
-            return Sensorvalues;
+            Guid IdGenerator = Guid.NewGuid();
+            // Besonderheiten des Sensors
+
+            this.Unit = "Dehnung in µm/m";
+            this.Sensortype = "Dehnungssensor";
+            this.Sensor_id = IdGenerator.ToString();
         }
+
+
     }
 }

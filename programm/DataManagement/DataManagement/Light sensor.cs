@@ -4,16 +4,16 @@ using System.Text;
 
 namespace SensorAndSensorgroup
 {
-    class Light_sensor:Sensor<int>
+    class BrightnessSensor:Sensor<int>
     {
-        public List<int> values;
-
-
-        public override Dictionary<DateTime, List<int>> Getvalue()
+        public BrightnessSensor()
         {
-            Dictionary<DateTime, List<int>> Sensorvalues = new Dictionary<DateTime, List<int>>();
-            Sensorvalues.Add(CreationDate, values);
-            return Sensorvalues;
+            Guid IdGenerator = Guid.NewGuid();
+            // Besonderheiten des Sensors
+            
+            this.Unit = "Lichtmenge in lm";
+            this.Sensortype = "Helligkeitssensor";
+            this.Sensor_id = IdGenerator.ToString();
         }
     }
 }

@@ -4,16 +4,17 @@ using System.Text;
 
 namespace SensorAndSensorgroup
 {
-    class Voltage_sensor : Sensor<double>
+    class VoltageSensor : Sensor<double>
     {
-        public List<double> values;
-
-
-        public override Dictionary<DateTime, List<double>> Getvalue()
+        public VoltageSensor() 
         {
-            Dictionary<DateTime, List<double>> Sensorvalues = new Dictionary<DateTime, List<double>>();
-            Sensorvalues.Add(CreationDate, values);
-            return Sensorvalues;
+            Guid IdGenerator = Guid.NewGuid();
+            // Besonderheiten des Sensors
+
+            this.Unit = "Spannung in V";
+            this.Sensortype = "Spannungssensor";
+            this.Sensor_id = IdGenerator.ToString();
         }
+        
     }
 }

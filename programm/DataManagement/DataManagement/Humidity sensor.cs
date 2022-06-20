@@ -5,17 +5,17 @@ using CommonInterfaces;
 
 namespace SensorAndSensorgroup
 {
-    class Humidity_sensor:Sensor<double>
+    class HumiditySensor:Sensor<double>
     {
-
-        public List<double> values;
-
-
-        public override Dictionary<DateTime, List<double>> Getvalue()
+        public HumiditySensor()
         {
-            Dictionary<DateTime, List<double>> Sensorvalues = new Dictionary<DateTime, List<double>>();
-            Sensorvalues.Add(CreationDate, values);
-            return Sensorvalues;
+            Guid IdGenerator = Guid.NewGuid();
+            // Besonderheiten des Sensors
+            this.Unit = "rel. Luftfeuchtigkeit in Vol.-%";
+            this.Sensortype = "Feuchtigkeitssensor";
+            this.Sensor_id = IdGenerator.ToString();
         }
+        
+ 
     }
 }

@@ -4,16 +4,16 @@ using System.Text;
 
 namespace SensorAndSensorgroup
 {
-    class level_sensor:Sensor<double>
+    // Füllstandssensor
+    class LevelSensor:Sensor<double>
     {
-        public List<double> values;
-
-
-        public override Dictionary<DateTime, List<double>> Getvalue()
+        public LevelSensor()
         {
-            Dictionary<DateTime, List<double>> Sensorvalues = new Dictionary<DateTime, List<double>>();
-            Sensorvalues.Add(CreationDate, values);
-            return Sensorvalues;
+            Guid IdGenerator = Guid.NewGuid();
+            // Besonderheiten des Sensors
+            this.Unit = "Füllstand in %";
+            this.Sensortype = "Füllstandssensor";
+            this.Sensor_id = IdGenerator.ToString();
         }
     }
 }

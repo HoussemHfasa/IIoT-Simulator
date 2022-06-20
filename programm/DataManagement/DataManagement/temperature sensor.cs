@@ -4,16 +4,17 @@ using System.Text;
 
 namespace SensorAndSensorgroup
 {
-    class temperature_sensor:Sensor<double>
+    class TemperatureSensor:Sensor<double>
     {
-        public List<double> values;
-
-
-        public override Dictionary<DateTime, List<double>> Getvalue()
+        public TemperatureSensor()
         {
-            Dictionary<DateTime, List<double>> Sensorvalues = new Dictionary<DateTime, List<double>>();
-            Sensorvalues.Add(CreationDate, values);
-            return Sensorvalues;
+            Guid IdGenerator = Guid.NewGuid();
+            // Besonderheiten des Sensors
+
+            this.Unit = "Temperatur in °C";
+            this.Sensortype = "Temperatursensor";
+            this.Sensor_id = IdGenerator.ToString();
         }
+        
     }
 }

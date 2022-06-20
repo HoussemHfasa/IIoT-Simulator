@@ -4,16 +4,17 @@ using System.Text;
 
 namespace SensorAndSensorgroup
 {
-    class Torque_sensor:Sensor<double>
+    class TorqueSensor:Sensor<double>
     {
-        public List<double> values;
-
-
-        public override Dictionary<DateTime, List<double>> Getvalue()
+        public TorqueSensor()
         {
-            Dictionary<DateTime, List<double>> Sensorvalues = new Dictionary<DateTime, List<double>>();
-            Sensorvalues.Add(CreationDate, values);
-            return Sensorvalues;
+            Guid IdGenerator = Guid.NewGuid();
+            // Besonderheiten des Sensors
+
+            this.Unit = "Drehmoment in Nm";
+            this.Sensortype = "Drehmomentsensor";
+            this.Sensor_id = IdGenerator.ToString();
         }
+        
     }
 }

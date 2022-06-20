@@ -12,22 +12,29 @@ namespace SensorAndSensorgroup
     {
         public string Sensor_id { get ; set ; }
         public string Sensortype { get ; set ; }
-        public string Einheit { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public DateTime CreationDate { get; }
-
-        public TimeSpan CreationTime { get; }
-
-        public int Werteanzahl { get; }
-
-        public int Timeinterval { get; }
-
-        public List<T> Getvalues()
-        {
-            throw new NotImplementedException();
-        }
-        public abstract Dictionary<DateTime, List<T>> Getvalue();
         
+        public string Unit { get ; set; }
+
+
+        public int AmmountofValues { get { return Values.Count;} }
+
+        public int Timeinterval { get; set; }
+        public string Topic { get; set; }
+
+        // Sensordaten, Zugriff nur über GetValues und SetValues
+        private List<T> Values;
+
+        // gibt die Sensordaten zurück
+        public List<T> GetValues()
+        {
+            return this.Values;
+        }
+
+     
+        public void SetValues(List<T> Values)
+        {
+            this.Values = Values;
+        }
     }
 }
 
