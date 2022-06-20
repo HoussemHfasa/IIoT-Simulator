@@ -146,7 +146,7 @@ namespace DataStorage
 
        
 
-       
+       /*
         //Extra datei
         //BrockerProfileEigenschaften
         public class BrokerProfile
@@ -210,6 +210,6 @@ namespace DataStorage
                 HostName_IP = hostname_IP;
                 Port = port;
             }
-        }
+        }*/
     }
 }
