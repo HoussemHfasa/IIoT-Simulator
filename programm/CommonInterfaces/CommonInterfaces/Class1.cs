@@ -5,28 +5,30 @@ namespace CommonInterfaces
 {
     public interface ISenor<T>
     {
+        // Eindeutige ID des Sensors
         public string Sensor_id { get; set; }
 
-        // 2 Dimensionales Array
+        // MQTT Topic, auf die der Sensor Daten sendet
+        public string Topic { get; set; }
 
+        // Sensortyp
         public string Sensortype { get; }
+        // pysikalische Einhei
         public string Unit { get; set; }
 
-        //Startzeit erster Wert?
+       /* //Startzeit erster Wert?
         public DateTime CreationDate { get; }
         //Zeitspanne zwischen zwei Werten?
-        public TimeSpan CreationTime { get; }
+        public TimeSpan CreationTime { get; } */
         public int AmmountofValues { get; }
         public int Timeinterval { get; }
 
         
-        //Gibt die Sensordaten zurück
-        public abstract List<T> Getvalues();
+        //Gibt eine Liste mit Sensordaten zurück
+        public abstract List<T> GetValues();
         
-        //Befüllt die Klasse mit Sensordaten
+        //Zum Abspeichern der Sensordaten im Objekt
         public void SetValues(List<T> Values);
-
-        // oder: // public List<T> Values {get; set;}
 
 
     }
