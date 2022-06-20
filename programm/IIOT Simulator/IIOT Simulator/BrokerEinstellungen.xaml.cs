@@ -40,7 +40,17 @@ namespace IIOT_Simulator
             objectStartseite2.Show();
         }
 
-       
+        private void StartseiteButton(object sender, RoutedEventArgs e)
+        {
+            Startseite objectStartseite2 = new Startseite();
+            this.Visibility = Visibility.Hidden; //So wird das aktuelle Fenster dann geschlossen
+            objectStartseite2.Show();
+        }
+
+        private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
     
 }

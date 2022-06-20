@@ -5,7 +5,7 @@ namespace SensorAndSensorgroups
 {
     public class SensorGroups : ISensorGroups
     {
-        public string Base { get { return this.Base; } set { this.Base = "Hause 1"; } }
+        public string Base { get { return this.Base; } set { this.Base = "Haus 1"; } }
         public Dictionary<string, List<string>> SensorIds
         {
             get { return this.SensorIds; }
@@ -19,7 +19,6 @@ namespace SensorAndSensorgroups
         }
 
         public string Node { get {return this.Node; } set { this.Node = "Zimmer1"; } }
-
 
         
 

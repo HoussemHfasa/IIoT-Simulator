@@ -13,12 +13,12 @@ namespace DataStorageDummy
 
 
 
-        public Dictionary<DateTime, List<double>> JsonDeserialize(string filepath)
+        public Dictionary<DateTime, List<double>> JsonDeserialize(string filepath, string Sensortype)
         {
             return Data;
         }
 
-        public void JsonSerialize(Dictionary<DateTime, List<double>> data, string filepath)
+        public void JsonSerialize(Dictionary<DateTime, List<double>> data, string filepath,string Sensortype)
         {
             data.Add(DateTime.Today, new List<double> { 251, 14, 25, 48, 2.41 });
             filepath = "funktioniert";
