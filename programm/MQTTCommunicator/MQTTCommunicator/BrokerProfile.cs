@@ -5,7 +5,7 @@ using CommonInterfaces;
 
 namespace MQTTCommunicator
 {
-    class BrokerProfile: IBrokerProfile
+    public class BrokerProfile:IBrokerProfile
     {
         public string HostName_IP
         {
@@ -65,6 +65,9 @@ namespace MQTTCommunicator
         {
             HostName_IP = hostname_IP;
             Port = port;
+        }
+        public BrokerProfile()
+        {
         }
     }
 }

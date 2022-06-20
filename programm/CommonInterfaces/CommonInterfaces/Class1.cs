@@ -107,7 +107,7 @@ namespace CommonInterfaces
         public string Password { get; set; }
     }
     
-    public interface IDatastorage<T> : IBrokerProfile
+    public interface IDatastorage<T> 
     {
       
         /// <summary>

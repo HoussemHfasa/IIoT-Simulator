@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using CommonInterfaces;
 using Newtonsoft.Json.Linq;
+using MQTTCommunicator;
 
 
 
@@ -17,15 +18,17 @@ namespace NunitTestDatastorage
     public class BrockerprofilSpeicherungTest
     {
         private DataStorage.DataStorage<double> Storagetest = new DataStorage<double>();
-        IDatastorage<double>.BrokerProfile Beispiel1 = new IDatastorage<double>.BrokerProfile();
-        IDatastorage<double>.BrokerProfile Beispiel2 = new IDatastorage<double>.BrokerProfile();
-        IDatastorage<double>.BrokerProfile Beispiel3 = new IDatastorage<double>.BrokerProfile();
+        
+        IBrokerProfile Beispiel1 = new MQTTCommunicator.BrokerProfile();
+        IBrokerProfile Beispiel2 = new MQTTCommunicator.BrokerProfile();
+        IBrokerProfile Beispiel3 = new MQTTCommunicator.BrokerProfile();
         string filePath;
         string filename;
         [SetUp]
         public void Setup()
         {
             //Arrange
+            
             Storagetest = new DataStorage.DataStorage<double>();
             filename = @"Tests\BrokerProfileTest";
              filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);
