@@ -27,8 +27,9 @@ namespace DataStorage
                 }
             }
         }
-        
+        // Sensor Zurückgeben
         // Speicherung der SensorDaten in der Dateipfad
+        /*
         public void JsonSerialize(Dictionary<DateTime, List<T>> data, string filepath,string Sensortype)
         {
             //Ladung der vorhandenen Daten
@@ -44,7 +45,8 @@ namespace DataStorage
                 serializer.Serialize(writer, already_data);
             }
 
-        }
+        }*/
+
         // Ladung der SensorDaten von der Dateipfad
         public Dictionary<DateTime, List<T>> JsonDeserialize(string filepath,string Sensortype)
         {
