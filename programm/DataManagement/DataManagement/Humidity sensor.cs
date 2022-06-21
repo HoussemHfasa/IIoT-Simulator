@@ -21,13 +21,13 @@ namespace SensorAndSensorgroup
             this.Sensor_id = IdGenerator.ToString();
         }
 
-        public override ISensor<double> JsonDeserialize(string filepath)
+        public override ISensor<double> JsonDeserialize(string filepath, string Sensor_id)
         {
             ISensor<double> data = new HumiditySensor();
             var serializer = new JsonSerializer();
-            if (File.Exists(filepath))
+            if (File.Exists(filepath+Sensor_id))
             {
-                using (TextReader reader = File.OpenText(filepath))
+                using (TextReader reader = File.OpenText(filepath+Sensor_id))
                 {
                     data = (HumiditySensor)serializer.Deserialize(reader, typeof(HumiditySensor));
                 }

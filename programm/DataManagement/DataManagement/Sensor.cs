@@ -5,10 +5,11 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using CommonInterfaces;
+using Newtonsoft.Json;
 
 namespace SensorAndSensorgroup
 {
-    public abstract class Sensor<T> : DataStorage.DataStorage<T>,ISensor<T>
+    public abstract class Sensor<T> : ISensor<T>
     {
         public string Sensor_id { get ; set ; }
         public string Sensortype { get ; set ; }
@@ -22,6 +23,7 @@ namespace SensorAndSensorgroup
         public string Topic { get; set; }
 
         // Sensordaten, Zugriff nur über GetValues und SetValues
+        [JsonProperty]
         private List<T> Values;
 
         // gibt die Sensordaten zurück
@@ -35,8 +37,10 @@ namespace SensorAndSensorgroup
         {
             this.Values = Values;
         }
-        public abstract ISensor<T> JsonDeserialize(string filepath);
+        public abstract ISensor<T> JsonDeserialize(string filepath, string Sensor_id);
         public abstract void JsonSerialize(ISensor<T> data, string filepath);
+
+     
     }
 }
 

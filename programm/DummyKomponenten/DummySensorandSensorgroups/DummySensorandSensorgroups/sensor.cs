@@ -1,24 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using CommonInterfaces;
+using System.Text;
+using Newtonsoft.Json;
+
 
 namespace DummySensorandSensorgroups
 {
-    public class Sensor : ISenor<double>
+    public abstract class Sensor<T> : ISensor<T>
     {
 
-        public Sensor()
-        {
-            // Sensor wird durch Konstruktor mit Beispieldaten befüllt.
-            // Kann durch set jeweils nochmal verändert werden
-            Sensortype = "Temperatursensor";
-            Unit = "Temperatur in °C";
-            Sensor_id = "6552778f";
-            Topic = "Haus/Wohnzimmer/TemperaturSensor";
-            Timeinterval = 5;
-            Values = new List<double> { 154, 848, 79549, 95.4, 4185.48 };
-        }
+      
         public string Sensor_id { get; set; }
 
         public string Topic { get; set; }
@@ -26,7 +18,7 @@ namespace DummySensorandSensorgroups
         public string Sensortype { get; set; }
 
         public string Unit { get; set; }
-
+        [JsonProperty]
         private List<double> Values;
         public int AmmountofValues
         {
@@ -46,5 +38,21 @@ namespace DummySensorandSensorgroups
         {
             this.Values = Values;
         }
+
+        List<T> ISensor<T>.GetValues()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetValues(List<T> Values)
+        {
+            throw new NotImplementedException();
+        }
+
+        public abstract void JsonSerialize(ISensor<T> data, string filepath);
+
+
+        public abstract ISensor<T> JsonDeserialize(string filepath, string Sensor_id);
+       
     }
 }

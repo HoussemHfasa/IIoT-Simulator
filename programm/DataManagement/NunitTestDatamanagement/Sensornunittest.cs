@@ -13,7 +13,7 @@ namespace NunitTestDatamanagement
 {
     public class Sensornunittest
     {
-
+/*
         private SensorAndSensorgroup.Currentsensor SensorTest = new Currentsensor();
 
         [SetUp]
@@ -22,7 +22,7 @@ namespace NunitTestDatamanagement
 
             SensorTest = new Currentsensor();
 
-        }
+        }*/
 
       /*  [Test]
          public void test()

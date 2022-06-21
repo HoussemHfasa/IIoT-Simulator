@@ -15,78 +15,7 @@ namespace DataStorage
 
     public class DataStorage<T> : IDatastorage<T> 
     {
-        
-        
-        // Die Daten von den Sensor kommen
-      // public Dictionary<DateTime,List<T>> Data { get; set; }
-       //Methode verifiziert die gegebene Data ist schon gespeichert oder nicht
-      /* public void Verfizierung( Dictionary<DateTime, List<T>> Olddata, Dictionary<DateTime, List<T>> NewData)
-        {
-            foreach (DateTime key in NewData.Keys)
-            {
-                if (!Olddata.ContainsKey(key))
-                {
-                    Olddata.Add(key, NewData[key]);
-                }
-            }
-        }*/
-        // Sensor Zurückgeben
-        // Speicherung der SensorDaten in der Dateipfad
-        public virtual void JsonSerialize(ISensor<T> data, string filepath)
-        {
-            
-            var serializer = new JsonSerializer();
-            using (TextWriter writer = File.CreateText(filepath ))
-            {
-                serializer.Serialize(writer, data);
-            }
-          
-        }
-        public virtual ISensor<T> JsonDeserialize(string filepath)
-        {
-            ISensor<T> data=new ISensor<T>;
-            
-            var serializer = new JsonSerializer();
-            if (File.Exists(filepath ))
-            {
-                using (TextReader reader = File.OpenText(filepath ))
-                {
-                    data = (ISensor<T>)serializer.Deserialize(reader, typeof(ISensor<T>));
-                }
-            }
-            return new ISensor<T>();
-        }
-        /*public void JsonSerialize(Dictionary<DateTime, List<T>> data, string filepath,string Sensortype)
-        {
-            //Ladung der vorhandenen Daten
-            Dictionary<DateTime, List<T>> already_data = new Dictionary<DateTime, List<T>>();
-            if(File.Exists(filepath+Sensortype))
-            {
-                already_data = JsonDeserialize(filepath, Sensortype);
-            }
-            Verfizierung(already_data, data);
-            var serializer = new JsonSerializer();
-            using (TextWriter writer = File.CreateText(filepath + Sensortype))
-            {
-                serializer.Serialize(writer, already_data);
-            }
-
-        }*/
-
-        /* // Ladung der SensorDaten von der Dateipfad
-         public Dictionary<DateTime, List<T>> JsonDeserialize(string filepath,string Sensortype)
-         {
-             Dictionary<DateTime, List<T>> data= new Dictionary<DateTime, List<T>>();
-             var serializer = new JsonSerializer();
-             if (File.Exists(filepath + Sensortype))
-             {
-                 using (TextReader reader = File.OpenText(filepath + Sensortype))
-                 {
-                     data = (Dictionary<DateTime, List<T>>)serializer.Deserialize(reader, typeof(Dictionary<DateTime, List<T>>));
-                 }
-             }
-             return data;
-         }*/
+       
         // Speicherung der Sensorgroups Daten(Ids)
         public void SaveSensorgroup(Dictionary<string, List<string>> SensorListe, string Base, string FolderPath)
         {/*
@@ -154,7 +83,7 @@ namespace DataStorage
                data  = (IBrokerProfile)serializer.Deserialize(reader, typeof(IBrokerProfile));
             }
             
-              return BP;*/
+              
             return data;
         }
 

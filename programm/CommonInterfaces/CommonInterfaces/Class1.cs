@@ -29,8 +29,8 @@ namespace CommonInterfaces
         
         //Zum Abspeichern der Sensordaten im Objekt
         public void SetValues(List<T> Values);
-
-
+        public abstract void JsonSerialize(ISensor<T> data, string filepath);
+        public abstract ISensor<T> JsonDeserialize(string filepath, string Sensor_id);
     }
     public interface ISensorGroups
     {
@@ -109,18 +109,18 @@ namespace CommonInterfaces
     
     public interface IDatastorage<T> 
     {
-      
+
         /// <summary>
         /// serialise die Daten zu Textdatei
         /// </summary>
         /// <param name="data"> die Daten zu speichern </param>
         /// <param name="filepath"> Dateipfad, wo die Daten werden gespeichert </param>
-        public void JsonSerialize(ISensor<T> data, string filepath, string Sensortype);
+     //   public virtual void JsonSerialize(ISensor<T> data, string filepath);
         /// <summary>
         /// deserialise Textdatei zu Json datei ,um die gespeicherte Datei zu laden
         /// </summary>
         /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
-        public ISensor<T> JsonDeserialize(string filepath, string Sensortype);
+      //  public virtual ISensor<T> JsonDeserialize(string filepath, string Sensortype);
         /// <summary>
         /// deserialise Textdatei zu Json datei ,um die gespeicherte sensorgruppe zu laden
         /// </summary>

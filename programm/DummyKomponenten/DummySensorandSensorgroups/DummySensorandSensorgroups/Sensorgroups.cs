@@ -32,6 +32,16 @@ namespace SensorAndSensorgroups
             Node = NodeName;
         }
 
+        public void DeleteBase(string BaseName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteNode(string NodeName, string Basename)
+        {
+            throw new NotImplementedException();
+        }
+
         public void DeleteNodeBase(string NodeName, string Basename)
         {
             throw new NotImplementedException();

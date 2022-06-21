@@ -21,13 +21,13 @@ namespace SensorAndSensorgroup
             this.Sensor_id = IdGenerator.ToString();
         }
 
-        public override ISensor<bool> JsonDeserialize(string filepath)
+        public override ISensor<bool> JsonDeserialize(string filepath, string Sensor_id)
         {
             ISensor<bool> data = new FireSensor();
             var serializer = new JsonSerializer();
-            if (File.Exists(filepath))
+            if (File.Exists(filepath+Sensor_id))
             {
-                using (TextReader reader = File.OpenText(filepath))
+                using (TextReader reader = File.OpenText(filepath+Sensor_id))
                 {
                     data = (FireSensor)serializer.Deserialize(reader, typeof(FireSensor));
                 }
