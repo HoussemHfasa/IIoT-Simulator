@@ -8,7 +8,7 @@ using CommonInterfaces;
 
 namespace SensorAndSensorgroup
 {
-    public abstract class Sensor<T> : ISenor<T>
+    public abstract class Sensor<T> : DataStorage.DataStorage<T>,ISensor<T>
     {
         public string Sensor_id { get ; set ; }
         public string Sensortype { get ; set ; }
@@ -35,6 +35,8 @@ namespace SensorAndSensorgroup
         {
             this.Values = Values;
         }
+        public abstract ISensor<T> JsonDeserialize(string filepath);
+        public abstract void JsonSerialize(ISensor<T> data, string filepath);
     }
 }
 

@@ -1,7 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-
+using System.IO;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using CommonInterfaces;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 namespace SensorAndSensorgroup
 {
     //Dehnungssensor
@@ -17,6 +22,27 @@ namespace SensorAndSensorgroup
             this.Sensor_id = IdGenerator.ToString();
         }
 
+        public override ISensor<ushort> JsonDeserialize(string filepath)
+        {
+            ISensor<ushort> data = new StrainSensor();
+            var serializer = new JsonSerializer();
+            if (File.Exists(filepath))
+            {
+                using (TextReader reader = File.OpenText(filepath))
+                {
+                    data = (StrainSensor)serializer.Deserialize(reader, typeof(StrainSensor));
+                }
+            }
+            return data;
+        }
 
+        public override void JsonSerialize(ISensor<ushort> data, string filepath)
+        {
+            var serializer = new JsonSerializer();
+            using (TextWriter writer = File.CreateText(filepath))
+            {
+                serializer.Serialize(writer, data);
+            }
+        }
     }
 }

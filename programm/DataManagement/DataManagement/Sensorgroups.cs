@@ -9,7 +9,7 @@ using DataStorage;
 
 namespace SensorAndSensorgroup
 {
-    public class Sensorgroups : ISensorGroups
+    public  class Sensorgroups : ISensorGroups
     {
         DataStorage<string> store = new DataStorage<string>();
         //allgemeine Adresse für die Sensoren ,die in der Liste sind

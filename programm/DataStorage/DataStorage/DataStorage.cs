@@ -9,15 +9,18 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 
+
 namespace DataStorage
 {
 
     public class DataStorage<T> : IDatastorage<T> 
     {
+        
+        
         // Die Daten von den Sensor kommen
-        public Dictionary<DateTime,List<T>> Data { get; set; }
+      // public Dictionary<DateTime,List<T>> Data { get; set; }
        //Methode verifiziert die gegebene Data ist schon gespeichert oder nicht
-       public void Verfizierung( Dictionary<DateTime, List<T>> Olddata, Dictionary<DateTime, List<T>> NewData)
+      /* public void Verfizierung( Dictionary<DateTime, List<T>> Olddata, Dictionary<DateTime, List<T>> NewData)
         {
             foreach (DateTime key in NewData.Keys)
             {
@@ -26,11 +29,34 @@ namespace DataStorage
                     Olddata.Add(key, NewData[key]);
                 }
             }
-        }
+        }*/
         // Sensor Zurückgeben
         // Speicherung der SensorDaten in der Dateipfad
-        /*
-        public void JsonSerialize(Dictionary<DateTime, List<T>> data, string filepath,string Sensortype)
+        public virtual void JsonSerialize(ISensor<T> data, string filepath)
+        {
+            
+            var serializer = new JsonSerializer();
+            using (TextWriter writer = File.CreateText(filepath ))
+            {
+                serializer.Serialize(writer, data);
+            }
+          
+        }
+        public virtual ISensor<T> JsonDeserialize(string filepath)
+        {
+            ISensor<T> data=new ISensor<T>;
+            
+            var serializer = new JsonSerializer();
+            if (File.Exists(filepath ))
+            {
+                using (TextReader reader = File.OpenText(filepath ))
+                {
+                    data = (ISensor<T>)serializer.Deserialize(reader, typeof(ISensor<T>));
+                }
+            }
+            return new ISensor<T>();
+        }
+        /*public void JsonSerialize(Dictionary<DateTime, List<T>> data, string filepath,string Sensortype)
         {
             //Ladung der vorhandenen Daten
             Dictionary<DateTime, List<T>> already_data = new Dictionary<DateTime, List<T>>();
@@ -47,20 +73,20 @@ namespace DataStorage
 
         }*/
 
-        // Ladung der SensorDaten von der Dateipfad
-        public Dictionary<DateTime, List<T>> JsonDeserialize(string filepath,string Sensortype)
-        {
-            Dictionary<DateTime, List<T>> data= new Dictionary<DateTime, List<T>>();
-            var serializer = new JsonSerializer();
-            if (File.Exists(filepath + Sensortype))
-            {
-                using (TextReader reader = File.OpenText(filepath + Sensortype))
-                {
-                    data = (Dictionary<DateTime, List<T>>)serializer.Deserialize(reader, typeof(Dictionary<DateTime, List<T>>));
-                }
-            }
-            return data;
-        }
+        /* // Ladung der SensorDaten von der Dateipfad
+         public Dictionary<DateTime, List<T>> JsonDeserialize(string filepath,string Sensortype)
+         {
+             Dictionary<DateTime, List<T>> data= new Dictionary<DateTime, List<T>>();
+             var serializer = new JsonSerializer();
+             if (File.Exists(filepath + Sensortype))
+             {
+                 using (TextReader reader = File.OpenText(filepath + Sensortype))
+                 {
+                     data = (Dictionary<DateTime, List<T>>)serializer.Deserialize(reader, typeof(Dictionary<DateTime, List<T>>));
+                 }
+             }
+             return data;
+         }*/
         // Speicherung der Sensorgroups Daten(Ids)
         public void SaveSensorgroup(Dictionary<string, List<string>> SensorListe, string Base, string FolderPath)
         {/*
@@ -110,13 +136,6 @@ namespace DataStorage
         //Speicherung der Brokerdaten
         public void SavebrokerProfile(IBrokerProfile data, string filepath)
         {
-          /*  //Als BrokeProfil speichern
-            // BrokerProfil Eigenschaften zu Liste konvertieren
-            List<string> BP = new List<string>(); 
-            BP.Add( data.HostName_IP);
-            BP.Add( Convert.ToString(data.Port));
-            BP.Add( data.Username);
-            BP.Add( data.Password);*/
             var serializer = new JsonSerializer();
             using (TextWriter writer = File.CreateText(filepath))
             {
@@ -134,12 +153,7 @@ namespace DataStorage
             {
                data  = (IBrokerProfile)serializer.Deserialize(reader, typeof(IBrokerProfile));
             }
-            /*  IDatastorage<T>.BrokerProfile BP = new IDatastorage<T>.BrokerProfile();
-              BP.HostName_IP = data[0];
-              BP.Port = Convert.ToUInt32(data[1]);
-              BP.Username = data[2];
-              BP.Password = data[3];
-
+            
               return BP;*/
             return data;
         }

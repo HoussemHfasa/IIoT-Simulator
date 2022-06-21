@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CommonInterfaces
 {
-    public interface ISenor<T>
+    public interface ISensor<T>
     {
         // Eindeutige ID des Sensors
         public string Sensor_id { get; set; }
@@ -115,12 +115,12 @@ namespace CommonInterfaces
         /// </summary>
         /// <param name="data"> die Daten zu speichern </param>
         /// <param name="filepath"> Dateipfad, wo die Daten werden gespeichert </param>
-        public void JsonSerialize(Dictionary<DateTime, List<T>> data, string filepath, string Sensortype);
+        public void JsonSerialize(ISensor<T> data, string filepath, string Sensortype);
         /// <summary>
         /// deserialise Textdatei zu Json datei ,um die gespeicherte Datei zu laden
         /// </summary>
         /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
-        public Dictionary<DateTime, List<T>> JsonDeserialize(string filepath, string Sensortype);
+        public ISensor<T> JsonDeserialize(string filepath, string Sensortype);
         /// <summary>
         /// deserialise Textdatei zu Json datei ,um die gespeicherte sensorgruppe zu laden
         /// </summary>
