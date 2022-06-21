@@ -21,7 +21,7 @@ namespace CommonInterfaces
         //Zeitspanne zwischen zwei Werten?
         public TimeSpan CreationTime { get; } */
         public int AmmountofValues { get; }
-        public int Timeinterval { get; }
+        public int Timeinterval { get; set; }
 
         
         //Gibt eine Liste mit Sensordaten zurück

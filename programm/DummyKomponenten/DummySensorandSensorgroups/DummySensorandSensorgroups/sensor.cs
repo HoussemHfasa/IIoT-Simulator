@@ -7,43 +7,44 @@ namespace DummySensorandSensorgroups
 {
     public class Sensor : ISenor<double>
     {
-        public string Sensor_id { get { return Sensor_id; } set { this.Sensor_id = "6552778f"; } }
 
-        public string Sensortype { get { return Sensortype; } set { this.Sensor_id = "Tempreturesensor"; } }
-
-        public string Einheit { get { return Einheit; } set { this.Sensor_id = "mm"; } }
-
-        DateTime ISenor<double>.CreationDate
+        public Sensor()
         {
-            get { return CreationDate; }
+            // Sensor wird durch Konstruktor mit Beispieldaten befüllt.
+            // Kann durch set jeweils nochmal verändert werden
+            Sensortype = "Temperatursensor";
+            Unit = "Temperatur in °C";
+            Sensor_id = "6552778f";
+            Topic = "Haus/Wohnzimmer/TemperaturSensor";
+            Timeinterval = 5;
+            Values = new List<double> { 154, 848, 79549, 95.4, 4185.48 };
+        }
+        public string Sensor_id { get; set; }
+
+        public string Topic { get; set; }
+
+        public string Sensortype { get; set; }
+
+        public string Unit { get; set; }
+
+        private List<double> Values;
+        public int AmmountofValues
+        {
+            get { return Values.Count; }
         }
 
-        TimeSpan ISenor<double>.CreationTime
+        public int Timeinterval { get; set; }
+
+
+
+        public List<double> GetValues()
         {
-            get { return CreationTime; }
+            return Values;
         }
 
-        int ISenor<double>.Werteanzahl
+        public void SetValues(List<double> Values)
         {
-            get { return Werteanzahl; }
-        }
-
-        int ISenor<double>.Timeinterval
-        {
-            get { return Timeinterval; }
-        }
-
-        public DateTime CreationDate = DateTime.Today;
-
-        public TimeSpan CreationTime = TimeSpan.Zero;
-
-        public int Werteanzahl =20;
-
-        public int Timeinterval =5;
-
-        public List<double> Getvalues()
-        {
-            return new List<double> { 154, 848, 79549, 95.4, 4185.48 };
+            this.Values = Values;
         }
     }
 }
