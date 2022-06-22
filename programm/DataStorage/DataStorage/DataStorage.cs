@@ -86,7 +86,29 @@ namespace DataStorage
               
             return data;
         }
+        //Ladung der Liste von Basenamen
+        public List<string> BasenameDeserialize(string filepath)
+        {
+            List<string> data = new List<string>();
+            var serializer = new JsonSerializer();
+            if (File.Exists(filepath + "List of Basenames"))
+            {
+                using (TextReader reader = File.OpenText(filepath + "List of Basenames"))
+                {
+                    data = (List<string>)serializer.Deserialize(reader, typeof(List<string>));
+                }
+            }
+            return data;
+        }
+        //Speicherung der Liste von Basenamen
+        public void BasenamSerialize(List<string> data, string filepath)
+        {
+            var serializer = new JsonSerializer();
+            using (TextWriter writer = File.CreateText(filepath + "List of Basenames"))
+            {
+                serializer.Serialize(writer, data);
+            }
+        }
 
-       
     }
 }

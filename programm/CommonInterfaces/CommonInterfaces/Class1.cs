@@ -143,6 +143,10 @@ namespace CommonInterfaces
         ///  <param name="data"> die BrockerProfileDaten </param>
         /// <param name="filepath"> Dateipfad, wo die BrockerProfileDaten werden gespeichert </param>
         public void SavebrokerProfile(IBrokerProfile data, string filepath);
+        //Ladung der Liste von Basenamen
+        public List<string> BasenameDeserialize(string filepath);
+        //Speicherung der Liste von Basenamen
+        public void BasenamSerialize(List<string> data, string filepath);
     }
 
   

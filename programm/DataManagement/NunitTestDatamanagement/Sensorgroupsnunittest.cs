@@ -108,19 +108,19 @@ namespace NunitTestDatamanagement
             Assert.That(!Ids2[Node].Contains(Id2));
         }
         [Test]
-         public void It_should_skip_when_the_id_is_founded()
-         {
+        public void It_should_skip_when_the_id_is_founded()
+        {
 
 
 
             //Act
             SensorgroupsTests.Sensorhinzufuegen(Id, Node, Base);
             SensorgroupsTests.Sensorhinzufuegen(Id, Node, Base);
-            
+
             Ids2 = store.LoadSensorgroup(Base, FolderPath);
 
             //Assert
-            Assert.That(Ids2[Node].Where(s => s != null && s.StartsWith(Id)).Count()<=1);
+            Assert.That(Ids2[Node].Where(s => s != null && s.StartsWith(Id)).Count() <= 1);
         }
     }
 }

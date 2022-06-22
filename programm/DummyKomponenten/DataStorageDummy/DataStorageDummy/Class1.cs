@@ -33,9 +33,10 @@ namespace DataStorageDummy
             return Liste;
         }
 
-        public IDatastorage<double>.BrokerProfile LoadBrokerProfile(string filepath)
+        public IBrokerProfile LoadBrokerProfile(string filepath)
         {
-            IDatastorage<double>.BrokerProfile Beispiel = new IDatastorage<double>.BrokerProfile();
+            IBrokerProfile Beispiel = new IBrokerProfile();
+            
             Beispiel.HostName_IP = "125.48.564";
             Beispiel.Port = Convert.ToUInt32("1484");
             Beispiel.Username = "name1";
@@ -49,65 +50,20 @@ namespace DataStorageDummy
             throw new NotImplementedException();
         }
 
-        public void SavebrokerProfile(IDatastorage<double>.BrokerProfile data, string filepath)
+        public void SavebrokerProfile(IBrokerProfile data, string filepath)
         {
             throw new NotImplementedException();
         }
-        //BrockerProfileEigenschaften
-        public class BrokerProfile
+
+        public List<string> BasenameDeserialize(string filepath)
         {
-            public string HostName_IP
-            {
-                get
-                {
-                    return this.HostName_IP;
-                }
-                set
-                {
-                    //Der IP enthält nur Zahlen und Punkten
-                    value = value.Replace(" ", "");
+            return (new List<string> { "Haus", "Garage" });
+        }
 
-                    if (uint.TryParse(value.Replace(".", ""), out uint output))
-                    {
-                        this.HostName_IP = value;
-                    }
-                    else
-                    {
-                        throw new Exception("Ungültige Eingabe");
-                    }
-                }
-            }
-            public uint Port
-            {
-                get
-                {
-                    return this.Port;
-                }
-                set
-                {
-                    //der Proxy muss zwischen 1000 und 9999 sein
-                    if ((value >= 1000) && (value <= 9999))
-                    {
-                        this.Port = value;
-                    }
-                    else
-                    {
-                        throw new ArgumentOutOfRangeException("der Proxy muss zwischen 1000 und 9999 sein");
-                    }
-                }
-            }
-            public string Username { get; set; }
-            public string Password { get; set; }
-
-            //Konsructor für die Dateneingabe
-            public BrokerProfile(string hostname_IP, uint port, string username, string password)
-            {
-                HostName_IP = hostname_IP;
-                Port = port;
-                Username = username;
-                Password = password;
-            }
-
+        public void BasenamSerialize(List<string> data, string filepath)
+        {
+            throw new NotImplementedException();
         }
     }
-}
+    }
+
