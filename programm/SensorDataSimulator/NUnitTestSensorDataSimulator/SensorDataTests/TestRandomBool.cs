@@ -86,7 +86,7 @@ namespace NUnitTestSensorDataSimulator
                                     + ActualToggleRate * 100
                                     + "% \n");
             //Ist die Abweichung grˆﬂer als 0.01%?
-            if (Math.Abs(ActualToggleRate - RandomToggle) > 0.001)
+            if (Math.Abs(ActualToggleRate - RandomToggle) > 0.002)
             {
                 Assert.Fail("Die Wechselwarscheinlichkeit weicht maﬂgeblich vom erwarteten Wert ab");
             }

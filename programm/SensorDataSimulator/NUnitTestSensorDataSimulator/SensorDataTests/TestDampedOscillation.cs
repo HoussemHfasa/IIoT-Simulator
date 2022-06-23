@@ -135,7 +135,7 @@ namespace NUnitTestSensorDataSimulator
             double TestPeriod = 10.0;
             uint TestAmmountofVaulues = 11;
             List<double> Expected = new List<double>
-                                    { 0, 139.7796568169315362, 215.1378806526605608, 204.6454824015336149, 120.309465564290172, 0, -108.860506186478522, -167.5495499206144932, -159.3780619463397845, -93.697105992371412, 0 };
+                                    { 0, 139.77965681704407, 215.1378806526953, 204.64548240156668, 120.30946556438704, 0, -108.86050618656613, -167.54954992064154, -159.37806194636553, -93.69710599244688, 0 };
             TestSimulator = new DampedOscillation(TestAmplitude, TestDampingRatio, TestPeriod, 0.0, TestAmmountofVaulues);
             // Act
             List<double> DampedTest = TestSimulator.GetSimulatorValues();
