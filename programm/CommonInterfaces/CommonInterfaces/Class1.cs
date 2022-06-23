@@ -87,13 +87,13 @@ namespace CommonInterfaces
         /// </summary>
         /// <param name="Host">Domainname oder IP-Adresse des Brokers</param>
         /// <param name="Port">Port des Brokers</param>
-        public String ConnectToBroker(string Host, int Port, string Username, string Password);
+        public string ConnectToBroker(string Host, int Port, string Username, string Password);
 
         public void CreateTopic(string topicName);
 
         public void PublishToTopic(string topicName, string messagePayload);
 
-        public void SetNewBroker(string Host, int Port);
+        public void SetNewBroker(string Host, int Port, string Username, string Password);
 
         public List<string> GetTopics();
         public List<string> GetClients();

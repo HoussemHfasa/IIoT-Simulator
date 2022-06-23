@@ -45,7 +45,7 @@ namespace MQTTCommunicator
             {
                 if (Port > 65535 || Port < 0)
                 {
-                    message += "bad port\n";
+                    message += "Invalid Port\n";
                 }
                          
                 if ( string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password) )
