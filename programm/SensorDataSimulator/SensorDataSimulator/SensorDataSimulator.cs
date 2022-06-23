@@ -192,241 +192,102 @@ namespace SensorDataSimulator
 
     public class StandardDeviation : SensorDataSimualtor<double>
     {
+        // Der Algorithmus zur Berechnung CalculateNextValue und DecideIncreaseOrDecrease
+        // wurde inspiriert/entlehnt von Joshua Hercher, "Simulation von Sensordaten".
+        // Zum besseren Verständnis wurden von mir z.B. Variablennamen angepasst
+        // Mittelwert wird mit genügender Wertezahl gut erreicht. Die erzeugte Standardabweichung
+        // ist in der Regel etwas unterschritten, meist innerhalb von 20% Abweichung/Unterschreitung.
+
+        //Mittelwert
+        private double Mean;
+        //Standardabweichung
+        private double StandardDev;
+        //Maximale Werteänderung zwischen zwei Werten
+        private double MaxStepSize;
+        private double CurrentValue;
+        private Random Rand;
+
+        public StandardDeviation(double MeanInput, double StandardDeviationInput, uint AmmountofValues)
+        {
+
+            this.Mean = MeanInput;
+            this.StandardDev = Math.Abs(StandardDeviationInput);
+            this.AmmountofValues = AmmountofValues;
+            MaxStepSize = StandardDev / 10;
+            //Startwert der Funktion
+            CurrentValue = MeanInput;
+            Rand = new Random();
+
+        }
         public override List<double> GetSimulatorValues()
         {
-            throw new NotImplementedException();
+            List<double> Result = new List<double> { };
+            
+            for(int i =0; i < AmmountofValues; i++)
+            {
+                Result.Add(CalculateNextValue());
+            }
+            return Result;
+        }
+        // Funktion zur Berechnung des Folgewerts
+        private double CalculateNextValue()
+        {
+            // 1. Um wieviel ändert sich der Wert
+            double ChangeValue = Rand.NextDouble() * MaxStepSize;
+
+            // 2. Entscheidung ob + oder -
+            int Multiplier = DecideIncreaseOrDecrease();
+
+            CurrentValue += ChangeValue * Multiplier;
+            return CurrentValue;
+        }
+
+        // Funktion, die entscheidet,ob der nächste Wert
+        // von CalculateNextValue kleiner oder größer als aktueller Wert wird
+        private int DecideIncreaseOrDecrease()
+        {
+            // Abstand zum Mittelwert
+            double DistanceToMean;
+            // Wird diese Variable gewählt, entfernt sich der Wert vom Mittelwert
+            int GoAwayFromMean;
+            // Wird diese Variable gewählt, nähert sich der Wert dem Mittelwert an
+            int GoTowardsMean;
+
+            // Bestimmen, ob wir uns unterhalb oder oberhalb des Mittelwerts befinden
+            //Faktoren -1/+1 entsprechend tauschen
+
+            if(CurrentValue > Mean)
+            {
+                DistanceToMean = CurrentValue - Mean;
+                GoAwayFromMean = 1;
+                GoTowardsMean = -1;
+            }
+            else
+            {
+                DistanceToMean = Mean - CurrentValue;
+                GoAwayFromMean = -1;
+                GoTowardsMean = 1;
+            }
+
+            /* Zur Entscheidung ob GoAwayFromMean oder GoTowardsMean zurückgegeben wird:
+            Die StardardDev wird als 100% gesetzt. Per Zufallsgenerator wird ein Wert zw.
+            0-100% (bzw. (0.0 bis 1)* StandardDev) geliefert. 
+            Als Vergleich dient = 50% (StandardDev/2) - Betrag der Abhänhig von DistanceToMean ist 
+            credit Joshua Hercher, "Simulation von Sensordaten"
+            */
+             // DistanceToMean/ 50 wurde von Joshua Hercher empirisch ermittelt
+            double Chance = (StandardDev / 2) - (DistanceToMean / 50);
+            double RandomValue = Rand.NextDouble() * StandardDev;
+
+            // Wenn der Zufallswert kleiner als die Chance ist, wird GoAwayFromMean zurückgegeben
+            if (RandomValue < Chance)
+                return GoAwayFromMean;
+            else
+                return GoTowardsMean;
+
         }
     }
-    /*
-        public class SensorDataSimulator : ISensorDataSimulator
-        {
 
-            private Random Rand;
-
-            // interne Variablen zur Berechnung Standardabweichung
-            private double Mean;
-            private double StandardDeviation;
-            // Maximale WerteÄnderung
-            private double MaxValueChange;
-            // Tatsächliche WertÄnderung
-            private double Prefix;
-
-
-            private double CurrentValue;
-
-            public uint AmmountofValues
-            {
-                get;
-                set;
-            }
-
-
-            public SensorDataSimulator( uint ValueCount)
-            {
-                Rand = new Random();
-                AmmountofValues = ValueCount;
-            }
-
-            public List<double> GetHarmonicOscillation(double Amplitude, double Period, double Phase)
-            {
-
-                //Ohne Rundungen
-                List<double> Result = new List<double>();
-                double CatchNegativZero;
-
-                // Überprüfung, ob Parameter in korrektem Wertebereich liegen. Falls nicht -> Exception
-                if (Amplitude < 0.0)
-                    throw new ArgumentOutOfRangeException("Amplitude darf nicht negativ sein!");
-                if (Period < 0.0)
-                    throw new ArgumentOutOfRangeException("Periodendauer darf nicht negativ sein");
-                // oder über uint..
-                if (AmmountofValues < 0)
-                    throw new ArgumentOutOfRangeException("Werteanzahl darf nicht negativ sein");
-
-                //Werteerzeugung
-                for (int i = 0; i < AmmountofValues; i++)
-                {
-                    // Gleichung für harmonische Schwingung. Hier entsteht durch Rundung teilweise -0 als Wert!
-                    CatchNegativZero = Math.Round(Amplitude * Math.Sin((2 * Math.PI / Period) * i + Phase), 2);
-
-                    // Daher diesen Fall abfangen
-                    if (CatchNegativZero == -0d)
-                    {
-                        CatchNegativZero = 0d;
-                    }
-                    Result.Add(CatchNegativZero);
-                }
-                return Result;
-            }
-
-            public List<double> GetDampedOscillation(double Amplitude, double Dampingratio, double Period, double Phase)
-            {
-                List<double> Result = new List<double>();
-
-                // Überprüfung, Dämpfungsrate im erlaubten Bereich liegt. Falls nicht -> Exception
-                if (Dampingratio < 0.0)
-                    throw new ArgumentOutOfRangeException("Dämpfungsrate darf nicht negativ sein!");
-
-                // Achtung, hier wird die Harmonische nur auf 2 Kommastellen genau geliefert...
-                // evtl harmonische in extra Funktion errechnen, GetHarmonicOscillation müsste dann noch runden.
-                List<double> HarmonicPart = GetHarmonicOscillation(Amplitude, Period, Phase, AmmountofValues);
-                for (int i = 0; i < AmmountofValues; i++)
-                {
-                    Result.Add(Math.Round(HarmonicPart[i] * Math.Exp(-1.0 * Dampingratio * i), 2));
-                }
-
-                return Result;
-            }
-
-
-
-            public List<bool> GetRandomBoolValues(double Toggleprobability)
-            {
-                List<bool> Result = new List<bool>();
-
-                // Wechselwarscheinlichkeit zwischen 0.0 und 1.0, daher Exception Handling?
-                if (Toggleprobability > 1.0 || Toggleprobability < 0.0)
-                {
-                    throw new ArgumentOutOfRangeException("Wechselwarscheinlichkeit darf nicht unter 0 oder über 1 liegen");
-                }
-
-                // Erzeugung erster Wert
-                Result.Add(Convert.ToBoolean(Rand.Next(0, 2)));
-
-                //Werteerzeugung mit Wechselwarscheinlichkeit, i = 1, da bereits ein Wert erzeugt wurde
-                for (int i = 1; i < AmmountofValues; i++)
-                {
-
-                    // Zufalls Double kleiner als Wechselwarscheinlichkeit -> Wert wechselt
-                    if (Rand.NextDouble() <= Toggleprobability)
-                    {
-                        Result.Add(!Result[i - 1]);
-                    }
-
-                    // Sonst: gleicher Wert
-                    else
-                    {
-                        Result.Add(Result[i - 1]);
-                    }
-                }
-
-
-                return Result;
-            }
-
-            public List<double> GetStandardDeviationValues(double MeanInput, double StandardDeviationInput)
-            {
-                // Standardabweichung darf nicht negativ sein..?!
-                // Info: Standardabweichung kann nur mit genügender Menge Werte erreicht werden
-
-                // Ergebnis A
-                List<double> Result = new List<double>();
-
-                // Intern abspeichern damit NextValue() darauf zugreifen kann
-                Mean = MeanInput;
-                StandardDeviation = StandardDeviationInput;
-                //Maximale Werteänderung zum Vorhergehenden Wert, 15 ist willkürlich gewählt
-                MaxValueChange = StandardDeviation / 15;
-                return Result = (List<double>)Normal.Samples(Mean, StandardDeviation);
-                // Ersten Wert setzen.. vlt nicht immer Mean nehmen?
-                CurrentValue = Mean;
-                Result.Add(CurrentValue);
-
-                // Restliche Werte erzeugen
-                for (int i = 1; i < AmmountofValues; i++)
-                {
-                    Result.Add(NextValue());
-                }
-
-                return Result;
-            }
-
-            public List<double> GetSuperposition(List<double> Oscillation1, List<double> Oscillation2)
-            {
-                List<double> Result = new List<double>();
-                List<double> ShortList;
-                List<double> LongList;
-
-                // Herausfinden, welche die kürzere Liste ist
-                if (Oscillation1.Count <= Oscillation2.Count)
-                {
-                    ShortList = Oscillation1;
-                    LongList = Oscillation2;
-                }
-                else
-                {
-
-                    ShortList = Oscillation2;
-                    LongList = Oscillation1;
-                }
-
-                for (int i = 0; i < LongList.Count; i++)
-                {
-                    // Die kurze Liste hat an der Stelle keine Werte mehr
-                    if (i >= ShortList.Count)
-                    {
-                        Result.Add(LongList[i]);
-                    }
-                    else
-                    {
-                        Result.Add(ShortList[i] + LongList[i]);
-                    }
-
-
-                }
-                return Result;
-            }
-
-            private double NextValue()
-            {
-                // Um wieviel soll sich Wert ändern
-                double ActualValueChange = MaxValueChange * Rand.NextDouble();
-
-                // Soll Änderung addiert oder subtrahiert werden?
-                Prefix = PlusorMinusOne();
-
-
-                CurrentValue = CurrentValue + ActualValueChange * Prefix;
-
-                return CurrentValue;
-            }
-
-            private double PlusorMinusOne()
-            {
-                //double DistanceToDev = Math.Abs(CurrentValue - StandardDeviation - Mean);
-                double DistanceToMean = Math.Abs(CurrentValue - Mean);
-
-                // Wenn die DistancetoDev größer ist als die Standardabweichung, soll der Wert tendenziell näher zur Standardabweichung
-                // Bei Standardabweichung = DistanceToDev 50/50 Warscheinlichkeit.
-
-                // Noch unsicher ob hier gewünschte Normalverteilung entsteht...HIER IST DENKFEHLER
-                //double Propability = StandardDeviation / (DistanceToDev * 2);
-                double Propability = ((StandardDeviation - DistanceToMean/10) / 2);
-
-
-                // Stanarddeviation entspricht 100%. 0.0 = 0%, jetzt zufälligen Wert normiert auf StandardDeviation erstellen
-                double CompareValue = Rand.NextDouble() * StandardDeviation;
-
-                //Wird hier der Wert verglichen oder die Adresse?!
-                if(Prefix == 1)
-                {
-                    if (Propability > CompareValue)
-                        return 1.0;
-                    else
-                        return -1.0;
-                }
-                else
-                {
-                    if (Propability > CompareValue)
-                        return -1.0;
-                    else
-                        return 1.0;
-                }
-
-
-            }
-        }
-    */
     public abstract class SensorDataErrors : ISensorDataErrors
     {
 
