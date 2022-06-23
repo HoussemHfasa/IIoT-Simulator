@@ -32,7 +32,7 @@ namespace NUnitTestSensorDataSimulator
         public void StandardDeviation_Matches_ExpectedMean ()
         {
             
-            TestMean = -250;
+            TestMean = 250;
             TestStandardDev = 15;
             TestAmmountofValues = 30000;
             TestSimulator = new StandardDeviation(TestMean, TestStandardDev, TestAmmountofValues);
