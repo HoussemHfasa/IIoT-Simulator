@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace IIOT_Simulator
 {
@@ -45,10 +46,27 @@ namespace IIOT_Simulator
         }
 
         //Methode für den Button 'Bestehende Sensorgruppe laden'
+        //Öffnet den Dataiexplorer und setzt den Topic auf die geladene Sensorgruppe
         private void PresentSensorGroupClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Hier kann man bestehende Sensorgruppen laden");
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            Nullable<bool> dialogOK = fileDialog.ShowDialog();
+            string sFilename = "";
+            sFilename = sFilename.Substring(1);
+
+            //Um den Topic in der Leiste festzulegen um sie danach als 'Aktives Topic' zu bestimmen
+            //Wenn man auf 'Simulation starten' klickt, beginnt die Simulation mit diesem festgelegten Topic
+            TextBoxTopic.Text = "Topic: " + sFilename;
         }
 
+        private void StartSimulationClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Simulation wurde gestartet.");
+        }
+
+        private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

@@ -10,33 +10,32 @@ using Newtonsoft.Json.Linq;
 
 namespace SensorAndSensorgroup
 {
-    class TorqueSensor:Sensor<double>
+    class firedetector : Sensor<bool>
     {
-        public TorqueSensor()
+        public firedetector()
         {
             Guid IdGenerator = Guid.NewGuid();
             // Besonderheiten des Sensors
-
-            this.Unit = "Drehmoment in Nm";
-            this.Sensortype = "Drehmomentsensor";
+            this.Unit = "Rauch vorhanden";
+            this.Sensortype = "Rauchmelder";
             this.Sensor_id = IdGenerator.ToString();
         }
 
-        public override ISensor<double> JsonDeserialize(string filepath, string Sensor_id)
+        public override ISensor<bool> JsonDeserialize(string filepath, string Sensor_id)
         {
-            ISensor<double> data = new TemperatureSensor();
+            ISensor<bool> data = new firedetector();
             var serializer = new JsonSerializer();
             if (File.Exists(filepath+Sensor_id))
             {
                 using (TextReader reader = File.OpenText(filepath+Sensor_id))
                 {
-                    data = (TemperatureSensor)serializer.Deserialize(reader, typeof(TemperatureSensor));
+                    data = (firedetector)serializer.Deserialize(reader, typeof(firedetector));
                 }
             }
             return data;
         }
 
-        public override void JsonSerialize(ISensor<double> data, string filepath)
+        public override void JsonSerialize(ISensor<bool> data, string filepath)
         {
             var serializer = new JsonSerializer();
             using (TextWriter writer = File.CreateText(filepath))

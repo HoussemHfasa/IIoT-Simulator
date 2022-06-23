@@ -5,69 +5,369 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IIOT_Simulator"
         mc:Ignorable="d"
-        Title="NeueSensorgruppeErstellen" Height="450" Width="800">
-    <Grid Background="#FF39383C" Height="434" VerticalAlignment="Top">
+        Title="NeueSensorgruppeErstellen" 
+        Height="600" Width="920"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <SolidColorBrush x:Key="ComboBoxBackground1" Color="Yellow"/>
+    </Window.Resources>
 
-        <!-- Button zum Stamm hinzufügen-->
-        <Button 
-            Content="Stamm hinzufügen" 
-            HorizontalAlignment="Left" 
-            Margin="42,319,0,0" 
-            VerticalAlignment="Top" 
-            Height="40" Width="185" 
-            Click="StammHinzufuegen"
-            FontSize="15"
-            />
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/IIOT2.jpg"
+                        Stretch="UniformToFill"
+                        />
+        </Grid.Background>
 
-        <!-- Button zum Sensor hinzufügen-->
-        <Button 
-            Content="Sensor hinzufügen" 
-            HorizontalAlignment="Left" 
-            Margin="251,319,0,0" 
-            VerticalAlignment="Top"
-            Height="40" Width="185"
-            FontSize="15"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35">
+            </RowDefinition>
+        </Grid.RowDefinitions>
 
-        <!-- Button zum Unterordner hinzufügen-->
-        <Button Content="Unterordner hinzufügen" 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="870">
+            </ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Background="#0F0F2D">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="180" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="IIOT Simulator"
+                        Background="#0F0F2D"
+                           Foreground="#FF99B2B3"
+                           Grid.Column="0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontFamily="Fonts/#Dosis"
+                           FontWeight="Medium"
+                           FontSize="24"
+                           />
+
+            <!--Button für um zurück zuer Startseite zu gelangen-->
+            <Button Content="Startseite"
+                        Click="StartseiteButton"
+                        Background="#0F0F2D"
+                           Foreground="LightGray"
+                           Grid.Column="1"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontFamily="Fonts/#Dosis"
+                          Height="35"
+                           FontSize="22" BorderBrush="#FF0F0F2D"
+                           />
+
+            <!--Button für die Broker Einstellungen-->
+            <Button Content="Broker Einstellungen"
+                        Click="BrokerSettingsClick"
+                           Foreground="LightGray"
+                        Background="#0F0F2D"
+                           Grid.Column="2"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontFamily="Fonts/#Dosis"
+                           
+                           FontSize="22" BorderBrush="#FF0F0F2D"
+                           />
+
+            <!-- Label für den Stamm-->
+            <Label
+                Content="Stamm:"
+                Margin="22,80,0,-78"
+                FontSize="18"
+                Foreground="White"
+                HorizontalAlignment="Left" Width="96"/>
+
+            <!-- Label für den Unterordner-->
+            <Label
+                Content="Unterordner:"
+                Margin="0,82,0,-85"
+                FontSize="18"
+                Foreground="White"
+                HorizontalAlignment="Center" 
+                Width="112" 
+                Grid.Column="1"/>
+
+            <!-- Label für den Sensortyp-->
+            <Label
+                Content="Sensortyp:"
+                Margin="145,82,0,-83"
+                FontSize="18"
+                Foreground="White"
                 HorizontalAlignment="Left" 
-                Margin="42,376,0,0" 
-                VerticalAlignment="Top"
-                Height="40" Width="185"
-                FontSize="15"/>
+                Width="93" 
+                Grid.Column="2"
+                Grid.ColumnSpan="2"/>
 
-        <!-- Button um die Sensorgruppe zu speichern-->
-        <Button 
-            Content="Sensorgruppe speichern" 
+            <!-- TextBox für den Stamm-->
+            <TextBox x:Name="textBoxEingabe"
+                Grid.ColumnSpan="2" 
+                Margin="106,86,214,-81"
+                Height="30"
+                Width="150"
+                  Background="#ff1f4663"
+                      TextAlignment="Center"
+                BorderBrush="#FF020E52"
+                FontSize="21"
+                VerticalAlignment="Top"
+                Foreground="#FFd5d5d5"
+                BorderThickness="2,2,2,2"   
+                />
+
+
+            <!-- TextBox für den Unterordner -->
+            <TextBox
+                Name="textBoxEingabe2"
+                Width="150"
+                     Height="30" 
+                     Grid.Column="1"
+                     Margin="195,86,110,-81" 
+                Grid.ColumnSpan="2"
+                Background="#ff1f4663"
+                      TextAlignment="Center"
+                BorderBrush="#FF020E52"
+                FontSize="21"
+                VerticalAlignment="Top"
+                Foreground="#FFd5d5d5"
+                BorderThickness="2,2,2,2"
+                     
+                     />
+
+            <!-- TextBox für den Sensortyp -->
+            <ComboBox ItemsSource="{Binding sensors}"
+                Width="150"
+                Height="30"
+                Grid.Column="3" 
+                Margin="44,86,-14,-81">
+            </ComboBox>
+
+            <!-- Button zum Erstellen der Sensorgruppe-->
+            <Button Content="Sensor hinzufügen"
+                    Click="SensorHinzufuegenClick"
+                    Foreground="White"
+                    FontSize="16" 
+                    Margin="10,121,-50,-177" 
+                    HorizontalAlignment="Left"
+                    Width="184" 
+                    Grid.Column="3" 
+                    Cursor="Hand">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                        <Setter Property="Background" 
+                                Value="#008080"/>
+                        <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                                <Setter Property="Background"
+                                     Value="Aqua"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="180" Height="30"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!-- Verzeichnisstruktur -->
+            <TreeView
+                Grid.ColumnSpan="2" 
+                Margin="52,268,214,-500" 
+                Opacity="0.8" 
+                FontSize="18">
+                <TreeView.BorderBrush>
+                    <ImageBrush/>
+                </TreeView.BorderBrush>
+                <TreeView.Background>
+                    <ImageBrush/>
+                </TreeView.Background>
+            </TreeView>
+
+
+
+
+
+            <!-- Button um die Sensorgruppe zu speichern-->
+            <Button 
+            Click="SensorgruppeSpeichern"
+            Content="SensorgruppeSpeichern" 
             HorizontalAlignment="Left" 
-            Margin="459,376,0,0" 
+            Margin="459,299,0,0" 
             VerticalAlignment="Top"
             Height="40" Width="185"
             FontSize="15"/>
 
-        <!-- Button um alles zu Löschen-->
-        <Button Click="AllesEntfernen"
+            <!-- Button um alles zu Löschen-->
+            <Button Click="AllesEntfernen"
             Content="Alles entfernen" 
             HorizontalAlignment="Left"
-            Margin="251,376,0,0" 
+            Margin="251,357,0,0" 
             VerticalAlignment="Top"
             Height="40" Width="185"
             FontSize="15"/>
-        
-        <!-- Verzeichnisstruktur -->
-        <TreeView
-            x:Name="Sensoren"
-            Margin="42,10,531,146">
-            <TreeViewItem Header="Stamm">
-                <TreeViewItem Header="Unterordner">
-                    <TreeViewItem Header="Sensor1"/>
-                    <TreeViewItem Header="Sensor2"/>
-                    <TreeViewItem Header="Sensor3"/>
-                    <TreeViewItem Header="Sensor4"/>
-                </TreeViewItem>
-            </TreeViewItem>
 
-        </TreeView>
+            <!--Button zum Abbrechen um zurück zur Startseite zu gelangen-->
+            <Button 
+            Click="AbbrechenButton"
+            Content="Abbrechen" 
+            HorizontalAlignment="Left"
+            Margin="459,357,0,0"
+            VerticalAlignment="Top"
+            Height="40" 
+            Width="185"
+            FontSize=" 15"/>
 
+            <!-- Verzeichnisstruktur -->
+            <TreeView
+            x:Name="TreeView1"
+            Margin="42,10,507,168">
+            </TreeView>
+
+            <!-- Button um das Programm zu schließen -->
+            <Button Content="×"
+                    Background="#0F0F2D"
+                    Click="ProgrammSchließenClick"
+                    Foreground="White"
+                    FontSize="30" 
+                    Margin="170,0,-50,0"
+                    Grid.Column="3" Height="35" VerticalAlignment="Top">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                        <Setter Property="Background" 
+                                Value="#39285D"/>
+                        <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                                <Setter Property="BorderBrush"
+                                        Value="LightBlue"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="60" Height="35"
+                               
+                                Background= "{TemplateBinding Background}">
+                            <ContentPresenter 
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!-- Button zum Stamm hinzufügen-->
+            <Button Content="Stamm hinzufügen"
+                    Click="StammHinzufuegen"
+                    Foreground="White"
+                    FontSize="16" 
+                    Margin="72,121,0,-177" 
+                    HorizontalAlignment="Left"
+                    Width="184" 
+                    Cursor="Hand" Grid.ColumnSpan="2">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                        <Setter Property="Background" 
+                                Value="#008080"/>
+                        <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                                <Setter Property="Background"
+                                     Value="Aqua"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="180" Height="30"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!-- Button um Unterordner hinzuzufügen-->
+            <Button Content="Unterordner hinzufügen"
+                    Click="UnterordnerHinzufuegenClick"
+                    Foreground="White"
+                    FontSize="16" 
+                    Margin="161,121,0,-177" 
+                    HorizontalAlignment="Left"
+                    Width="184" 
+                    Cursor="Hand" 
+                    Grid.ColumnSpan="2" 
+                    Grid.Column="1">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                        <Setter Property="Background" 
+                                Value="#008080"/>
+                        <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                                <Setter Property="Background"
+                                     Value="Aqua"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="180" Height="30"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                               <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+
+
+
+        </Grid>
+       
     </Grid>
 </Window>

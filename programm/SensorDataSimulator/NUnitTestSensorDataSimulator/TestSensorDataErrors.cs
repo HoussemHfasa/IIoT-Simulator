@@ -7,7 +7,7 @@ namespace NUnitTestSensorDataSimulator
     {
         [Test]
 
-        public void ErrorTest()
+        public void ErrorTest1()
         {
 
         }

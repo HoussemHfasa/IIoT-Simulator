@@ -3,27 +3,43 @@ using System.Collections.Generic;
 
 namespace CommonInterfaces
 {
-    public interface ISenor<T>
+    public interface ISensor<T>
     {
+        // Eindeutige ID des Sensors
         public string Sensor_id { get; set; }
 
-        // 2 Dimensionales Array
+        // MQTT Topic, auf die der Sensor Daten sendet
+        public string Topic { get; set; }
 
+        // Sensortyp
         public string Sensortype { get; }
-        public string Einheit { get; set; }
+        // pysikalische Einhei
+        public string Unit { get; set; }
+
+       /* //Startzeit erster Wert?
         public DateTime CreationDate { get; }
-        public TimeSpan CreationTime { get; }
-        public int Werteanzahl { get; }
-        public int Timeinterval { get; }
-        //bekommt die Daten von der Sensoren
-        public abstract List<T> Getvalues();
- 
+        //Zeitspanne zwischen zwei Werten?
+        public TimeSpan CreationTime { get; } */
+        public int AmmountofValues { get; }
+        public int Timeinterval { get; set; }
+
+        
+        //Gibt eine Liste mit Sensordaten zurück
+        public abstract List<T> GetValues();
+        
+        //Zum Abspeichern der Sensordaten im Objekt
+        public void SetValues(List<T> Values);
+        //Ladung des SensorProperties
+        public abstract void JsonSerialize(ISensor<T> data, string filepath);
+        //Speicherung des SensorProperties in JsonDatei
+        public abstract ISensor<T> JsonDeserialize(string filepath, string Sensor_id);
+        
     }
     public interface ISensorGroups
     {
         
         // algemeine Adresse für die Sensorgruppe
-        string Adresse { get; set; }
+        string Base { get; set; }
 
        
         // Unterordner Name
@@ -39,14 +55,14 @@ namespace CommonInterfaces
         /// </summary>
         /// <param name="sensorids"> die Liste von Sensorids </param>
         /// <param name="sensorid"> das id zu hinzufugen zur Id_liste </param>
-        public void Sensorhinzufuegen(List<string> sensorids, string sensorid);
+        public void Sensorhinzufuegen(string sensorid, string NodeName, string Basename);
 
         /// <summary>
         /// Ein Sensor_Id von der SensorIds Liste loeschen
         /// </summary>
         /// <param name="sensorids"> die Liste von Sensorids </param>
         /// <param name="sensorid"> das id zu loeschen von der Liste </param>
-        public void Sensorloeschen(List<string> sensorids, string sensorid);
+        public void Sensorloeschen(string sensorid, string NodeName, string Basename);
 
         //Stamm hinzufügen
         public void AddBase(string BaseName);
@@ -55,14 +71,15 @@ namespace CommonInterfaces
         public void AddNode(string NodeName, string Basename);
 
         //Löschen von Stamm/Unterordner
-        public void DeleteNodeBase(string NodeName, string Basename);
-
+        public void DeleteNode(string NodeName, string Basename);
+        public void DeleteBase(string BaseName);
 
 
     }
-
+   
     public interface IMQTTCommunicator
     {
+        
         // Überlegung ob Rückgabewerte benötigt wird für Rückmeldung von Erfolg/Nichterfolg
         //Welche Informationen werden zur Registrierung des Clients benoetigt? /Paul
         /// <summary>
@@ -81,44 +98,61 @@ namespace CommonInterfaces
         public List<string> GetTopics();
         public List<string> GetClients();
     }
-
+    public interface IBrokerProfile
+    {
+        public string HostName_IP { get; set; }
+        public uint Port { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
+    
     public interface IDatastorage<T> 
     {
-        // die Daten die von der Sensoren kommt
-        public Dictionary<DateTime, List<T>> Data { get; set; }
+
         /// <summary>
         /// serialise die Daten zu Textdatei
         /// </summary>
         /// <param name="data"> die Daten zu speichern </param>
         /// <param name="filepath"> Dateipfad, wo die Daten werden gespeichert </param>
-        public void JsonSerialize(Dictionary<DateTime, List<T>> data, string filepath);
+     //   public virtual void JsonSerialize(ISensor<T> data, string filepath);
         /// <summary>
         /// deserialise Textdatei zu Json datei ,um die gespeicherte Datei zu laden
         /// </summary>
         /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
-        public Dictionary<DateTime, List<T>> JsonDeserialize(string filepath);
+      //  public virtual ISensor<T> JsonDeserialize(string filepath, string Sensortype);
         /// <summary>
         /// deserialise Textdatei zu Json datei ,um die gespeicherte sensorgruppe zu laden
         /// </summary>
         /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
-        public List<string> LoadSensorgroup(string Base, string Node);
+        public Dictionary<string, List<string>> LoadSensorgroup(string Base, string Filepath);
         /// <summary>
         /// deserialise Textdatei zu Json datei ,um die gespeicherte BrockerProfile zu laden
         /// </summary>
         /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
-        public object LoadBrockerProfile(string filepath);
+        public IBrokerProfile LoadBrokerProfile(string filepath);
         /// <summary>
         /// speichern die Sensorgruppe
         /// </summary>
         ///  <param name="data"> die liste mit der Sensor_ids des gruppes </param>
         /// <param name="filepath"> Dateipfad, wo die Sensorgroup werden gespeichert </param>
-        public void SaveSensorgroup(List<string> SensorListe, string Base, string Node);
+        public void SaveSensorgroup(Dictionary<string, List<string>> SensorListe, string Base, string Filepath);
         /// <summary>
         /// speichern die BrockerProfile
         /// </summary>
         ///  <param name="data"> die BrockerProfileDaten </param>
         /// <param name="filepath"> Dateipfad, wo die BrockerProfileDaten werden gespeichert </param>
-        public void SavebrockerProfile(object data, string filepath);
+        public void SavebrokerProfile(IBrokerProfile data, string filepath);
+        /// <summary>
+        /// Ladung der Liste von Basenamen
+        /// </summary>
+        /// <param name="filepath"> Dateipfad, wo die SensorListe wird gespeichert </param>
+        public List<string> BasenameDeserialize(string filepath);
+        /// <summary>
+        /// Speicherung der Liste von Basenamen
+        /// </summary>
+        ///  <param name="data"> List der Basenamen </param>
+        /// <param name="filepath"> Dateipfad, wo die Basenameliste wird gespeichert </param>
+        public void BasenamSerialize(List<string> data, string filepath);
     }
 
   

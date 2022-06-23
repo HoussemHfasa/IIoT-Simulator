@@ -5,29 +5,45 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using CommonInterfaces;
+using Newtonsoft.Json;
 
 namespace SensorAndSensorgroup
 {
-    public abstract class Sensor<T> : ISenor<T>
+    public abstract class Sensor<T> : ISensor<T>
     {
         public string Sensor_id { get ; set ; }
         public string Sensortype { get ; set ; }
-        public string Einheit { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public DateTime CreationDate { get; }
-
-        public TimeSpan CreationTime { get; }
-
-        public int Werteanzahl { get; }
-
-        public int Timeinterval { get; }
-
-        public List<T> Getvalues()
-        {
-            throw new NotImplementedException();
-        }
-        public abstract Dictionary<DateTime, List<T>> Getvalue();
         
+        public string Unit { get ; set; }
+
+
+        public int AmmountofValues { get { return Values.Count;} }
+
+        public int Timeinterval { get; set; }
+        public string Topic { get; set; }
+
+        // Sensordaten, Zugriff nur über GetValues und SetValues
+        //JsonProperty für den Zugriff zu Jsonserialization
+        [JsonProperty]
+        private List<T> Values;
+
+        // gibt die Sensordaten zurück
+        public List<T> GetValues()
+        {
+            return this.Values;
+        }
+
+     
+        public void SetValues(List<T> Values)
+        {
+            this.Values = Values;
+        }
+        //Ladung des SensorProperties
+        public abstract ISensor<T> JsonDeserialize(string filepath, string Sensor_id);
+        //Speicherung des SensorProperties in JsonDatei
+        public abstract void JsonSerialize(ISensor<T> data, string filepath);
+
+     
     }
 }
 

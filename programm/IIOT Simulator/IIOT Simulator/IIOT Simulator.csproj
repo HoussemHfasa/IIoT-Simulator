@@ -5,6 +5,21 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>IIOT_Simulator</RootNamespace>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon />
+    <StartupObject />
   </PropertyGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Remove="App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CommonInterfaces\CommonInterfaces\CommonInterfaces.csproj" />
+    <ProjectReference Include="..\..\DummyKomponenten\DataAnalysisDummy\DataAnalysisDummy\DataAnalysisDummy.csproj" />
+    <ProjectReference Include="..\..\DummyKomponenten\DataStorageDummy\DataStorageDummy\DataStorageDummy.csproj" />
+    <ProjectReference Include="..\..\DummyKomponenten\DummySensorandSensorgroups\DummySensorandSensorgroups\DummySensorandSensorgroups.csproj" />
+    <ProjectReference Include="..\..\DummyKomponenten\MQTTCommunicatorDummy\MQTTCommunicatorDummy\MQTTCommunicatorDummy.csproj" />
+    <ProjectReference Include="..\..\DummyKomponenten\SensorDataSimulatorDummy\SensorDataSimulatorDummy\SensorDataSimulatorDummy.csproj" />
+  </ItemGroup>
 
 </Project>

@@ -27,9 +27,7 @@ namespace IIOT_Simulator
         private void Verbinden(object sender, RoutedEventArgs e)
         {
            MessageBox.Show("Erfolgreich mit dem Broker verbunden");
-            Startseite objectStartseite1 = new Startseite();
-            this.Visibility = Visibility.Hidden; //So wird das aktuelle Fenster dann geschlossen
-            objectStartseite1.Show();
+            
         }
 
 
@@ -40,6 +38,18 @@ namespace IIOT_Simulator
             Startseite objectStartseite2 = new Startseite();
             this.Visibility = Visibility.Hidden; //So wird das aktuelle Fenster dann geschlossen
             objectStartseite2.Show();
+        }
+
+        private void StartseiteButton(object sender, RoutedEventArgs e)
+        {
+            Startseite objectStartseite2 = new Startseite();
+            this.Visibility = Visibility.Hidden; //So wird das aktuelle Fenster dann geschlossen
+            objectStartseite2.Show();
+        }
+
+        private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
     

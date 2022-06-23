@@ -5,29 +5,39 @@ namespace SensorAndSensorgroups
 {
     public class SensorGroups : ISensorGroups
     {
-        public string Adresse { get { return this.Adresse; } set { this.Adresse = "funktioniert"; } }
-        public string[] SensorIds
+        public string Base { get { return this.Base; } set { this.Base = "Haus 1"; } }
+        public Dictionary<string, List<string>> SensorIds
         {
             get { return this.SensorIds; }
             set
             {
-                string[] test = { "funktioniert" };
+                Dictionary<string, List<string>> test = new Dictionary<string, List<string>>();
+                test.Add("Zimmer", new List<string> { "296" });
                 this.SensorIds = test;
 
             }
         }
 
-        public string Node { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Node { get {return this.Node; } set { this.Node = "Zimmer1"; } }
 
-
-        Dictionary<string, string> ISensorGroups.SensorIds => throw new NotImplementedException();
+        
 
         public void AddBase(string BaseName)
+        {
+            Base = BaseName;
+        }
+
+        public void AddNode(string NodeName, string Basename)
+        {
+            Node = NodeName;
+        }
+
+        public void DeleteBase(string BaseName)
         {
             throw new NotImplementedException();
         }
 
-        public void AddNode(string NodeName, string Basename)
+        public void DeleteNode(string NodeName, string Basename)
         {
             throw new NotImplementedException();
         }
@@ -37,22 +47,17 @@ namespace SensorAndSensorgroups
             throw new NotImplementedException();
         }
 
-        public void Sensorhinzufuegen()
-        {
-            throw new NotImplementedException();
-        }
+        
 
-        public void Sensorhinzufuegen(List<string> sensorids, string sensorid)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void Sensorloeschen()
-        {
-            throw new NotImplementedException();
-        }
 
-        public void Sensorloeschen(List<string> sensorids, string sensorid)
+        public void Sensorhinzufuegen(string sensorid, string NodeName, string Basename)
+        {
+            SensorIds[NodeName].Add(sensorid);
+        }
+  
+
+        public void Sensorloeschen(string sensorid, string NodeName, string Basename)
         {
             throw new NotImplementedException();
         }

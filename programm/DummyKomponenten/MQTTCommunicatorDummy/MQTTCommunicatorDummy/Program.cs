@@ -45,7 +45,22 @@ namespace MQTTCommunicatorDummy
             throw new NotImplementedException();
         }
 
-        void IMQTTCommunicator.ConnectToBroker(dynamic Host, int Port)
+        //void IMQTTCommunicator.ConnectToBroker(dynamic Host, int Port)
+       // {
+          //  throw new NotImplementedException();
+       // }
+
+        void IMQTTCommunicator.ConnectToBroker(string Host, int Port)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMQTTCommunicator.PublishToTopic(string clientId, string topicName, string messagePayload)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IMQTTCommunicator.SetNewBroker(string Host, int Port)
         {
             throw new NotImplementedException();
         }

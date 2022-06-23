@@ -8,72 +8,90 @@ using CommonInterfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+
+
 namespace DataStorage
 {
+
     public class DataStorage<T> : IDatastorage<T> 
     {
-        // Die Daten von den Sensoren
-        public Dictionary<DateTime,List<T>> Data { get; set; }
-        
-
-
-        // Ladung der Daten in der Dateipfad
-        public Dictionary<DateTime, List<T>> JsonDeserialize(string filepath)
+       
+        // Speicherung der Sensorgroups Daten(Nodename-Ids)
+        public void SaveSensorgroup(Dictionary<string, List<string>> SensorListe, string Base, string FolderPath)
         {
-
-            Dictionary<DateTime, List<T>> data;
-            var serializer = new JsonSerializer();
-            using (TextReader reader = File.OpenText(filepath))
-            {
-                data = (Dictionary<DateTime, List<T>>)serializer.Deserialize(reader, typeof(Dictionary<DateTime, List<T>>));
-            }
-            return data;
+                var serializer = new JsonSerializer();
+                using (TextWriter writer = File.CreateText(FolderPath + Base))
+                {
+                    serializer.Serialize(writer, SensorListe);
+                }
+            
         }
-        // Speicherung der Daten in der Dateipfad
-        public void JsonSerialize(Dictionary<DateTime, List<T>> data, string filepath)
+
+        // Ladung der Sensorgroups Daten(Nodename-Ids)
+        public Dictionary<string, List<string>> LoadSensorgroup(string Base, string FolderPath)
+        {
+            
+                Dictionary<string, List<string>> data = new Dictionary<string, List<string>>(); ;
+                var serializer = new JsonSerializer();
+            if (File.Exists(FolderPath + Base))
+            {
+                using (TextReader reader = File.OpenText(FolderPath + Base))
+                {
+                    data = (Dictionary<string, List<string>>)serializer.Deserialize(reader, typeof(Dictionary<string, List<string>>));
+
+                }
+            }
+                return data; 
+            
+        }
+        
+        //Speicherung der Brokerdaten
+        public void SavebrokerProfile(IBrokerProfile data, string filepath)
         {
             var serializer = new JsonSerializer();
-            using (TextWriter writer = File.CreateText(filepath))
+            using (TextWriter writer = File.CreateText(filepath+ "BrokerProfileTest"))
             {
                 serializer.Serialize(writer, data);
             }
-        
-        
-    }
-       
-        public object LoadBrockerProfile(string filepath)
-        {
-            throw new NotImplementedException();
         }
-
-        public List<string> LoadSensorgroup(string Base, string Node)
+        
+        //Ladung der Brokerdaten
+        public IBrokerProfile LoadBrokerProfile(string filepath)
         {
-            string Filepath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\" + Base + "\\" + Node;
-            List<string> data;
+
+            IBrokerProfile data = new MQTTCommunicator.BrokerProfile();
             var serializer = new JsonSerializer();
-            using (TextReader reader = File.OpenText(Filepath))
+            using (TextReader reader = File.OpenText(filepath+"BrokerProfileTest"))
             {
-                data = (List<string>)serializer.Deserialize(reader, typeof(List<string>));
-
+               data  = (MQTTCommunicator.BrokerProfile)serializer.Deserialize(reader, typeof(MQTTCommunicator.BrokerProfile));
             }
-
+            
+              
             return data;
         }
-
-        public void SavebrockerProfile(object data, string filepath)
+        //Ladung der Liste von Basename
+        public List<string> BasenameDeserialize(string filepath)
         {
-            throw new NotImplementedException();
-        }
-
-        public void SaveSensorgroup(List<string> SensorListe,string Base, string Node)
-        {
-            string Filepath = @"C:\Users\houss\Documents\gitlab\programm\DataManagement\Tests\" + Base + "\\" + Node;
+            List<string> data = new List<string>();
             var serializer = new JsonSerializer();
-            using (TextWriter writer = File.CreateText(Filepath))
+            if (File.Exists(filepath + "List of Basenames"))
             {
-                serializer.Serialize(writer, SensorListe);
+                using (TextReader reader = File.OpenText(filepath + "List of Basenames"))
+                {
+                    data = (List<string>)serializer.Deserialize(reader, typeof(List<string>));
+                }
             }
-
+            return data;
         }
+        //Speicherung der Liste von Basename
+        public void BasenamSerialize(List<string> data, string filepath)
+        {
+            var serializer = new JsonSerializer();
+            using (TextWriter writer = File.CreateText(filepath + "List of Basenames"))
+            {
+                serializer.Serialize(writer, data);
+            }
+        }
+
     }
 }

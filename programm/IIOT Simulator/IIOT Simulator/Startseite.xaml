@@ -5,54 +5,259 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IIOT_Simulator"
         mc:Ignorable="d"
-        Title="Startseite" Height="450" Width="800">
-    <StackPanel Background="#FF39383C">
-        
-        <!--Überschrift-->
-        <TextBlock
-            HorizontalAlignment="Center" 
-            Margin="50"
-            FontSize="37"
-            Foreground="#FFE6DFDF" 
-            FontWeight="Bold">
-            IIOT Simulator
-        </TextBlock>
+       Height="600" Width="920"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True">
 
-        
-        <!--Buttons erstellen-->
-        
-        <!--Broker Einstellungen Button-->
-        <Button
-            Height="50"
-            Width="200"
-            FontSize="17"
-            PreviewMouseLeftButtonUp ="BrokerSettingsClick"
-            Click="BrokerSettingsClick">
-            Broker Einstellungen
-        </Button>
-        
-        <!--Neue Sensorgruppe erstellen Button-->
-        <Button Click="NewSensorGroupClick"
-            Height="50" 
-            Width="300" 
-            FontSize="17"
-            Margin="30" 
-            PreviewMouseLeftButtonUp ="NewSensorGroupClick">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/IIOT.jpg"
+                        Stretch="UniformToFill"
+                        />
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" >
+            </RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="870">
+
+            </ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Background="#0F0F2D">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="180"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 'ÍIOT Simulator' in der Leiste-->
+            <TextBlock Text="IIOT Simulator"
+                           Background="#0F0F2D"
+                           Foreground="#FF99B2B3"
+                           Grid.Column="0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontFamily="Fonts/#Dosis"
+                           FontWeight="Medium"
+                           FontSize="24"/>
             
-            Neue Sensorgruppe erstellen
-        </Button>
+            <!-- 'Startseite' in der Leiste -->
+            <TextBlock Text="Startseite"
+                           FontWeight="Heavy"
+                           Foreground="LightGray"
+                           Background="#0F0F2D"
+                           Grid.Column="1"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontFamily="Fonts/#Dosis"
+                           FontSize="22"/>
+            
+            <!--Button für die Broker Einstellungen-->
+            <Button Content="Broker Einstellungen"
+                           Click="BrokerSettingsClick"
+                           Foreground="LightGray"
+                           Background="#0F0F2D"
+                           Grid.Column="2"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontFamily="Fonts/#Dosis"
+                           FontSize="22" 
+                           BorderBrush="#FF0F0F2D"/>
 
-        <!--Bestehende Sensorgruppe laden Button-->
-        <Button
-            Height="50" 
-            Width="300" 
-            FontSize="17" 
-            PreviewMouseLeftButtonUp ="PresentSensorGroupClick">
-            Bestehende Sensorgruppe laden
-        </Button>
+            <!-- TextBox um den Zopic festzulegen -->
+            <TextBox x:Name="TextBoxTopic" Text=""
+                           Foreground="LightGray"
+                           Background="#0F0F2D"
+                           Grid.Column="3"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontFamily="Fonts/#Dosis"
+                           Width="300"
+                           Height="35"
+                           FontSize="22" 
+                           TextAlignment="Center"
+                           BorderBrush="#FF0F0F2D"/>
 
-    </StackPanel>
-   
-   
-    
+            <!-- TextBlock IIOT Simulator-->
+            <TextBlock Text="IIOT Simulator"
+                       Foreground="White"
+                       FontSize="40"
+                       Grid.ColumnSpan="2" 
+                       Margin="92,230,5,-255"
+                       FontFamily="Fonts/#Dosis"
+                       FontWeight="Medium"/>
+
+            <!-- Button um die Simulation zu starten-->
+            <Button Content="Simulation starten"
+                    Click="StartSimulationClick"
+                    Foreground="White"
+                    FontSize="20"
+                    Grid.ColumnSpan="2" 
+                    Margin="142,378,-10,-493" 
+                    HorizontalAlignment="Left" 
+                    Width="201" 
+                    Height="150">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                        <Setter Property="Background" 
+                                Value="#008080"/>
+                        <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                                <Setter Property="Background"
+                                        Value="Aqua"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="200" Height="40"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                               <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+
+            <!-- Button um eine neue Sensorgruppe zu erstellen-->
+            <Button Content="Sensorgruppe erstellen"
+                    Click="NewSensorGroupClick"
+                    Foreground="White"
+                    FontSize="16"
+                    Grid.ColumnSpan="3" 
+                    Margin="163,360,148,-360">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                        <Setter Property="Background" 
+                                Value="#39285D"/>
+                        <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                                    <Setter Property="Background"
+                                     Value="Aqua"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="180" Height="30"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                               <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!-- Button um die Sensorgruppe zu laden-->
+            <Button Content="Sensorgruppe laden"
+                    Click="PresentSensorGroupClick"
+                    Foreground="White"
+                    FontSize="16"
+                    Grid.ColumnSpan="2" 
+                    Margin="-51,360,0,-360"
+                    HorizontalAlignment="Left"
+                    Width="394">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                        <Setter Property="Background" 
+                                Value="#39285D"/>
+                        <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                                    <Setter Property="Background"
+                                        Value="Aqua"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="180" Height="30"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                               <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!-- Button um das Programm zu schließen -->
+            <Button Content="×"
+                    Background="#0F0F2D"
+                    Click="ProgrammSchließenClick"
+                    Foreground="White"
+                    FontSize="30" 
+                    Margin="170,0,-50,0"
+                    Grid.Column="3" 
+                    Height="35" 
+                    VerticalAlignment="Top">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                        <Setter Property="Background" 
+                                Value="#39285D"/>
+                        <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                                <Setter Property="BorderBrush"
+                                        Value="LightBlue"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="60" Height="35"
+                               
+                                Background= "{TemplateBinding Background}">
+                            <ContentPresenter 
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+        </Grid>
+
+    </Grid>
+
 </Window>

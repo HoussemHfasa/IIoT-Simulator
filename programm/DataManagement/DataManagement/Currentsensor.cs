@@ -1,21 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.IO;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using CommonInterfaces;
-using SensorAndSensorgroup;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace SensorAndSensorgroup
 {
-    public class Currentsensor : Sensor<double>
+    public class CurrentSensor : Sensor<double>
     {
-        public List<double> values;
-
-
-        public override Dictionary<DateTime, List<double>> Getvalue()
+       public CurrentSensor()
         {
-            Dictionary<DateTime, List<double>> Sensorvalues = new Dictionary<DateTime, List<double>>();
-            Sensorvalues.Add(CreationDate, values);
-            return Sensorvalues;
+            Guid IdGenerator = Guid.NewGuid();
+            // Besonderheiten des Sensors
+            this.Unit = "Strom in A";
+            this.Sensortype = "Stromsensor";
+            this.Sensor_id = IdGenerator.ToString();
+        }
+        public override ISensor<double> JsonDeserialize(string filepath, string Sensor_id)
+        {
+            ISensor<double> data = new CurrentSensor();
+            var serializer = new JsonSerializer();
+            if (File.Exists(filepath+Sensor_id))
+            {
+                using (TextReader reader = File.OpenText(filepath+Sensor_id))
+                {
+                    data = (CurrentSensor)serializer.Deserialize(reader, typeof(CurrentSensor));
+                }
+            }
+            return data;
+        }
+
+        public override void JsonSerialize(ISensor<double> data, string filepath)
+        {
+            var serializer = new JsonSerializer();
+            using (TextWriter writer = File.CreateText(filepath))
+            {
+                serializer.Serialize(writer, data);
+            }
         }
     }
 }

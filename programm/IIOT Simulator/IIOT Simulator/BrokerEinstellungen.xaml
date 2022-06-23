@@ -5,90 +5,295 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IIOT_Simulator"
         mc:Ignorable="d"
-        Title="BrokerEinstellungen" Height="450" Width="800">
+        Title="BrokerEinstellungen" Height="600" Width="920"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="#181735"
+        >
 
-    <Grid Background="#FF39383C">
-        <!-- Broker Name Label-->
-        <Label 
-            Content="Broker Name" 
-            HorizontalAlignment="Left" 
-            Margin="63,129,0,0" 
-            VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="#FFF9F3F3"/>
+    <Grid >
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/IIOT2.jpg"
+                        Stretch="UniformToFill"
+                        />
+        </Grid.Background>
 
-        <!--Textbox zum Eingeben des Broker Namens-->
-        <TextBox Margin="189,124,427,274" BorderBrush="#FF565F7C">
-        </TextBox>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35">
+            </RowDefinition>
+        </Grid.RowDefinitions>
 
-        <!-- Label für den Port-->
-        <Label Content="Port" 
-               HorizontalAlignment="Left" 
-               Margin="95,241,0,0" 
-               VerticalAlignment="Top" 
-               FontSize="16"
-               FontWeight="Normal" 
-               Foreground="#FFFAF3F3">
-        </Label>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="870">
+            </ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-        <!-- TextBox um den Port einzugeben-->
-        <TextBox 
-            HorizontalAlignment="Left" 
-            Margin="189,236,0,0"  
-            TextWrapping="Wrap" 
-            VerticalAlignment="Top" 
-            Width="184" Height="36"/>
+        <Grid Background="#0F0F2D">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width=" 280"/>
 
-        <!-- Label für den Nutzernamen-->
-        <Label 
-            Content="Nutzername" 
-            HorizontalAlignment="Left" 
-            Margin="447,129,0,0" 
-            VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="#FFF7F5F5"/>
+            </Grid.ColumnDefinitions>
 
-        <!-- Label für das Passwort-->
-        <Label 
-            Content="Passwort" 
-            HorizontalAlignment="Left" 
-            Margin="456,241,0,0" 
-            VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="#FFF6ECEC"/>
 
-        <!-- PasswortBox zum Eingeben des Passworts-->
-        <PasswordBox 
-            HorizontalAlignment="Left" 
-            Margin="572,238,0,0" 
-            VerticalAlignment="Top" 
-            Width="120" 
-            Height="34"/>
+            <TextBlock Text="IIOT Simulator"
+                        Background="#0F0F2D"
+                           Foreground="#FF99B2B3"
+                           Grid.Column="0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontFamily="Fonts/#Dosis"
+                           FontWeight="Medium"
+                           FontSize="24"
+                           />
 
-        <!-- Textbox zum eingeben des Nutzernamens-->
-        <TextBox 
-            HorizontalAlignment="Left" 
-            Margin="572,124,0,0" 
-            TextWrapping="Wrap" 
-            VerticalAlignment="Top" 
-            Width="120" 
-            Height="36"/>
+            <!-- Button um zu Verbinden-->
+            <Button Content="Verbinden"
+                    Click="Verbinden"
+                Foreground="White"
+                    FontSize="16" 
+                    Margin="216,447,0,-511" 
+                    HorizontalAlignment="Left"
+                    Width="184"
+                    Grid.Column="1"
+                    Cursor="Hand" Grid.ColumnSpan="2">
 
-        <!-- Button zum Verbinden-->
-        <Button 
-            Click="Verbinden"
-            Content="Verbinden" 
-            HorizontalAlignment="Left"
-            Margin="492,378,0,0"
-            VerticalAlignment="Top" FontSize="16" Width="110"/>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                        <Setter Property="Background" 
+                                Value="#008080"/>
+                        <Setter Property="Cursor" 
+                                Value="Hand"/>
 
-        <!-- Button zum Abbrechen um zurück zur Startseite zu gelangen-->
-        <Button 
-            Click="Abbrechen"
-            Content="Abbrechen" 
-            HorizontalAlignment="Left" 
-            Margin="632,378,0,0" 
-            VerticalAlignment="Top" FontSize="16" Width="110"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                                <Setter Property="Background"
+                                        Value="Aqua"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="180" Height="30"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!-- Button um abzubrechen um zurück zur Startseite zu gelangen-->
+            <Button Content="Abbrechen"
+                    Click="Abbrechen"
+                Foreground="White"
+                    FontSize="16" 
+                    Margin="62,447,0,-511" 
+                    HorizontalAlignment="Left"
+                    Width="184"
+                    Grid.Column="3">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                        <Setter Property="Background" 
+                                Value="#008080"/>
+                        <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                                <Setter Property="Background"
+                                        Value="Aqua"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="180" Height="30"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+
+
+
+
+            <!--Button für um zurück zuer Startseite zu gelangen-->
+            <Button Content="Startseite"
+                        Click="StartseiteButton"
+                        Background="#0F0F2D"
+                           Foreground="LightGray"
+                           Grid.Column="1"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontFamily="Fonts/#Dosis"
+                          Height="35"
+                           FontSize="22" BorderBrush="#FF0F0F2D"
+                           />
+
+
+            <TextBlock Text="Broker Einstellungen"
+                        Background="#0F0F2D"
+                           Foreground="#FF99B2B3"
+                           Grid.Column="2"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontFamily="Fonts/#Dosis"
+                           FontSize="24"
+                       FontWeight="Heavy"
+                           />
+
+            <!-- Label für den Broker Namen-->
+            <Label
+                Content="Broker Name"
+                Margin="21,145,0,-168"
+                FontSize="22"
+                Foreground="White"
+                HorizontalAlignment="Left" Width="154"/>
+
+            <!-- Label für den Port-->
+            <Label
+                Content="Port"
+                Margin="108,316,0,-321"
+                FontSize="22"
+                Foreground="White"
+                HorizontalAlignment="Left"/>
+
+            <!-- Label für das Passwort-->
+            <Label
+                Content="Passwort"
+                Margin="80,314,0,-319"
+                FontSize="22"
+                Foreground="White"
+                HorizontalAlignment="Left" Grid.Column="2"/>
+
+            <!-- Label für den Nutzernamen-->
+            <Label
+                Content="Nutzername"
+                Margin="0,145,0,-150"
+                FontSize="22"
+                Foreground="White"
+                HorizontalAlignment="Center" Grid.Column="2"/>
+
+
+
+
+            <!-- TextBox zum Broker Namen eingeben-->
+            <TextBox Width="220"
+                     Height="35"
+                     Grid.ColumnSpan="3"
+                     Margin="215,150,218,-150"
+                      Background="#ff1f4663"
+                      TextAlignment="Center"
+                BorderBrush="#FF020E52"
+                FontSize="21"
+                VerticalAlignment="Top"
+                Foreground="#FFd5d5d5"
+                BorderThickness="2,2,2,2"/>
+
+            <!-- TextBox für den Port-->
+            <TextBox Width="220"
+                     Height="35" 
+                     Grid.ColumnSpan="2" 
+                     Margin="213,316,0,-316"
+                      Background="#ff1f4663"
+                     TextAlignment="Center"
+                BorderBrush="#FF020E52"
+                FontSize="21"
+                VerticalAlignment="Top"
+                Foreground="#FFd5d5d5"
+                BorderThickness="2,2,2,2">
+            </TextBox>
+
+
+            <!-- TextBox fpr den Nutzernamen -->
+            <TextBox
+                Width="220"
+                Height="35" 
+                Grid.Column="2"
+                Margin="214,150,3,-150" 
+                Grid.ColumnSpan="2"
+                  Background="#ff1f4663"
+                BorderBrush="#FF020E52"
+                FontSize="21"
+                VerticalAlignment="Top"
+                Foreground="#FFd5d5d5"
+                BorderThickness="2,2,2,2"/>
+
+            <!-- PasswortBox -->
+            <PasswordBox Width="220"
+                         Height="35" 
+                         Grid.ColumnSpan="2" 
+                         Grid.Column="2" 
+                         Margin="214,318,3,-319"
+                         Background="#ff1f4663"
+                         BorderBrush="#FF020E52"
+                FontSize="21"
+                VerticalAlignment="Top"
+                Foreground="#FFd5d5d5"
+                BorderThickness="2,2,2,2" >
+
+            </PasswordBox>
+
+            <!-- Button um das Programm zu schließen -->
+            <Button Content="×"
+                    Background="#0F0F2D"
+                    Click="ProgrammSchließenClick"
+                    Foreground="White"
+                    FontSize="30" 
+                    Margin="269,0,-50,0"
+                    Grid.Column="3" Cursor="Hand">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                        <Setter Property="Background" 
+                                Value="#39285D"/>
+                        <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                                <Setter Property="BorderBrush"
+                                        Value="LightBlue"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="60" Height="35"
+                               
+                                Background= "{TemplateBinding Background}">
+                            <ContentPresenter 
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+
+        </Grid>
 
     </Grid>
-
-
-
-
-
 
 </Window>

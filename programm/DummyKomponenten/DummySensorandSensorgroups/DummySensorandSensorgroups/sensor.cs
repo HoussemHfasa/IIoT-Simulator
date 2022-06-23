@@ -1,49 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using CommonInterfaces;
+using System.Text;
+using Newtonsoft.Json;
+
 
 namespace DummySensorandSensorgroups
 {
-    class sensor : ISenor<double>
+    public abstract class Sensor<T> : ISensor<T>
     {
-        public string Sensor_id { get { return Sensor_id; } set { this.Sensor_id = "6552778f"; } }
 
-        public string Sensortype { get { return Sensortype; } set { this.Sensor_id = "Tempreturesensor"; } }
+      
+        public string Sensor_id { get; set; }
 
-        public string Einheit { get { return Einheit; } set { this.Sensor_id = "mm"; } }
+        public string Topic { get; set; }
 
-        DateTime ISenor<double>.CreationDate
+        public string Sensortype { get; set; }
+
+        public string Unit { get; set; }
+        [JsonProperty]
+        private List<double> Values;
+        public int AmmountofValues
         {
-            get { return CreationDate; }
+            get { return Values.Count; }
         }
 
-        TimeSpan ISenor<double>.CreationTime
+        public int Timeinterval { get; set; }
+
+
+
+        public List<double> GetValues()
         {
-            get { return CreationTime; }
+            return Values;
         }
 
-        int ISenor<double>.Werteanzahl
+        public void SetValues(List<double> Values)
         {
-            get { return Werteanzahl; }
+            this.Values = Values;
         }
 
-        int ISenor<double>.Timeinterval
+        List<T> ISensor<T>.GetValues()
         {
-            get { return Timeinterval; }
+            throw new NotImplementedException();
         }
 
-        public DateTime CreationDate = DateTime.Today;
-
-        public TimeSpan CreationTime = TimeSpan.Zero;
-
-        public int Werteanzahl =20;
-
-        public int Timeinterval =5;
-
-        public List<double> Getvalues()
+        public void SetValues(List<T> Values)
         {
-            return new List<double> { 154, 848, 79549, 95.4, 4185.48 };
+            throw new NotImplementedException();
         }
+
+        public abstract void JsonSerialize(ISensor<T> data, string filepath);
+
+
+        public abstract ISensor<T> JsonDeserialize(string filepath, string Sensor_id);
+       
     }
 }
