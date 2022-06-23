@@ -16,26 +16,9 @@ namespace DataStorage
     public class DataStorage<T> : IDatastorage<T> 
     {
        
-        // Speicherung der Sensorgroups Daten(Ids)
+        // Speicherung der Sensorgroups Daten(Nodename-Ids)
         public void SaveSensorgroup(Dictionary<string, List<string>> SensorListe, string Base, string FolderPath)
-        {/*
-            if (File.Exists(FolderPath + Base))
-            {
-                Dictionary<string, List<string>> data = new Dictionary<string, List<string>>();
-                data = LoadSensorgroup(Base, FolderPath);
-                File.Delete(FolderPath+Base);
-                
-                //Fehler
-                    var serializer = new JsonSerializer();
-                    using (TextWriter writer = File.CreateText(FolderPath + Base))
-                    {
-                        serializer.Serialize(writer, SensorListe);
-                    
-                }
-
-            }
-            else
-            {*/
+        {
                 var serializer = new JsonSerializer();
                 using (TextWriter writer = File.CreateText(FolderPath + Base))
                 {
@@ -44,7 +27,7 @@ namespace DataStorage
             
         }
 
-        // Ladung der Sensorgroups Daten(Ids)
+        // Ladung der Sensorgroups Daten(Nodename-Ids)
         public Dictionary<string, List<string>> LoadSensorgroup(string Base, string FolderPath)
         {
             
@@ -66,7 +49,7 @@ namespace DataStorage
         public void SavebrokerProfile(IBrokerProfile data, string filepath)
         {
             var serializer = new JsonSerializer();
-            using (TextWriter writer = File.CreateText(filepath))
+            using (TextWriter writer = File.CreateText(filepath+ "BrokerProfileTest"))
             {
                 serializer.Serialize(writer, data);
             }
@@ -78,15 +61,15 @@ namespace DataStorage
 
             IBrokerProfile data = new MQTTCommunicator.BrokerProfile();
             var serializer = new JsonSerializer();
-            using (TextReader reader = File.OpenText(filepath))
+            using (TextReader reader = File.OpenText(filepath+"BrokerProfileTest"))
             {
-               data  = (IBrokerProfile)serializer.Deserialize(reader, typeof(IBrokerProfile));
+               data  = (MQTTCommunicator.BrokerProfile)serializer.Deserialize(reader, typeof(MQTTCommunicator.BrokerProfile));
             }
             
               
             return data;
         }
-        //Ladung der Liste von Basenamen
+        //Ladung der Liste von Basename
         public List<string> BasenameDeserialize(string filepath)
         {
             List<string> data = new List<string>();
@@ -100,7 +83,7 @@ namespace DataStorage
             }
             return data;
         }
-        //Speicherung der Liste von Basenamen
+        //Speicherung der Liste von Basename
         public void BasenamSerialize(List<string> data, string filepath)
         {
             var serializer = new JsonSerializer();

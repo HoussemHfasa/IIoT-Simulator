@@ -23,20 +23,18 @@ namespace NunitTestDatastorage
         IBrokerProfile Beispiel2 = new MQTTCommunicator.BrokerProfile();
         IBrokerProfile Beispiel3 = new MQTTCommunicator.BrokerProfile();
         string filePath;
-        string filename;
         [SetUp]
         public void Setup()
         {
             //Arrange
             
             Storagetest = new DataStorage.DataStorage<double>();
-            filename = @"Tests\BrokerProfileTest";
-             filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename);
+             filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,@"Tests\");
             Beispiel1.HostName_IP = "124.145.12.326";
             Beispiel1.Password = "12345";
-            Beispiel1.Port = Convert.ToUInt32("15423");
+           Beispiel1.Port = Convert.ToUInt32("1423");
             Beispiel1.Username = "name1";
-            Beispiel2.HostName_IP = "193.145.12.326";
+            Beispiel2.HostName_IP = "193.145";
             Beispiel2.Password = "ho5475";
             Beispiel2.Port = Convert.ToUInt32("8710");
             Beispiel2.Username = "name2";
@@ -44,28 +42,32 @@ namespace NunitTestDatastorage
         }
 
         [Test]
+        //Prüfung für die Speicherung des Brockerprofiles
         public void it_should_save_thebroker_details()
         {
             
             //Act
             Storagetest.SavebrokerProfile(Beispiel1, filePath);
-
+       
             //Assert
-            Assert.That(File.Exists(filePath));
+            Assert.That(File.Exists(filePath+ "BrokerProfileTest"));
         }
         [Test]
+        //Prüfung für die Ladung des Brockerprofiles
         public void it_should_load_thebroker_details()
         {
             //Act
             Storagetest.SavebrokerProfile(Beispiel1, filePath);
             Beispiel3 = Storagetest.LoadBrokerProfile(filePath);
             //Assert
-            Assert.AreEqual(Beispiel1.HostName_IP,Beispiel3.HostName_IP);
+            Assert.AreEqual(Beispiel1.HostName_IP, Beispiel3.HostName_IP);
+            Assert.AreEqual(Beispiel1.Port, Beispiel3.Port);
             Assert.AreEqual(Beispiel1.Username, Beispiel3.Username);
             Assert.AreEqual(Beispiel1.Password, Beispiel3.Password);
-            Assert.AreEqual(Beispiel1.Port, Beispiel3.Port);
+
         }
         [Test]
+        //Prüfung ob nur das letzte Brokerprofile gespeichert wird
         public void it_should_save_only_the_last_broker_details()
         {
             //Act

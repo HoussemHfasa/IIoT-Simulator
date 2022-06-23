@@ -23,6 +23,7 @@ namespace SensorAndSensorgroup
         public string Topic { get; set; }
 
         // Sensordaten, Zugriff nur über GetValues und SetValues
+        //JsonProperty für den Zugriff zu Jsonserialization
         [JsonProperty]
         private List<T> Values;
 
@@ -37,7 +38,9 @@ namespace SensorAndSensorgroup
         {
             this.Values = Values;
         }
+        //Ladung des SensorProperties
         public abstract ISensor<T> JsonDeserialize(string filepath, string Sensor_id);
+        //Speicherung des SensorProperties in JsonDatei
         public abstract void JsonSerialize(ISensor<T> data, string filepath);
 
      

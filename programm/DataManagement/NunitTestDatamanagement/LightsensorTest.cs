@@ -14,6 +14,9 @@ using DataStorage;
 
 namespace NunitTestDatamanagement
 {
+    /// <summary>
+    /// //Der gleiche Test für alle Sensorentype
+    /// </summary>
     class LightsensorTest
     {
         private SensorAndSensorgroup.Sensor<int> Lightsensortest = new SensorAndSensorgroup.BrightnessSensor();

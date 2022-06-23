@@ -38,6 +38,7 @@ namespace NunitTestDatamanagement
         }
 
         [Test]
+        //Prüfung für die Speicherung des Basenameliste
         public void It_should_save_the_BasenameList()
         {
             //Act
@@ -48,6 +49,7 @@ namespace NunitTestDatamanagement
             Assert.That((File.Exists(Filepath + "List of Basenames"))&&(listname.Contains(Basename1)));
         }
         [Test]
+        //Prüfung ob Basename nur einmal gespeichert ist
         public void It_should_save_an_existing_Basename()
         {
             //Act
@@ -58,6 +60,7 @@ namespace NunitTestDatamanagement
             Assert.That(listname.Where(s => s != null && s.StartsWith("Haus4")).Count()==1);
         }
         [Test]
+        //Prüfung ob die Basename geloecht wird
         public void It_should_delete_basename_from_the_BasenameList()
         {
             //Act
@@ -69,6 +72,7 @@ namespace NunitTestDatamanagement
             Assert.That((!listname.Contains(Basename3)) && (listname.Contains(Basename2)));
         }
         [Test]
+        //prüfen ob gibt es Bugs wenn mann loescht ein nicht existierendes Basename
         public void It_should_delete_not_existing_basename_from_the_BasenameList()
         {
             //Act
