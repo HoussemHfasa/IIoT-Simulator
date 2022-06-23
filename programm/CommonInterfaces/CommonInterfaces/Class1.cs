@@ -29,8 +29,11 @@ namespace CommonInterfaces
         
         //Zum Abspeichern der Sensordaten im Objekt
         public void SetValues(List<T> Values);
-
-
+        //Ladung des SensorProperties
+        public abstract void JsonSerialize(ISensor<T> data, string filepath);
+        //Speicherung des SensorProperties in JsonDatei
+        public abstract ISensor<T> JsonDeserialize(string filepath, string Sensor_id);
+        
     }
     public interface ISensorGroups
     {
@@ -80,21 +83,17 @@ namespace CommonInterfaces
         // Überlegung ob Rückgabewerte benötigt wird für Rückmeldung von Erfolg/Nichterfolg
         //Welche Informationen werden zur Registrierung des Clients benoetigt? /Paul
         /// <summary>
-        /// Erstellung einer Verbindung zum Broker
+        /// Erstellung einer einfachen Verbindung zum Broker, welche nicht gesichert ist
         /// </summary>
         /// <param name="Host">Domainname oder IP-Adresse des Brokers</param>
         /// <param name="Port">Port des Brokers</param>
-        public void ConnectToBroker(string Host, int Port);
-        
-        public void RegisterClient(string clientId, bool isGroup);
+        public string ConnectToBroker(string Host, int Port, string Username, string Password);
 
-        public void SubscribeTopic(string clientId, string topicName);
+        public void CreateTopic(string topicName);
 
-        public void CreateTopic(string clientId, string topicName);
+        public void PublishToTopic(string topicName, string messagePayload);
 
-        public void PublishToTopic(string clientId, string topicName, string messagePayload);
-
-        public void SetNewBroker(string Host, int Port);
+        public void SetNewBroker(string Host, int Port, string Username, string Password);
 
         public List<string> GetTopics();
         public List<string> GetClients();
@@ -109,18 +108,18 @@ namespace CommonInterfaces
     
     public interface IDatastorage<T> 
     {
-      
+
         /// <summary>
         /// serialise die Daten zu Textdatei
         /// </summary>
         /// <param name="data"> die Daten zu speichern </param>
         /// <param name="filepath"> Dateipfad, wo die Daten werden gespeichert </param>
-        public void JsonSerialize(ISensor<T> data, string filepath, string Sensortype);
+     //   public virtual void JsonSerialize(ISensor<T> data, string filepath);
         /// <summary>
         /// deserialise Textdatei zu Json datei ,um die gespeicherte Datei zu laden
         /// </summary>
         /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
-        public ISensor<T> JsonDeserialize(string filepath, string Sensortype);
+      //  public virtual ISensor<T> JsonDeserialize(string filepath, string Sensortype);
         /// <summary>
         /// deserialise Textdatei zu Json datei ,um die gespeicherte sensorgruppe zu laden
         /// </summary>
@@ -143,6 +142,17 @@ namespace CommonInterfaces
         ///  <param name="data"> die BrockerProfileDaten </param>
         /// <param name="filepath"> Dateipfad, wo die BrockerProfileDaten werden gespeichert </param>
         public void SavebrokerProfile(IBrokerProfile data, string filepath);
+        /// <summary>
+        /// Ladung der Liste von Basenamen
+        /// </summary>
+        /// <param name="filepath"> Dateipfad, wo die SensorListe wird gespeichert </param>
+        public List<string> BasenameDeserialize(string filepath);
+        /// <summary>
+        /// Speicherung der Liste von Basenamen
+        /// </summary>
+        ///  <param name="data"> List der Basenamen </param>
+        /// <param name="filepath"> Dateipfad, wo die Basenameliste wird gespeichert </param>
+        public void BasenamSerialize(List<string> data, string filepath);
     }
 
   

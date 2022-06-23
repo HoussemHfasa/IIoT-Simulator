@@ -2,29 +2,34 @@
 using System.Collections.Generic;
 using System.Text;
 using CommonInterfaces;
+using Newtonsoft.Json;
 
 namespace MQTTCommunicator
 {
     public class BrokerProfile:IBrokerProfile
     {
+        string hostName_IP;
+        uint port;
+        string username;
+        string password;    
         public string HostName_IP
         {
             get
             {
-                return this.HostName_IP;
+                return this.hostName_IP;
             }
             set
             {
                 //Der IP enthält nur Zahlen und Punkten
                 value = value.Replace(" ", "");
 
-                if (uint.TryParse(value.Replace(".", ""), out uint output))
+                if (ulong.TryParse(value.Replace(".", ""), out ulong output))
                 {
-                    this.HostName_IP = value;
+                    this.hostName_IP = value;
                 }
                 else
                 {
-                    throw new Exception("Ungültige Eingabe");
+                    throw new Exception("Ungültige Eingabe000");
                 }
             }
         }
@@ -32,14 +37,14 @@ namespace MQTTCommunicator
         {
             get
             {
-                return this.Port;
+                return this.port;
             }
             set
             {
                 //der Proxy muss zwischen 1000 und 9999 sein
                 if ((value >= 1000) && (value <= 9999))
                 {
-                    this.Port = value;
+                    this.port = value;
                 }
                 else
                 {
@@ -47,8 +52,27 @@ namespace MQTTCommunicator
                 }
             }
         }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public string Username
+        {
+            get
+            {
+                return this.username;
+            }
+            set
+            {
+                this.username = value;
+            }
+        }
+        public string Password {
+            get
+            {
+                return this.password;
+            }
+            set
+            {
+                this.password = value;
+            }
+        }
 
         //Konsructor für die Dateneingabe
         public BrokerProfile(string hostname_IP, uint port, string username, string password)

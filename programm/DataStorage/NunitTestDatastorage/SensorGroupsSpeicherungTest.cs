@@ -32,11 +32,15 @@ namespace NunitTestDatastorage
             Folderpath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Tests\");
             List<string> Sensoren = new List<string> { "151546", "18546", "84984" };
             Sensorliste.TryAdd("Zimmer1",Sensoren);
-            
+            if (!System.IO.Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Tests"))
+            {
+                System.IO.Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "Tests");
+            }
 
         }
 
         [Test]
+        //Prüfung für die Speicherung des Sensorgruppen
         public void it_should_save_the_sensor_groups()
         {
 
@@ -48,6 +52,7 @@ namespace NunitTestDatastorage
            
         }
         [Test]
+        //Prüfung für die Ladung des Sensorgruppen
         public void it_should_load_the_sensor_groups()
         {
             //Act         
@@ -57,6 +62,7 @@ namespace NunitTestDatastorage
             Assert.That(Sensorliste, Is.EqualTo(Sensorliste2));
         }
         [Test]
+        //prüfen ob gibt es Bugs wenn mann laedt ein nicht existierendes File
         public void it_should_not_load_the_not_found_file()
         {
             //Act         

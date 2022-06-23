@@ -22,13 +22,13 @@ namespace SensorAndSensorgroup
             this.Sensor_id = IdGenerator.ToString();
         }
 
-        public override ISensor<int> JsonDeserialize(string filepath)
+        public override ISensor<int> JsonDeserialize(string filepath, string Sensor_id)
         {
             ISensor<int> data = new BrightnessSensor();
             var serializer = new JsonSerializer();
-            if (File.Exists(filepath))
+            if (File.Exists(filepath+Sensor_id))
             {
-                using (TextReader reader = File.OpenText(filepath))
+                using (TextReader reader = File.OpenText(filepath+Sensor_id))
                 {
                     data = (BrightnessSensor)serializer.Deserialize(reader, typeof(BrightnessSensor));
                 }
@@ -38,7 +38,6 @@ namespace SensorAndSensorgroup
 
         public override void JsonSerialize(ISensor<int> data, string filepath)
         {
-
             var serializer = new JsonSerializer();
             using (TextWriter writer = File.CreateText(filepath+data.Sensor_id))
             {
