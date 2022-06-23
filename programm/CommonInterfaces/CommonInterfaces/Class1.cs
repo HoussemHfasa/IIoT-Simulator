@@ -66,19 +66,15 @@ namespace CommonInterfaces
         // Überlegung ob Rückgabewerte benötigt wird für Rückmeldung von Erfolg/Nichterfolg
         //Welche Informationen werden zur Registrierung des Clients benoetigt? /Paul
         /// <summary>
-        /// Erstellung einer Verbindung zum Broker
+        /// Erstellung einer einfachen Verbindung zum Broker, welche nicht gesichert ist
         /// </summary>
         /// <param name="Host">Domainname oder IP-Adresse des Brokers</param>
         /// <param name="Port">Port des Brokers</param>
-        public void ConnectToBroker(string Host, int Port);
-        
-        public void RegisterClient(string clientId, bool isGroup);
+        public String ConnectToBroker(string Host, int Port, string Username, string Password);
 
-        public void SubscribeTopic(string clientId, string topicName);
+        public void CreateTopic(string topicName);
 
-        public void CreateTopic(string clientId, string topicName);
-
-        public void PublishToTopic(string clientId, string topicName, string messagePayload);
+        public void PublishToTopic(string topicName, string messagePayload);
 
         public void SetNewBroker(string Host, int Port);
 

@@ -55,9 +55,9 @@ namespace MQTTConsoleTest
             Console.WriteLine("Projekt started");
             Communicator communicator = new Communicator();
             communicator.ConnectToBroker("localhost", 1883);
-            communicator.PublishToTopic("client1", "test/124", "5");
-            /*communicator.PublishToTopic("client1", "test/123", "8");
-            communicator.PublishToTopic("client1", "test/124", "5");*/
+            System.Threading.Thread.Sleep(6000);
+            communicator.PublishToTopic("test/123", "testaddasdasdasdasaa");
+            //communicator.GetTopics();
         }
     }
 }
