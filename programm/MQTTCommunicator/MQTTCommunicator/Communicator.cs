@@ -15,153 +15,179 @@ namespace MQTTCommunicator
     public class Communicator : IMQTTCommunicator
     {
         private IMqttClient mqttClient;
-        private Dictionary<String, Client> clients;
-
-
-        /*public enum MqttClientConnectionStatus
-        {
-            Disconnected,
-            Disconnecting,
-            Connected,
-            Connecting
-        }*/
-
-
+        //private Dictionary<String, Client> clients;
+        private List<String> Topic { get; set; }
+        private List<String> TopicMessage { get; set; }
+        /// <summary>
+        /// Konstruktor des Communicators
+        /// </summary>
         public Communicator()
         {
             mqttClient = new MqttFactory().CreateMqttClient();
-            clients = new Dictionary<string, Client>();
+            //clients = new Dictionary<string, Client>();
+            this.Topic = new List<string>();
+            this.TopicMessage = new List<string>();
         }
-
-        public async void ConnectToBroker(string Host, int Port)
+        /// <summary>
+        ///  Verbindung zum Broker mit und ohne Authentifizierung. Wenn man keine login und password eingibt, wird eine
+        ///  ungesicherte Verbindung zum Port 1883 aufgebaut. Anderfalls wird eine Verbindung zum Port 1884 aufgebaut.
+        ///  Falls die Verbindung abbricht, wird es nochmal versucht eine einzustellen.
+        /// </summary>
+        /// <param name="Host">Erwuenschte Brokername bzw. IP-Adresse des Brokers</param>
+        /// <param name="Port">Ein gültiger Port eingeben</param>
+        /// <param name="Username">Eingestellte Username</param>
+        /// <param name="Password">Dazugehörige Kennwort</param>
+        public string ConnectToBroker(string Host, int Port, string Username = null, string Password = null)
         {
+            string message = "";
             Console.WriteLine("Connecting to " + Host + " : " + Port);
             try
             {
+                if (Port > 65535 || Port < 0)
+                {
+                    message += "Invalid Port\n";
+                }
+                         
+                if ( string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password) )
+                {
                     var options = new MqttClientOptionsBuilder()
                         .WithClientId("TestClient")
                         .WithTcpServer(Host, Port)
                         .WithCleanSession()
-                        //.WithTls(tlsOptions)
                         .WithProtocolVersion(MQTTnet.Formatter.MqttProtocolVersion.V311)
                         .Build();
-
                     mqttClient.UseConnectedHandler(e =>
                     {
                         Console.WriteLine("Connected to the broker");
                     });
+                    Task t = Task.Run(() => mqttClient.ConnectAsync(options));
+                    Task.WaitAll(t);
 
-                    await mqttClient.ConnectAsync(options);                              
+
+                }
+                else
+                {
+                    var options = new MqttClientOptionsBuilder()
+                        .WithClientId("TestClient")
+                        .WithTcpServer(Host, Port)
+                        .WithCleanSession()
+                        .WithProtocolVersion(MQTTnet.Formatter.MqttProtocolVersion.V311)
+                        .WithCredentials(Username, Password)
+                        .Build();
+                    mqttClient.UseConnectedHandler(e =>
+                    {
+                        Console.WriteLine("Connected to the broker");
+                        Task t = Task.Run(() => mqttClient.ConnectAsync(options));
+                    Task.WaitAll(t);
+
+                    });
+                }
             }
             catch
             {
                     Console.WriteLine("Connection failed");
             }
-            if (mqttClient.IsConnected)
+            mqttClient.UseDisconnectedHandler(async e =>
             {
-                var message = new MqttApplicationMessageBuilder()
-                    .WithTopic("test/123")
-                    .WithPayload("test")
-                    .WithExactlyOnceQoS()
-                    .WithRetainFlag()
-                    .Build();
+                Console.WriteLine("Connecting failed, try again");
+                await Task.Delay(TimeSpan.FromSeconds(5));
 
-                //Task t = Task.Run(() => mqttClient.PublishAsync(message));
-                //Task.WaitAll(t);
-                await mqttClient.PublishAsync(message);
-            }
-            else
-            {
-                Console.WriteLine("Broker not connected for sending messages");
-            }
-         
-
+                try
+                {
+                    var options = new MqttClientOptionsBuilder()
+                        .WithClientId("TestClient")
+                        .WithTcpServer(Host, Port)
+                        .WithCleanSession()
+                        .WithProtocolVersion(MQTTnet.Formatter.MqttProtocolVersion.V311)
+                        .Build();
+                    Task t = Task.Run(() => mqttClient.ConnectAsync(options));
+                    Task.WaitAll(t);
+                }
+                catch
+                {
+                    Console.WriteLine("FAILED");
+                }
+            });
+            Console.WriteLine(message);
+            return message;
         }
 
-
-        public void CreateTopic(string clientId, string topicName)
+        public void CreateTopic(string topicName)
         {
             Console.ReadKey();
         }
-
+        /// <summary>
+        /// Erstmal nicht gebraucht
+        /// </summary>
+        /// <returns></returns>
         public List<string> GetClients()
         {
             throw new NotImplementedException();
         }
-
+        /// <summary>
+        /// Erstmal nicht gebraucht
+        /// </summary>
+        /// <returns></returns>
         public List<string> GetTopics()
         {
             throw new NotImplementedException();
         }
 
-        public async void PublishToTopic(string clientId, string topicName, String messagePayload)
+
+        /// <summary>
+        /// Versendug von Messages an den Broker mit Voreinstellungen. Wird ausführbar, erst dann wenn der eine Verbindung zum
+        /// Broker besteht. Nachrichten werden mit QoS = 2 gesendet.
+        /// </summary>
+        /// <param name="topicName">Als TopicName wird Pfad von einem Sensor genommen</param>
+        /// <param name="messagePayload">Ubersendete Nachrichten an den Broker</param>
+        public async void PublishToTopic(string topicName, String messagePayload)
         {
-            /* if(mqttClient.IsConnected)
-             {           
-                 Client client;
-                 clients.TryGetValue(clientId, out client);
-                 if (client == null || !client.IsPublishing(topicName))
-                 {
-                     Console.WriteLine("The client " + clientId + " can not write to the topic " + topicName + " message: " + messagePayload);
-                     return;
-                 }
-                 else
-                 {                
-                     Console.WriteLine("Publishing message -" + messagePayload +"- from: " + clientId + " to " + topicName);
+             if(mqttClient.IsConnected)
+             {                                      
                      try
                      {
                           var message = new MqttApplicationMessageBuilder()
                           .WithTopic(topicName)
                           .WithPayload(messagePayload)
                           .WithExactlyOnceQoS()
-                          .WithRetainFlag()
+                          .WithRetainFlag(true)
                           .Build();
-
-                      //Task t = Task.Run(() => mqttClient.PublishAsync(message));
-                      //Task.WaitAll(t);
-                          await mqttClient.PublishAsync(message);
-                          Console.ReadKey();
-                     } 
+                             AddTopic(topicName);
+                             AddTopicMessage(messagePayload);
+                             Console.WriteLine("Publishing message -" + messagePayload + "- from: " + "TestClient" + " to Topic " + topicName);
+                    Task t = Task.Run(() => mqttClient.PublishAsync(message));
+                    Task.WaitAll(t);                                      
+                } 
                      catch (Exception e)
                      {
                           Console.WriteLine("Something went wrong: " + e.Message);
                           Console.ReadKey();
                      }
-                 }
-             }*/
-            Console.ReadKey();
+             }
+        }
+        /// <summary>
+        /// Falls Benutzer eine neue Verbindung braucht, wird bestehende abgebrochen. Dann nochmal die Methode
+        /// ConnectToBroker ausgeführt.
+        /// </summary>
+        /// <param name="Host">Erwuenschte Brokername bzw. IP-Adresse des Brokers</param>
+        /// <param name="Port">Ein gültiger Port eingeben</param>
+        /// <param name="Username">Eingestellte Username</param>
+        /// <param name="Password">Dazugehörige Kennwort</param>
+        public void SetNewBroker(string Host, int Port, string Username = null, string Password = null)
+        {
+            mqttClient.DisconnectAsync();
+            Console.WriteLine("Disconnected");
+            ConnectToBroker(Host, Port,  Username = null, Password = null);
         }
 
-        public void RegisterClient(string clientId, bool isGroup)
+        public void AddTopic(String Topic)
         {
-            clients.Add(clientId, new Client(clientId));
+            this.Topic.Add(Topic);
+        }
+        public void AddTopicMessage(String TopicMessage)
+        {
+            this.TopicMessage.Add(TopicMessage);
         }
 
-        public void SetNewBroker(string Host, int Port)
-        {
-            
-        }
-        /*private void HandleMessageReceived(MqttApplicationMessage applicationMessage)
-        {
-            Console.WriteLine("### RECEIVED APPLICATION MESSAGE ###");
-            Console.WriteLine($"+ Topic = {applicationMessage.Topic}");
-            Console.WriteLine($"+ Payload = {Encoding.UTF8.GetString(applicationMessage.Payload)}");
-            Console.WriteLine($"+ QoS = {applicationMessage.QualityOfServiceLevel}");
-            Console.WriteLine($"+ Retain = {applicationMessage.Retain}");
-            Console.WriteLine();
-        }*/
-
-        public void SubscribeTopic(string clientId, string topicName)
-        {
-            mqttClient.UseApplicationMessageReceivedHandler(e =>
-            {
-                Console.WriteLine("### RECEIVED APPLICATION MESSAGE ###");
-                Console.WriteLine($"+ Topic = {e.ApplicationMessage.Topic}");
-                Console.WriteLine($"+ Payload = {Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}");
-                Console.WriteLine($"+ QoS = {e.ApplicationMessage.QualityOfServiceLevel}");
-                Console.WriteLine($"+ Retain = {e.ApplicationMessage.Retain}");
-                Console.WriteLine();
-            });
-        }
     }
 }
