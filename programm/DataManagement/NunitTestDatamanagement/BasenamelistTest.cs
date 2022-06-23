@@ -34,6 +34,10 @@ namespace NunitTestDatamanagement
             Basename2 = "Haus2";
             Basename3 = "Haus3";
             Basename4 = "Haus4";
+            if(!System.IO.Directory.Exists(AppDomain.CurrentDomain.BaseDirectory+ "SensorGroups"))
+              {
+                System.IO.Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "SensorGroups");
+             }
             Filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"SensorGroups\");
         }
 

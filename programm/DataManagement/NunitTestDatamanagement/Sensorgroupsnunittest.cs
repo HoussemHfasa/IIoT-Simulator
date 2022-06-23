@@ -39,6 +39,10 @@ namespace NunitTestDatamanagement
             Ids.TryAdd(Node,Sensoren);
             Id = "8198419";
             Id2 = "46984156";
+            if (System.IO.Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "SensorGroups"))
+            {
+                System.IO.Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "SensorGroups");
+            }
         }
         [Test]
         public void It_should_Addbase()
