@@ -414,6 +414,7 @@ namespace SensorDataSimulator
                     // entsprechend der Fehlerlänge Nullen setzen
                     for (int z = 0; z < ErrorLength; z++)
                     {
+                        if(i+z < TempList.Count)
                         TempList[i+z] = 0.0;
                     }
 
