@@ -5,9 +5,12 @@ namespace SensorDataSimulator
 {
     public class TransientNoise : SensorDataErrors, CommonInterfaces.ISensorDataErrors
     {
+        // Klasse zur Erzeugung von Fehlern Aufgrund von abklingen Rauschsingnalen(gedämpfte Schwingung) 
         List<double> Result;
         List<double> Puls;
         double DampingRatio;
+
+        //Konstruktor 
         public TransientNoise(List<double> Puls, int DecayTime)
         {
             this.Puls = Puls;
@@ -17,8 +20,10 @@ namespace SensorDataSimulator
             DampingRatio = Math.Log(0.00001) / (DecayTime * -1);
         }
 
+        //Fehlererzeugungsmethode
         public override List<double> GetSensorDataWithErrors(List<double> SensorDataWithoutErorrs)
         {
+            // Für jedes Element in der Liste
             for (int i = 0; i < SensorDataWithoutErorrs.Count; i++)
             {
                 Result.Add(SensorDataWithoutErorrs[i] + Puls[i] * Math.Exp(-1.0 * DampingRatio * i));

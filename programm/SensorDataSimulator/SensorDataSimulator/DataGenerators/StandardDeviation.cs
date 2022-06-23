@@ -5,6 +5,8 @@ namespace SensorDataSimulator
 {
     public class StandardDeviation : SensorDataSimualtor<double>
     {
+        // Klasse zur erzeugung von stetigen, normalverteilten Werten
+
         // Der Algorithmus zur Berechnung CalculateNextValue und DecideIncreaseOrDecrease
         // wurde inspiriert/entlehnt von Joshua Hercher, "Simulation von Sensordaten".
         // Zum besseren Verständnis wurden von mir z.B. Variablennamen angepasst
@@ -20,6 +22,7 @@ namespace SensorDataSimulator
         private double CurrentValue;
         private Random Rand;
 
+        //Konstruktor erhält alle für Berechnung nötigen Parameter
         public StandardDeviation(double MeanInput, double StandardDeviationInput, uint AmmountofValues)
         {
 
@@ -32,16 +35,19 @@ namespace SensorDataSimulator
             Rand = new Random();
 
         }
+        //Datenerzeugung
         public override List<double> GetSimulatorValues()
         {
             List<double> Result = new List<double> { };
             
+            //Werte werden einzeln der Liste hinzugefügt
             for(int i =0; i < AmmountofValues; i++)
             {
                 Result.Add(CalculateNextValue());
             }
             return Result;
         }
+
         // Funktion zur Berechnung des Folgewerts
         private double CalculateNextValue()
         {
@@ -51,7 +57,10 @@ namespace SensorDataSimulator
             // 2. Entscheidung ob + oder -
             int Multiplier = DecideIncreaseOrDecrease();
 
+            // 3. Wert ändern
             CurrentValue += ChangeValue * Multiplier;
+
+            // 4. Wert zurückgeben
             return CurrentValue;
         }
 

@@ -9,6 +9,8 @@ namespace SensorDataSimulator
 
     public abstract class SensorDataSimualtor<T> : ISensorDataSimulator<T>
     {
+        // Mutterklasse aller SensorDataSimulatoren
+
         // Werteanzahl, die erzeugt werden soll
         public uint AmmountofValues { get; set; }
         // in abgeleiteten Klasse werden hiermit die Werte erzeugt
@@ -18,6 +20,8 @@ namespace SensorDataSimulator
 
     public abstract class SensorDataErrors : ISensorDataErrors
     {
+        //Mutterklasse aller SensorDataError-Klassen
+
 
         // kein public set nötig? Absprache mit Team nicht vor Abgabe Einzelphase möglich
         public double ErrorRatio {
@@ -30,6 +34,8 @@ namespace SensorDataSimulator
 
         public double ErrorMin { get; set; }
 
+
+        // Fehlererzeugungsmethode, muss von jeder abgeleiteten Klasse implementiert werden
         public abstract List<double> GetSensorDataWithErrors(List<double> SensorDataWithoutErorrs);
 
         // void wäre sinnvoller, Absprache mit Team nicht vor Abgabe Einzelphase möglich

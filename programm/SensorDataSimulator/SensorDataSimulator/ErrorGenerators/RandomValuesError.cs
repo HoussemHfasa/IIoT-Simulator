@@ -5,18 +5,16 @@ namespace SensorDataSimulator
 {
     public class RandomValuesError : SensorDataErrors, CommonInterfaces.ISensorDataErrors
     {
+        // Klasse zur Erzeugung von zufälligen Fehlerwerten in Daten
 
         private List<double> TempList;
         private Random Rand = new Random();
 
+        // Konstruktor erhält benötigte Daten als Paramter
         public RandomValuesError(double ErrorRatio, int ErrorLength, double MaxError, double MinError)
         {
-            // Errorlenght auf Uint ändern
-
-
-
+            
             // Wenn Min und Max verwechselt wurde, entsprechend tauschen
-
             if(MaxError >= MinError)
             {
                 this.ErrorMax = MaxError;
@@ -31,6 +29,8 @@ namespace SensorDataSimulator
             this.ErrorRatio = ErrorRatio;
             this.ErrorLength = ErrorLength;
         }
+
+        // Fehlererzeugungsmethode bekommt eine Liste von Typ double übergeben
         public override List<double> GetSensorDataWithErrors(List<double> SensorDataWithoutErorrs)
         {
             //Eingaben auf Exceptions überprüfen

@@ -6,10 +6,13 @@ namespace SensorDataSimulator
 {
     public class BurstNoise : SensorDataErrors, ISensorDataErrors
     {
+        // Klasse zur Erzeugung von Fehlern Aufgrund von Burst-Signalen 
         double BurstValue;
 
         List<double> TempList;
         Random Rand = new Random();
+
+        // Konstruktor erhält alle benötigten Werte als Parameter
         public BurstNoise(double Burstvalue, int Burstduration, double BurstRatio)
         {
             //Exception Handling BurstRatio
@@ -23,15 +26,17 @@ namespace SensorDataSimulator
             this.ErrorLength = Burstduration;
             this.ErrorRatio = BurstRatio;
         }
-
+        // Fehlererzeugungsmethode erhält die Liste mit Daten ohne Fehler als Übergabeparameter
         public override List<double> GetSensorDataWithErrors(List<double> SensorDataWithoutErorrs)
         {
             TempList = SensorDataWithoutErorrs;
-
+            // Für jedes Element in der Liste:
             for(int i = 0; i < SensorDataWithoutErorrs.Count; i++)
             {
+                // Falls Zufallswert kleiner Fehlerrate :
                 if(Rand.NextDouble() <= ErrorRatio)
                 {
+                    // Fehler erzeugen auf gesamter Fehlerlänge
                     for (int z = 0; z < ErrorLength; z++)
                     {
                         TempList[i + z] = BurstValue;

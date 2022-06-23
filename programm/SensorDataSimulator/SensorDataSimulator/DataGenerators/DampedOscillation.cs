@@ -5,10 +5,15 @@ namespace SensorDataSimulator
 {
     public class DampedOscillation : SensorDataSimualtor<double>
     {
+        //Klasse zur Erzeugung einer gedämpften Schwingung
+
+        // Für die Datenerzeugung benötigte Variablen/Felder
         private double Amplitude;
         private double Dampingratio;
         private double Period;
         private double Phase;
+
+        // Dem Konstruktor werden alle zur Berechnung benötigten Werte übergeben
         public DampedOscillation(double Amplitude, double Dampingratio, double Period, double Phase, uint AmmountofValues)
         {
             this.Amplitude = Amplitude;
@@ -17,6 +22,8 @@ namespace SensorDataSimulator
             this.Phase = Phase;
             this.AmmountofValues = AmmountofValues;
         }
+
+        // Gibt Liste von errechneten Werten zurück
         public override List<double> GetSimulatorValues()
         {
             List<double> Result = new List<double>();

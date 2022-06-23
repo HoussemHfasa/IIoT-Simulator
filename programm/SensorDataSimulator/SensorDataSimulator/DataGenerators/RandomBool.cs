@@ -5,15 +5,19 @@ namespace SensorDataSimulator
 {
     public class RandomBool : SensorDataSimualtor<bool>
     {
+        // Klasse zur Erzeugung von zufällig erzeugten Bool-Werten
+
         private Random Rand = new Random();
         private double Toggleprobability;
+
+        // Konstruktor
         public RandomBool(double Toggleprobability, uint AmmountofValues)
         {
-            //
-
             this.Toggleprobability = Toggleprobability;
             this.AmmountofValues = AmmountofValues;
         }
+
+        // Datenerzeugung
         public override List<bool> GetSimulatorValues()
         {
             List<bool> Result = new List<bool>();

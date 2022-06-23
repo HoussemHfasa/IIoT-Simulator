@@ -4,12 +4,16 @@ namespace SensorDataSimulator
 {
     public class AdditiveNoise : SensorDataErrors, CommonInterfaces.ISensorDataErrors
     {
+        // Klasse zur Erzeugung von Fehlern Aufgrund von Rauschen(Noise)
         List<double> Noise;
+       
+        //Konstruktor erhält Noise/Rauschen Werte
         public AdditiveNoise(List<double> Noise)
         {
             this.Noise = Noise;
         }
 
+        //Fehlererzeugungsmethode
         public override List<double> GetSensorDataWithErrors(List<double> SensorDataWithoutErorrs)
         {
             // Achtung, wenn Noise Daten weniger sind als Sensordaten..
@@ -30,9 +34,10 @@ namespace SensorDataSimulator
                 LongerList = SensorDataWithoutErorrs;
             }
 
+            // Für jeden Wert der längeren Liste :
             for (int i = 0; i < SensorDataWithoutErorrs.Count; i++)
             {
-                // Die kurze Liste hat an der Stelle keine Werte mehr
+                // Die kurze Liste hat an der Stelle keine Werte mehr: Wert der langen Liste nehmen
                 if (i >= ShorterList.Count)
                 {
                     Result.Add(LongerList[i]);

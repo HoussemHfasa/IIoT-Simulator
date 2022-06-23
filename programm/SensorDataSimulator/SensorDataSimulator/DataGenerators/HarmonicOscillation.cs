@@ -5,12 +5,14 @@ namespace SensorDataSimulator
 {
     public class HarmonicOscillation : SensorDataSimualtor<double>
     {
+        //Klasse zur Erzeugung einer harmonischen Schwingung
+
         //Absprache nötig: Werden diese Daten in der Anzeige später gebraucht?
         private double Amplitude;
         private double Period;
         private double Phase;
 
-        //Konstruktor
+        //Konstruktor erhält alle benötigten Parameter
         public HarmonicOscillation(double Amplitude, double Period, double Phase, uint AmmountofValues )
         {
             // Parameter intern abspeichern

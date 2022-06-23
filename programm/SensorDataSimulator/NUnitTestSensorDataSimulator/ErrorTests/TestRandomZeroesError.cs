@@ -60,7 +60,7 @@ namespace NUnitTestSensorDataSimulator
             for(int i = 1; i < Result.Count; i++)
             {
                 if (Result[i] != 0.0)
-                    Assert.Fail("Die generierte Liste enthälte nicht nur O'en");
+                    Assert.Fail("Die generierte Liste enthält nicht nur O'en");
             }
         }
     }

@@ -34,6 +34,7 @@ namespace NUnitTestSensorDataSimulator
         [Test]
         public void AdditiveNoise_AddingZeroes_keeps_Data_unchanged()
         {
+            // Mit 0en addieren soll die Daten nicht ändern
             List<double> Result;
             TestData2 = new List<double> { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
             ErrorGenerator = new SensorDataSimulator.AdditiveNoise(TestData2);
@@ -43,7 +44,9 @@ namespace NUnitTestSensorDataSimulator
             Assert.IsTrue(Enumerable.SequenceEqual(Result, TestData));
         }
 
+        
         [Test]
+        // Test ob die Werte der Listen addiert werden
         public void AdditiveNoise_Adds_Values()
         {
             List<double> Result;
