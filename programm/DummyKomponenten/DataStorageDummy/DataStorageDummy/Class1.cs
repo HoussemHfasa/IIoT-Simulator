@@ -33,26 +33,33 @@ namespace DataStorageDummy
             return Liste;
         }
 
-        public IDatastorage<double>.BrokerProfile LoadBrokerProfile(string filepath)
-        {
-            IDatastorage<double>.BrokerProfile Beispiel = new IDatastorage<double>.BrokerProfile();
-            Beispiel.HostName_IP = "125.48.564";
-            Beispiel.Port = Convert.ToUInt32("1484");
-            Beispiel.Username = "name1";
-            Beispiel.Password = "passwort1";
-            return Beispiel;
-
-        }
+ 
 
         public void SaveSensorgroup(Dictionary<string, List<string>> SensorListe, string Base, string Filepath)
         {
             throw new NotImplementedException();
         }
 
-        public void SavebrokerProfile(IDatastorage<double>.BrokerProfile data, string filepath)
+        void IDatastorage<double>.JsonSerialize(ISensor<double> data, string filepath, string Sensortype)
         {
             throw new NotImplementedException();
         }
+
+        ISensor<double> IDatastorage<double>.JsonDeserialize(string filepath, string Sensortype)
+        {
+            throw new NotImplementedException();
+        }
+
+        IBrokerProfile IDatastorage<double>.LoadBrokerProfile(string filepath)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IDatastorage<double>.SavebrokerProfile(IBrokerProfile data, string filepath)
+        {
+            throw new NotImplementedException();
+        }
+
         //BrockerProfileEigenschaften
         public class BrokerProfile
         {

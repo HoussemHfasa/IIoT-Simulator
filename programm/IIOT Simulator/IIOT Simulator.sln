@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32407.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IIOT Simulator", "IIOT Simulator\IIOT Simulator.csproj", "{854747D8-DE94-4B2A-8D31-8FA77186FAE4}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStorageDummy", "..\DummyKomponenten\DataStorageDummy\DataStorageDummy\DataStorageDummy.csproj", "{D7FBC223-6B1F-4A51-A24D-02A640FC18F1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DummySensorandSensorgroups", "..\DummyKomponenten\DummySensorandSensorgroups\DummySensorandSensorgroups\DummySensorandSensorgroups.csproj", "{9399D1BB-18DD-4E85-8804-ACE99589982C}"
@@ -22,16 +20,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IIoTSimulatorUI", "IIoTSimulatorUI\IIoTSimulatorUI.csproj", "{0CF37846-4AD9-4E2F-AAFF-E346EC86345F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{854747D8-DE94-4B2A-8D31-8FA77186FAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{854747D8-DE94-4B2A-8D31-8FA77186FAE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{854747D8-DE94-4B2A-8D31-8FA77186FAE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{854747D8-DE94-4B2A-8D31-8FA77186FAE4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7FBC223-6B1F-4A51-A24D-02A640FC18F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D7FBC223-6B1F-4A51-A24D-02A640FC18F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7FBC223-6B1F-4A51-A24D-02A640FC18F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -56,6 +52,10 @@ Global
 		{823A2034-3E79-4776-B081-84B63490D93C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{823A2034-3E79-4776-B081-84B63490D93C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{823A2034-3E79-4776-B081-84B63490D93C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CF37846-4AD9-4E2F-AAFF-E346EC86345F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CF37846-4AD9-4E2F-AAFF-E346EC86345F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CF37846-4AD9-4E2F-AAFF-E346EC86345F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CF37846-4AD9-4E2F-AAFF-E346EC86345F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

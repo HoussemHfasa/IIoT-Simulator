@@ -5,7 +5,7 @@ using CommonInterfaces;
 
 namespace DummySensorandSensorgroups
 {
-    public class Sensor : ISenor<double>
+    public class Sensor : ISensor<double>
     {
 
         public Sensor()

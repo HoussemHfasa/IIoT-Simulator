@@ -13,20 +13,32 @@ using System.Windows.Shapes;
 namespace IIOT_Simulator
 {
     /// <summary>
-    /// Interaktionslogik für BestehendeSensorgruppeGeladen.xaml
+    /// Interaktionslogik für Simulation.xaml
     /// </summary>
-    public partial class BestehendeSensorgruppeGeladen : Window
+    public partial class Simulation : Window
     {
-        public BestehendeSensorgruppeGeladen()
+        public Simulation()
         {
             InitializeComponent();
         }
 
-        private void AbbrechenButton(object sender, RoutedEventArgs e)
+        private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void StartseiteButton(object sender, RoutedEventArgs e)
         {
             Startseite objectStartseite2 = new Startseite();
             this.Visibility = Visibility.Hidden; //So wird das aktuelle Fenster dann geschlossen
             objectStartseite2.Show();
+        }
+
+        private void BrokerSettingsClick(object sender, RoutedEventArgs e)
+        {
+            BrokerEinstellungen objectBrokerEinstellungen = new BrokerEinstellungen();
+            this.Visibility = Visibility.Hidden; //So wird das aktuelle Fenster dann geschlossen
+            objectBrokerEinstellungen.Show();
         }
     }
 }
