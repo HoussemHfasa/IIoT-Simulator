@@ -27,12 +27,12 @@ namespace IIoTSimulatorUI
 
 
             //Die geladene Sensorgreupe
-            Sensor sensorSimualtion = new Sensor();
+            Sensorbeispiel sensor = new Sensorbeispiel();
 
-            LabelTopicSimulation.Text = sensorSimualtion.Topic;
+             LabelTopicSimulation.Text = sensor.Topic;
 
             //Label für das Topic in der Leiste
-            LabelTopic.Content = sensorSimualtion.Topic;
+             LabelTopic.Content = sensor.Topic;
 
 
             //Visualisierung der Sensordaten, bisher noch kein Binding

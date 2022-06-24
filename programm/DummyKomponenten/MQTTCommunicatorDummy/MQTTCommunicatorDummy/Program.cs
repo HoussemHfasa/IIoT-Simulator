@@ -50,17 +50,24 @@ namespace MQTTCommunicatorDummy
           //  throw new NotImplementedException();
        // }
 
-        void IMQTTCommunicator.ConnectToBroker(string Host, int Port)
+
+        string IMQTTCommunicator.ConnectToBroker(string Host, int Port, string Username, string Password)
         {
             throw new NotImplementedException();
         }
 
-        void IMQTTCommunicator.PublishToTopic(string clientId, string topicName, string messagePayload)
+        void IMQTTCommunicator.CreateTopic(string topicName)
         {
             throw new NotImplementedException();
         }
 
-        void IMQTTCommunicator.SetNewBroker(string Host, int Port)
+        void IMQTTCommunicator.PublishToTopic(string topicName, string messagePayload)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        void IMQTTCommunicator.SetNewBroker(string Host, int Port, string Username, string Password)
         {
             throw new NotImplementedException();
         }

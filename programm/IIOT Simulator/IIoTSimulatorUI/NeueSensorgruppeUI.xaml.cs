@@ -97,8 +97,8 @@ namespace IIoTSimulatorUI
         //Speichert die Sensorgruppe als Topic(Soll)
         private void SensorgruppeSpeichernClick(object sender, RoutedEventArgs e)
         {
-            Sensor sensorTopic = new Sensor();
-            LabelTopic.Content = sensorTopic.Topic;
+            Sensorbeispiel sensor = new Sensorbeispiel();
+           LabelTopic.Content = sensor.Topic;
 
             MessageBox.Show("Sensorgruppe wurde gespeichert");
         }
