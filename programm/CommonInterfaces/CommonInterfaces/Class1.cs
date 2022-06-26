@@ -91,8 +91,23 @@ namespace CommonInterfaces
 
         public void CreateTopic(string topicName);
 
+
+        /// <summary>
+        /// Versendug von Messages an den Broker mit Voreinstellungen. Wird ausführbar, erst dann wenn der eine Verbindung zum
+        /// Broker besteht. Nachrichten werden mit QoS = 2 gesendet.
+        /// </summary>
+        /// <param name="topicName">Als TopicName wird Pfad von einem Sensor genommen</param>
+        /// <param name="messagePayload">Ubersendete Nachrichten an den Broker</param>
         public void PublishToTopic(string topicName, string messagePayload);
 
+        /// <summary>
+        /// Falls Benutzer eine neue Verbindung braucht, wird bestehende abgebrochen. Dann nochmal die Methode
+        /// ConnectToBroker ausgeführt.
+        /// </summary>
+        /// <param name="Host">Erwuenschte Brokername bzw. IP-Adresse des Brokers</param>
+        /// <param name="Port">Ein gültiger Port eingeben</param>
+        /// <param name="Username">Eingestellte Username</param>
+        /// <param name="Password">Dazugehörige Kennwort</param>
         public void SetNewBroker(string Host, int Port, string Username, string Password);
 
         public List<string> GetTopics();

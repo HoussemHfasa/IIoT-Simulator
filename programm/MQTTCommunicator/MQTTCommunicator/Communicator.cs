@@ -24,9 +24,11 @@ namespace MQTTCommunicator
         public Communicator()
         {
             mqttClient = new MqttFactory().CreateMqttClient();
-            //clients = new Dictionary<string, Client>();
+
             this.Topic = new List<string>();
+
             this.TopicMessage = new List<string>();
+
         }
         /// <summary>
         ///  Verbindung zum Broker mit und ohne Authentifizierung. Wenn man keine login und password eingibt, wird eine
@@ -47,7 +49,11 @@ namespace MQTTCommunicator
                 {
                     message += "Invalid Port\n";
                 }
-                         
+                if (string.IsNullOrWhiteSpace(Host))
+                {
+                    message += "Invalid Host\n";
+                }
+
                 if ( string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password) )
                 {
                     var options = new MqttClientOptionsBuilder()
