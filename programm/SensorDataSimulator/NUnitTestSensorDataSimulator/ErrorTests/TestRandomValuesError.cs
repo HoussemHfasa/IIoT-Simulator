@@ -8,6 +8,7 @@ namespace NUnitTestSensorDataSimulator
 {
     public class TestRandomValuesError
     {
+        // Benötigte Variablen/Felder
         RandomValuesError ErrorGenerator;
         Random Rand = new Random();
         double RandomErrorRatio;
@@ -71,7 +72,7 @@ namespace NUnitTestSensorDataSimulator
         [Test]
         public void RandomError_ErrorRatioAboveOne_Throws()
         {
-            //Negative ErrorRatio
+            //ErrorRatio über 1
             ErrorGenerator = new SensorDataSimulator.RandomValuesError(RandomErrorRatio +1.1, RandomErrorLength, RandomMaxError, RandomMinError);
 
             //Löst Exception aus?
@@ -80,6 +81,7 @@ namespace NUnitTestSensorDataSimulator
         }
 
         [Test]
+        // Debugtest zum Anzeigen des Ergebnisses
         public void RandomError_Print_Result_Test()
         {
             List<double> TestResult;
@@ -100,7 +102,7 @@ namespace NUnitTestSensorDataSimulator
                    + "\x0A erzeugt");
         }
 
-        //TestIdeen: Errorlength 0 returns die Liste
+        
 
 
         

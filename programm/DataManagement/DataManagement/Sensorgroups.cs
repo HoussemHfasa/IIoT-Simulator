@@ -84,7 +84,11 @@ namespace SensorAndSensorgroup
             Dictionary<string, List<string>> Sensorids = new Dictionary<string, List<string>>();
             if (File.Exists(Path.Combine(folderPath, Basename)))
             {
-                Sensorids = store.LoadSensorgroup(Basename, folderPath);
+                if(!(store.LoadSensorgroup(Basename, folderPath)==null))
+                {
+                    Sensorids = store.LoadSensorgroup(Basename, folderPath);
+                }
+                
                 if (!Sensorids.ContainsKey(NodeName))
                 {
                     Sensorids.Add(NodeName, new List<string> { });
@@ -97,7 +101,10 @@ namespace SensorAndSensorgroup
         public void DeleteNode(string NodeName, string Basename)
         {
             Dictionary<string, List<string>> Sensorids = new Dictionary<string, List<string>>();
-            Sensorids = store.LoadSensorgroup(Basename, folderPath);
+            if (!(store.LoadSensorgroup(Basename, folderPath) == null))
+            {
+                Sensorids = store.LoadSensorgroup(Basename, folderPath);
+            }
             if (File.Exists(folderPath + Basename))
             {
                 if (Sensorids.ContainsKey(NodeName))
@@ -113,8 +120,11 @@ namespace SensorAndSensorgroup
         public void Sensorhinzufuegen(string sensorid, string NodeName, string Basename)
         {
             Dictionary<string, List<string>> Sensorids = new Dictionary<string, List<string>>();
-            Sensorids = store.LoadSensorgroup(Basename, folderPath);
-            if ((File.Exists(folderPath + Basename))&& (Sensorids.ContainsKey(NodeName)))
+            if (!(store.LoadSensorgroup(Basename, folderPath) == null))
+            {
+                Sensorids = store.LoadSensorgroup(Basename, folderPath);
+            }
+            if ((File.Exists(folderPath + Basename))&& (Sensorids.Keys.Contains(NodeName)))
             {
                 if(!Sensorids[NodeName].Contains(sensorid))
                 {
@@ -128,7 +138,10 @@ namespace SensorAndSensorgroup
         public void Sensorloeschen(string sensorid, string NodeName, string Basename)
         {
             Dictionary<string, List<string>> Sensorids = new Dictionary<string, List<string>>();
-            Sensorids = store.LoadSensorgroup(Basename, folderPath);
+            if (!(store.LoadSensorgroup(Basename, folderPath) == null))
+            {
+                Sensorids = store.LoadSensorgroup(Basename, folderPath);
+            }
             if ((File.Exists(folderPath + Basename)) && (Sensorids.ContainsKey(NodeName)))
             {
                 

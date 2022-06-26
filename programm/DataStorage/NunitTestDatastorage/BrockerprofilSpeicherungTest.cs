@@ -27,7 +27,10 @@ namespace NunitTestDatastorage
         public void Setup()
         {
             //Arrange
-            
+            if (!System.IO.Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Tests"))
+            {
+                System.IO.Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "Tests");
+            }
             Storagetest = new DataStorage.DataStorage<double>();
              filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,@"Tests\");
             Beispiel1.HostName_IP = "124.145.12.326";

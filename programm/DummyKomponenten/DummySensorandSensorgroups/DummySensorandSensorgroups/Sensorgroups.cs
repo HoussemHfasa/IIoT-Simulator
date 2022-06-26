@@ -20,8 +20,6 @@ namespace SensorAndSensorgroups
 
         public string Node { get {return this.Node; } set { this.Node = "Zimmer1"; } }
 
-        
-
         public void AddBase(string BaseName)
         {
             Base = BaseName;
@@ -58,6 +56,16 @@ namespace SensorAndSensorgroups
   
 
         public void Sensorloeschen(string sensorid, string NodeName, string Basename)
+        {
+            throw new NotImplementedException();
+        }
+
+        void ISensorGroups.DeleteBase(string BaseName)
+        {
+            throw new NotImplementedException();
+        }
+
+        void ISensorGroups.DeleteNode(string NodeName, string Basename)
         {
             throw new NotImplementedException();
         }

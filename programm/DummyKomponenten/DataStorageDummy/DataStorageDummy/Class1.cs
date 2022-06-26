@@ -33,7 +33,7 @@ namespace DataStorageDummy
             return Liste;
         }
 
-        public IBrokerProfile LoadBrokerProfile(string filepath)
+       /* public IBrokerProfile LoadBrokerProfile(string filepath)
         {
             IBrokerProfile Beispiel = new IBrokerProfile();
             
@@ -43,7 +43,7 @@ namespace DataStorageDummy
             Beispiel.Password = "passwort1";
             return Beispiel;
 
-        }
+        }*/
 
         public void SaveSensorgroup(Dictionary<string, List<string>> SensorListe, string Base, string Filepath)
         {
@@ -61,6 +61,11 @@ namespace DataStorageDummy
         }
 
         public void BasenamSerialize(List<string> data, string filepath)
+        {
+            throw new NotImplementedException();
+        }
+
+        IBrokerProfile IDatastorage<double>.LoadBrokerProfile(string filepath)
         {
             throw new NotImplementedException();
         }

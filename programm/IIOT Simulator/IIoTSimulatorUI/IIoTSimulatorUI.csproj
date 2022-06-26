@@ -3,14 +3,12 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>IIOT_Simulator</RootNamespace>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon />
-	  <StartupObject>IIOTSimulator.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
-    <ApplicationDefinition Remove="App.xaml" />
+    <None Remove="Images\IIOT.jpg" />
+    <None Remove="Images\IIOT2.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +18,20 @@
     <ProjectReference Include="..\..\DummyKomponenten\DummySensorandSensorgroups\DummySensorandSensorgroups\DummySensorandSensorgroups.csproj" />
     <ProjectReference Include="..\..\DummyKomponenten\MQTTCommunicatorDummy\MQTTCommunicatorDummy\MQTTCommunicatorDummy.csproj" />
     <ProjectReference Include="..\..\DummyKomponenten\SensorDataSimulatorDummy\SensorDataSimulatorDummy\SensorDataSimulatorDummy.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\IIOT.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\IIOT2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LiveCharts" Version="0.9.7" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
   </ItemGroup>
 
 </Project>

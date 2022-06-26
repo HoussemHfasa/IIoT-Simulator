@@ -19,6 +19,9 @@ namespace IIOT_Simulator
     /// </summary>
     public partial class NeueSensorgruppeErstellen : Window
     {
+        //Instanz der Klasse TreeView erstellen und den Stamm Namen vorerst festlegen
+        TreeViewKlasse<string> treeViewObject = new TreeViewKlasse<string>("Stamm..");
+
         public NeueSensorgruppeErstellen()
         {
             InitializeComponent();
@@ -37,12 +40,15 @@ namespace IIOT_Simulator
         {
 
             string stammText = textBoxEingabe.Text;
-            string unterordnerText = textBoxEingabe2.Text;                                  
+            string unterordnerText = textBoxEingabe2.Text;
+
+            TreeViewItem selectedTVI = (TreeViewItem)TreeView1.SelectedItem;
+
 
             TreeViewItem StammItem = new TreeViewItem();
 
             StammItem.Header = stammText;
-            TreeView1.Items.Add(StammItem); 
+            selectedTVI.Items.Add(StammItem); 
 
             StammItem.Items.Add(new TreeViewItem() { Header = unterordnerText });
 
@@ -95,24 +101,27 @@ namespace IIOT_Simulator
         private void StammHinzufuegen(object sender, RoutedEventArgs e)
         {
             string stamm = textBoxEingabe.Text; //Benutzereingabe in einem String speichern
-            string folderPath = @"C:\stamm"; //Den Pfad zu diesem Ordner festlegen
-            if (!Directory.Exists(folderPath)) //Prüfen ob der Ordner bereits existiert
-            {
-                Directory.CreateDirectory(folderPath); //Wenn nicht, erstelle den Ordnerpfad
-            }
-            else //Ansonsten lass eine MassageBox erscheinen die darum bittet einen neuen Namen einzugeben 
-            {
-                MessageBox.Show("Der Name existiert bereits. Bitte geben Sie einen neuen Namen ein.");
-            }
-            textBoxEingabe.Clear();//In jedem Fall wird die TextBox geleert
+             /* string folderPath = @"C:\stamm"; //Den Pfad zu diesem Ordner festlegen
+             if (!Directory.Exists(folderPath)) //Prüfen ob der Ordner bereits existiert
+             {
+                 Directory.CreateDirectory(folderPath); //Wenn nicht, erstelle den Ordnerpfad
+             }
+             else //Ansonsten lass eine MassageBox erscheinen die darum bittet einen neuen Namen einzugeben 
+             {
+                 MessageBox.Show("Der Name existiert bereits. Bitte geben Sie einen neuen Namen ein.");
+             }
+             textBoxEingabe.Clear();//In jedem Fall wird die TextBox geleert
+            */
 
+            TreeViewKlasse<string> treeViewObject = new TreeViewKlasse<string>(stamm); //Die Benutzereingabe als Stamm festlegen
 
         }
 
         //Button um den Unterordner hinzuzufügen
         private void UnterordnerHinzufuegenClick(object sender, RoutedEventArgs e)
         {
-            string unterordner = textBoxEingabe2.Text;
+            string unterordner = textBoxEingabe2.Text; //Benutzereingabe in einem string speichern
+            TreeViewKlasse<string> pfad1 = treeViewObject.AddChild(unterordner); //die Benutzereingabe als Unterordner festlegen
             
         }
 
@@ -122,5 +131,9 @@ namespace IIOT_Simulator
             
         }
 
+        private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

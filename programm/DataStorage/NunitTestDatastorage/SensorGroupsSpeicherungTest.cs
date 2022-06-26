@@ -32,7 +32,10 @@ namespace NunitTestDatastorage
             Folderpath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Tests\");
             List<string> Sensoren = new List<string> { "151546", "18546", "84984" };
             Sensorliste.TryAdd("Zimmer1",Sensoren);
-            
+            if (!System.IO.Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "Tests"))
+            {
+                System.IO.Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "Tests");
+            }
 
         }
 

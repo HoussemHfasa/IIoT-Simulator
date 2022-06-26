@@ -21,6 +21,8 @@ namespace NunitTestDatamanagement
         string FolderPath;
         string Base;
         string Node;
+        string Node1;
+        string Node3;
         string Node2;
         string Id;
         string Id2;
@@ -35,10 +37,16 @@ namespace NunitTestDatamanagement
             Base = "Hometest2";
             Node = "Zimmer5";
             Node2 = "Wohnzimmer";
+            Node1 = "zimmer1";
+            Node3 = "zimmer4";
             List<string> Sensoren = new List<string> { "18485146", "1784961", "47849525" };
             Ids.TryAdd(Node,Sensoren);
             Id = "8198419";
             Id2 = "46984156";
+            if (System.IO.Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "SensorGroups"))
+            {
+                System.IO.Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "SensorGroups");
+            }
         }
         [Test]
         public void It_should_Addbase()
@@ -60,12 +68,12 @@ namespace NunitTestDatamanagement
 
             //Act
             SensorgroupsTests.AddNode(Node, Base);
-            SensorgroupsTests.AddNode(Node2, Base);
+            
             Ids2 = store.LoadSensorgroup(Base, FolderPath);
             
 
             //Assert
-            Assert.That(Ids2.ContainsKey(Node));
+            Assert.That(Ids2.Keys.Contains(Node));
            
         }
         
@@ -75,12 +83,14 @@ namespace NunitTestDatamanagement
         {
 
             //Act
-            SensorgroupsTests.Sensorhinzufuegen(Id,Node,Base);
-            SensorgroupsTests.Sensorhinzufuegen(Id2, Node, Base);
+
+            SensorgroupsTests.AddNode(Node2, Base);
+            SensorgroupsTests.Sensorhinzufuegen(Id,Node2,Base);
+            
             Ids2 = store.LoadSensorgroup(Base, FolderPath);
 
             //Assert
-            Assert.That(Ids2[Node].Contains(Id));
+            Assert.That(Ids2[Node2].Contains(Id));
         }
         [Test]
         public void It_should_delete_node()
@@ -88,11 +98,11 @@ namespace NunitTestDatamanagement
 
 
             //Act
-            SensorgroupsTests.DeleteNode(Node2, Base);
+            SensorgroupsTests.DeleteNode(Node3, Base);
             Ids2 = store.LoadSensorgroup(Base, FolderPath);
 
             //Assert
-            Assert.That(!Ids2.ContainsKey(Node2));
+            Assert.That(!Ids2.ContainsKey(Node3));
         }
         [Test]
         public void It_should_delete_Sensor()
@@ -110,8 +120,6 @@ namespace NunitTestDatamanagement
         [Test]
         public void It_should_skip_when_the_id_is_founded()
         {
-
-
 
             //Act
             SensorgroupsTests.Sensorhinzufuegen(Id, Node, Base);
