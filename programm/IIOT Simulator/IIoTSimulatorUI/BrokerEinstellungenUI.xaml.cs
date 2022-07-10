@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DataStorageDummy;
+using MQTTCommunicator;
 
 namespace IIoTSimulatorUI
 {
@@ -28,7 +29,6 @@ namespace IIoTSimulatorUI
         //aufgefordert den Nutzernamen und das Passwort einzugeben.
         private void Verbinden(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Geben Sie Ihren Nutzernamen und Passwort ein.");
 
             //Wenn der Broker-Name und der Port zur Anmeldung reichen wird gleich mit dem Broker verbunden
             //Sollte noch der Nutzername und das Passwort benötigt werden, 
@@ -46,6 +46,17 @@ namespace IIoTSimulatorUI
             HakenPort.Foreground = System.Windows.Media.Brushes.Green;
 
             HakenBrokerName.Foreground = System.Windows.Media.Brushes.Green;
+
+            string brokerNameEingabe = BrokerNameText.Text;
+            int portEingabe = Int32.Parse(PortText.Text);
+            string nutzernameEingabe = NutzernameText.Text;
+            string passwortEingabe = PassswortBox.Password.ToString();
+
+            Communicator communicatorObject = new Communicator();
+
+            string verbunden = communicatorObject.ConnectToBroker(brokerNameEingabe, portEingabe);
+            MessageBox.Show("Verbindungsstatus: " + verbunden);
+
         }
 
 

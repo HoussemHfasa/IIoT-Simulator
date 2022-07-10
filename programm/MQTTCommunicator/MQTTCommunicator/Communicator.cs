@@ -41,8 +41,9 @@ namespace MQTTCommunicator
         /// <param name="Password">Dazugehörige Kennwort</param>
         public string ConnectToBroker(string Host, int Port, string Username = null, string Password = null)
         {
-            string message = "";
-            Console.WriteLine("Connecting to " + Host + " : " + Port);
+            string message = "hallo";
+            
+            //Console.WriteLine("Connecting to " + Host + " : " + Port);
             try
             {
                 if (Port > 65535 || Port < 0)
@@ -64,7 +65,7 @@ namespace MQTTCommunicator
                         .Build();
                     mqttClient.UseConnectedHandler(e =>
                     {
-                        Console.WriteLine("Connected to the broker");
+                        message += "-Connected to the broker\n-";
                     });
                     Task t = Task.Run(() => mqttClient.ConnectAsync(options));
                     Task.WaitAll(t);
@@ -82,7 +83,7 @@ namespace MQTTCommunicator
                         .Build();
                     mqttClient.UseConnectedHandler(e =>
                     {
-                        Console.WriteLine("Connected to the broker");
+                        message += "-Connected to the broker\n-";
                         Task t = Task.Run(() => mqttClient.ConnectAsync(options));
                     Task.WaitAll(t);
 
@@ -91,11 +92,11 @@ namespace MQTTCommunicator
             }
             catch
             {
-                    Console.WriteLine("Connection failed");
+                message += "-Connection failed\n-";
             }
             mqttClient.UseDisconnectedHandler(async e =>
             {
-                Console.WriteLine("Connecting failed, try again");
+                message += "-Connected to the broker, try again\n-";
                 await Task.Delay(TimeSpan.FromSeconds(5));
 
                 try
@@ -111,10 +112,9 @@ namespace MQTTCommunicator
                 }
                 catch
                 {
-                    Console.WriteLine("FAILED");
+                    message += "-FAILED\n-";
                 }
             });
-            Console.WriteLine(message);
             return message;
         }
 

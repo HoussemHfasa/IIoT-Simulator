@@ -214,7 +214,7 @@
                      BorderThickness="2,2,2,2"/>
 
             <!-- TextBox für den Port-->
-            <TextBox x:Name="PortText"
+            <TextBox x:Name="NutzernameText"
                      Width="220"
                      Height="35" 
                      Grid.ColumnSpan="2" 
@@ -231,6 +231,7 @@
 
             <!-- TextBox fpr den Nutzernamen -->
             <TextBox
+                x:Name="PortText"
                 Width="220"
                 Height="35" 
                 Grid.Column="2"

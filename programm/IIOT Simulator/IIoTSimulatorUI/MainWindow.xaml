@@ -142,7 +142,7 @@
                     Foreground="White"
                     FontSize="16"
                     Grid.ColumnSpan="3" 
-                    Margin="163,360,148,-360">
+                    Margin="163,360,148,-360" Cursor="Hand">
 
                 <Button.Style>
                     <Style TargetType="Button">
