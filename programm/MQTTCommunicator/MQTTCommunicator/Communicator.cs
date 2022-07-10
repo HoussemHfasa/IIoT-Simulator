@@ -41,7 +41,7 @@ namespace MQTTCommunicator
         /// <param name="Password">Dazugehörige Kennwort</param>
         public string ConnectToBroker(string Host, int Port, string Username = null, string Password = null)
         {
-            string message = "hallo";
+            string message = "";
             
             //Console.WriteLine("Connecting to " + Host + " : " + Port);
             try
@@ -65,7 +65,7 @@ namespace MQTTCommunicator
                         .Build();
                     mqttClient.UseConnectedHandler(e =>
                     {
-                        message += "-Connected to the broker\n-";
+                        message += "-Connected\n-";
                     });
                     Task t = Task.Run(() => mqttClient.ConnectAsync(options));
                     Task.WaitAll(t);
@@ -83,7 +83,7 @@ namespace MQTTCommunicator
                         .Build();
                     mqttClient.UseConnectedHandler(e =>
                     {
-                        message += "-Connected to the broker\n-";
+                        message += "-Connected\n-";
                         Task t = Task.Run(() => mqttClient.ConnectAsync(options));
                     Task.WaitAll(t);
 

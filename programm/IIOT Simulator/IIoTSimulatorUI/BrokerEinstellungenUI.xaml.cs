@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DataStorageDummy;
+using DummySensorandSensorgroups;
 using MQTTCommunicator;
 
 namespace IIoTSimulatorUI
@@ -55,7 +56,16 @@ namespace IIoTSimulatorUI
             Communicator communicatorObject = new Communicator();
 
             string verbunden = communicatorObject.ConnectToBroker(brokerNameEingabe, portEingabe);
-            MessageBox.Show("Verbindungsstatus: " + verbunden);
+
+            if (verbunden.Equals("-Connected\n-"))
+            {
+                MessageBox.Show("Erfolgreiche Broker-Verbindung" );
+            }
+            else
+            {
+                MessageBox.Show("Verbindung fehlgeschlagen: " + verbunden);
+            }
+            
 
         }
 
