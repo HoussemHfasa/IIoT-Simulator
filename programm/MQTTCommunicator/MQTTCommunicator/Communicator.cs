@@ -41,7 +41,7 @@ namespace MQTTCommunicator
         /// <param name="Password">Dazugehörige Kennwort</param>
         public string ConnectToBroker(string Host, int Port, string Username = null, string Password = null)
         {
-            string message = "hallo";
+            string message = "";
             
             //Console.WriteLine("Connecting to " + Host + " : " + Port);
             try
