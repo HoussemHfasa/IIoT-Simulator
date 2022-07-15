@@ -24,6 +24,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IIoTSimulatorUI", "IIoTSimu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQTTCommunicator", "..\MQTTCommunicator\MQTTCommunicator\MQTTCommunicator.csproj", "{AE670A61-79AF-4B8F-9976-9EEEFEFFABE6}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SensorAndSensorgroup", "..\DataManagement\DataManagement\SensorAndSensorgroup.csproj", "{F4551CC5-C3AF-4C41-B880-5F2DDC630138}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStorage", "..\DataStorage\DataStorage\DataStorage.csproj", "{AF4021C1-DD94-40F4-81EF-3A445D703F47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +66,14 @@ Global
 		{AE670A61-79AF-4B8F-9976-9EEEFEFFABE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE670A61-79AF-4B8F-9976-9EEEFEFFABE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE670A61-79AF-4B8F-9976-9EEEFEFFABE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4551CC5-C3AF-4C41-B880-5F2DDC630138}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4551CC5-C3AF-4C41-B880-5F2DDC630138}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4551CC5-C3AF-4C41-B880-5F2DDC630138}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4551CC5-C3AF-4C41-B880-5F2DDC630138}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF4021C1-DD94-40F4-81EF-3A445D703F47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF4021C1-DD94-40F4-81EF-3A445D703F47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF4021C1-DD94-40F4-81EF-3A445D703F47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF4021C1-DD94-40F4-81EF-3A445D703F47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

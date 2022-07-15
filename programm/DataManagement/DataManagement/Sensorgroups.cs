@@ -11,6 +11,12 @@ namespace SensorAndSensorgroup
 {
     public  class Sensorgroups : ISensorGroups
     {
+        List<string> List_of_Basename; //Änderung - Lokales Abspeichern der Base Names
+
+        Dictionary<string, List<string>> Nodes; //Änderung - Lokales Abspeichern des Node Names
+
+        List<string> nodesList;
+
         DataStorage<string> store = new DataStorage<string>();
         //allgemeine Adresse für die Sensoren ,die in der Liste sind
         public string Base { get; set; }
@@ -18,6 +24,13 @@ namespace SensorAndSensorgroup
         public string Node { get; set; }
         //Ordnerpfad von die Sensorgruppen gespeichert
         string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"SensorGroups\");
+
+        public Sensorgroups()
+        {
+            List_of_Basename = new List<string>();
+
+            Nodes = new Dictionary<string, List<string>>();
+        }
 
         //List von Sensoren und ihren Node
         public Dictionary<string,List<string>> SensorIds 
@@ -47,8 +60,8 @@ namespace SensorAndSensorgroup
         // allgemeine Adresse für die Sensoren hinzufügen
         public void AddBase(string BaseName)
         {
-            List<string> List_of_Basename = new List<string>();
-            List_of_Basename = store.BasenameDeserialize(folderPath );
+            List_of_Basename.Add(BaseName);
+           /* List_of_Basename = store.BasenameDeserialize(folderPath );
             if (!File.Exists(folderPath + "List of Basenames"))
             {
                 Create_File(folderPath, "List of Basenames");
@@ -62,7 +75,7 @@ namespace SensorAndSensorgroup
                 List_of_Basename.Add(BaseName);
             }
             
-            store.BasenamSerialize(List_of_Basename,folderPath);
+            store.BasenamSerialize(List_of_Basename,folderPath);*/
             
             
         }
@@ -81,20 +94,27 @@ namespace SensorAndSensorgroup
         // Unterordner hinzufügen unter die Adresse
         public void AddNode(string NodeName, string Basename)
         {
-            Dictionary<string, List<string>> Sensorids = new Dictionary<string, List<string>>();
-            if (File.Exists(Path.Combine(folderPath, Basename)))
-            {
-                if(!(store.LoadSensorgroup(Basename, folderPath)==null))
-                {
-                    Sensorids = store.LoadSensorgroup(Basename, folderPath);
-                }
-                
-                if (!Sensorids.ContainsKey(NodeName))
-                {
-                    Sensorids.Add(NodeName, new List<string> { });
-                    store.SaveSensorgroup(Sensorids, Basename, folderPath);
-                }
-            }
+            //prüfen ob bereits eine Liste im Dictionary zu dem Key Basename existiert
+            //  wenn ja: zu der Liste den NodeName hinzufügen
+            // wenn nein: Eine neue ertstellen die den Nodename hinzufügt
+            // und dann abspeichern unter Basename und der Liste
+       
+
+          // nodesList.Add(Basename, NodeName);
+
+            /* if (File.Exists(Path.Combine(folderPath, Basename)))
+             {
+                 if(!(store.LoadSensorgroup(Basename, folderPath)==null))
+                 {
+                     Nodes = store.LoadSensorgroup(Basename, folderPath);
+                 }
+
+                 if (!Nodes.ContainsKey(NodeName))
+                 {
+                     Nodes.Add(NodeName, new List<string> { });
+                     store.SaveSensorgroup(Nodes, Basename, folderPath);
+                 }
+             }*/
         }
 
         // Unterordner Löschen

@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DummySensorandSensorgroups;
+using SensorAndSensorgroup;
 
 namespace IIoTSimulatorUI
 {
@@ -18,6 +19,8 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class NeueSensorgruppeUI : Window
     {
+        Sensorgroups sensorgroupsObject = new Sensorgroups();
+
         public NeueSensorgruppeUI()
         {
             InitializeComponent();
@@ -62,12 +65,17 @@ namespace IIoTSimulatorUI
             HakenStamm.Foreground = System.Windows.Media.Brushes.Green; //Grünen Haken erscheinen lassen
 
             LabelInfo.Foreground = System.Windows.Media.Brushes.White; //Info ausblenden
+
+            Sensorgroups sensorgroupsObject = new Sensorgroups();
+
+            sensorgroupsObject.AddBase(stammText);
         }
 
         //Button um den Unterordner hinzuzufügen
         private void UnterordnerHinzufuegenClick(object sender, RoutedEventArgs e)
         {
-            TreeViewItem selectedTVI = (TreeViewItem)TreeView1.SelectedItem; //Ein TreeViewItem vom ausgewählten Item erstellen
+            TreeViewItem selectedTVI = (TreeViewItem)TreeView1.SelectedItem as TreeViewItem; //Ein TreeViewItem vom ausgewählten Item erstellen
+            string oberordner = selectedTVI.Header.ToString();//Das ausgewählte Objekt in String speichern
 
             TreeViewItem unterordner = new TreeViewItem(); //Ein TreeViewItem vom Unterordner erstellen
 
@@ -76,6 +84,9 @@ namespace IIoTSimulatorUI
             unterordner.Header = unterordnerText;
 
             selectedTVI.Items.Add(unterordner);// Dem ausgewählten Item den Unterordner hinzufügen
+
+            sensorgroupsObject.AddNode(unterordnerText, oberordner);
+
 
         }
 
