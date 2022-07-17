@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\CommonInterfaces\CommonInterfaces\CommonInterfaces.csproj" />
+    <ProjectReference Include="..\..\DataManagement\DataManagement\SensorAndSensorgroup.csproj" />
     <ProjectReference Include="..\..\MQTTCommunicator\MQTTCommunicator\MQTTCommunicator.csproj" />
   </ItemGroup>
 

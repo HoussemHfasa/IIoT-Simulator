@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using CommonInterfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SensorAndSensorgroup;
 
 
 
@@ -26,7 +27,7 @@ namespace DataStorage
                 }
             
         }
-
+       
         // Ladung der Sensorgroups Daten(Nodename-Ids)
         public Dictionary<string, List<string>> LoadSensorgroup(string Base, string FolderPath)
         {
@@ -91,6 +92,50 @@ namespace DataStorage
             {
                 serializer.Serialize(writer, data);
             }
+        }
+
+
+
+        // Änderungen im Gruppenmeeting
+        //die Methode Basename/Nodename/Sensor nicht geeignjet für unsere Programm ,da der Nutzer mehrere Unterordner erstellen kann
+        public void SaveTree(List<TreeNode<T>.NAryTree> Trees, List<string> Basenames)
+        {
+            var serializer = new JsonSerializer();
+            foreach (TreeNode<T>.NAryTree k in Trees)
+            {
+                using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "Tree" + Trees.IndexOf(k)))
+                {
+                    serializer.Serialize(writer, k);
+                }
+
+            }
+            using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "Basenames"))
+            {
+                serializer.Serialize(writer, Basenames);
+            }
+        }
+        public List<string> Loadbasenameliste(string Filepath)
+        {
+            var serializer = new JsonSerializer();
+            List<string> basenemaesliste = new List<string>();
+            using (TextReader reader = File.OpenText(Filepath))
+            {
+                basenemaesliste = (List<string>)serializer.Deserialize(reader, typeof(List<string>));
+            }
+            return basenemaesliste;
+        }
+        public List<TreeNode<T>.NAryTree> LoadTree(List<string> Basenameliste)
+        {
+            var serializer = new JsonSerializer();
+            List<TreeNode<T>.NAryTree> Trees = new List<TreeNode<T>.NAryTree>();
+            foreach (string k in Basenameliste)
+            {
+                using (TextReader reader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "Tree" + Basenameliste.IndexOf(k)))
+                {
+                    Trees.Add((TreeNode<T>.NAryTree)serializer.Deserialize(reader, typeof(TreeNode<T>.NAryTree)));
+                }
+            }
+            return Trees;
         }
 
     }
