@@ -93,15 +93,19 @@ namespace IIoTSimulatorUI
         //Button um den Sensor hinzuzufügen
         private void SensorHinzufuegenClick(object sender, RoutedEventArgs e)
         {
-            TreeViewItem selectedTVI = (TreeViewItem)TreeView1.SelectedItem;
 
-            TreeViewItem sensorItem = new TreeViewItem();
+            PopUpSensoren objectPopupSensoren = new PopUpSensoren();
+            objectPopupSensoren.Show();
+            /*  TreeViewItem selectedTVI = (TreeViewItem)TreeView1.SelectedItem;
 
-            string sensor = (string)ComboBoxSensoren.Text;
+              TreeViewItem sensorItem = new TreeViewItem();
 
-            sensorItem.Header = sensor;
+              string sensor = (string)ComboBoxSensoren.Text;
 
-            selectedTVI.Items.Add(sensorItem); //Funktioniert
+              sensorItem.Header = sensor;
+
+              selectedTVI.Items.Add(sensorItem); //Funktioniert
+            */
         }
 
 

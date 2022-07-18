@@ -1,0 +1,66 @@
+﻿<Window x:Class="IIoTSimulatorUI.PopUpSensoren"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IIoTSimulatorUI"
+        mc:Ignorable="d"
+        Title="PopUpSensoren" Height="450" Width="800">
+    <Grid>
+        <!-- TextBox für den Sensortyp -->
+        <ComboBox x:Name="ComboBoxSensoren"
+                Height="30" 
+                Margin="53,82,466,322" 
+                FontSize="17">
+            <ComboBoxItem 
+                     Content="Harmonische Schwingung"></ComboBoxItem>
+            <ComboBoxItem 
+                     Content="Gedämpfte Schwingung"></ComboBoxItem>
+            <ComboBoxItem 
+                     Content="Überlagerte Schwingung"></ComboBoxItem>
+            <ComboBoxItem 
+                     Content="Standardabweichung"></ComboBoxItem>
+
+        </ComboBox>
+
+        <!-- Button zum Erstellen der Sensorgruppe-->
+        <Button Content="Sensor hinzufügen"
+                    Click="SensorHinzufuegenClick"
+                    Foreground="White"
+                    FontSize="16" 
+                    Margin="400,69,0,309" 
+                    HorizontalAlignment="Left"
+                    Width="184" 
+                    Cursor="Hand">
+
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                    <Setter Property="Background" 
+                                Value="#008080"/>
+                    <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                            <Setter Property="Background"
+                                     Value="Aqua"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="180" Height="30"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+    </Grid>
+</Window>
