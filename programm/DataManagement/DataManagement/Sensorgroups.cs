@@ -10,7 +10,7 @@ using CommonInterfaces;
 namespace SensorAndSensorgroup
 {
     
-        public class Sensorgroups<T> : ISensorGroups
+        public class Sensorgroups : ISensorGroups
         {
            
         
@@ -162,7 +162,7 @@ namespace SensorAndSensorgroup
 
             }
         // Änderungen im Gruppenmeeting
-        List<TreeNode<T>.NAryTree> Trees = new List<TreeNode<T>.NAryTree>();
+     /*   List<TreeNode<T>.NAryTree> Trees = new List<TreeNode<T>.NAryTree>();
         List<string> basenameliste = new List<string>();
         public void Addbase(string Basename)
         {
@@ -178,7 +178,7 @@ namespace SensorAndSensorgroup
         public void Addsensor(Sensor<T> sensor,string obere_Ordner)
         {
 
-        }
+        }*/
 
     }
     
