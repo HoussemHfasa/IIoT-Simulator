@@ -21,5 +21,15 @@ namespace IIoTSimulatorUI
         {
             InitializeComponent();
         }
+
+        private void FehlerHinzufuegen(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SensordatenSpeichern(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -21,5 +21,10 @@ namespace IIoTSimulatorUI
         {
             InitializeComponent();
         }
+
+        private void SensorHinzufuegenClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
