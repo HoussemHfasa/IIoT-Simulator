@@ -30,24 +30,6 @@ namespace IIoTSimulatorUI
         //aufgefordert den Nutzernamen und das Passwort einzugeben.
         private void Verbinden(object sender, RoutedEventArgs e)
         {
-
-            //Wenn der Broker-Name und der Port zur Anmeldung reichen wird gleich mit dem Broker verbunden
-            //Sollte noch der Nutzername und das Passwort benötigt werden, 
-            //ändern diese Elemente beim Verbinden ihre Farbe um auf die Eingabe hinzuweißen
-            var bc = new BrushConverter();
-            
-            PortText.Background = (Brush)bc.ConvertFrom("#ff1f4663");
-            
-            PassswortBox.Background = (Brush)bc.ConvertFrom("#ff1f4663");
-
-            NutzernameLabel.Foreground = System.Windows.Media.Brushes.White;
-
-            PasswortLabel.Foreground = System.Windows.Media.Brushes.White;
-
-            HakenPort.Foreground = System.Windows.Media.Brushes.Green;
-
-            HakenBrokerName.Foreground = System.Windows.Media.Brushes.Green;
-
             string brokerNameEingabe = BrokerNameText.Text;
             int portEingabe = Int32.Parse(PortText.Text);
             string nutzernameEingabe = NutzernameText.Text;
@@ -56,6 +38,8 @@ namespace IIoTSimulatorUI
             Communicator communicatorObject = new Communicator();
 
             string verbunden = communicatorObject.ConnectToBroker(brokerNameEingabe, portEingabe);
+
+            string verbunden2 = communicatorObject.ConnectToBroker(brokerNameEingabe, portEingabe, nutzernameEingabe, passwortEingabe);
 
             if (verbunden.Equals("-Connected\n-"))
             {
@@ -92,6 +76,23 @@ namespace IIoTSimulatorUI
         private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void HakenSetzen(object sender, RoutedEventArgs e)
+        {
+            //Sollte noch der Nutzername und das Passwort benötigt werden, 
+            //werden diese beim Haken setzen aufhellen
+            var bc = new BrushConverter();
+
+            PortText.Background = (Brush)bc.ConvertFrom("#ff1f4663");
+
+            PassswortBox.Background = (Brush)bc.ConvertFrom("#ff1f4663");
+
+            NutzernameLabel.Foreground = System.Windows.Media.Brushes.White;
+
+            PasswortLabel.Foreground = System.Windows.Media.Brushes.White;
+
+            Foreground = (Brush)bc.ConvertFrom("#ffffff");
         }
     }
 

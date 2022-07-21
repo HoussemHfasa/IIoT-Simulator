@@ -19,7 +19,7 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class NeueSensorgruppeUI : Window
     {
-        Sensorgroups sensorgroupsObject = new Sensorgroups();
+        //Sensorgroups sensorgroupsObject = new Sensorgroups();
 
         public NeueSensorgruppeUI()
         {
@@ -66,9 +66,9 @@ namespace IIoTSimulatorUI
 
             LabelInfo.Foreground = System.Windows.Media.Brushes.White; //Info ausblenden
 
-            Sensorgroups sensorgroupsObject = new Sensorgroups();
+            //Sensorgroups sensorgroupsObject = new Sensorgroups();
 
-            sensorgroupsObject.AddBase(stammText);
+            //sensorgroupsObject.AddBase(stammText);
         }
 
         //Button um den Unterordner hinzuzufügen
@@ -85,7 +85,7 @@ namespace IIoTSimulatorUI
 
             selectedTVI.Items.Add(unterordner);// Dem ausgewählten Item den Unterordner hinzufügen
 
-            sensorgroupsObject.AddNode(unterordnerText, oberordner);
+            //sensorgroupsObject.AddNode(unterordnerText, oberordner);
 
 
         }
