@@ -4,7 +4,7 @@ using CommonInterfaces;
 
 namespace DataStorageDummy
 {
-    public class DataStorage : IDatastorage<double>
+    public class DataStorage : IDatastorage
     {
 
 
@@ -26,7 +26,7 @@ namespace DataStorageDummy
         }
 
 
-        Dictionary<string, List<string>> IDatastorage<double>.LoadSensorgroup(string Base, string Filepath)
+        Dictionary<string, List<string>> IDatastorage.LoadSensorgroup(string Base, string Filepath)
         {
             Dictionary<string, List<string>> Liste = new Dictionary<string, List<string>>();
             Liste.Add("Zimmer1", new List<string> { "184879", "1849165" });
@@ -65,7 +65,7 @@ namespace DataStorageDummy
             throw new NotImplementedException();
         }
 
-        IBrokerProfile IDatastorage<double>.LoadBrokerProfile(string filepath)
+        IBrokerProfile IDatastorage.LoadBrokerProfile(string filepath)
         {
             throw new NotImplementedException();
         }
