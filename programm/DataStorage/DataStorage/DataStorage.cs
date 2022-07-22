@@ -99,7 +99,7 @@ namespace DataStorage
         // Änderungen im Gruppenmeeting
         //die Methode Basename/Nodename/Sensor nicht geeignjet für unsere Programm ,da der Nutzer mehrere Unterordner erstellen kann
        
-            public void Save(Dictionary<string, NAryTree> allTree, Dictionary<string, TreeNode> allchildren, Dictionary<string, dynamic> allsensor, List<string> basenames, Dictionary<string, int> basenames_children)
+            public void Save(Dictionary<string, NAryTree> allTree, Dictionary<string, Node> allchildren, Dictionary<string, dynamic> allsensor, List<string> basenames, Dictionary<string, int> basenames_children)
             {
                 var serializer = new JsonSerializer();
                 using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "basenames_children"))
@@ -136,26 +136,39 @@ namespace DataStorage
 
                 return basenames;
             }
-            public Dictionary<string, NAryTree> Load_alltree()
+        public Dictionary<string, NAryTree> Load_alltree()
+        {
+            Dictionary<string, NAryTree> allTree = new Dictionary<string, NAryTree>();
+            Dictionary<string, Node> allchildren = new Dictionary<string, Node>();
+            Dictionary<string, dynamic> allsensor = new Dictionary<string, dynamic>();
+            Dictionary<string, int> basenames_children = new Dictionary<string, int>();
+            List<string> basenames = new List<string>();
+            allchildren = Load_allchildren();
+            allsensor = Load_allsensor();
+            basenames = Load_Basenames();
+            Sensorgroups Loading = new Sensorgroups();
+            foreach (string k in basenames)
             {
-                var serializer = new JsonSerializer();
-                Dictionary<string, NAryTree> alltree = new Dictionary<string, NAryTree>();
-
-                using (TextReader reader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "alltree"))
-                {
-                    alltree = ((Dictionary<string, NAryTree>)serializer.Deserialize(reader, typeof(Dictionary<string, NAryTree>)));
-                }
-
-                return alltree;
+                Loading.Add_new_Base(k);
             }
-            public Dictionary<string, TreeNode> Load_allchildren()
+            foreach (Node k in allchildren.Values)
+            {
+                Loading.Add_new_Node(k.Mothername, k.name);
+            }
+            foreach (dynamic k in allsensor.Values)
+            {
+                Loading.Add_new_sensor(k.Mothername, k);
+            }
+            return Loading.allTree;
+        }
+        public Dictionary<string, Node> Load_allchildren()
             {
                 var serializer = new JsonSerializer();
-                Dictionary<string, TreeNode> alltree = new Dictionary<string, TreeNode>();
+                Dictionary<string, Node> alltree = new Dictionary<string, Node>();
 
                 using (TextReader reader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "allchildren"))
                 {
-                    alltree = ((Dictionary<string, TreeNode>)serializer.Deserialize(reader, typeof(Dictionary<string, TreeNode>)));
+                    alltree = ((Dictionary<string, Node>)serializer.Deserialize(reader, typeof(Dictionary<string, Node>)));
                 }
 
                 return alltree;

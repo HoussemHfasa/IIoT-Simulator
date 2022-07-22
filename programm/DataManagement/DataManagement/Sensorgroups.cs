@@ -164,7 +164,7 @@ namespace SensorAndSensorgroup
         // Änderungen im Gruppenmeeting
         //die Methode Basename/Nodename/Sensor nicht geeignet für unsere Programm ,da der Nutzer mehrere Unterordner erstellen kann
         public Dictionary<string, NAryTree> allTree = new Dictionary<string, NAryTree>();
-        public Dictionary<string, TreeNode> allchildren = new Dictionary<string, TreeNode>();
+        public Dictionary<string, Node> allchildren = new Dictionary<string, Node>();
         public Dictionary<string, dynamic> allsensor = new Dictionary<string, dynamic>();
         public Dictionary<string, int> basenames_children = new Dictionary<string, int>();
         public List<string> basenames = new List<string>();
@@ -181,8 +181,9 @@ namespace SensorAndSensorgroup
         {
             if (allTree.ContainsKey(Mother))
             {
-                TreeNode ch1 = new TreeNode(Node);
+                Node ch1 = new Node(Node);
                 allTree[Mother].root.addChild(ch1);
+                ch1.Mothername = Mother;
                 ch1.path.Add(basenames.IndexOf(Mother));
                 ch1.path.Add(basenames_children[Mother]);
                 basenames_children[Mother] += 1;
@@ -191,7 +192,8 @@ namespace SensorAndSensorgroup
             }
             else
             {
-                TreeNode ch = new TreeNode(Node);
+                Node ch = new Node(Node);
+                ch.Mothername = Mother;
                 allchildren.Add(Node, ch);
                 if (allchildren.ContainsKey(Mother))
                 {
@@ -324,9 +326,9 @@ namespace SensorAndSensorgroup
         }
         public void Add_new_sensor(string Mother, dynamic new_Sensor)
         {
+            new_Sensor.Mothername = Mother;
             if (allTree.ContainsKey(Mother))
             {
-
 
                 new_Sensor.path.Add(basenames.IndexOf(Mother));
                 new_Sensor.path.Add(basenames_children[Mother]);

@@ -18,6 +18,7 @@ namespace SensorAndSensorgroup
 
         public List<int> path = new List<int> { };
         public int childnumber = 0;
+        public string Mothername;
         public int AmmountofValues { get { return Values.Count;} }
 
         public int Timeinterval { get; set; }
