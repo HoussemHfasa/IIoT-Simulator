@@ -16,7 +16,7 @@ namespace NunitTestDatastorage
 {
     public class SensorGroupsSpeicherungTest
     {
-        private DataStorage.DataStorage<double> GroupsTest = new DataStorage<double>();
+        private DataStorage.DataStorage GroupsTest = new DataStorage.DataStorage();
         String Base;
         String Base2;
         String Folderpath;
