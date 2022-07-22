@@ -24,12 +24,16 @@ namespace IIoTSimulatorUI
 
         private void FehlerHinzufuegen(object sender, RoutedEventArgs e)
         {
-
+            SensordatenFehler objectFehler = new SensordatenFehler();
+            this.Visibility = Visibility.Hidden;
+            objectFehler.Show();
         }
 
         private void SensordatenSpeichern(object sender, RoutedEventArgs e)
         {
-
+            NeueSensorgruppeUI objectNeueSensorgruppe = new NeueSensorgruppeUI();
+            this.Visibility = Visibility.Hidden;
+            objectNeueSensorgruppe.Show();
         }
 
         private void ProgrammSchließenClick(object sender, RoutedEventArgs e)

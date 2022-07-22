@@ -6,11 +6,14 @@
         xmlns:local="clr-namespace:IIoTSimulatorUI"
         mc:Ignorable="d"
         Title="PopUpSensoren" 
-        Height="450" Width="800"
+        Height="250" Width="470"
          WindowStartupLocation="CenterScreen"
         Background="#181735"
         WindowStyle="None">
-    <Grid Opacity="0.995" Visibility="Visible">
+
+
+    <Grid Opacity="0.995" 
+          Visibility="Visible">
 
         <Grid.Background>
             <ImageBrush ImageSource="/Images/IIOT2.jpg"
@@ -18,38 +21,22 @@
                         />
         </Grid.Background>
 
-        <!-- TextBox für den Sensortyp -->
-        <ComboBox x:Name="ComboBoxSensoren"
-                Height="30" 
-                Margin="289,131,289,289"
-                FontSize="17">
-            <ComboBoxItem 
-                     Content="Harmonische Schwingung"></ComboBoxItem>
-            <ComboBoxItem 
-                     Content="Gedämpfte Schwingung"></ComboBoxItem>
-            <ComboBoxItem 
-                     Content="Überlagerte Schwingung"></ComboBoxItem>
-            <ComboBoxItem 
-                     Content="Standardabweichung"></ComboBoxItem>
-
-        </ComboBox>
-
-        <!-- Label Amplitude-->
+        <!-- Label Schwingung-->
         <Label
                 Content="Schwingung:"
-                Margin="98,123,0,270"
+                Margin="48,57,0,115"
                 FontSize="18"
                 Foreground="#FFFFF8F8"
                 HorizontalAlignment="Left" 
-                Width="169"
+                Width="154"
                 FontFamily="Fonts/#Dosis"/>
 
-        <!-- Button zum Erstellen der Sensorgruppe-->
+        <!-- Button Schwingung hinzufügen-->
         <Button Content="Schwingung hinzufügen"
                     Click="Schwingung"
                     Foreground="White"
-                    FontSize="16" 
-                    Margin="565,347,0,24" 
+                    FontSize="14" 
+                    Margin="261,172,0,26" 
                     HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand">
@@ -89,10 +76,18 @@
                     Background="{x:Null}"
                     Click="ProgrammSchließenClick"
                     Foreground="White"
-                    FontSize="30" 
-                    Margin="741,0,0,0" 
+                    FontSize="20" 
                     Height="35" 
-                    VerticalAlignment="Top" Cursor="Hand">
+                
+                    VerticalAlignment="Top" Cursor="Hand" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="57" Margin="423,-5,0,0">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-0.413"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-0.126"/>
+                </TransformGroup>
+            </Button.RenderTransform>
 
             <Button.Style>
                 <Style TargetType="Button">
@@ -124,5 +119,21 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+
+        <ComboBox 
+            HorizontalAlignment="Left"
+            Margin="202,65,0,0" 
+            VerticalAlignment="Top" 
+            Width="173">
+            <ComboBoxItem 
+                     Content="Harmonische Schwingung">
+            </ComboBoxItem>
+            <ComboBoxItem 
+                     Content="Gedämpfte Schwingung"></ComboBoxItem>
+            <ComboBoxItem 
+                     Content="Standardabweichung"></ComboBoxItem>
+            <ComboBoxItem 
+                     Content="Überlagerte Schwingung"></ComboBoxItem>
+        </ComboBox>
     </Grid>
 </Window>

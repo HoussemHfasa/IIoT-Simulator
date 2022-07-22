@@ -5,8 +5,276 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IIoTSimulatorUI"
         mc:Ignorable="d"
-        Title="GedaempfteSchwingung" Height="450" Width="800">
+        Title="GedaempfteSchwingung" 
+        Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="#181735"
+         >
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="61*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/IIOT2.jpg"
+                        Stretch="UniformToFill"
+                        />
+        </Grid.Background>
+
+
+        <!-- Label- Überschrift Gedämpfte Schwingung-->
+        <Label
+                Content="Gedämpfte Schwingung"
+                Margin="29,4,0,353"
+                FontSize="25"
+                Foreground="#FFFFF8F8"
+                HorizontalAlignment="Left" 
+                Width="492"
+                FontWeight="Medium"
+                FontFamily="Fonts/#Dosis"/>
+
+        <!-- Label Amplitude-->
+        <Label
+                Content="Amplitude:"
+                Margin="114,95,0,298"
+                FontSize="18"
+                Foreground="#FFFFF8F8"
+                HorizontalAlignment="Left" 
+                Width="82"
+                FontFamily="Fonts/#Dosis"/>
+
+        <!-- TextBox für die Amplitude-->
+        <TextBox x:Name="textBoxAmplitude" 
+                Text="0.00"
+                Margin="244,95,334,0"
+                Height="30"
+                  Background="#ff1f4663"
+                      TextAlignment="Right"
+                BorderBrush="#FF020E52"
+                FontSize="16"
+                VerticalAlignment="Top"
+                Foreground="AliceBlue"
+                BorderThickness="2,2,2,2"   
+                />
+
+        <!-- Label für die Dämpfungsrate-->
+        <Label
+                Content="Dämnpfungsrate:"
+                Margin="66,152,0,243"
+                FontSize="18"
+                Foreground="#FFFAF9F9"
+                HorizontalAlignment="Left" 
+                Width="154"
+                FontFamily="Fonts/#Dosis"/>
+
+        <!-- TextBox für die Dämpfungsrate -->
+        <TextBox x:Name="textBoxDaempfungsrate" 
+                Text="0.00"
+                Margin="244,160,334,0"
+                Height="30"
+                  Background="#ff1f4663"
+                      TextAlignment="Right"
+                BorderBrush="#FF020E52"
+                FontSize="16"
+                VerticalAlignment="Top"
+                Foreground="AliceBlue"
+                BorderThickness="2,2,2,2"   
+                />
+
+        <!-- Label für die Periodendauer-->
+        <Label
+                Content="Periodendauer:"
+                Margin="81,213,0,181"
+                FontSize="18"
+                Foreground="#FFFCF6F6"
+                HorizontalAlignment="Left" 
+                Width="163"
+                FontFamily="Fonts/#Dosis"/>
+
+        <!-- TextBox für die Periodendauer-->
+        <TextBox x:Name="textBoxPeriodendauer" 
+                Text="0.00"
+                Margin="244,221,334,0"
+                Height="30"
+                  Background="#ff1f4663"
+                      TextAlignment="Right"
+                BorderBrush="#FF020E52"
+                FontSize="16"
+                VerticalAlignment="Top"
+                Foreground="AliceBlue"
+                BorderThickness="2,2,2,2"   
+                />
+
+        <!-- Label für die Phasenverschiebung-->
+        <Label
+                Content="Phasenverschiebung:"
+                Margin="42,283,0,110"
+                FontSize="18"
+                Foreground="#FFFDFDFD"
+                HorizontalAlignment="Left" 
+                Width="166"
+                FontFamily="Fonts/#Dosis"/>
+
+        <!-- TextBox für die Werteanzahl-->
+        <TextBox x:Name="textBoxPhasenverschiebung" 
+                Text="0.00"
+                Margin="244,283,334,0"
+                Height="30"
+                  Background="#ff1f4663"
+                      TextAlignment="Right"
+                BorderBrush="#FF020E52"
+                FontSize="16"
+                VerticalAlignment="Top"
+                Foreground="AliceBlue"
+                BorderThickness="2,2,2,2"   
+                />
+
+        <!-- Label für die Werteanzahl-->
+        <Label
+                Content="Werteanzahl:"
+                Margin="102,347,0,47"
+                FontSize="18"
+                Foreground="#FFFDFDFD"
+                HorizontalAlignment="Left" 
+                Width="106"
+                FontFamily="Fonts/#Dosis"/>
+
+        <!-- TextBox für die Werteanzahl-->
+        <TextBox x:Name="textBoxWerteanzahl" 
+                Text="1"
+                Margin="244,347,334,0"
+                Height="30"
+                  Background="#ff1f4663"
+                      TextAlignment="Right"
+                BorderBrush="#FF020E52"
+                FontSize="16"
+                VerticalAlignment="Top"
+                Foreground="AliceBlue"
+                BorderThickness="2,2,2,2"   
+                />
+
+        <!-- Button zum Speichern der Sensordaten-->
+        <Button Content="Sensordaten speichern"
+                    Click="SensordatenSpeichern"
+                    Foreground="White"
+                    FontSize="16" 
+                    Margin="565,347,0,24" 
+                    HorizontalAlignment="Left"
+                    Width="184" 
+                    Cursor="Hand">
+
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                    <Setter Property="Background" 
+                                Value="#008080"/>
+                    <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                            <Setter Property="Background"
+                                     Value="Aqua"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="180" Height="30"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Button zum Fehler hinzufügen-->
+        <Button Content="Fehler hinzufügen"
+                    Click="FehlerHinzufuegen"
+                    Foreground="White"
+                    FontSize="16" 
+                    Margin="565,285,0,86" 
+                    HorizontalAlignment="Left"
+                    Width="184" 
+                    Cursor="Hand">
+
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                    <Setter Property="Background" 
+                                Value="#008080"/>
+                    <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                            <Setter Property="Background"
+                                     Value="Aqua"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="180" Height="30"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Button um die Sensordateneingabe zu schließen-->
+        <Button Content="×"
+                    Background="{x:Null}"
+                    Click="ProgrammSchließenClick"
+                    Foreground="White"
+                    FontSize="30" 
+                    Margin="741,0,0,0" 
+                    Height="35" 
+                    VerticalAlignment="Top" Cursor="Hand">
+
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                    <Setter Property="Background" 
+                                Value="#39285D"/>
+                    <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                            <Setter Property="BorderBrush"
+                                        Value="LightBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="60" Height="35"
+                               
+                                Background= "{TemplateBinding Background}">
+                        <ContentPresenter 
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </Grid>
 </Window>

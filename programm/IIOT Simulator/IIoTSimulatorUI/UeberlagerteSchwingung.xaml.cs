@@ -13,18 +13,13 @@ using System.Windows.Shapes;
 namespace IIoTSimulatorUI
 {
     /// <summary>
-    /// Interaktionslogik für GedaempfteSchwingung.xaml
+    /// Interaktionslogik für UeberlagerteSchwingung.xaml
     /// </summary>
-    public partial class GedaempfteSchwingung : Window
+    public partial class UeberlagerteSchwingung : Window
     {
-        public GedaempfteSchwingung()
+        public UeberlagerteSchwingung()
         {
             InitializeComponent();
-        }
-
-        private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void FehlerHinzufuegen(object sender, RoutedEventArgs e)
@@ -39,6 +34,11 @@ namespace IIoTSimulatorUI
             NeueSensorgruppeUI objectNeueSensorgruppe = new NeueSensorgruppeUI();
             this.Visibility = Visibility.Hidden;
             objectNeueSensorgruppe.Show();
+        }
+
+        private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

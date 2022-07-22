@@ -1,17 +1,16 @@
-﻿<Window x:Class="IIoTSimulatorUI.HarmonischeSchwingung"
+﻿<Window x:Class="IIoTSimulatorUI.UeberlagerteSchwingung"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IIoTSimulatorUI"
         mc:Ignorable="d"
-        Title="HarmonischeSchwingung" 
-        Height="450" Width="800"
+        Title="UeberlagerteSchwingung" 
+        Height="450"
+        Width="800"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Background="#181735"
-        >
-
+        Background="#181735">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="61*"/>
@@ -62,54 +61,6 @@
         <TextBox x:Name="textBoxPeriodendauer" 
                 Text="0.00"
                 Margin="244,160,334,0"
-                Height="30"
-                  Background="#ff1f4663"
-                      TextAlignment="Right"
-                BorderBrush="#FF020E52"
-                FontSize="16"
-                VerticalAlignment="Top"
-                Foreground="AliceBlue"
-                BorderThickness="2,2,2,2"   
-                />
-
-        <!-- Label für die Phasenverschiebung-->
-        <Label
-                Content="Phasenverschiebung:"
-                Margin="45,217,0,176"
-                FontSize="18"
-                Foreground="#FFFCF6F6"
-                HorizontalAlignment="Left" 
-                Width="163"
-                FontFamily="Fonts/#Dosis"/>
-
-        <!-- TextBox für die Phasenverschiebung-->
-        <TextBox x:Name="textBoxPhasenverschiebung" 
-                Text="0.00"
-                Margin="244,221,334,0"
-                Height="30"
-                  Background="#ff1f4663"
-                      TextAlignment="Right"
-                BorderBrush="#FF020E52"
-                FontSize="16"
-                VerticalAlignment="Top"
-                Foreground="AliceBlue"
-                BorderThickness="2,2,2,2"   
-                />
-
-        <!-- Label für die Werteanzahl-->
-        <Label
-                Content="Werteanzahl:"
-                Margin="102,281,0,112"
-                FontSize="18"
-                Foreground="#FFFDFDFD"
-                HorizontalAlignment="Left" 
-                Width="106"
-                FontFamily="Fonts/#Dosis"/>
-
-        <!-- TextBox für die Werteanzahl-->
-        <TextBox x:Name="textBoxWerteanzahl" 
-                Text="1"
-                Margin="244,283,334,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -241,16 +192,15 @@
             </Button.Template>
         </Button>
 
-        <!-- Label- Überschrift Harmonische Schwingung-->
+        <!-- Label- Überschrift Überlagerte Schwingung-->
         <Label
-                Content="Harmonische Schwingung"
+                Content="Überlagerte Schwingung"
                 Margin="29,4,0,353"
                 FontSize="25"
                 Foreground="#FFFFF8F8"
                 HorizontalAlignment="Left" 
-                Width="492"
+                Width="506"
                 FontWeight="Medium"
                 FontFamily="Fonts/#Dosis"/>
-
     </Grid>
 </Window>
