@@ -14,7 +14,7 @@ using SensorAndSensorgroup;
 namespace DataStorage
 {
 
-    public class DataStorage<T> : IDatastorage<T> 
+    public class DataStorage : IDatastorage
     {
        
         // Speicherung der Sensorgroups Daten(Nodename-Ids)
@@ -98,33 +98,32 @@ namespace DataStorage
 
         // Änderungen im Gruppenmeeting
         //die Methode Basename/Nodename/Sensor nicht geeignjet für unsere Programm ,da der Nutzer mehrere Unterordner erstellen kann
-<<<<<<< HEAD
        
-            public void Save(Dictionary<string, NAryTree> allTree, Dictionary<string, Node> allchildren, Dictionary<string, dynamic> allsensor, List<string> basenames, Dictionary<string, int> basenames_children)
+            public void SaveTree(Dictionary<string, NAryTree> allTree, Dictionary<string, TreeNode> allchildren, Dictionary<string, dynamic> allsensor, List<string> basenames, Dictionary<string, int> basenames_children)
             {
-                var serializer = new JsonSerializer();
-                using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "basenames_children"))
-                {
-                    serializer.Serialize(writer, basenames_children);
-                }
-
-                using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "Basenames"))
-                {
-                    serializer.Serialize(writer, basenames);
-                }
-                using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "alltree"))
-                {
-                    serializer.Serialize(writer, allTree);
-                }
-                using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "allchildren"))
-                {
-                    serializer.Serialize(writer, allchildren);
-                }
-                using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "allsensor"))
-                {
-                    serializer.Serialize(writer, allsensor);
-                }
+            var serializer = new JsonSerializer();
+            using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "basenames_children"))
+            {
+                serializer.Serialize(writer, basenames_children);
             }
+
+            using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "Basenames"))
+            {
+                serializer.Serialize(writer, basenames);
+            }
+            using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "alltree"))
+            {
+                serializer.Serialize(writer, allTree);
+            }
+            foreach (TreeNode i in allchildren.Values)
+            {
+                i.child = null;
+            }
+            using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "allchildren"))
+            {
+                serializer.Serialize(writer, allchildren);
+            }
+        }
             public List<string> Load_Basenames()
             {
                 var serializer = new JsonSerializer();
@@ -139,97 +138,43 @@ namespace DataStorage
             }
         public Dictionary<string, NAryTree> Load_alltree()
         {
-            Dictionary<string, NAryTree> allTree = new Dictionary<string, NAryTree>();
-            Dictionary<string, Node> allchildren = new Dictionary<string, Node>();
-            Dictionary<string, dynamic> allsensor = new Dictionary<string, dynamic>();
-            Dictionary<string, int> basenames_children = new Dictionary<string, int>();
-            List<string> basenames = new List<string>();
-            allchildren = Load_allchildren();
-            allsensor = Load_allsensor();
-            basenames = Load_Basenames();
-            Sensorgroups Loading = new Sensorgroups();
-            foreach (string k in basenames)
+            var serializer = new JsonSerializer();
+            Dictionary<string, NAryTree> alltree = new Dictionary<string, NAryTree>();
+
+            using (TextReader reader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "alltree"))
             {
-                Loading.Add_new_Base(k);
+                alltree = ((Dictionary<string, NAryTree>)serializer.Deserialize(reader, typeof(Dictionary<string, NAryTree>)));
             }
-            foreach (Node k in allchildren.Values)
-            {
-                Loading.Add_new_Node(k.Mothername, k.name);
-            }
-            foreach (dynamic k in allsensor.Values)
-            {
-                Loading.Add_new_sensor(k.Mothername, k);
-            }
-            return Loading.allTree;
+
+            return alltree;
         }
-        public Dictionary<string, Node> Load_allchildren()
+        public Dictionary<string, TreeNode> Load_allchildren()
             {
                 var serializer = new JsonSerializer();
-                Dictionary<string, Node> alltree = new Dictionary<string, Node>();
+                Dictionary<string, TreeNode> alltree = new Dictionary<string, TreeNode>();
 
                 using (TextReader reader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "allchildren"))
                 {
-                    alltree = ((Dictionary<string, Node>)serializer.Deserialize(reader, typeof(Dictionary<string, Node>)));
+                    alltree = ((Dictionary<string, TreeNode>)serializer.Deserialize(reader, typeof(Dictionary<string, TreeNode>)));
                 }
 
                 return alltree;
             }
-            public Dictionary<string, dynamic> Load_allsensor()
-            {
-                var serializer = new JsonSerializer();
-                Dictionary<string, dynamic> alltree = new Dictionary<string, dynamic>();
-
-                using (TextReader reader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "allsensor"))
-                {
-                    alltree = ((Dictionary<string, dynamic>)serializer.Deserialize(reader, typeof(Dictionary<string, dynamic>)));
-                }
-
-                return alltree;
-            
-
-        }
+           
         public Dictionary<string, int> Load_Basenames_children()
-=======
-        public void SaveTree(List<TreeNode<T>.NAryTree> Trees, List<string> Basenames)
->>>>>>> parent of 4e757bc (Gruppen Meeting TreeStructure bearbeitet)
         {
             var serializer = new JsonSerializer();
-            foreach (TreeNode<T>.NAryTree k in Trees)
-            {
-                using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "Tree" + Trees.IndexOf(k)))
-                {
-                    serializer.Serialize(writer, k);
-                }
+            Dictionary<string, int> basenames = new Dictionary<string, int>();
 
-            }
-            using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "Basenames"))
+            using (TextReader reader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "basenames_children"))
             {
-                serializer.Serialize(writer, Basenames);
+                basenames = ((Dictionary<string, int>)serializer.Deserialize(reader, typeof(Dictionary<string, int>)));
             }
+
+            return basenames;
         }
-        public List<string> Loadbasenameliste(string Filepath)
-        {
-            var serializer = new JsonSerializer();
-            List<string> basenemaesliste = new List<string>();
-            using (TextReader reader = File.OpenText(Filepath))
-            {
-                basenemaesliste = (List<string>)serializer.Deserialize(reader, typeof(List<string>));
-            }
-            return basenemaesliste;
-        }
-        public List<TreeNode<T>.NAryTree> LoadTree(List<string> Basenameliste)
-        {
-            var serializer = new JsonSerializer();
-            List<TreeNode<T>.NAryTree> Trees = new List<TreeNode<T>.NAryTree>();
-            foreach (string k in Basenameliste)
-            {
-                using (TextReader reader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "Tree" + Basenameliste.IndexOf(k)))
-                {
-                    Trees.Add((TreeNode<T>.NAryTree)serializer.Deserialize(reader, typeof(TreeNode<T>.NAryTree)));
-                }
-            }
-            return Trees;
-        }
+
+       
 
     }
 }

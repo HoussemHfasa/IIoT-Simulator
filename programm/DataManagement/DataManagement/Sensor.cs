@@ -16,13 +16,8 @@ namespace SensorAndSensorgroup
         
         public string Unit { get ; set; }
 
-<<<<<<< HEAD
         public List<int> path = new List<int> { };
         public int childnumber = 0;
-        public string Mothername;
-=======
-
->>>>>>> parent of 4e757bc (Gruppen Meeting TreeStructure bearbeitet)
         public int AmmountofValues { get { return Values.Count;} }
 
         public int Timeinterval { get; set; }

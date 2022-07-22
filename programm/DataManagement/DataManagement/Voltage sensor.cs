@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace SensorAndSensorgroup
 {
-    class VoltageSensor : Sensor<double>
+    public class VoltageSensor : Sensor<double>
     {
         public VoltageSensor() 
         {

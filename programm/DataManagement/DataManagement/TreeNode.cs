@@ -1,50 +1,37 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SensorAndSensorgroup
 {
-<<<<<<< HEAD
+
 	//NAryTree für die Datenspeicherung
 	//die Methode Basename/Nodename/Sensor nicht geeignet für unsere Programm ,da der Nutzer mehrere Unterordner erstellen kann
-	public class Node
+	
+	public class TreeNode
 	{
-		public string Mothername;
 		public string name;
 		public List<int> path = new List<int> { };
 		public int childnumber = 0;
-		public Node(string node)
-		{
-			this.name = node;
-		}
-	}
-	public class TreeNode
-	{
-		public string nodename;
-		public object Sensordaten;
+		public dynamic Sensordaten;
 		public List<TreeNode> child;
-		public TreeNode(object sensor)
+		[JsonConstructor]
+		public TreeNode(dynamic sensor)
 		{
 			this.Sensordaten = sensor;
 			this.child = new List<TreeNode>();
-
 		}
 		public TreeNode(string Nodename)
 		{
-			this.nodename = Nodename;
+			this.name = Nodename;
 			this.child = new List<TreeNode>();
 		}
 
-		public void addChild(Node nodename)
+		public void addChild(TreeNode nodename)
 		{
-			var t = new TreeNode(nodename);
-			this.child.Add(t);
-		}
 
-		public void addsensor(object Sensor)
-		{
-			var t = new TreeNode(Sensor);
-			this.child.Add(t);
+			this.child.Add(nodename);
 		}
 
 	}
@@ -57,7 +44,7 @@ namespace SensorAndSensorgroup
 			this.root = null;
 		}
 	}
-=======
+
     //NAryTree für die Datenspeicherung
     //die Methode Basename/Nodename/Sensor nicht geeignjet für unsere Programm ,da der Nutzer mehrere Unterordner erstellen kann
     public class TreeNode<T>
@@ -84,24 +71,7 @@ namespace SensorAndSensorgroup
                 // Set initial tree root to null
                 this.root = null;
             }
-            public void printPreorder(TreeNode<T> node)
-            {
-                if (node == null)
-                {
-                    return;
-                }
-                var i = 0;
-                TreeNode<T> temp = null;
-                Console.Write("  " + node.key.ToString());
-                // iterating the child of given node
-                while (i < node.child.Count)
-                {
-                    temp = node.child[i];
-                    this.printPreorder(temp);
-                    i++;
-                }
-            }
+            
         }
     }
->>>>>>> parent of 4e757bc (Gruppen Meeting TreeStructure bearbeitet)
 }

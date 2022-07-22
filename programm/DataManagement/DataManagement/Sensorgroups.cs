@@ -162,33 +162,29 @@ namespace SensorAndSensorgroup
 
             }
         // Änderungen im Gruppenmeeting
-<<<<<<< HEAD
+
         //die Methode Basename/Nodename/Sensor nicht geeignet für unsere Programm ,da der Nutzer mehrere Unterordner erstellen kann
         public Dictionary<string, NAryTree> allTree = new Dictionary<string, NAryTree>();
-        public Dictionary<string, Node> allchildren = new Dictionary<string, Node>();
-        public Dictionary<string, dynamic> allsensor = new Dictionary<string, dynamic>();
+        public Dictionary<string, TreeNode> allchildren = new Dictionary<string, TreeNode>();
+       // public Dictionary<string, dynamic> allsensor = new Dictionary<string, dynamic>();
         public Dictionary<string, int> basenames_children = new Dictionary<string, int>();
         public List<string> basenames = new List<string>();
         public void Add_new_Base(string basename)
-=======
-     /*   List<TreeNode<T>.NAryTree> Trees = new List<TreeNode<T>.NAryTree>();
-        List<string> basenameliste = new List<string>();
-        public void Addbase(string Basename)
->>>>>>> parent of 4e757bc (Gruppen Meeting TreeStructure bearbeitet)
         {
-            var Tree = new TreeNode<T>.NAryTree();
-            Tree.root = new TreeNode<T>(Basename);
-            Trees.Add(Tree);
-            basenameliste.Add(nameof(Tree));
+            var Tree = new NAryTree();
+            Tree.root = new TreeNode(basename);
+            allTree.Add(basename, Tree);
+            basenames.Add(basename);
+            Tree.root.path.Add(basename.IndexOf(basename));
+            basenames_children.Add(basename, 0);
         }
-        public void Addnode(string Nodename, string Basename)
+        public void Add_new_Node(string Mother, string Node)
         {
-<<<<<<< HEAD
+
             if (allTree.ContainsKey(Mother))
             {
-                Node ch1 = new Node(Node);
+                TreeNode ch1 = new TreeNode(Node);
                 allTree[Mother].root.addChild(ch1);
-                ch1.Mothername = Mother;
                 ch1.path.Add(basenames.IndexOf(Mother));
                 ch1.path.Add(basenames_children[Mother]);
                 basenames_children[Mother] += 1;
@@ -197,10 +193,16 @@ namespace SensorAndSensorgroup
             }
             else
             {
-                Node ch = new Node(Node);
-                ch.Mothername = Mother;
+                TreeNode ch = new TreeNode(Node);
                 allchildren.Add(Node, ch);
-                if (allchildren.ContainsKey(Mother))
+                if (allTree.ContainsKey(Mother))
+                {
+                    allTree[Mother].root.addChild(ch);
+                    ch.path.Add(basenames.IndexOf(Mother));
+                    ch.path.Add(basenames_children[Mother]);
+                    basenames_children[Mother] += 1;
+                }
+                else
                 {
                     List<int> path = allchildren[Mother].path;
                     int i = allchildren[Mother].path.Count;
@@ -208,10 +210,7 @@ namespace SensorAndSensorgroup
                     {
                         case 2:
                             allchildren[Node].path = new List<int>();
-                            foreach (int k in allchildren[Mother].path)
-                            {
-                                allchildren[Node].path.Add(k);
-                            }
+                            allchildren[Node].path.AddRange(allchildren[Mother].path);
                             allchildren[Node].path.Add(allchildren[Mother].childnumber);
                             allchildren[Mother].childnumber += 1;
 
@@ -220,10 +219,8 @@ namespace SensorAndSensorgroup
                             break;
                         case 3:
                             allchildren[Node].path = new List<int>();
-                            foreach (int k in allchildren[Mother].path)
-                            {
-                                allchildren[Node].path.Add(k);
-                            }
+                            allchildren[Node].path.AddRange(allchildren[Mother].path);
+
                             ch.path.Add(allchildren[Mother].childnumber);
                             allchildren[Mother].childnumber += 1;
 
@@ -231,277 +228,117 @@ namespace SensorAndSensorgroup
                             break;
                         case 4:
                             allchildren[Node].path = new List<int>();
-                            foreach (int k in allchildren[Mother].path)
-                            {
-                                allchildren[Node].path.Add(k);
-                            }
-                            ch.path.Add(allchildren[Mother].childnumber);
-                            allchildren[Mother].childnumber += 1;
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].addChild(ch);
-                            break;
-                        case 5:
-                            allchildren[Node].path = new List<int>();
-                            foreach (int k in allchildren[Mother].path)
-                            {
-                                allchildren[Node].path.Add(k);
-                            }
-                            ch.path.Add(allchildren[Mother].childnumber);
-                            allchildren[Mother].childnumber += 1;
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].addChild(ch);
-                            break;
-                        case 6:
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].child[path[5]].addChild(ch);
-                            break;
-                        case 7:
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].child[path[5]].child[path[6]].addChild(ch);
-                            break;
+                            allchildren[Node].path.AddRange(allchildren[Mother].path);
 
-                    }
-                }
-                else if (allsensor.ContainsKey(Mother))
-                {
-                    List<int> path = allsensor[Mother].path;
-                    int i = allsensor[Mother].path.Count;
-                    switch (i)
-                    {
-                        case 2:
-                            allchildren[Node].path = new List<int>();
-                            foreach (int k in allsensor[Mother].path)
-                            {
-                                allchildren[Node].path.Add(k);
-                            }
-                            ch.path.Add(allsensor[Mother].childnumber);
-                            allsensor[Mother].childnumber += 1;
-                            allTree[basenames[path[0]]].root.child[path[1]].addChild(ch);
-                            break;
-                        case 3:
-                            allchildren[Node].path = new List<int>();
-                            foreach (int k in allsensor[Mother].path)
-                            {
-                                allchildren[Node].path.Add(k);
-                            }
-                            ch.path.Add(allsensor[Mother].childnumber);
-                            allsensor[Mother].childnumber += 1;
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].addChild(ch);
-                            break;
-                        case 4:
-                            allchildren[Node].path = new List<int>();
-                            foreach (int k in allsensor[Mother].path)
-                            {
-                                allchildren[Node].path.Add(k);
-                            }
-                            ch.path.Add(allsensor[Mother].childnumber);
-                            allsensor[Mother].childnumber += 1;
+                            ch.path.Add(allchildren[Mother].childnumber);
+                            allchildren[Mother].childnumber += 1;
                             allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].addChild(ch);
                             break;
                         case 5:
                             allchildren[Node].path = new List<int>();
-                            foreach (int k in allsensor[Mother].path)
-                            {
-                                allchildren[Node].path.Add(k);
-                            }
-                            ch.path.Add(allsensor[Mother].childnumber);
-                            allsensor[Mother].childnumber += 1;
+                            allchildren[Node].path.AddRange(allchildren[Mother].path);
+
+                            ch.path.Add(allchildren[Mother].childnumber);
+                            allchildren[Mother].childnumber += 1;
                             allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].addChild(ch);
                             break;
                         case 6:
                             allchildren[Node].path = new List<int>();
-                            foreach (int k in allsensor[Mother].path)
-                            {
-                                allchildren[Node].path.Add(k);
-                            }
-                            ch.path.Add(allsensor[Mother].childnumber);
-                            allsensor[Mother].childnumber += 1;
+                            allchildren[Node].path.AddRange(allchildren[Mother].path);
+                            ch.path.Add(allchildren[Mother].childnumber);
+                            allchildren[Mother].childnumber += 1;
                             allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].child[path[5]].addChild(ch);
                             break;
                         case 7:
                             allchildren[Node].path = new List<int>();
-                            foreach (int k in allsensor[Mother].path)
-                            {
-                                allchildren[Node].path.Add(k);
-                            }
-                            ch.path.Add(allsensor[Mother].childnumber);
-                            allsensor[Mother].childnumber += 1;
+                            allchildren[Node].path.AddRange(allchildren[Mother].path);
+                            ch.path.Add(allchildren[Mother].childnumber);
+                            allchildren[Mother].childnumber += 1;
                             allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].child[path[5]].child[path[6]].addChild(ch);
                             break;
 
                     }
                 }
             }
-=======
-
->>>>>>> parent of 4e757bc (Gruppen Meeting TreeStructure bearbeitet)
-        }
-        public void Addsensor(Sensor<T> sensor,string obere_Ordner)
+            }
+        
+        public void Add_new_Sensor(string Mother, dynamic new_Sensor)
         {
-<<<<<<< HEAD
-            new_Sensor.Mothername = Mother;
+            TreeNode ch = new TreeNode(new_Sensor);
+            ch.name = new_Sensor.Id;
+            allchildren.Add(new_Sensor.Id, ch);
             if (allTree.ContainsKey(Mother))
             {
-
-                new_Sensor.path.Add(basenames.IndexOf(Mother));
-                new_Sensor.path.Add(basenames_children[Mother]);
+                //TreeNode ch1 = new TreeNode(Node);
+                allTree[Mother].root.addChild(ch);
+                ch.path.Add(basenames.IndexOf(Mother));
+                ch.path.Add(basenames_children[Mother]);
                 basenames_children[Mother] += 1;
-                allsensor.Add(new_Sensor.Sensor_id, new_Sensor);
-
-                allTree[Mother].root.addsensor(new_Sensor);
-
             }
             else
             {
-                if (allchildren.ContainsKey(Mother))
+                List<int> path = allchildren[Mother].path;
+                int i = allchildren[Mother].path.Count;
+                switch (i)
                 {
-                    allsensor.Add(new_Sensor.Sensor_id, new_Sensor);
-                    List<int> path = allchildren[Mother].path;
-                    int i = allchildren[Mother].path.Count;
-                    switch (i)
-                    {
-                        case 2:
+                    case 2:
+                        allchildren[new_Sensor.Id].path = new List<int>();
+                        foreach (int k in allchildren[Mother].path)
+                        {
+                            allchildren[new_Sensor.Id].path.Add(k);
+                        }
+                        allchildren[new_Sensor.Id].path.Add(allchildren[Mother].childnumber);
+                        allchildren[Mother].childnumber += 1;
 
-                            allsensor[new_Sensor.Sensor_id].path = new List<int>();
-                            foreach (int k in allchildren[Mother].path)
-                            {
-                                allsensor[new_Sensor.Sensor_id].path.Add(k);
-                            }
-                            new_Sensor.path.Add(allchildren[Mother].childnumber);
-                            allchildren[Mother].childnumber += 1;
-                            allTree[basenames[path[0]]].root.child[path[1]].addsensor(new_Sensor);
-                            break;
-                        case 3:
-                            allsensor[new_Sensor.Sensor_id].path = new List<int>();
-                            foreach (int k in allchildren[Mother].path)
-                            {
-                                allsensor[new_Sensor.Sensor_id].path.Add(k);
-                            }
-                            new_Sensor.path.Add(allchildren[Mother].childnumber);
-                            allchildren[Mother].childnumber += 1;
-                            //allsensor.Add(Node, new_Sensor);
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].addsensor(new_Sensor);
-                            break;
-                        case 4:
-                            allsensor[new_Sensor.Sensor_id].path = new List<int>();
-                            foreach (int k in allchildren[Mother].path)
-                            {
-                                allsensor[new_Sensor.Sensor_id].path.Add(k);
-                            }
-                            new_Sensor.path.Add(allchildren[Mother].childnumber);
-                            allchildren[Mother].childnumber += 1;
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].addsensor(new_Sensor);
-                            break;
-                        case 5:
-                            allsensor[new_Sensor.Sensor_id].path = new List<int>();
-                            foreach (int k in allchildren[Mother].path)
-                            {
-                                allsensor[new_Sensor.Sensor_id].path.Add(k);
-                            }
-                            new_Sensor.path.Add(allchildren[Mother].childnumber);
-                            allchildren[Mother].childnumber += 1;
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].addsensor(new_Sensor);
-                            break;
-                        case 6:
-                            allsensor[new_Sensor.Sensor_id].path = new List<int>();
-                            foreach (int k in allchildren[Mother].path)
-                            {
-                                allsensor[new_Sensor.Sensor_id].path.Add(k);
-                            }
-                            new_Sensor.path.Add(allchildren[Mother].childnumber);
-                            allchildren[Mother].childnumber += 1;
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].child[path[5]].addsensor(new_Sensor);
-                            break;
-                        case 7:
-                            allsensor[new_Sensor.Sensor_id].path = new List<int>();
-                            foreach (int k in allchildren[Mother].path)
-                            {
-                                allsensor[new_Sensor.Sensor_id].path.Add(k);
-                            }
-                            new_Sensor.path.Add(allchildren[Mother].childnumber);
-                            allchildren[Mother].childnumber += 1;
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].child[path[5]].child[path[6]].addsensor(new_Sensor);
-                            break;
+                        allTree[basenames[path[0]]].root.child[path[1]].addChild(ch);
 
-                    }
-                }
-                else if ((allsensor.ContainsKey(Mother)))
-                {
-                    allsensor.Add(new_Sensor.Sensor_id, new_Sensor);
-                    List<int> path = allsensor[Mother].path;
-                    int i = allsensor[Mother].path.Count;
-                    switch (i)
-                    {
-                        case 2:
-                            allsensor[new_Sensor.Sensor_id].path = new List<int>();
-                            foreach (int k in allsensor[Mother].path)
-                            {
-                                allsensor[new_Sensor.Sensor_id].path.Add(k);
-                            }
-                            new_Sensor.path.Add(allsensor[Mother].childnumber);
-                            allsensor[Mother].childnumber += 1;
+                        break;
+                    case 3:
+                        allchildren[new_Sensor.Id].path = new List<int>();
+                        foreach (int k in allchildren[Mother].path)
+                        {
+                            allchildren[new_Sensor.Id].path.Add(k);
+                        }
+                        ch.path.Add(allchildren[Mother].childnumber);
+                        allchildren[Mother].childnumber += 1;
 
-                            allTree[basenames[path[0]]].root.child[path[1]].addsensor(new_Sensor);
-                            break;
-                        case 3:
-                            allsensor[new_Sensor.Sensor_id].path = new List<int>();
-                            foreach (int k in allsensor[Mother].path)
-                            {
-                                allsensor[new_Sensor.Sensor_id].path.Add(k);
-                            }
-                            new_Sensor.path.Add(allsensor[Mother].childnumber);
-                            allsensor[Mother].childnumber += 1;
-                            //allsensor.Add(Node, new_Sensor);
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].addsensor(new_Sensor);
-                            break;
-                        case 4:
-                            allsensor[new_Sensor.Sensor_id].path = new List<int>();
-                            foreach (int k in allsensor[Mother].path)
-                            {
-                                allsensor[new_Sensor.Sensor_id].path.Add(k);
-                            }
-                            new_Sensor.path.Add(allsensor[Mother].childnumber);
-                            allsensor[Mother].childnumber += 1;
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].addsensor(new_Sensor);
-                            break;
-                        case 5:
-                            allsensor[new_Sensor.Sensor_id].path = new List<int>();
-                            foreach (int k in allsensor[Mother].path)
-                            {
-                                allsensor[new_Sensor.Sensor_id].path.Add(k);
-                            }
-                            new_Sensor.path.Add(allsensor[Mother].childnumber);
-                            allsensor[Mother].childnumber += 1;
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].addsensor(new_Sensor);
-                            break;
-                        case 6:
-                            allsensor[new_Sensor.Sensor_id].path = new List<int>();
-                            foreach (int k in allsensor[Mother].path)
-                            {
-                                allsensor[new_Sensor.Sensor_id].path.Add(k);
-                            }
-                            new_Sensor.path.Add(allsensor[Mother].childnumber);
-                            allsensor[Mother].childnumber += 1;
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].child[path[5]].addsensor(new_Sensor);
-                            break;
-                        case 7:
-                            allsensor[new_Sensor.Sensor_id].path = new List<int>();
-                            foreach (int k in allsensor[Mother].path)
-                            {
-                                allsensor[new_Sensor.Sensor_id].path.Add(k);
-                            }
-                            new_Sensor.path.Add(allsensor[Mother].childnumber);
-                            allsensor[Mother].childnumber += 1;
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].child[path[5]].child[path[6]].addsensor(new_Sensor);
+                        allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].addChild(ch);
+                        break;
+                    case 4:
+                        allchildren[new_Sensor.Id].path = new List<int>();
+                        foreach (int k in allchildren[Mother].path)
+                        {
+                            allchildren[new_Sensor.Id].path.Add(k);
+                        }
+                        ch.path.Add(allchildren[Mother].childnumber);
+                        allchildren[Mother].childnumber += 1;
+                        allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].addChild(ch);
+                        break;
+                    case 5:
+                        allchildren[new_Sensor.Id].path = new List<int>();
+                        foreach (int k in allchildren[Mother].path)
+                        {
+                            allchildren[new_Sensor.Id].path.Add(k);
+                        }
+                        ch.path.Add(allchildren[Mother].childnumber);
+                        allchildren[Mother].childnumber += 1;
+                        allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].addChild(ch);
+                        break;
+                    case 6:
+                        allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].child[path[5]].addChild(ch);
+                        break;
+                    case 7:
+                        allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].child[path[5]].child[path[6]].addChild(ch);
+                        break;
 
-                            break;
-                    }
                 }
             }
         }
-=======
+        }
 
-        }*/
->>>>>>> parent of 4e757bc (Gruppen Meeting TreeStructure bearbeitet)
 
     }
     
-}
+
 
 
