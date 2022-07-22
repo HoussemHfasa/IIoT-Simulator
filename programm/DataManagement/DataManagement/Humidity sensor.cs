@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace SensorAndSensorgroup
 {
-    public class HumiditySensor:Sensor<double>
+    class HumiditySensor:Sensor<double>
     {
         public HumiditySensor()
         {

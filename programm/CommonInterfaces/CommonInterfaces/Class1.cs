@@ -121,7 +121,7 @@ namespace CommonInterfaces
         public string Password { get; set; }
     }
     
-    public interface IDatastorage
+    public interface IDatastorage<T> 
     {
 
         /// <summary>

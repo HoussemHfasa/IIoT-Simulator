@@ -162,6 +162,7 @@ namespace SensorAndSensorgroup
 
             }
         // Änderungen im Gruppenmeeting
+<<<<<<< HEAD
         //die Methode Basename/Nodename/Sensor nicht geeignet für unsere Programm ,da der Nutzer mehrere Unterordner erstellen kann
         public Dictionary<string, NAryTree> allTree = new Dictionary<string, NAryTree>();
         public Dictionary<string, Node> allchildren = new Dictionary<string, Node>();
@@ -169,16 +170,20 @@ namespace SensorAndSensorgroup
         public Dictionary<string, int> basenames_children = new Dictionary<string, int>();
         public List<string> basenames = new List<string>();
         public void Add_new_Base(string basename)
+=======
+     /*   List<TreeNode<T>.NAryTree> Trees = new List<TreeNode<T>.NAryTree>();
+        List<string> basenameliste = new List<string>();
+        public void Addbase(string Basename)
+>>>>>>> parent of 4e757bc (Gruppen Meeting TreeStructure bearbeitet)
         {
-            var Tree = new NAryTree();
-            Tree.root = new TreeNode(basename);
-            allTree.Add(basename, Tree);
-            basenames.Add(basename);
-            basenames_children.Add(basename, 0);
+            var Tree = new TreeNode<T>.NAryTree();
+            Tree.root = new TreeNode<T>(Basename);
+            Trees.Add(Tree);
+            basenameliste.Add(nameof(Tree));
         }
-
-        public void Add_new_Node(string Mother, string Node)
+        public void Addnode(string Nodename, string Basename)
         {
+<<<<<<< HEAD
             if (allTree.ContainsKey(Mother))
             {
                 Node ch1 = new Node(Node);
@@ -323,9 +328,13 @@ namespace SensorAndSensorgroup
                     }
                 }
             }
+=======
+
+>>>>>>> parent of 4e757bc (Gruppen Meeting TreeStructure bearbeitet)
         }
-        public void Add_new_sensor(string Mother, dynamic new_Sensor)
+        public void Addsensor(Sensor<T> sensor,string obere_Ordner)
         {
+<<<<<<< HEAD
             new_Sensor.Mothername = Mother;
             if (allTree.ContainsKey(Mother))
             {
@@ -486,9 +495,13 @@ namespace SensorAndSensorgroup
                 }
             }
         }
+=======
+
+        }*/
+>>>>>>> parent of 4e757bc (Gruppen Meeting TreeStructure bearbeitet)
 
     }
-
+    
 }
 
 

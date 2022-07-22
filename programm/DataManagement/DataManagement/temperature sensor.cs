@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace SensorAndSensorgroup
 {
-    public class TemperatureSensor:Sensor<double>
+    class TemperatureSensor:Sensor<double>
     {
         public TemperatureSensor()
         {

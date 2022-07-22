@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace SensorAndSensorgroup
 {
-    public class firedetector : Sensor<bool>
+    class firedetector : Sensor<bool>
     {
         public firedetector()
         {

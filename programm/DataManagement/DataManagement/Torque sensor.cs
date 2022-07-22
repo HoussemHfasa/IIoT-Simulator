@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace SensorAndSensorgroup
 {
-    public class TorqueSensor:Sensor<double>
+    class TorqueSensor:Sensor<double>
     {
         public TorqueSensor()
         {

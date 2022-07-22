@@ -11,7 +11,7 @@ using Newtonsoft.Json.Linq;
 namespace SensorAndSensorgroup
 {
     // Füllstandssensor
-    public class LevelSensor:Sensor<double>
+    class LevelSensor:Sensor<double>
     {
         public LevelSensor()
         {
