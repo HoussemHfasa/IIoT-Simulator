@@ -16,9 +16,7 @@ using Newtonsoft.Json;
 
 namespace NunitTestDatamanagement
 {
-    /// <summary>
-    /// //Der gleiche Test für alle Sensorentype
-    /// </summary>
+  
     class TreenodeUnittest
     {
        
@@ -57,7 +55,8 @@ namespace NunitTestDatamanagement
             sensorgroupstest.Add_new_Node("Home", "Wohnzimmer");
             sensorgroupstest.Add_new_Sensor("Zimmer1",Sensor1);
             sensorgroupstest.Add_new_Sensor("Whonzimmer", Sensor2);
-            Datastoragetest.SaveTree(sensorgroupstest.allTree,sensorgroupstest.allchildren,sensorgroupstest.allsensor,sensorgroupstest.basenames,sensorgroupstest.basenames_children);
+            
+            Datastoragetest.SaveTree(sensorgroupstest.allTree,sensorgroupstest.allchildren,sensorgroupstest.basenames,sensorgroupstest.basenames_children);
 
             //Assert
             Assert.That(File.Exists(AppDomain.CurrentDomain.BaseDirectory + "alltree"));
@@ -67,7 +66,6 @@ namespace NunitTestDatamanagement
         {
             //Act
             allTree = Datastoragetest.Load_alltree();
-            allsensor = Datastoragetest.Load_allsensor();
             allchildren = Datastoragetest.Load_allchildren();
             basenames = Datastoragetest.Load_Basenames();
             basenames_children = Datastoragetest.Load_Basenames_children();

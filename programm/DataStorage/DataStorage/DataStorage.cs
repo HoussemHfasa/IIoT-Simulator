@@ -99,7 +99,7 @@ namespace DataStorage
         // Änderungen im Gruppenmeeting
         //die Methode Basename/Nodename/Sensor nicht geeignjet für unsere Programm ,da der Nutzer mehrere Unterordner erstellen kann
        
-            public void SaveTree(Dictionary<string, NAryTree> allTree, Dictionary<string, TreeNode> allchildren, Dictionary<string, dynamic> allsensor, List<string> basenames, Dictionary<string, int> basenames_children)
+            public void SaveTree(Dictionary<string, NAryTree> allTree, Dictionary<string, TreeNode> allchildren, List<string> basenames, Dictionary<string, int> basenames_children)
             {
             var serializer = new JsonSerializer();
             using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "basenames_children"))
