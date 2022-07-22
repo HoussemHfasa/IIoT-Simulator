@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 namespace SensorAndSensorgroup
 {
     //Dehnungssensor
-    class StrainSensor : Sensor<ushort>
+    public class StrainSensor : Sensor<ushort>
     {
         public StrainSensor()
         {
