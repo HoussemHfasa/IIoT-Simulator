@@ -363,7 +363,7 @@
                 FontSize="18"
                 Foreground="White"
                 HorizontalAlignment="Left" 
-                Width="517"
+                Width="423"
                 FontFamily="Fonts/#Dosis" Grid.ColumnSpan="3" Grid.Column="1"/>
 
         </Grid>

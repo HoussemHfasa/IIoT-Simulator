@@ -17,6 +17,7 @@ namespace IIoTSimulatorUI
     /// <summary>
     /// Interaktionslogik für NeueSensorgruppeUI.xaml
     /// </summary>
+
     public partial class NeueSensorgruppeUI : Window
     {
         //Sensorgroups sensorgroupsObject = new Sensorgroups();
@@ -26,7 +27,7 @@ namespace IIoTSimulatorUI
             InitializeComponent();
         }
 
-
+        
         //Menü Leiste:
 
         //Button um zu den Broker Einstellungen zu gelangen
@@ -90,23 +91,6 @@ namespace IIoTSimulatorUI
 
         }
 
-        //Button um den Sensor hinzuzufügen
-        private void SensorHinzufuegenClick(object sender, RoutedEventArgs e)
-        {
-
-            PopUpSensoren objectPopupSensoren = new PopUpSensoren();
-            objectPopupSensoren.Show();
-            /*  TreeViewItem selectedTVI = (TreeViewItem)TreeView1.SelectedItem;
-
-              TreeViewItem sensorItem = new TreeViewItem();
-
-              string sensor = (string)ComboBoxSensoren.Text;
-
-              sensorItem.Header = sensor;
-
-              selectedTVI.Items.Add(sensorItem); //Funktioniert
-            */
-        }
 
 
         //Speichert die Sensorgruppe als Topic(Soll)
@@ -130,6 +114,23 @@ namespace IIoTSimulatorUI
         private void SensorgruppeLoeschen(object sender, RoutedEventArgs e)
         {
             TreeView1.Items.Clear();
+        }
+
+        //Button um zu den Sensordaten-Einstellungen zu gelangen
+        private void Sensordaten(object sender, RoutedEventArgs e)
+        {
+            PopUpSensoren objectPopupSensoren = new PopUpSensoren();
+            objectPopupSensoren.Show();
+            /*  TreeViewItem selectedTVI = (TreeViewItem)TreeView1.SelectedItem;
+
+              TreeViewItem sensorItem = new TreeViewItem();
+
+              string sensor = (string)ComboBoxSensoren.Text;
+
+              sensorItem.Header = sensor;
+
+              selectedTVI.Items.Add(sensorItem); //Funktioniert
+            */
         }
     }
 }

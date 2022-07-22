@@ -71,7 +71,6 @@
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            FontFamily="Fonts/#Dosis"
-                           
                            FontSize="22" BorderBrush="#FF0F0F2D"
                            />
 
@@ -171,8 +170,8 @@
             </ComboBox>
 
             <!-- Button zum Erstellen der Sensorgruppe-->
-            <Button Content="Sensor hinzufügen"
-                    Click="SensorHinzufuegenClick"
+            <Button Content="Sensordaten auswählen"
+                    Click="Sensordaten"
                     Foreground="White"
                     FontSize="16" 
                     Margin="10,121,-50,-177" 

@@ -223,7 +223,7 @@
                     Margin="170,0,-50,0"
                     Grid.Column="3" 
                     Height="35" 
-                    VerticalAlignment="Top">
+                    VerticalAlignment="Top" Cursor="Hand">
 
                 <Button.Style>
                     <Style TargetType="Button">

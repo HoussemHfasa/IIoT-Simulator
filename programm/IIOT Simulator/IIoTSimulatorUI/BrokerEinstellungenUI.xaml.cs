@@ -20,6 +20,7 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class BrokerEinstellungenUI : Window
     {
+        
         public BrokerEinstellungenUI()
         {
             InitializeComponent();
@@ -35,10 +36,12 @@ namespace IIoTSimulatorUI
             string nutzernameEingabe = NutzernameText.Text;
             string passwortEingabe = PassswortBox.Password.ToString();
 
+            //bool hakenGesetzt = HakenSetzen.Click -hier ncoh eine If-Abfrage die überprüft ob der Haken gesetzt wurde
+
             Communicator communicatorObject = new Communicator();
 
             string verbunden = communicatorObject.ConnectToBroker(brokerNameEingabe, portEingabe);
-
+            
             string verbunden2 = communicatorObject.ConnectToBroker(brokerNameEingabe, portEingabe, nutzernameEingabe, passwortEingabe);
 
             if (verbunden.Equals("-Connected\n-"))

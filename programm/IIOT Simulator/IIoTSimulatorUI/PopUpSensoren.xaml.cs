@@ -22,9 +22,16 @@ namespace IIoTSimulatorUI
             InitializeComponent();
         }
 
-        private void SensorHinzufuegenClick(object sender, RoutedEventArgs e)
+        private void Schwingung(object sender, RoutedEventArgs e)
         {
+            HarmonischeSchwingung objectSchwingung = new HarmonischeSchwingung();
+            this.Visibility = Visibility.Hidden;
+            objectSchwingung.Show();
+        }
 
+        private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

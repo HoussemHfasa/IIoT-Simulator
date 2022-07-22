@@ -5,12 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IIoTSimulatorUI"
         mc:Ignorable="d"
-        Title="PopUpSensoren" Height="450" Width="800">
-    <Grid>
+        Title="PopUpSensoren" 
+        Height="450" Width="800"
+         WindowStartupLocation="CenterScreen"
+        Background="#181735"
+        WindowStyle="None">
+    <Grid Opacity="0.995" Visibility="Visible">
+
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/IIOT2.jpg"
+                        Stretch="UniformToFill" Opacity="0.995"
+                        />
+        </Grid.Background>
+
         <!-- TextBox für den Sensortyp -->
         <ComboBox x:Name="ComboBoxSensoren"
                 Height="30" 
-                Margin="53,82,466,322" 
+                Margin="289,131,289,289"
                 FontSize="17">
             <ComboBoxItem 
                      Content="Harmonische Schwingung"></ComboBoxItem>
@@ -23,12 +34,22 @@
 
         </ComboBox>
 
+        <!-- Label Amplitude-->
+        <Label
+                Content="Schwingung:"
+                Margin="98,123,0,270"
+                FontSize="18"
+                Foreground="#FFFFF8F8"
+                HorizontalAlignment="Left" 
+                Width="169"
+                FontFamily="Fonts/#Dosis"/>
+
         <!-- Button zum Erstellen der Sensorgruppe-->
-        <Button Content="Sensor hinzufügen"
-                    Click="SensorHinzufuegenClick"
+        <Button Content="Schwingung hinzufügen"
+                    Click="Schwingung"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="400,69,0,309" 
+                    Margin="565,347,0,24" 
                     HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand">
@@ -57,6 +78,47 @@
                                 CornerRadius="12"
                                 Background= "{TemplateBinding Background}">
                         <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Button um die Sensordateneingabe zu schließen-->
+        <Button Content="×"
+                    Background="{x:Null}"
+                    Click="ProgrammSchließenClick"
+                    Foreground="White"
+                    FontSize="30" 
+                    Margin="741,0,0,0" 
+                    Height="35" 
+                    VerticalAlignment="Top" Cursor="Hand">
+
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                    <Setter Property="Background" 
+                                Value="#39285D"/>
+                    <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                            <Setter Property="BorderBrush"
+                                        Value="LightBlue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="60" Height="35"
+                               
+                                Background= "{TemplateBinding Background}">
+                        <ContentPresenter 
+                                VerticalAlignment="Center"
                                 HorizontalAlignment="Center"/>
                     </Border>
                 </ControlTemplate>

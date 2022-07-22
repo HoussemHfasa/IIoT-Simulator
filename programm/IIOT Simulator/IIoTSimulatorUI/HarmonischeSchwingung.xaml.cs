@@ -31,5 +31,10 @@ namespace IIoTSimulatorUI
         {
 
         }
+
+        private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
