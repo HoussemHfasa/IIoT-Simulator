@@ -31,12 +31,10 @@ namespace IIoTSimulatorUI
 
         private void SensordatenSpeichern(object sender, RoutedEventArgs e)
         {
-            NeueSensorgruppeUI objectNeueSensorgruppe = new NeueSensorgruppeUI();
-            this.Visibility = Visibility.Hidden;
-            objectNeueSensorgruppe.Show();
+            Close();
         }
 
-        private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
+        private void ProgrammSchlievßenClick(object sender, RoutedEventArgs e)
         {
             Close();
         }

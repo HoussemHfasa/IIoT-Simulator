@@ -95,17 +95,34 @@
                 Grid.Column="1"
                 FontFamily="Fonts/#Dosis"/>
 
-            <!-- Label für den Sensortyp-->
+            <!-- Label für den Sensorname-->
             <Label
-                Content="Sensortyp:"
-                Margin="145,82,0,-83"
+                Content="Sensorname:"
+                Margin="139,82,0,-83"
                 FontSize="18"
                 Foreground="White"
                 HorizontalAlignment="Left" 
-                Width="93" 
+                Width="99" 
                 Grid.Column="2"
                 Grid.ColumnSpan="2"
                 FontFamily="Fonts/#Dosis"/>
+
+            <!-- TextBox für den Sensorname -->
+            <TextBox
+                Name="textBoxEingabeSensor"
+                Width="150"
+                     Height="30" 
+                     Grid.Column="3"
+                     Margin="50,86,-20,-81"
+                 Background="#ff1f4663"
+                      TextAlignment="Left"
+                BorderBrush="#FF020E52"
+                FontSize="20"
+                VerticalAlignment="Top"
+                Foreground="#FFd5d5d5"
+                BorderThickness="2,2,2,2" 
+                />
+
 
             <!-- TextBox für den Stamm-->
             <TextBox x:Name="textBoxEingabe"
@@ -141,42 +158,15 @@
                      
                      />
 
-            <!-- TextBox für den Sensortyp -->
-            <ComboBox x:Name="ComboBoxSensoren" 
-                Width="150"
-                Height="30"
-                Grid.Column="3" 
-                Margin="44,86,-14,-81" 
-                FontSize="17">
-                <ComboBoxItem 
-                     Content="Temperatursensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Helligkeitssensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Stromsensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Rauchmelder"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Feuchtigkeitssensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Füllstandsensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Dehnungssensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Drehmomentsensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Spannungssensor"></ComboBoxItem>
-                
-            </ComboBox>
 
             <!-- Button zum Erstellen der Sensorgruppe-->
             <Button Content="Sensordaten auswählen"
                     Click="Sensordaten"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="10,121,-50,-177" 
+                    Margin="0,116,-50,-172" 
                     HorizontalAlignment="Left"
-                    Width="184" 
+                    Width="220" 
                     Grid.Column="3" 
                     Cursor="Hand">
 
@@ -222,12 +212,8 @@
                 FontStretch="Medium" 
                 Background="#FFB5D6EE" 
                 FontWeight="Bold"
-                FontFamily="Fonts/#Dosis"
-                >
-                <TreeView.BorderBrush>
-                    <ImageBrush/>
-                </TreeView.BorderBrush>
-            </TreeView>
+                FontFamily="Fonts/#Dosis" BorderBrush="#FF4D6A94"
+                />
 
             <!-- Button um das Programm zu schließen -->
             <Button Content="×"
@@ -358,7 +344,7 @@
                     Click="SensorgruppeSpeichernClick"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="15,462,0,-518" 
+                    Margin="3,457,0,-513" 
                     HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand" 
@@ -399,8 +385,8 @@
                     Click="SensorgruppeLoeschen"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="0,462,0,-518" 
-                    HorizontalAlignment="Center"
+                    Margin="0,457,0,-513" 
+                    HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand" 
                     Grid.Column="3">
@@ -471,9 +457,78 @@
                 Grid.ColumnSpan="4"
                 Background="Transparent"
                 Width="834"/>
-            
+
+            <ComboBox 
+                Grid.Column="3" 
+                Margin="50,229,-20,-224"
+                Width="150"
+                     Height="30" >
+                <ComboBoxItem 
+                     Content="Temperatursensor">
+                </ComboBoxItem>
+                <ComboBoxItem 
+                     Content="Helligkeitssensor"></ComboBoxItem>
+                <ComboBoxItem 
+                     Content="Stromsensor"></ComboBoxItem>
+                <ComboBoxItem 
+                     Content="Rauchmelder"></ComboBoxItem>
+                <ComboBoxItem 
+                     Content="Feuchtigkeitssensor"></ComboBoxItem>
+                <ComboBoxItem 
+                     Content="Füllstandsensor"></ComboBoxItem>
+                <ComboBoxItem 
+                     Content="Dehnungssensor"></ComboBoxItem>
+                <ComboBoxItem 
+                     Content="Drehmomentsensor"></ComboBoxItem>
+                <ComboBoxItem 
+                     Content="Spannungssensor"></ComboBoxItem>
+
+            </ComboBox>
+
+            <!-- Button Sensortyp-->
+            <Button Content="Hinzufügen"
+                    Click="SensortypHinzufuegen"
+                    Foreground="White"
+                    FontSize="16" 
+                    Margin="18,268,-50,-324" 
+                    HorizontalAlignment="Left"
+                    Width="184" 
+                    Cursor="Hand" 
+                    Grid.Column="3">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                        <Setter Property="Background" 
+                                Value="#008080"/>
+                        <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                                <Setter Property="Background"
+                                     Value="Aqua"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="180" Height="30"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+
         </Grid>
 
     </Grid>
-    
+
 </Window>

@@ -21,24 +21,24 @@
                         />
         </Grid.Background>
 
-        <!-- Label Schwingung-->
+        <!-- Label Datenerzeugung-->
         <Label
-                Content="Schwingung:"
-                Margin="48,57,0,115"
+                Content="Datenerzeugung:"
+                Margin="25,57,0,115"
                 FontSize="18"
                 Foreground="#FFFFF8F8"
                 HorizontalAlignment="Left" 
-                Width="154"
+                Width="172"
                 FontFamily="Fonts/#Dosis"/>
 
-        <!-- Button Schwingung hinzufügen-->
-        <Button Content="Schwingung hinzufügen"
+        <!-- Button Datenerzeugung-->
+        <Button Content="Auswählen"
                     Click="Schwingung"
                     Foreground="White"
-                    FontSize="14" 
-                    Margin="261,172,0,26" 
+                    FontSize="13" 
+                    Margin="260,172,0,26" 
                     HorizontalAlignment="Left"
-                    Width="184" 
+                    Width="185" 
                     Cursor="Hand">
 
             <Button.Style>
@@ -124,7 +124,7 @@
             HorizontalAlignment="Left"
             Margin="202,65,0,0" 
             VerticalAlignment="Top" 
-            Width="173">
+            Width="173" Cursor="Hand">
             <ComboBoxItem 
                      Content="Harmonische Schwingung">
             </ComboBoxItem>

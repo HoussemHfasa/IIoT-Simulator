@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SensorAndSensorgroup;
 
 namespace IIoTSimulatorUI
 {
@@ -17,6 +18,11 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class PopUpSensoren : Window
     {
+        public PopUpSensoren(Sensor<double> newSensor)
+        { }
+
+        public PopUpSensoren(Sensor<bool> newSensor)
+        { }
         public PopUpSensoren()
         {
             InitializeComponent();

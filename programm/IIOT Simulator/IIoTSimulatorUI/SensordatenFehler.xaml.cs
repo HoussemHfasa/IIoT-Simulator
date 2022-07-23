@@ -26,5 +26,12 @@ namespace IIoTSimulatorUI
         {
             Close();
         }
+
+        private void Fehlermethode(object sender, RoutedEventArgs e)
+        {
+            FehlerZufallswerte objectFehlerZufall = new FehlerZufallswerte();
+            this.Visibility = Visibility.Hidden;
+            objectFehlerZufall.Show();
+        }
     }
 }

@@ -1,13 +1,12 @@
-﻿<Window x:Class="IIoTSimulatorUI.UeberlagerteSchwingung"
+﻿<Window x:Class="IIoTSimulatorUI.FehlerZufallswerte"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IIoTSimulatorUI"
         mc:Ignorable="d"
-        Title="UeberlagerteSchwingung" 
-        Height="450"
-        Width="800"
+        Title="FehlerZufallswerte" 
+        Height="450" Width="800"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Background="#181735">
@@ -23,19 +22,19 @@
                         />
         </Grid.Background>
 
-        <!-- Label Amplitude-->
+        <!-- Label Maximaler Fehlerwert-->
         <Label
-                Content="Amplitude:"
-                Margin="102,95,0,298"
+                Content="Maximaler Fehlerwert:"
+                Margin="34,90,0,304"
                 FontSize="18"
                 Foreground="#FFFFF8F8"
                 HorizontalAlignment="Left" 
-                Width="83"
+                Width="185"
                 FontFamily="Fonts/#Dosis"/>
 
         <!-- TextBox für die Amplitude-->
         <TextBox x:Name="textBoxAmplitude" 
-                Text="0.00"
+                Text="............"
                 Margin="244,95,334,0"
                 Height="30"
                   Background="#ff1f4663"
@@ -47,14 +46,14 @@
                 BorderThickness="2,2,2,2"   
                 />
 
-        <!-- Label für die Periodendauer-->
+        <!-- Label für die Minimale Fehlerwert-->
         <Label
-                Content="Periodendauer:"
-                Margin="80,152,0,242"
+                Content="Minimaler Fehlerwert:"
+                Margin="34,152,0,243"
                 FontSize="18"
                 Foreground="#FFFAF9F9"
                 HorizontalAlignment="Left" 
-                Width="119"
+                Width="189"
                 FontFamily="Fonts/#Dosis"/>
 
         <!-- TextBox für die Periodendauer -->
@@ -71,9 +70,57 @@
                 BorderThickness="2,2,2,2"   
                 />
 
-        <!-- Button zum Speichern der Sensordaten-->
-        <Button Content="Sensordaten speichern"
-                    Click="SensordatenSpeichern"
+        <!-- Label für die Fehlerrate-->
+        <Label
+                Content="Fehlerrate:"
+                Margin="34,221,0,172"
+                FontSize="18"
+                Foreground="#FFFCF6F6"
+                HorizontalAlignment="Left" 
+                Width="142"
+                FontFamily="Fonts/#Dosis"/>
+
+        <!-- TextBox für die Phasenverschiebung-->
+        <TextBox x:Name="textBoxPhasenverschiebung" 
+                Text="0.00"
+                Margin="244,221,334,0"
+                Height="30"
+                  Background="#ff1f4663"
+                      TextAlignment="Right"
+                BorderBrush="#FF020E52"
+                FontSize="16"
+                VerticalAlignment="Top"
+                Foreground="AliceBlue"
+                BorderThickness="2,2,2,2"   
+                />
+
+        <!-- Label für die Fehlerlänge-->
+        <Label
+                Content="Fehlerlänge:"
+                Margin="34,283,0,110"
+                FontSize="18"
+                Foreground="#FFFDFDFD"
+                HorizontalAlignment="Left" 
+                Width="106"
+                FontFamily="Fonts/#Dosis"/>
+
+        <!-- TextBox für die Fehlerlänge-->
+        <TextBox x:Name="textBoxWerteanzahl" 
+                Text="1"
+                Margin="244,283,334,0"
+                Height="30"
+                  Background="#ff1f4663"
+                      TextAlignment="Right"
+                BorderBrush="#FF020E52"
+                FontSize="16"
+                VerticalAlignment="Top"
+                Foreground="AliceBlue"
+                BorderThickness="2,2,2,2"   
+                />
+
+        <!-- Button Hinzufügen-->
+        <Button Content="Hinzufügen"
+                    Click="Hinzufügen"
                     Foreground="White"
                     FontSize="16" 
                     Margin="565,347,0,24" 
@@ -111,50 +158,11 @@
             </Button.Template>
         </Button>
 
-        <!-- Button zum Fehler hinzufügen-->
-        <Button Content="Fehler hinzufügen"
-                    Click="FehlerHinzufuegen"
-                    Foreground="White"
-                    FontSize="16" 
-                    Margin="565,285,0,86" 
-                    HorizontalAlignment="Left"
-                    Width="184" 
-                    Cursor="Hand">
-
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="TextElement.FontFamily" 
-                                Value ="Fonts/Dosis"/>
-                    <Setter Property="Background" 
-                                Value="#008080"/>
-                    <Setter Property="Cursor" 
-                                Value="Hand"/>
-
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" 
-                                     Value="True">
-                            <Setter Property="Background"
-                                     Value="Aqua"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-            <Button.Template>
-                <ControlTemplate TargetType="Button">
-                    <Border Width="180" Height="30"
-                                CornerRadius="12"
-                                Background= "{TemplateBinding Background}">
-                        <ContentPresenter VerticalAlignment="Center"
-                                HorizontalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
 
         <!-- Button um die Sensordateneingabe zu schließen-->
         <Button Content="×"
                     Background="{x:Null}"
-                    Click="ProgrammSchlievßenClick"
+                    Click="ProgrammSchließenClick"
                     Foreground="White"
                     FontSize="30" 
                     Margin="741,0,0,0" 
@@ -192,14 +200,14 @@
             </Button.Template>
         </Button>
 
-        <!-- Label- Überschrift Überlagerte Schwingung-->
+        <!-- Label- Überschrift -->
         <Label
-                Content="Überlagerte Schwingung"
+                Content="Zufällige Fehlerwerte"
                 Margin="29,4,0,353"
                 FontSize="25"
                 Foreground="#FFFFF8F8"
                 HorizontalAlignment="Left" 
-                Width="506"
+                Width="492"
                 FontWeight="Medium"
                 FontFamily="Fonts/#Dosis"/>
     </Grid>

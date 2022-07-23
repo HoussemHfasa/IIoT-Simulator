@@ -76,6 +76,7 @@ namespace IIoTSimulatorUI
         private void UnterordnerHinzufuegenClick(object sender, RoutedEventArgs e)
         {
             TreeViewItem selectedTVI = (TreeViewItem)TreeView1.SelectedItem as TreeViewItem; //Ein TreeViewItem vom ausgewählten Item erstellen
+           
             string oberordner = selectedTVI.Header.ToString();//Das ausgewählte Objekt in String speichern
 
             TreeViewItem unterordner = new TreeViewItem(); //Ein TreeViewItem vom Unterordner erstellen
@@ -119,18 +120,27 @@ namespace IIoTSimulatorUI
         //Button um zu den Sensordaten-Einstellungen zu gelangen
         private void Sensordaten(object sender, RoutedEventArgs e)
         {
+
+            TreeViewItem selectedTVI = (TreeViewItem)TreeView1.SelectedItem as TreeViewItem; //Ein TreeViewItem vom ausgewählten Item erstellen
+           
+            string oberordner = selectedTVI.Header.ToString();//Das ausgewählte Objekt in String speichern
+
+            TreeViewItem sensorname = new TreeViewItem(); //Ein TreeViewItem vom Sensornamen erstellen
+
+            string textSensorname = textBoxEingabeSensor.Text; //Benutzereingabe in einem string speichern
+
+            sensorname.Header = textSensorname;
+
+            selectedTVI.Items.Add(sensorname);
+        }
+
+        private void SensortypHinzufuegen(object sender, RoutedEventArgs e)
+        {
+            //SensorAndSensorgroup.Sensor<double> newSensor = new SensorAndSensorgroup.Sensor<double>();
+
+            //Das Fenster Sensortyp öffnen
             PopUpSensoren objectPopupSensoren = new PopUpSensoren();
             objectPopupSensoren.Show();
-            /*  TreeViewItem selectedTVI = (TreeViewItem)TreeView1.SelectedItem;
-
-              TreeViewItem sensorItem = new TreeViewItem();
-
-              string sensor = (string)ComboBoxSensoren.Text;
-
-              sensorItem.Header = sensor;
-
-              selectedTVI.Items.Add(sensorItem); //Funktioniert
-            */
         }
     }
 }

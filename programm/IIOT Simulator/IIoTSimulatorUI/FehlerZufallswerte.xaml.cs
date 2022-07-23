@@ -13,23 +13,17 @@ using System.Windows.Shapes;
 namespace IIoTSimulatorUI
 {
     /// <summary>
-    /// Interaktionslogik für HarmonischeSchwingung.xaml
+    /// Interaktionslogik für FehlerZufallswerte.xaml
     /// </summary>
-    public partial class HarmonischeSchwingung : Window
+    public partial class FehlerZufallswerte : Window
     {
-        public HarmonischeSchwingung()
+
+        public FehlerZufallswerte()
         {
             InitializeComponent();
         }
 
-        private void FehlerHinzufuegen(object sender, RoutedEventArgs e)
-        {
-            SensordatenFehler objectFehler = new SensordatenFehler();
-            this.Visibility = Visibility.Hidden;
-            objectFehler.Show();
-        }
-
-        private void SensordatenSpeichern(object sender, RoutedEventArgs e)
+        private void Hinzufügen(object sender, RoutedEventArgs e)
         {
             Close();
         }
