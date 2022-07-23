@@ -28,6 +28,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SensorAndSensorgroup", "..\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStorage", "..\DataStorage\DataStorage\DataStorage.csproj", "{AF4021C1-DD94-40F4-81EF-3A445D703F47}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SensorDataSimulator", "..\SensorDataSimulator\SensorDataSimulator\SensorDataSimulator.csproj", "{3C1603F3-82BD-411D-8F81-F62CB62813E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +76,10 @@ Global
 		{AF4021C1-DD94-40F4-81EF-3A445D703F47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF4021C1-DD94-40F4-81EF-3A445D703F47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF4021C1-DD94-40F4-81EF-3A445D703F47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C1603F3-82BD-411D-8F81-F62CB62813E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C1603F3-82BD-411D-8F81-F62CB62813E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C1603F3-82BD-411D-8F81-F62CB62813E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C1603F3-82BD-411D-8F81-F62CB62813E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

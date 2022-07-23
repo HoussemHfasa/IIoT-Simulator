@@ -26,8 +26,8 @@ namespace IIoTSimulatorUI
         {
             InitializeComponent();
         }
+        SensorAndSensorgroup.Sensor<double> DoubleSensor;
 
-        
         //Menü Leiste:
 
         //Button um zu den Broker Einstellungen zu gelangen
@@ -114,6 +114,7 @@ namespace IIoTSimulatorUI
         //Löscht die ganze Sensorgruppe
         private void SensorgruppeLoeschen(object sender, RoutedEventArgs e)
         {
+            DoubleSensor.GetValues();
             TreeView1.Items.Clear();
         }
 
@@ -136,10 +137,19 @@ namespace IIoTSimulatorUI
 
         private void SensortypHinzufuegen(object sender, RoutedEventArgs e)
         {
+            //SensorAndSensorgroup.Sensor<double> DoubleSensor;
+
             //SensorAndSensorgroup.Sensor<double> newSensor = new SensorAndSensorgroup.Sensor<double>();
 
-            //Das Fenster Sensortyp öffnen
-            PopUpSensoren objectPopupSensoren = new PopUpSensoren();
+            //Für Testzwecke nur ein Sensor erstellen, der nicht in der Sensorgroup Datenstrucktur enthalten is
+
+            //TODO:  Fallunterscheidung nach ausgewähltem Sensortyp in der Combobox!
+
+            // Für Testzwecke erstmal Temperatursensor
+            DoubleSensor = new TemperatureSensor();
+
+            //Das Fenster Sensortyp öffnen ; IF Abfrage für Double oder Bool Sensor
+            PopUpSensoren objectPopupSensoren = new PopUpSensoren(ref DoubleSensor);
             objectPopupSensoren.Show();
         }
     }

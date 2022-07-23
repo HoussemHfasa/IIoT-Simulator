@@ -9,6 +9,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SensorAndSensorgroup;
+using SensorDataSimulator;
 
 namespace IIoTSimulatorUI
 {
@@ -17,14 +19,23 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class FehlerZufallswerte : Window
     {
-
-        public FehlerZufallswerte()
+        Sensor<double> DoubleSensor;
+        public FehlerZufallswerte(ref Sensor<double> NewSensor)
         {
+            this.DoubleSensor = NewSensor;
             InitializeComponent();
         }
 
         private void Hinzufügen(object sender, RoutedEventArgs e)
         {
+            List<double> Testvalues = new List<double>();
+            Testvalues.Add(Convert.ToDouble(textBoxErrorRate.Text));
+            Testvalues.Add(Convert.ToInt32(textBoxErrorLength.Text));
+            Testvalues.Add(Convert.ToDouble(textBoxMaxError.Text));
+            Testvalues.Add(Convert.ToDouble(textBoxMinError.Text));
+            RandomValuesError DataGenerator = new RandomValuesError(Convert.ToDouble(textBoxErrorRate.Text), Convert.ToInt32(textBoxErrorLength.Text), Convert.ToDouble(textBoxMaxError.Text), Convert.ToDouble(textBoxMinError.Text));
+            DoubleSensor.SetValues(DataGenerator.GetSensorDataWithErrors(DoubleSensor.GetValues()));
+
             Close();
         }
 

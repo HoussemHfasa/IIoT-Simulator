@@ -9,7 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using SensorAndSensorgroup;
 namespace IIoTSimulatorUI
 {
     /// <summary>
@@ -17,10 +17,29 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class SensordatenFehler : Window
     {
-        public SensordatenFehler()
+        Sensor<bool> BoolSensor;
+        Sensor<double> DoubleSensor;
+
+        //Konstruktor für bool Sensoren
+        public SensordatenFehler(ref Sensor<bool> newSensor)
         {
+            this.BoolSensor = newSensor; 
             InitializeComponent();
         }
+        //Konstruktor für double Sensoren
+        public SensordatenFehler(ref Sensor<double> newSensor)
+        {
+            this.DoubleSensor = newSensor;
+            InitializeComponent();
+        }
+
+        // TODO: Dieser Konstruktor sollte nicht verwendet werden
+        public SensordatenFehler()
+        {
+            
+            InitializeComponent();
+        }
+
 
         private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
         {
@@ -29,7 +48,10 @@ namespace IIoTSimulatorUI
 
         private void Fehlermethode(object sender, RoutedEventArgs e)
         {
-            FehlerZufallswerte objectFehlerZufall = new FehlerZufallswerte();
+            //TODO: Fallunterscheidung welches Combobox Contentitem ausgewählt wurde
+
+            // Für Zufallswerte
+            FehlerZufallswerte objectFehlerZufall = new FehlerZufallswerte(ref DoubleSensor);
             this.Visibility = Visibility.Hidden;
             objectFehlerZufall.Show();
         }

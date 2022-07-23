@@ -32,9 +32,8 @@
                 Width="185"
                 FontFamily="Fonts/#Dosis"/>
 
-        <!-- TextBox für die Amplitude-->
-        <TextBox x:Name="textBoxAmplitude" 
-                Text="............"
+        <!-- TextBox für Maximalen Fehlerwert-->
+        <TextBox x:Name="textBoxMaxError"
                 Margin="244,95,334,0"
                 Height="30"
                   Background="#ff1f4663"
@@ -43,7 +42,7 @@
                 FontSize="16"
                 VerticalAlignment="Top"
                 Foreground="AliceBlue"
-                BorderThickness="2,2,2,2"   
+                BorderThickness="2,2,2,2" Text="0.00"   
                 />
 
         <!-- Label für die Minimale Fehlerwert-->
@@ -56,8 +55,8 @@
                 Width="189"
                 FontFamily="Fonts/#Dosis"/>
 
-        <!-- TextBox für die Periodendauer -->
-        <TextBox x:Name="textBoxPeriodendauer" 
+        <!-- TextBox für die minimalen Fehlerwert -->
+        <TextBox x:Name="textBoxMinError" 
                 Text="0.00"
                 Margin="244,160,334,0"
                 Height="30"
@@ -80,8 +79,8 @@
                 Width="142"
                 FontFamily="Fonts/#Dosis"/>
 
-        <!-- TextBox für die Phasenverschiebung-->
-        <TextBox x:Name="textBoxPhasenverschiebung" 
+        <!-- TextBox für Die Fehlerrate-->
+        <TextBox x:Name="textBoxErrorRate" 
                 Text="0.00"
                 Margin="244,221,334,0"
                 Height="30"
@@ -105,7 +104,7 @@
                 FontFamily="Fonts/#Dosis"/>
 
         <!-- TextBox für die Fehlerlänge-->
-        <TextBox x:Name="textBoxWerteanzahl" 
+        <TextBox x:Name="textBoxErrorLength" 
                 Text="1"
                 Margin="244,283,334,0"
                 Height="30"

@@ -9,6 +9,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SensorAndSensorgroup;
+using SensorDataSimulator;
 
 namespace IIoTSimulatorUI
 {
@@ -17,20 +19,38 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class HarmonischeSchwingung : Window
     {
-        public HarmonischeSchwingung()
+        HarmonicOscillation DataGenerator;
+        Sensor<double> DoubleSensor = null;
+        Sensor<bool> BoolSensor = null;
+        public HarmonischeSchwingung(ref SensorAndSensorgroup.Sensor<double> NewSensor)
         {
+            this.DoubleSensor = NewSensor;
+            InitializeComponent();
+        }
+        public HarmonischeSchwingung(ref SensorAndSensorgroup.Sensor<bool> NewSensor)
+        {
+            this.BoolSensor = NewSensor;
             InitializeComponent();
         }
 
         private void FehlerHinzufuegen(object sender, RoutedEventArgs e)
         {
-            SensordatenFehler objectFehler = new SensordatenFehler();
+            //TODO: Es fehlt hier noch die Überprüfung Nutzereingaben. Bitte noch spezifizieren welche Überprüfungen stattfinden müssen
+
+            // Objekt der Datenerzeugungsmethode erstellen
+            DataGenerator = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude.Text), Convert.ToDouble(textBoxPeriodendauer.Text), Convert.ToDouble(textBoxPhasenverschiebung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
+            DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
+            SensordatenFehler objectFehler = new SensordatenFehler(ref DoubleSensor);
+
+            //TODO: Hier wieder close?
             this.Visibility = Visibility.Hidden;
             objectFehler.Show();
         }
 
         private void SensordatenSpeichern(object sender, RoutedEventArgs e)
         {
+            DataGenerator = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude.Text), Convert.ToDouble(textBoxPeriodendauer), Convert.ToDouble(textBoxPhasenverschiebung), Convert.ToUInt32(textBoxWerteanzahl));
+            DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
             Close();
         }
 

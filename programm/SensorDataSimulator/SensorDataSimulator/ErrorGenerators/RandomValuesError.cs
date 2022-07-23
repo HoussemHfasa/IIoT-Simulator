@@ -33,6 +33,7 @@ namespace SensorDataSimulator
         // Fehlererzeugungsmethode bekommt eine Liste von Typ double übergeben
         public override List<double> GetSensorDataWithErrors(List<double> SensorDataWithoutErorrs)
         {
+
             //Eingaben auf Exceptions überprüfen
             //Fehlerrate zwischen 0 und 1?
             if (ErrorRatio > 1.0 || ErrorRatio < 0.0)

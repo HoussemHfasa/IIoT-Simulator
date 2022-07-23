@@ -112,5 +112,10 @@ namespace IIoTSimulatorUI
                 this.Visibility = Visibility.Hidden; 
                 objectStartseite2.Show();
         }
+
+        private void CartesianChart_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

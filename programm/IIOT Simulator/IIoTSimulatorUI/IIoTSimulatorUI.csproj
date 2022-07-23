@@ -21,6 +21,7 @@
     <ProjectReference Include="..\..\DummyKomponenten\MQTTCommunicatorDummy\MQTTCommunicatorDummy\MQTTCommunicatorDummy.csproj" />
     <ProjectReference Include="..\..\DummyKomponenten\SensorDataSimulatorDummy\SensorDataSimulatorDummy\SensorDataSimulatorDummy.csproj" />
     <ProjectReference Include="..\..\MQTTCommunicator\MQTTCommunicator\MQTTCommunicator.csproj" />
+    <ProjectReference Include="..\..\SensorDataSimulator\SensorDataSimulator\SensorDataSimulator.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -13,24 +13,56 @@ using SensorAndSensorgroup;
 
 namespace IIoTSimulatorUI
 {
+    public static class TestVariables
+    {
+        public static double Pfad;
+    }
     /// <summary>
     /// Interaktionslogik für PopUpSensoren.xaml
     /// </summary>
     public partial class PopUpSensoren : Window
     {
-        public PopUpSensoren(Sensor<double> newSensor)
-        { }
-
-        public PopUpSensoren(Sensor<bool> newSensor)
-        { }
-        public PopUpSensoren()
+        Sensor<double> DoubleSensor = null;
+        Sensor<bool> BoolSensor = null;
+        // Konstruktor, der einen double Sensor übergeben bekommt
+        public PopUpSensoren(ref Sensor<double> newSensor)
         {
+            DoubleSensor = newSensor;
             InitializeComponent();
         }
+        // Konstruktor, der einen bool Sensor übergeben bekommt
+        public PopUpSensoren(ref Sensor<bool> newSensor)
+        {
+            BoolSensor = newSensor;
+            InitializeComponent();
+        }
+        /*public PopUpSensoren()
+        {
+            InitializeComponent();
+        } */
+
 
         private void Schwingung(object sender, RoutedEventArgs e)
         {
-            HarmonischeSchwingung objectSchwingung = new HarmonischeSchwingung();
+            HarmonischeSchwingung objectSchwingung;
+            if (!DoubleSensor.Equals(null))
+            {
+                TestVariables.Pfad = 1;
+                objectSchwingung = new HarmonischeSchwingung(ref DoubleSensor);
+            }
+            else if(!BoolSensor.Equals(null))
+            {
+                TestVariables.Pfad = 2;
+                objectSchwingung = new HarmonischeSchwingung(ref BoolSensor);
+            }
+            else
+            {
+                TestVariables.Pfad = 3;
+                // in diesem else wäre eine Fehlererkennung nötig. Hier darf das Programm nicht hin
+                objectSchwingung = new HarmonischeSchwingung(ref DoubleSensor);
+            }
+            
+            // Hier close?
             this.Visibility = Visibility.Hidden;
             objectSchwingung.Show();
         }
