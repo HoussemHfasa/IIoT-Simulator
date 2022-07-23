@@ -20,13 +20,14 @@ namespace IIoTSimulatorUI
 
     public partial class NeueSensorgruppeUI : Window
     {
-        //Sensorgroups sensorgroupsObject = new Sensorgroups();
-
+        Sensorgroups Sensorgroup = new Sensorgroups();
+        SensorAndSensorgroup.Sensor<double> DoubleSensor;
+        SensorAndSensorgroup.Sensor<bool> BoolSensor;
         public NeueSensorgruppeUI()
         {
             InitializeComponent();
         }
-        SensorAndSensorgroup.Sensor<double> DoubleSensor;
+        
 
         //Menü Leiste:
 
@@ -70,6 +71,10 @@ namespace IIoTSimulatorUI
             //Sensorgroups sensorgroupsObject = new Sensorgroups();
 
             //sensorgroupsObject.AddBase(stammText);
+
+            //
+            Sensorgroup.Add_new_Base(stammText);
+
         }
 
         //Button um den Unterordner hinzuzufügen
@@ -89,7 +94,7 @@ namespace IIoTSimulatorUI
 
             //sensorgroupsObject.AddNode(unterordnerText, oberordner);
 
-
+            Sensorgroup.Add_new_Node(oberordner, unterordnerText);
         }
 
 
@@ -121,9 +126,13 @@ namespace IIoTSimulatorUI
         //Button um zu den Sensordaten-Einstellungen zu gelangen
         private void Sensordaten(object sender, RoutedEventArgs e)
         {
+            // TODO: Für diesen Button muss auch die Sensortypbox ausgewählt sein. Dann kann hier bereits parallel zum Treeview 
+            // unser Sensor erzeugt und zur Sensorgroup hinzugefügt werden
+
 
             TreeViewItem selectedTVI = (TreeViewItem)TreeView1.SelectedItem as TreeViewItem; //Ein TreeViewItem vom ausgewählten Item erstellen
            
+            
             string oberordner = selectedTVI.Header.ToString();//Das ausgewählte Objekt in String speichern
 
             TreeViewItem sensorname = new TreeViewItem(); //Ein TreeViewItem vom Sensornamen erstellen
@@ -133,66 +142,99 @@ namespace IIoTSimulatorUI
             sensorname.Header = textSensorname;
 
             selectedTVI.Items.Add(sensorname);
-        }
 
-        private void SensortypHinzufuegen(object sender, RoutedEventArgs e)
-        {
-            //SensorAndSensorgroup.Sensor<double> DoubleSensor;
-
-            //SensorAndSensorgroup.Sensor<double> newSensor = new SensorAndSensorgroup.Sensor<double>();
-
-            //Für Testzwecke nur ein Sensor erstellen, der nicht in der Sensorgroup Datenstrucktur enthalten is
-
-            //TODO:  Fallunterscheidung nach ausgewähltem Sensortyp in der Combobox!
-
-            // Für Testzwecke erstmal Temperatursensor
-            DoubleSensor = new TemperatureSensor();
-
-            //Das Fenster Sensortyp öffnen ; IF Abfrage für Double oder Bool Sensor
-            PopUpSensoren objectPopupSensoren = new PopUpSensoren(ref DoubleSensor);
-            objectPopupSensoren.Show();
-
+            // Auswahl für die verschiedenen Sensoren, die der Nutzer genommen hat
+            // und Hinzufügen des Sensors in unsere Sensorgroup
             string SensortypAuswahl = SensortypBox.Text;
-            if(SensortypAuswahl== "Temperatursensor")
+            if (SensortypAuswahl == "Temperatursensor")
             {
-
+                DoubleSensor = new TemperatureSensor();
+                DoubleSensor.Sensor_id = textSensorname;
+                Sensorgroup.Add_new_Sensor(oberordner, DoubleSensor);
             }
-            else if(SensortypAuswahl== "Helligkeitssensor")
+            else if (SensortypAuswahl == "Helligkeitssensor")
             {
-
+                DoubleSensor = new BrightnessSensor();
+                DoubleSensor.Sensor_id = textSensorname;
+                Sensorgroup.Add_new_Sensor(oberordner, DoubleSensor);
             }
             else if (SensortypAuswahl == "Stromsensor")
             {
-
+                DoubleSensor = new CurrentSensor();
+                DoubleSensor.Sensor_id = textSensorname;
+                Sensorgroup.Add_new_Sensor(oberordner, DoubleSensor);
             }
             else if (SensortypAuswahl == "Rauchmelder")
             {
-
+                BoolSensor = new firedetector();
+                BoolSensor.Sensor_id = textSensorname;
+                Sensorgroup.Add_new_Sensor(oberordner, BoolSensor);
             }
             else if (SensortypAuswahl == "Feuchtigkeitssensor")
             {
-
+                DoubleSensor = new HumiditySensor();
+                DoubleSensor.Sensor_id = textSensorname;
+                Sensorgroup.Add_new_Sensor(oberordner, DoubleSensor);
             }
             else if (SensortypAuswahl == "Füllstandsensor")
             {
-
+                DoubleSensor = new LevelSensor();
+                DoubleSensor.Sensor_id = textSensorname;
+                Sensorgroup.Add_new_Sensor(oberordner, DoubleSensor);
             }
             else if (SensortypAuswahl == "Dehnungssensor")
             {
-
+                DoubleSensor = new StrainSensor();
+                DoubleSensor.Sensor_id = textSensorname;
+                Sensorgroup.Add_new_Sensor(oberordner, DoubleSensor);
             }
             else if (SensortypAuswahl == "Drehmomentsensor")
             {
-
+                DoubleSensor = new TorqueSensor();
+                DoubleSensor.Sensor_id = textSensorname;
+                Sensorgroup.Add_new_Sensor(oberordner, DoubleSensor);
             }
-            else if(SensortypAuswahl == "Spannungssensor")
+            else if (SensortypAuswahl == "Spannungssensor")
             {
-
+                DoubleSensor = new VoltageSensor();
+                DoubleSensor.Sensor_id = textSensorname;
+                Sensorgroup.Add_new_Sensor(oberordner, DoubleSensor);
             }
             else
             {
                 MessageBox.Show("Wählen Sie einen Sensortyp aus.");
             }
+
+
+
+        }
+
+        private void SensortypHinzufuegen(object sender, RoutedEventArgs e)
+        {
+            // TODO: Dieser Button soll zu einem Button "Sensordaten erzeugen" o.ä. werden. Der Nutzer kann
+            // damit die Daten des Sensors bestimmen 
+
+
+            //SensorAndSensorgroup.Sensor<double> DoubleSensor;
+
+            //SensorAndSensorgroup.Sensor<double> newSensor = new SensorAndSensorgroup.Sensor<double>();
+            PopUpSensoren objectPopupSensoren;
+            //TODO Das Fenster Sensortyp öffnen ; IF Abfrage für Double oder Bool Sensor
+            string SensortypAuswahl = SensortypBox.Text;
+            if (SensortypAuswahl == "Rauchmelder")
+            {
+                //Bool
+                objectPopupSensoren = new PopUpSensoren(ref BoolSensor);               
+            }
+            else
+            {
+                objectPopupSensoren = new PopUpSensoren(ref DoubleSensor);               
+            }
+            objectPopupSensoren.Show();
+
+
+
+
         }
     }
 }

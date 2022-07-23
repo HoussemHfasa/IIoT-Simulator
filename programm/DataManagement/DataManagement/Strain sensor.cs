@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 namespace SensorAndSensorgroup
 {
     //Dehnungssensor
-    public class StrainSensor : Sensor<ushort>
+    public class StrainSensor : Sensor<double>
     {
         public StrainSensor()
         {
@@ -22,7 +22,17 @@ namespace SensorAndSensorgroup
             this.Sensor_id = IdGenerator.ToString();
         }
 
-        public override ISensor<ushort> JsonDeserialize(string filepath, string Sensor_id)
+        public override ISensor<double> JsonDeserialize(string filepath, string Sensor_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void JsonSerialize(ISensor<double> data, string filepath)
+        {
+            throw new NotImplementedException();
+        }
+
+        /*public override ISensor<ushort> JsonDeserialize(string filepath, string Sensor_id)
         {
             ISensor<ushort> data = new StrainSensor();
             var serializer = new JsonSerializer();
@@ -44,5 +54,6 @@ namespace SensorAndSensorgroup
                 serializer.Serialize(writer, data);
             }
         }
+        */
     }
 }

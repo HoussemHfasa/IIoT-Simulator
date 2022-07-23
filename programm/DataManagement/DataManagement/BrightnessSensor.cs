@@ -10,7 +10,7 @@ using Newtonsoft.Json.Linq;
 
 namespace SensorAndSensorgroup
 {
-    public class BrightnessSensor:Sensor<int>
+    public class BrightnessSensor:Sensor<double>
     {
         public BrightnessSensor()
         {
@@ -22,27 +22,38 @@ namespace SensorAndSensorgroup
             this.Sensor_id = IdGenerator.ToString();
         }
 
-        public override ISensor<int> JsonDeserialize(string filepath, string Sensor_id)
+        public override ISensor<double> JsonDeserialize(string filepath, string Sensor_id)
         {
-            ISensor<int> data = new BrightnessSensor();
-            var serializer = new JsonSerializer();
-            if (File.Exists(filepath+Sensor_id))
-            {
-                using (TextReader reader = File.OpenText(filepath+Sensor_id))
-                {
-                    data = (BrightnessSensor)serializer.Deserialize(reader, typeof(BrightnessSensor));
-                }
-            }
-            return data;
+            throw new NotImplementedException();
         }
 
-        public override void JsonSerialize(ISensor<int> data, string filepath)
+        public override void JsonSerialize(ISensor<double> data, string filepath)
         {
-            var serializer = new JsonSerializer();
-            using (TextWriter writer = File.CreateText(filepath+data.Sensor_id))
-            {
-                serializer.Serialize(writer, data);
-            }
+            throw new NotImplementedException();
         }
+        /*
+public override ISensor<int> JsonDeserialize(string filepath, string Sensor_id)
+{
+   ISensor<int> data = new BrightnessSensor();
+   var serializer = new JsonSerializer();
+   if (File.Exists(filepath+Sensor_id))
+   {
+       using (TextReader reader = File.OpenText(filepath+Sensor_id))
+       {
+           data = (BrightnessSensor)serializer.Deserialize(reader, typeof(BrightnessSensor));
+       }
+   }
+   return data;
+}
+
+public override void JsonSerialize(ISensor<int> data, string filepath)
+{
+   var serializer = new JsonSerializer();
+   using (TextWriter writer = File.CreateText(filepath+data.Sensor_id))
+   {
+       serializer.Serialize(writer, data);
+   }
+}
+*/
     }
 }
