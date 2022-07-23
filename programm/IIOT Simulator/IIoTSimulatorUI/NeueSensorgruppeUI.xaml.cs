@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DummySensorandSensorgroups;
 using SensorAndSensorgroup;
+using DataStorage;
 
 namespace IIoTSimulatorUI
 {
@@ -21,6 +22,7 @@ namespace IIoTSimulatorUI
     public partial class NeueSensorgruppeUI : Window
     {
         Sensorgroups Sensorgroup = new Sensorgroups();
+        DataStorage.DataStorage Datasave = new DataStorage.DataStorage();
         SensorAndSensorgroup.Sensor<double> DoubleSensor;
         SensorAndSensorgroup.Sensor<bool> BoolSensor;
         public NeueSensorgruppeUI()
@@ -102,8 +104,9 @@ namespace IIoTSimulatorUI
         //Speichert die Sensorgruppe als Topic(Soll)
         private void SensorgruppeSpeichernClick(object sender, RoutedEventArgs e)
         {
-            Sensorbeispiel sensor = new Sensorbeispiel();
-           LabelTopic.Content = sensor.Topic;
+            Datasave.SaveTree(Sensorgroup.allTree, Sensorgroup.allchildren, Sensorgroup.basenames, Sensorgroup.basenames_children);
+          // Sensorbeispiel sensor = new Sensorbeispiel();
+          // LabelTopic.Content = sensor.Topic;
 
             MessageBox.Show("Sensorgruppe wurde gespeichert");
         }
