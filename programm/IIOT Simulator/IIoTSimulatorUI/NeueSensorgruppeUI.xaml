@@ -102,7 +102,7 @@
                 FontSize="18"
                 Foreground="White"
                 HorizontalAlignment="Left" 
-                Width="99" 
+                Width="126" 
                 Grid.Column="2"
                 Grid.ColumnSpan="2"
                 FontFamily="Fonts/#Dosis"/>
@@ -159,12 +159,12 @@
                      />
 
 
-            <!-- Button zum Erstellen der Sensorgruppe-->
-            <Button Content="Sensordaten auswählen"
+            <!-- Sensor erstellen-->
+            <Button Content="Sensor erstellen"
                     Click="Sensordaten"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="0,116,-50,-172" 
+                    Margin="10,192,-50,-249" 
                     HorizontalAlignment="Left"
                     Width="220" 
                     Grid.Column="3" 
@@ -204,7 +204,7 @@
             <TreeView
                 Name="TreeView1"
                 Grid.ColumnSpan="2" 
-                Margin="52,268,76,-500" 
+                Margin="52,286,76,-518" 
                 Opacity="0.785" 
                 FontSize="14"
                 Foreground="#FFD1EFF0" 
@@ -344,7 +344,7 @@
                     Click="SensorgruppeSpeichernClick"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="3,457,0,-513" 
+                    Margin="3,492,0,-541" 
                     HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand" 
@@ -385,7 +385,7 @@
                     Click="SensorgruppeLoeschen"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="0,457,0,-513" 
+                    Margin="0,495,0,-536" 
                     HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand" 
@@ -450,20 +450,32 @@
                 x:Name="LabelInfo"
                 Content="Bevor Sie einen Unterordner hinzufügen, stellen Sie sicher das ein Element ausgewählt ist."
                 Margin="56,217,0,-224"
-                FontSize="18"
+                FontSize="12"
                 Foreground="#00000000"
                 HorizontalAlignment="Left"
                 FontFamily="Fonts/#Dosis"
                 Grid.ColumnSpan="4"
                 Background="Transparent"
-                Width="834"/>
+                Width="652"/>
 
-            
+
+            <!-- Label Sensortyp-->
+            <Label
+                Content="Sensortyp:"
+                Margin="139,148,0,-149"
+                FontSize="18"
+                Foreground="White"
+                HorizontalAlignment="Left" 
+                Width="99" 
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                FontFamily="Fonts/#Dosis"/>
+
             <!-- ComboBox Sensortyp-->
             <ComboBox 
                 Name="SensortypBox"
                 Grid.Column="3" 
-                Margin="50,229,-20,-224"
+                Margin="50,155,-20,-150"
                 Width="150"
                 Height="30" >
                 <ComboBoxItem 
@@ -487,48 +499,6 @@
                      Content="Spannungssensor"></ComboBoxItem>
 
             </ComboBox>
-
-            <!-- Button Sensortyp-->
-            <Button Content="Hinzufügen"
-                    Click="SensortypHinzufuegen"
-                    Foreground="White"
-                    FontSize="16" 
-                    Margin="18,268,-50,-324" 
-                    HorizontalAlignment="Left"
-                    Width="184" 
-                    Cursor="Hand" 
-                    Grid.Column="3">
-
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="TextElement.FontFamily" 
-                                Value ="Fonts/Dosis"/>
-                        <Setter Property="Background" 
-                                Value="#008080"/>
-                        <Setter Property="Cursor" 
-                                Value="Hand"/>
-
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" 
-                                     Value="True">
-                                <Setter Property="Background"
-                                     Value="Aqua"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border Width="180" Height="30"
-                                CornerRadius="12"
-                                Background= "{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center"
-                                HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-
 
         </Grid>
 

@@ -105,7 +105,7 @@ namespace IIoTSimulatorUI
         private void SensorgruppeSpeichernClick(object sender, RoutedEventArgs e)
         {
             Datasave.SaveTree(Sensorgroup.allTree, Sensorgroup.allchildren, Sensorgroup.basenames, Sensorgroup.basenames_children);
-          // Sensorbeispiel sensor = new Sensorbeispiel();
+
           // LabelTopic.Content = sensor.Topic;
 
             MessageBox.Show("Sensorgruppe wurde gespeichert");
@@ -208,34 +208,18 @@ namespace IIoTSimulatorUI
                 MessageBox.Show("Wählen Sie einen Sensortyp aus.");
             }
 
-
-
-        }
-
-        private void SensortypHinzufuegen(object sender, RoutedEventArgs e)
-        {
-            // TODO: Dieser Button soll zu einem Button "Sensordaten erzeugen" o.ä. werden. Der Nutzer kann
-            // damit die Daten des Sensors bestimmen 
-
-
-            //SensorAndSensorgroup.Sensor<double> DoubleSensor;
-
-            //SensorAndSensorgroup.Sensor<double> newSensor = new SensorAndSensorgroup.Sensor<double>();
             PopUpSensoren objectPopupSensoren;
-            //TODO Das Fenster Sensortyp öffnen ; IF Abfrage für Double oder Bool Sensor
-            string SensortypAuswahl = SensortypBox.Text;
+            
             if (SensortypAuswahl == "Rauchmelder")
             {
                 //Bool
-                objectPopupSensoren = new PopUpSensoren(ref BoolSensor);               
+                objectPopupSensoren = new PopUpSensoren(ref BoolSensor);
             }
             else
             {
-                objectPopupSensoren = new PopUpSensoren(ref DoubleSensor);               
+                objectPopupSensoren = new PopUpSensoren(ref DoubleSensor);
             }
             objectPopupSensoren.Show();
-
-
 
 
         }
