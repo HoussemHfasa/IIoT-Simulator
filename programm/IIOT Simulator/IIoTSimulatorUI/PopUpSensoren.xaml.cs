@@ -45,7 +45,8 @@ namespace IIoTSimulatorUI
         private void Schwingung(object sender, RoutedEventArgs e)
         {
             HarmonischeSchwingung objectSchwingung;
-            if (!DoubleSensor.Equals(null))
+           
+            /* if (!DoubleSensor.Equals(null))
             {
                 TestVariables.Pfad = 1;
                 objectSchwingung = new HarmonischeSchwingung(ref DoubleSensor);
@@ -61,10 +62,32 @@ namespace IIoTSimulatorUI
                 // in diesem else wäre eine Fehlererkennung nötig. Hier darf das Programm nicht hin
                 objectSchwingung = new HarmonischeSchwingung(ref DoubleSensor);
             }
-            
-            // Hier close?
-            this.Visibility = Visibility.Hidden;
-            objectSchwingung.Show();
+            */
+
+            //Weiterer Pfad zu den Fenstern je nach Auswahl - Harmonische Schwingung...
+            string DatenerzeugungAuswahl = DatenerzeugungBox.Text;
+            if (DatenerzeugungAuswahl.Equals("Harmonische Schwingung"))
+            {
+                objectSchwingung = new HarmonischeSchwingung(ref DoubleSensor);
+                this.Visibility = Visibility.Hidden;
+                objectSchwingung.Show();
+            }
+            else if (DatenerzeugungAuswahl.Equals("Gedämpfte Schwingung"))
+            {
+
+            }
+            else if(DatenerzeugungAuswahl.Equals("Standardabweichung"))
+            {
+
+            }
+            else if(DatenerzeugungAuswahl.Equals("Überlagerte Schwingung"))
+            { 
+
+            }
+            else
+            {
+                MessageBox.Show("Wählen Sie eine Datenerzeugungsmethode aus.");
+            }
         }
 
         private void ProgrammSchließenClick(object sender, RoutedEventArgs e)

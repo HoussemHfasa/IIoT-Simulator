@@ -121,6 +121,7 @@
         </Button>
 
         <ComboBox 
+            Name="DatenerzeugungBox"
             HorizontalAlignment="Left"
             Margin="202,65,0,0" 
             VerticalAlignment="Top" 

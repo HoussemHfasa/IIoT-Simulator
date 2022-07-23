@@ -36,7 +36,6 @@ namespace IIoTSimulatorUI
         // TODO: Dieser Konstruktor sollte nicht verwendet werden
         public SensordatenFehler()
         {
-            
             InitializeComponent();
         }
 
@@ -50,10 +49,37 @@ namespace IIoTSimulatorUI
         {
             //TODO: Fallunterscheidung welches Combobox Contentitem ausgewählt wurde
 
-            // Für Zufallswerte
-            FehlerZufallswerte objectFehlerZufall = new FehlerZufallswerte(ref DoubleSensor);
-            this.Visibility = Visibility.Hidden;
-            objectFehlerZufall.Show();
+            string FehlerAuswahl = FehlerBox.Text;
+
+            if (FehlerAuswahl.Equals("Zufallswerte"))
+            {
+                // Für Zufallswerte
+                FehlerZufallswerte objectFehlerZufall = new FehlerZufallswerte(ref DoubleSensor);
+                this.Visibility = Visibility.Hidden;
+                objectFehlerZufall.Show();
+            }
+            else if (FehlerAuswahl.Equals("Burst-Signal"))
+            {
+                FehlerBurstSignal objectBurstSignal = new FehlerBurstSignal();
+                this.Visibility = Visibility.Hidden;
+                objectBurstSignal.Show();
+            }
+            else if (FehlerAuswahl.Equals("Rauschen"))
+            {
+                FehlerRauschen objectRauschen = new FehlerRauschen();
+                this.Visibility = Visibility.Hidden;
+                objectRauschen.Show();
+            }
+            else if (FehlerAuswahl.Equals("Abklingendes Rauschen"))
+            {
+                FehlerAbklingendesRauschen objectAbklingend = new FehlerAbklingendesRauschen();
+                this.Visibility = Visibility.Hidden;
+                objectAbklingend.Show();
+            }
+            else
+            {
+                MessageBox.Show("Wählen Sie eine Fehlermethode aus.");
+            }
         }
     }
 }

@@ -458,11 +458,14 @@
                 Background="Transparent"
                 Width="834"/>
 
+            
+            <!-- ComboBox Sensortyp-->
             <ComboBox 
+                Name="SensortypBox"
                 Grid.Column="3" 
                 Margin="50,229,-20,-224"
                 Width="150"
-                     Height="30" >
+                Height="30" >
                 <ComboBoxItem 
                      Content="Temperatursensor">
                 </ComboBoxItem>

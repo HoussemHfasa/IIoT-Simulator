@@ -151,6 +151,48 @@ namespace IIoTSimulatorUI
             //Das Fenster Sensortyp öffnen ; IF Abfrage für Double oder Bool Sensor
             PopUpSensoren objectPopupSensoren = new PopUpSensoren(ref DoubleSensor);
             objectPopupSensoren.Show();
+
+            string SensortypAuswahl = SensortypBox.Text;
+            if(SensortypAuswahl== "Temperatursensor")
+            {
+
+            }
+            else if(SensortypAuswahl== "Helligkeitssensor")
+            {
+
+            }
+            else if (SensortypAuswahl == "Stromsensor")
+            {
+
+            }
+            else if (SensortypAuswahl == "Rauchmelder")
+            {
+
+            }
+            else if (SensortypAuswahl == "Feuchtigkeitssensor")
+            {
+
+            }
+            else if (SensortypAuswahl == "Füllstandsensor")
+            {
+
+            }
+            else if (SensortypAuswahl == "Dehnungssensor")
+            {
+
+            }
+            else if (SensortypAuswahl == "Drehmomentsensor")
+            {
+
+            }
+            else if(SensortypAuswahl == "Spannungssensor")
+            {
+
+            }
+            else
+            {
+                MessageBox.Show("Wählen Sie einen Sensortyp aus.");
+            }
         }
     }
 }
