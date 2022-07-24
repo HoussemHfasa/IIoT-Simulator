@@ -10,7 +10,6 @@ using Newtonsoft.Json.Linq;
 using SensorAndSensorgroup;
 
 
-
 namespace DataStorage
 {
 
@@ -98,62 +97,66 @@ namespace DataStorage
 
         // Änderungen im Gruppenmeeting
         //die Methode Basename/Nodename/Sensor nicht geeignjet für unsere Programm ,da der Nutzer mehrere Unterordner erstellen kann
-       
-            public void SaveTree(Dictionary<string, NAryTree> allTree, Dictionary<string, TreeNode> allchildren, List<string> basenames, Dictionary<string, int> basenames_children)
-            {
-            var serializer = new JsonSerializer();
-            using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "basenames_children"))
-            {
-                serializer.Serialize(writer, basenames_children);
-            }
 
-            using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "Basenames"))
+         void JsonSerialize(string Folderpath, string Filename, string Sensorgroupname, dynamic Data)
+        {
+            var serializer = new JsonSerializer();
+            using (TextWriter writer = File.CreateText(Path.Combine(Folderpath + Sensorgroupname + @"\" + Filename)))
             {
-                serializer.Serialize(writer, basenames);
+                serializer.Serialize(writer, Data);
             }
-            using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "alltree"))
+        }
+        public void SaveTree(Sensorgroups Sensorgroup,string Sensorgroupname,string Folderpath)
             {
-                serializer.Serialize(writer, allTree);
+            if (!Directory.Exists(Folderpath + Sensorgroupname))
+            {
+                Directory.CreateDirectory(Folderpath + Sensorgroupname);
             }
-            foreach (TreeNode i in allchildren.Values)
+            var serializer = new JsonSerializer();
+            using (TextWriter writer = File.CreateText(Folderpath + Sensorgroupname))
+            {
+                serializer.Serialize(writer, Folderpath);
+            }
+            foreach (TreeNode i in Sensorgroup.allchildren.Values)
             {
                 i.child = null;
             }
-            using (TextWriter writer = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "allchildren"))
-            {
-                serializer.Serialize(writer, allchildren);
-            }
+            JsonSerialize(Folderpath, "alltree", Sensorgroupname, Sensorgroup.allTree);
+            JsonSerialize(Folderpath, "allchildren", Sensorgroupname, Sensorgroup.allchildren);
+            JsonSerialize(Folderpath, "Basenames", Sensorgroupname, Sensorgroup.basenames);
+            JsonSerialize(Folderpath, "basenames_children", Sensorgroupname, Sensorgroup.basenames_children);
+            
         }
-            public List<string> Load_Basenames()
+             List<string> Load_Basenames(string Filepath)
             {
                 var serializer = new JsonSerializer();
                 List<string> basenames = new List<string>();
 
-                using (TextReader reader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "Basenames"))
+                using (TextReader reader = File.OpenText(Filepath + "Basenames"))
                 {
                     basenames = ((List<string>)serializer.Deserialize(reader, typeof(List<string>)));
                 }
 
                 return basenames;
             }
-        public Dictionary<string, NAryTree> Load_alltree()
+         Dictionary<string, NAryTree> Load_alltree(string Filepath)
         {
             var serializer = new JsonSerializer();
             Dictionary<string, NAryTree> alltree = new Dictionary<string, NAryTree>();
 
-            using (TextReader reader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "alltree"))
+            using (TextReader reader = File.OpenText(Filepath + "alltree"))
             {
                 alltree = ((Dictionary<string, NAryTree>)serializer.Deserialize(reader, typeof(Dictionary<string, NAryTree>)));
             }
 
             return alltree;
         }
-        public Dictionary<string, TreeNode> Load_allchildren()
+         Dictionary<string, TreeNode> Load_allchildren(string Filepath)
             {
                 var serializer = new JsonSerializer();
                 Dictionary<string, TreeNode> alltree = new Dictionary<string, TreeNode>();
 
-                using (TextReader reader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "allchildren"))
+                using (TextReader reader = File.OpenText(Filepath + "allchildren"))
                 {
                     alltree = ((Dictionary<string, TreeNode>)serializer.Deserialize(reader, typeof(Dictionary<string, TreeNode>)));
                 }
@@ -161,19 +164,32 @@ namespace DataStorage
                 return alltree;
             }
            
-        public Dictionary<string, int> Load_Basenames_children()
+         Dictionary<string, int> Load_Basenames_children(string Filepath)
         {
             var serializer = new JsonSerializer();
             Dictionary<string, int> basenames = new Dictionary<string, int>();
 
-            using (TextReader reader = File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "basenames_children"))
+            using (TextReader reader = File.OpenText(Filepath + "basenames_children"))
             {
                 basenames = ((Dictionary<string, int>)serializer.Deserialize(reader, typeof(Dictionary<string, int>)));
             }
 
             return basenames;
         }
-
+        public void LoadTree(Sensorgroups sensorgroup,string Filepath)
+        {
+            var serializer = new JsonSerializer();
+            string Path;
+            using (TextReader reader = File.OpenText(Filepath))
+            {
+                Path = ((string)serializer.Deserialize(reader, typeof(string)));
+            }
+            sensorgroup.allTree = Load_alltree(Path);
+            sensorgroup.allchildren = Load_allchildren(Path);
+            sensorgroup.basenames = Load_Basenames(Path);
+            sensorgroup.basenames_children = Load_Basenames_children(Path);
+             
+        }
        
 
     }

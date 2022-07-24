@@ -29,11 +29,7 @@ namespace CommonInterfaces
         
         //Zum Abspeichern der Sensordaten im Objekt
         public void SetValues(List<T> Values);
-        //Ladung des SensorProperties
-        public abstract void JsonSerialize(ISensor<T> data, string filepath);
-        //Speicherung des SensorProperties in JsonDatei
-        public abstract ISensor<T> JsonDeserialize(string filepath, string Sensor_id);
-        
+     
     }
     public interface ISensorGroups
     {

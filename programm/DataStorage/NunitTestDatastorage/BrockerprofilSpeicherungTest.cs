@@ -17,7 +17,7 @@ namespace NunitTestDatastorage
 {
     public class BrockerprofilSpeicherungTest
     {
-        private DataStorage.DataStorage<double> Storagetest = new DataStorage<double>();
+        private DataStorage.DataStorage Storagetest = new DataStorage.DataStorage();
         
         IBrokerProfile Beispiel1 = new MQTTCommunicator.BrokerProfile();
         IBrokerProfile Beispiel2 = new MQTTCommunicator.BrokerProfile();
@@ -31,7 +31,7 @@ namespace NunitTestDatastorage
             {
                 System.IO.Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "Tests");
             }
-            Storagetest = new DataStorage.DataStorage<double>();
+            Storagetest = new DataStorage.DataStorage();
              filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,@"Tests\");
             Beispiel1.HostName_IP = "124.145.12.326";
             Beispiel1.Password = "12345";

@@ -22,38 +22,6 @@ namespace SensorAndSensorgroup
             this.Sensor_id = IdGenerator.ToString();
         }
 
-        public override ISensor<double> JsonDeserialize(string filepath, string Sensor_id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void JsonSerialize(ISensor<double> data, string filepath)
-        {
-            throw new NotImplementedException();
-        }
-
-        /*public override ISensor<ushort> JsonDeserialize(string filepath, string Sensor_id)
-        {
-            ISensor<ushort> data = new StrainSensor();
-            var serializer = new JsonSerializer();
-            if (File.Exists(filepath+Sensor_id))
-            {
-                using (TextReader reader = File.OpenText(filepath+Sensor_id))
-                {
-                    data = (StrainSensor)serializer.Deserialize(reader, typeof(StrainSensor));
-                }
-            }
-            return data;
-        }
-
-        public override void JsonSerialize(ISensor<ushort> data, string filepath)
-        {
-            var serializer = new JsonSerializer();
-            using (TextWriter writer = File.CreateText(filepath))
-            {
-                serializer.Serialize(writer, data);
-            }
-        }
-        */
+       
     }
 }

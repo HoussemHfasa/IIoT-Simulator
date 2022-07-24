@@ -16,8 +16,6 @@ namespace SensorAndSensorgroup
         
         public string Unit { get ; set; }
 
-        public List<int> path = new List<int> { };
-        public int childnumber = 0;
         public int AmmountofValues { get { return Values.Count;} }
 
         public int Timeinterval { get; set; }
@@ -39,10 +37,7 @@ namespace SensorAndSensorgroup
         {
             this.Values = Values;
         }
-        //Ladung des SensorProperties
-        public abstract ISensor<T> JsonDeserialize(string filepath, string Sensor_id);
-        //Speicherung des SensorProperties in JsonDatei
-        public abstract void JsonSerialize(ISensor<T> data, string filepath);
+        
 
      
     }

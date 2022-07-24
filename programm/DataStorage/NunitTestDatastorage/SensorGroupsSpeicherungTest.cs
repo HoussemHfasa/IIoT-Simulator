@@ -15,8 +15,8 @@ using Newtonsoft.Json.Linq;
 namespace NunitTestDatastorage
 {
     public class SensorGroupsSpeicherungTest
-    {
-        private DataStorage.DataStorage<double> GroupsTest = new DataStorage<double>();
+    {/*
+        private DataStorage.DataStorage GroupsTest = new DataStorage.DataStorage();
         String Base;
         String Base2;
         String Folderpath;
@@ -72,6 +72,6 @@ namespace NunitTestDatastorage
 
             Assert.AreEqual(Sensorliste3,new Dictionary<string, List<string>> { });
         }
-
+        */
     }
 }

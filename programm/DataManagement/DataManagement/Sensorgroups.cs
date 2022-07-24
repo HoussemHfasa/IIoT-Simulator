@@ -166,7 +166,6 @@ namespace SensorAndSensorgroup
         //die Methode Basename/Nodename/Sensor nicht geeignet für unsere Programm ,da der Nutzer mehrere Unterordner erstellen kann
         public Dictionary<string, NAryTree> allTree = new Dictionary<string, NAryTree>();
         public Dictionary<string, TreeNode> allchildren = new Dictionary<string, TreeNode>();
-       // public Dictionary<string, dynamic> allsensor = new Dictionary<string, dynamic>();
         public Dictionary<string, int> basenames_children = new Dictionary<string, int>();
         public List<string> basenames = new List<string>();
         public void Add_new_Base(string basename)

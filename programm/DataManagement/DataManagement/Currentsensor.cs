@@ -20,27 +20,6 @@ namespace SensorAndSensorgroup
             this.Sensortype = "Stromsensor";
             this.Sensor_id = IdGenerator.ToString();
         }
-        public override ISensor<double> JsonDeserialize(string filepath, string Sensor_id)
-        {
-            ISensor<double> data = new CurrentSensor();
-            var serializer = new JsonSerializer();
-            if (File.Exists(filepath+Sensor_id))
-            {
-                using (TextReader reader = File.OpenText(filepath+Sensor_id))
-                {
-                    data = (CurrentSensor)serializer.Deserialize(reader, typeof(CurrentSensor));
-                }
-            }
-            return data;
-        }
-
-        public override void JsonSerialize(ISensor<double> data, string filepath)
-        {
-            var serializer = new JsonSerializer();
-            using (TextWriter writer = File.CreateText(filepath))
-            {
-                serializer.Serialize(writer, data);
-            }
-        }
+        
     }
 }
