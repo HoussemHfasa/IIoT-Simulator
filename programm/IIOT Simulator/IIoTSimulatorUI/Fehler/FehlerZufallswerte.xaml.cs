@@ -28,11 +28,9 @@ namespace IIoTSimulatorUI
 
         private void Hinzufügen(object sender, RoutedEventArgs e)
         {
-            List<double> Testvalues = new List<double>();
-            Testvalues.Add(Convert.ToDouble(textBoxErrorRate.Text));
-            Testvalues.Add(Convert.ToInt32(textBoxErrorLength.Text));
-            Testvalues.Add(Convert.ToDouble(textBoxMaxError.Text));
-            Testvalues.Add(Convert.ToDouble(textBoxMinError.Text));
+            // TODO Nutzereingaben überprüfen
+
+            // Fehlerdatengenerator erzeugen, Sensordaten mit Fehlern versehen
             RandomValuesError DataGenerator = new RandomValuesError(Convert.ToDouble(textBoxErrorRate.Text), Convert.ToInt32(textBoxErrorLength.Text), Convert.ToDouble(textBoxMaxError.Text), Convert.ToDouble(textBoxMinError.Text));
             DoubleSensor.SetValues(DataGenerator.GetSensorDataWithErrors(DoubleSensor.GetValues()));
 

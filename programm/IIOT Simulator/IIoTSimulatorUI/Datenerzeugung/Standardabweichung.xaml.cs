@@ -40,7 +40,7 @@ namespace IIoTSimulatorUI
             DataGenerator = new StandardDeviation(Convert.ToDouble(textBoxMittelwert.Text), Convert.ToDouble(textBoxStandartabweichung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
             DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
 
-            SensordatenFehler objectFehler = new SensordatenFehler();
+            SensordatenFehler objectFehler = new SensordatenFehler(ref DoubleSensor);
 
             // TODO Hier wieder close?
             this.Visibility = Visibility.Hidden;

@@ -22,9 +22,9 @@
                         />
         </Grid.Background>
 
-        <!-- Label Maximaler Fehlerwert-->
+        <!-- Label Rauschen Mittelwert-->
         <Label
-                Content="Maximaler Fehlerwert:"
+                Content="Rauschen Mittelwert:"
                 Margin="34,90,0,304"
                 FontSize="18"
                 Foreground="#FFFFF8F8"
@@ -32,8 +32,8 @@
                 Width="185"
                 FontFamily="Fonts/#Dosis"/>
 
-        <!-- TextBox für Maximalen Fehlerwert-->
-        <TextBox x:Name="textBoxMaxError"
+        <!-- TextBox für Rauschen Mittelwert-->
+        <TextBox x:Name="textBoxMittelwert"
                 Margin="244,95,334,0"
                 Height="30"
                   Background="#ff1f4663"
@@ -45,7 +45,7 @@
                 BorderThickness="2,2,2,2" Text="0.00"   
                 />
 
-        <!-- Label für die Minimale Fehlerwert-->
+        <!-- Label für die Standardabweichung-->
         <Label
                 Content="Minimaler Fehlerwert:"
                 Margin="34,152,0,243"
@@ -55,8 +55,8 @@
                 Width="189"
                 FontFamily="Fonts/#Dosis"/>
 
-        <!-- TextBox für die minimalen Fehlerwert -->
-        <TextBox x:Name="textBoxMinError" 
+        <!-- TextBox für die Standardabweichung -->
+        <TextBox x:Name="textBoxStandardabweichung" 
                 Text="0.00"
                 Margin="244,160,334,0"
                 Height="30"
@@ -69,9 +69,9 @@
                 BorderThickness="2,2,2,2"   
                 />
 
-        <!-- Label für die Fehlerrate-->
+        <!-- Label für die Werteanzahl-->
         <Label
-                Content="Fehlerrate:"
+                Content="Werteanzahl:"
                 Margin="34,221,0,172"
                 FontSize="18"
                 Foreground="#FFFCF6F6"
@@ -79,8 +79,8 @@
                 Width="142"
                 FontFamily="Fonts/#Dosis"/>
 
-        <!-- TextBox für Die Fehlerrate-->
-        <TextBox x:Name="textBoxErrorRate" 
+        <!-- TextBox für die Werteanzahl-->
+        <TextBox x:Name="textBoxWerteanzahl" 
                 Text="0.00"
                 Margin="244,221,334,0"
                 Height="30"
@@ -93,9 +93,9 @@
                 BorderThickness="2,2,2,2"   
                 />
 
-        <!-- Label für die Fehlerlänge-->
+        <!-- Label für die Abklingzeit-->
         <Label
-                Content="Fehlerlänge:"
+                Content="Abklingzeit:"
                 Margin="34,283,0,110"
                 FontSize="18"
                 Foreground="#FFFDFDFD"
@@ -103,8 +103,8 @@
                 Width="106"
                 FontFamily="Fonts/#Dosis"/>
 
-        <!-- TextBox für die Fehlerlänge-->
-        <TextBox x:Name="textBoxErrorLength" 
+        <!-- TextBox für die Abklingzeit-->
+        <TextBox x:Name="textBoxAbklingzeit" 
                 Text="1"
                 Margin="244,283,334,0"
                 Height="30"

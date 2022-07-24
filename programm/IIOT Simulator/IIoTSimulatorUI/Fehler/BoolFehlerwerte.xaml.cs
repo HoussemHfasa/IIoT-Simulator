@@ -19,19 +19,27 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class BoolFehlerwerte : Window
     {
+        Sensor<bool> BoolSensor;
         public BoolFehlerwerte(ref Sensor<bool> NewSensor)
         {
+            this.BoolSensor = NewSensor;
             InitializeComponent();
         }
 
         private void SensordatenSpeichern(object sender, RoutedEventArgs e)
         {
+            // TODO Nutzereingaben überprüfen
 
+            // Fehlerdatengenerator erzeugen, Sensordaten mit Fehlern versehen
+            RandomZeroesError DataGenerator = new RandomZeroesError(Convert.ToDouble(textBoxFehlerrate.Text), Convert.ToInt32(textBoxFehlerlänge.Text));
+            BoolSensor.SetValues(DataGenerator.GetSensorDataWithBoolErrors(BoolSensor.GetValues()));
+
+            Close();
         }
 
         private void ProgrammSchlievßenClick(object sender, RoutedEventArgs e)
         {
-
+            Close();
         }
     }
 }

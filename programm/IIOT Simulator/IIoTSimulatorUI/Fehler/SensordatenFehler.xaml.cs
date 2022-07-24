@@ -60,19 +60,19 @@ namespace IIoTSimulatorUI
             }
             else if (FehlerAuswahl.Equals("Burst-Signal"))
             {
-                FehlerBurstSignal objectBurstSignal = new FehlerBurstSignal();
+                FehlerBurstSignal objectBurstSignal = new FehlerBurstSignal(ref DoubleSensor);
                 this.Visibility = Visibility.Hidden;
                 objectBurstSignal.Show();
             }
             else if (FehlerAuswahl.Equals("Rauschen"))
             {
-                FehlerRauschen objectRauschen = new FehlerRauschen();
+                FehlerRauschen objectRauschen = new FehlerRauschen(ref DoubleSensor);
                 this.Visibility = Visibility.Hidden;
                 objectRauschen.Show();
             }
             else if (FehlerAuswahl.Equals("Abklingendes Rauschen"))
             {
-                FehlerAbklingendesRauschen objectAbklingend = new FehlerAbklingendesRauschen();
+                FehlerAbklingendesRauschen objectAbklingend = new FehlerAbklingendesRauschen(ref DoubleSensor);
                 this.Visibility = Visibility.Hidden;
                 objectAbklingend.Show();
             }

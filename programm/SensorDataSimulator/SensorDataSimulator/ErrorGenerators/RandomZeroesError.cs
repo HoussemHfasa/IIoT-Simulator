@@ -51,5 +51,33 @@ namespace SensorDataSimulator
             }
             return TempList;
         }
+
+        public List<bool> GetSensorDataWithBoolErrors(List<bool> SensorDataWithoutErrors)
+        {
+            List<bool> TempList = SensorDataWithoutErrors;
+
+            // Wenn Fehlerlänge 0 -> Liste unverändert zurückgeben
+            if (ErrorLength == 0)
+                return TempList;
+
+            // Für jedes Element in der Liste
+            for (int i = 0; i < TempList.Count; i++)
+            {
+                // Wenn Zufallswert kleiner gleich ErrorRatio
+                if (Rand.NextDouble() <= ErrorRatio)
+                {
+                    // entsprechend der Fehlerlänge Nullen setzen
+                    for (int z = 0; z < ErrorLength; z++)
+                    {
+                        if (i + z < TempList.Count)
+                            TempList[i + z] = false;
+                    }
+
+                    //äußere Zählschleife soll gesetzte Fehler nicht überschreiben
+                    i += ErrorLength - 1;
+                }
+            }
+            return TempList;
+        }
     }
 }
