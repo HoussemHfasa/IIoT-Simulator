@@ -9,28 +9,48 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SensorAndSensorgroup;
+using SensorDataSimulator;
 
 namespace IIoTSimulatorUI
 {
     /// <summary>
     /// Interaktionslogik für Standardabweichung.xaml
     /// </summary>
+    /// 
+
+   
     public partial class Standardabweichung : Window
     {
-        public Standardabweichung()
+        StandardDeviation DataGenerator;
+        Sensor<double> DoubleSensor = null;
+
+        // Konstruktor bekommt Referenz des neu erstellen Double Sensors übergeben
+        public Standardabweichung(ref Sensor<double> NewSensor)
         {
+            this.DoubleSensor = NewSensor;
             InitializeComponent();
         }
 
         private void FehlerHinzufuegen(object sender, RoutedEventArgs e)
         {
+            //TODO: Es fehlt hier noch die Überprüfung Nutzereingaben. Bitte noch spezifizieren welche Überprüfungen stattfinden müssen
+
+            // Objekt der Datenerzeugungsmethode erstellen
+            DataGenerator = new StandardDeviation(Convert.ToDouble(textBoxMittelwert.Text), Convert.ToDouble(textBoxStandartabweichung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
+            DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
+
             SensordatenFehler objectFehler = new SensordatenFehler();
+
+            // TODO Hier wieder close?
             this.Visibility = Visibility.Hidden;
             objectFehler.Show();
         }
 
         private void SensordatenSpeichern(object sender, RoutedEventArgs e)
         {
+            DataGenerator = new StandardDeviation(Convert.ToDouble(textBoxMittelwert.Text), Convert.ToDouble(textBoxStandartabweichung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
+            DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
             Close();
         }
 

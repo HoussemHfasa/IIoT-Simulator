@@ -34,8 +34,8 @@
                 Width="241"
                 FontFamily="Fonts/#Dosis"/>
 
-        <!-- TextBox für die Amplitude-->
-        <TextBox x:Name="textBoxAmplitude" 
+        <!-- TextBox für die Wechselwarscheinlichkeit-->
+        <TextBox x:Name="textBoxWechselwarscheinlichkeit" 
                 Text="0.00"
                 Margin="244,95,334,0"
                 Height="30"
@@ -58,8 +58,8 @@
                 Width="119"
                 FontFamily="Fonts/#Dosis"/>
 
-        <!-- TextBox für die Periodendauer -->
-        <TextBox x:Name="textBoxPeriodendauer" 
+        <!-- TextBox für die Werteanzahl -->
+        <TextBox x:Name="textBoxWerteanzahl" 
                 Text="0.00"
                 Margin="244,160,334,0"
                 Height="30"

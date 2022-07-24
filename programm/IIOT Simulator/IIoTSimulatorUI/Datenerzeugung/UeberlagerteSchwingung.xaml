@@ -32,11 +32,44 @@
                 HorizontalAlignment="Left" 
                 Width="83"
                 FontFamily="Fonts/#Dosis"/>
+        <!-- Label für Schwingung1-->
+        <Label
+                Content="Schwingung 1:"
+                Margin="244,45,0,348"
+                FontSize="18"
+                Foreground="#FFFFF8F8"
+                HorizontalAlignment="Left" 
+                Width="167"
+                FontFamily="Fonts/#Dosis"/>
 
-        <!-- TextBox für die Amplitude-->
-        <TextBox x:Name="textBoxAmplitude" 
+        <!-- Label für Schwingung2-->
+        <Label
+                Content="Schwingung 2:"
+                Margin="490,45,0,348"
+                FontSize="18"
+                Foreground="#FFFFF8F8"
+                HorizontalAlignment="Left" 
+                Width="167"
+                FontFamily="Fonts/#Dosis"/>
+
+
+        <!-- TextBox für die Amplitude1-->
+        <TextBox x:Name="textBoxAmplitude1" 
                 Text="0.00"
                 Margin="244,95,334,0"
+                Height="30"
+                  Background="#ff1f4663"
+                      TextAlignment="Right"
+                BorderBrush="#FF020E52"
+                FontSize="16"
+                VerticalAlignment="Top"
+                Foreground="AliceBlue"
+                BorderThickness="2,2,2,2"   
+                />
+        <!-- TextBox für die Amplitude2-->
+        <TextBox x:Name="textBoxAmplitude2" 
+                Text="0.00"
+                Margin="490,95,88,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -57,10 +90,100 @@
                 Width="119"
                 FontFamily="Fonts/#Dosis"/>
 
-        <!-- TextBox für die Periodendauer -->
-        <TextBox x:Name="textBoxPeriodendauer" 
+        <!-- TextBox für die Periodendauer1 -->
+        <TextBox x:Name="textBoxPeriodendauer1" 
                 Text="0.00"
                 Margin="244,160,334,0"
+                Height="30"
+                  Background="#ff1f4663"
+                      TextAlignment="Right"
+                BorderBrush="#FF020E52"
+                FontSize="16"
+                VerticalAlignment="Top"
+                Foreground="AliceBlue"
+                BorderThickness="2,2,2,2"   
+                />
+
+        <!-- TextBox für die Periodendauer2 -->
+        <TextBox x:Name="textBoxPeriodendauer2" 
+                Text="0.00"
+                Margin="490,160,88,0"
+                Height="30"
+                  Background="#ff1f4663"
+                      TextAlignment="Right"
+                BorderBrush="#FF020E52"
+                FontSize="16"
+                VerticalAlignment="Top"
+                Foreground="AliceBlue"
+                BorderThickness="2,2,2,2"   
+                />
+
+        <!-- Label für die Phasenverschiebung-->
+        <Label
+                Content="Phasenverschiebung:"
+                Margin="45,217,0,176"
+                FontSize="18"
+                Foreground="#FFFCF6F6"
+                HorizontalAlignment="Left" 
+                Width="163"
+                FontFamily="Fonts/#Dosis"/>
+
+        <!-- TextBox für die Phasenverschiebung1-->
+        <TextBox x:Name="textBoxPhasenverschiebung1" 
+                Text="0.00"
+                Margin="244,221,334,0"
+                Height="30"
+                  Background="#ff1f4663"
+                      TextAlignment="Right"
+                BorderBrush="#FF020E52"
+                FontSize="16"
+                VerticalAlignment="Top"
+                Foreground="AliceBlue"
+                BorderThickness="2,2,2,2"   
+                />
+
+        <!-- TextBox für die Phasenverschiebung2-->
+        <TextBox x:Name="textBoxPhasenverschiebung2" 
+                Text="0.00"
+                Margin="490,221,88,0"
+                Height="30"
+                  Background="#ff1f4663"
+                      TextAlignment="Right"
+                BorderBrush="#FF020E52"
+                FontSize="16"
+                VerticalAlignment="Top"
+                Foreground="AliceBlue"
+                BorderThickness="2,2,2,2"   
+                />
+
+        <!-- Label für die Werteanzahl-->
+        <Label
+                Content="Werteanzahl:"
+                Margin="102,281,0,112"
+                FontSize="18"
+                Foreground="#FFFDFDFD"
+                HorizontalAlignment="Left" 
+                Width="106"
+                FontFamily="Fonts/#Dosis"/>
+
+        <!-- TextBox für die Werteanzahl1-->
+        <TextBox x:Name="textBoxWerteanzahl1" 
+                Text="1"
+                Margin="244,283,334,0"
+                Height="30"
+                  Background="#ff1f4663"
+                      TextAlignment="Right"
+                BorderBrush="#FF020E52"
+                FontSize="16"
+                VerticalAlignment="Top"
+                Foreground="AliceBlue"
+                BorderThickness="2,2,2,2"   
+                />
+
+        <!-- TextBox für die Werteanzahl2-->
+        <TextBox x:Name="textBoxWerteanzahl2" 
+                Text="1"
+                Margin="490,283,88,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -116,7 +239,7 @@
                     Click="FehlerHinzufuegen"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="565,285,0,86" 
+                    Margin="365,347,0,24" 
                     HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand">
@@ -195,7 +318,7 @@
         <!-- Label- Überschrift Überlagerte Schwingung-->
         <Label
                 Content="Überlagerte Schwingung"
-                Margin="29,4,0,353"
+                Margin="29,4,0,394"
                 FontSize="25"
                 Foreground="#FFFFF8F8"
                 HorizontalAlignment="Left" 

@@ -9,6 +9,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SensorAndSensorgroup;
+using SensorDataSimulator;
 
 namespace IIoTSimulatorUI
 {
@@ -17,7 +19,7 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class BoolFehlerwerte : Window
     {
-        public BoolFehlerwerte()
+        public BoolFehlerwerte(ref Sensor<bool> NewSensor)
         {
             InitializeComponent();
         }
