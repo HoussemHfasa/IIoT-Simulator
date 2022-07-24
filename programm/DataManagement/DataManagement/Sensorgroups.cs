@@ -176,7 +176,7 @@ namespace SensorAndSensorgroup
             Tree.root = new TreeNode(basename);
             allTree.Add(basename, Tree);
             basenames.Add(basename);
-            Tree.root.path.Add(basename.IndexOf(basename));
+            Tree.root.path.Add(basenames.IndexOf(basename));
             basenames_children.Add(basename, 0);
         }
         public void Add_new_Node(string Mother, string Node)
@@ -267,6 +267,7 @@ namespace SensorAndSensorgroup
         {
             TreeNode ch = new TreeNode(new_Sensor);
             ch.name = new_Sensor.Sensor_id;
+            ch.Sensordaten = new_Sensor;
             allchildren.Add(new_Sensor.Sensor_id, ch);
             if (allTree.ContainsKey(Mother))
             {
