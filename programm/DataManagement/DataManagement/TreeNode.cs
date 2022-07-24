@@ -20,6 +20,7 @@ namespace SensorAndSensorgroup
 		public TreeNode(dynamic sensor)
 		{
 			this.Sensordaten = sensor;
+			this.name = sensor.Sensor_id;
 			this.child = new List<TreeNode>();
 		}
 		public TreeNode(string Nodename)

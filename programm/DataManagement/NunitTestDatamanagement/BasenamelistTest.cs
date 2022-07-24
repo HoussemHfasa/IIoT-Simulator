@@ -14,14 +14,14 @@ using SensorAndSensorgroup;
 
 namespace NunitTestDatamanagement
 {
-    class BasenamelistTest
+ /*   class BasenamelistTest
     {
       // private SensorAndSensorgroup.Sensorgroups Basenametest = new Sensorgroups();
       //  DataStorage<string> store = new DataStorage<string>();
         string Basename1;
         string Basename2;
         string Basename3;
-        string Basename4;
+
         List<string> listname = new List<string>();
 
         string Filepath;
@@ -87,5 +87,5 @@ namespace NunitTestDatamanagement
             Assert.That((!listname.Contains(Basename3)));
         }
 
-    }
+    }*/
 }

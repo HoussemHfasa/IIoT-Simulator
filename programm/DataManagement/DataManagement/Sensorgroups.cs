@@ -169,6 +169,7 @@ namespace SensorAndSensorgroup
         public Dictionary<string, TreeNode> allchildren = new Dictionary<string, TreeNode>();
         public Dictionary<string, int> basenames_children = new Dictionary<string, int>();
         public List<string> basenames = new List<string>();
+        public string Sensorgroupname;
         public void Add_new_Base(string basename)
         {
             var Tree = new NAryTree();

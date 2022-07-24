@@ -113,18 +113,20 @@ namespace DataStorage
                 Directory.CreateDirectory(Folderpath + Sensorgroupname);
             }
             var serializer = new JsonSerializer();
-            using (TextWriter writer = File.CreateText(Folderpath + Sensorgroupname))
+            using (TextWriter writer = File.CreateText(Path.Combine(Folderpath + @"\Load " + Sensorgroupname + " From Here")))
             {
-                serializer.Serialize(writer, Folderpath);
+                serializer.Serialize(writer, Path.Combine(Folderpath,Sensorgroupname));
             }
             foreach (TreeNode i in Sensorgroup.allchildren.Values)
             {
                 i.child = null;
             }
+            Sensorgroup.Sensorgroupname = Sensorgroupname;
             JsonSerialize(Folderpath, "alltree", Sensorgroupname, Sensorgroup.allTree);
             JsonSerialize(Folderpath, "allchildren", Sensorgroupname, Sensorgroup.allchildren);
             JsonSerialize(Folderpath, "Basenames", Sensorgroupname, Sensorgroup.basenames);
             JsonSerialize(Folderpath, "basenames_children", Sensorgroupname, Sensorgroup.basenames_children);
+            JsonSerialize(Folderpath, "Sensorgroupname", Sensorgroupname, Sensorgroup.Sensorgroupname);
             
         }
              List<string> Load_Basenames(string Filepath)
@@ -176,8 +178,21 @@ namespace DataStorage
 
             return basenames;
         }
-        public void LoadTree(Sensorgroups sensorgroup,string Filepath)
+        string Load_Sensorgroupname(string Filepath)
         {
+            var serializer = new JsonSerializer();
+            string basenames;
+
+            using (TextReader reader = File.OpenText(Filepath + "Sensorgroupname"))
+            {
+                basenames = ((string)serializer.Deserialize(reader, typeof(string)));
+            }
+
+            return basenames;
+        }
+        public Sensorgroups LoadTree(string Filepath)
+        {
+            Sensorgroups sensorgroup = new Sensorgroups();
             var serializer = new JsonSerializer();
             string Path;
             using (TextReader reader = File.OpenText(Filepath))
@@ -188,6 +203,8 @@ namespace DataStorage
             sensorgroup.allchildren = Load_allchildren(Path);
             sensorgroup.basenames = Load_Basenames(Path);
             sensorgroup.basenames_children = Load_Basenames_children(Path);
+            sensorgroup.Sensorgroupname = Load_Sensorgroupname(Path);
+            return sensorgroup;
              
         }
        

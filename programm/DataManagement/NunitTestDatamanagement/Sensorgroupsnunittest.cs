@@ -15,13 +15,13 @@ using SensorAndSensorgroup;
 namespace NunitTestDatamanagement
 {
     public class Sensorgroupsnunittest
-    {
+    {/*
         private SensorAndSensorgroup.Sensorgroups SensorgroupsTests = new Sensorgroups();
         DataStorage.DataStorage store = new DataStorage.DataStorage();
         string FolderPath;
         string Base;
         string Node;
-        string Node1;
+
         string Node3;
         string Node2;
         string Id;
@@ -129,6 +129,6 @@ namespace NunitTestDatamanagement
 
             //Assert
             Assert.That(Ids2[Node].Where(s => s != null && s.StartsWith(Id)).Count() <= 1);
-        }
+        }*/
     }
 }
