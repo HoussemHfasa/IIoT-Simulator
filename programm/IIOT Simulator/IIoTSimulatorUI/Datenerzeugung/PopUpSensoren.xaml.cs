@@ -44,7 +44,7 @@ namespace IIoTSimulatorUI
 
         private void Schwingung(object sender, RoutedEventArgs e)
         {
-            HarmonischeSchwingung objectSchwingung;
+            
            
             /* if (!DoubleSensor.Equals(null))
             {
@@ -68,21 +68,32 @@ namespace IIoTSimulatorUI
             string DatenerzeugungAuswahl = DatenerzeugungBox.Text;
             if (DatenerzeugungAuswahl.Equals("Harmonische Schwingung"))
             {
-                objectSchwingung = new HarmonischeSchwingung(ref DoubleSensor);
+                HarmonischeSchwingung objectDatenerzeugung;
+                objectDatenerzeugung = new HarmonischeSchwingung(ref DoubleSensor);
                 this.Visibility = Visibility.Hidden;
-                objectSchwingung.Show();
+                objectDatenerzeugung.Show();
             }
             else if (DatenerzeugungAuswahl.Equals("Gedämpfte Schwingung"))
             {
-
+                GedaempfteSchwingung objectDatenerzeugung;
+                objectDatenerzeugung = new GedaempfteSchwingung(ref DoubleSensor);
+                this.Visibility = Visibility.Hidden;
+                objectDatenerzeugung.Show();
             }
             else if(DatenerzeugungAuswahl.Equals("Standardabweichung"))
             {
+                Standardabweichung objectDatenerzeugung;
+                objectDatenerzeugung = new Standardabweichung(ref DoubleSensor);
+                this.Visibility = Visibility.Hidden;
+                objectDatenerzeugung.Show();
 
             }
             else if(DatenerzeugungAuswahl.Equals("Überlagerte Schwingung"))
-            { 
-
+            {
+                UeberlagerteSchwingung objectDatenerzeugung;
+                objectDatenerzeugung = new UeberlagerteSchwingung(ref DoubleSensor);
+                this.Visibility = Visibility.Hidden;
+                objectDatenerzeugung.Show();
             }
             else
             {
