@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using SensorAndSensorgroup;
 
 namespace IIoTSimulatorUI
 {
@@ -21,8 +22,16 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        Sensorgroups Sensorgroup;
         public MainWindow()
         {
+            this.Sensorgroup = new Sensorgroups();
+            InitializeComponent();
+        }
+
+        public MainWindow(ref Sensorgroups ExistingSensorgroup)
+        {
+            this.Sensorgroup = ExistingSensorgroup;
             InitializeComponent();
         }
 
@@ -39,7 +48,7 @@ namespace IIoTSimulatorUI
         //Öffnet das Fenster NeueSensorgruppeErstellen und schließt die Startseite
         private void NewSensorGroupClick(object sender, RoutedEventArgs e)
         {
-            NeueSensorgruppeUI objectNeueSensorGruppe = new NeueSensorgruppeUI();
+            NeueSensorgruppeUI objectNeueSensorGruppe = new NeueSensorgruppeUI(ref Sensorgroup);
             this.Visibility = Visibility.Hidden;
             objectNeueSensorGruppe.Show();
         }
@@ -48,6 +57,7 @@ namespace IIoTSimulatorUI
         //Öffnet den Dataiexplorer und setzt den Topic auf die geladene Sensorgruppe
         private void PresentSensorGroupClick(object sender, RoutedEventArgs e)
         {
+
             OpenFileDialog fileDialog = new OpenFileDialog();
             Nullable<bool> dialogOK = fileDialog.ShowDialog();
             //Es muss noch programmiert werden was mit der geöffneten Datei passiert

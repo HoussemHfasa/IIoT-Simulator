@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using DummySensorandSensorgroups;
 using SensorAndSensorgroup;
 using DataStorage;
+using Microsoft.Win32;
 
 namespace IIoTSimulatorUI
 {
@@ -21,12 +22,13 @@ namespace IIoTSimulatorUI
 
     public partial class NeueSensorgruppeUI : Window
     {
-        Sensorgroups Sensorgroup = new Sensorgroups();
+        Sensorgroups Sensorgroup;
         DataStorage.DataStorage Datasave = new DataStorage.DataStorage();
         SensorAndSensorgroup.Sensor<double> DoubleSensor;
         SensorAndSensorgroup.Sensor<bool> BoolSensor;
-        public NeueSensorgruppeUI()
+        public NeueSensorgruppeUI(ref Sensorgroups NewSensorgroup)
         {
+            this.Sensorgroup = NewSensorgroup;
             InitializeComponent();
         }
         
@@ -45,9 +47,10 @@ namespace IIoTSimulatorUI
         //Button um zurück zur Startseite zu gelangen
         private void StartseiteButton(object sender, RoutedEventArgs e)
         {
-            MainWindow objectStartseite2 = new MainWindow();
-            this.Visibility = Visibility.Hidden; 
-            objectStartseite2.Show();
+             MainWindow objectStartseite2 = new MainWindow();
+             this.Visibility = Visibility.Hidden; 
+             objectStartseite2.Show(); 
+            
         }
 
 
@@ -115,6 +118,8 @@ namespace IIoTSimulatorUI
                     TreeViewItem unterordner = new TreeViewItem(); //Ein TreeViewItem vom Unterordner erstellen
 
                     string unterordnerText = textBoxEingabe2.Text; //Benutzereingabe in einem string speichern
+                    
+                    textBoxEingabe2.Clear(); //TextBox Eingabe wieder löschen
 
                     unterordner.Header = unterordnerText;
 
@@ -139,12 +144,28 @@ namespace IIoTSimulatorUI
         private void SensorgruppeSpeichernClick(object sender, RoutedEventArgs e)
         {
 
-            // TODO: Die Methode sollte nur Sensorgroup und Path entgegennehmen, Name der Sensorgruppe soll in Sensorgroup intern abgespeichert sein
-            Datasave.SaveTree(Sensorgroup, "Fisch", AppDomain.CurrentDomain.BaseDirectory);
+            // Windows SaveFileDialog aufrufen  , evtl noch InitialDirectory setzen
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "Sensorgroup File (*)|*";
+            if (saveDialog.ShowDialog() == true)
+            {
+                string Filename = saveDialog.FileName;
+
+                // TODO: Die Methode sollte nur Sensorgroup und Path entgegennehmen, Name der Sensorgruppe soll in Sensorgroup intern abgespeichert sein
+                Datasave.SaveTree(Sensorgroup, "Fisch", Filename);
+
+                MessageBox.Show("Sensorgruppe wurde gespeichert");
+                
+                MainWindow objectStartseite2 = new MainWindow(ref Sensorgroup);
+                this.Visibility = Visibility.Hidden;
+                objectStartseite2.Show();
+            }
+
+            
 
           // LabelTopic.Content = sensor.Topic;
 
-            MessageBox.Show("Sensorgruppe wurde gespeichert");
+            
         }
 
 
@@ -185,7 +206,10 @@ namespace IIoTSimulatorUI
             //Nutzer hat Namen und einen Sensortypen ausgewählt eingegeben
             else
             {
+                try
+                {
 
+                
                 TreeViewItem selectedTVI = (TreeViewItem)TreeView1.SelectedItem as TreeViewItem; //Ein TreeViewItem vom ausgewählten Item erstellen
 
 
@@ -194,6 +218,7 @@ namespace IIoTSimulatorUI
                 TreeViewItem sensorname = new TreeViewItem(); //Ein TreeViewItem vom Sensornamen erstellen            
 
                 sensorname.Header = textSensorname;
+                textBoxEingabeSensor.Clear(); //TextBox Eingabe wieder löschen
 
                 selectedTVI.Items.Add(sensorname);
 
@@ -293,7 +318,11 @@ namespace IIoTSimulatorUI
                     objectPopupSensoren.Show();
                 }
 
-
+                }
+                catch (System.NullReferenceException f)
+                {
+                    MessageBox.Show("Wählen Sie zuerst einen Ordner aus, in dem der Sensor erstellt werden soll. ");
+                }
 
             }
 
