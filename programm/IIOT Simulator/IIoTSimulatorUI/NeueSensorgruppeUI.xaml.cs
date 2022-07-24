@@ -104,7 +104,8 @@ namespace IIoTSimulatorUI
         //Speichert die Sensorgruppe als Topic(Soll)
         private void SensorgruppeSpeichernClick(object sender, RoutedEventArgs e)
         {
-            Datasave.SaveTree(Sensorgroup.allTree, Sensorgroup.allchildren, Sensorgroup.basenames, Sensorgroup.basenames_children);
+            // TODO: Die Methode sollte nur Sensorgroup und Path entgegennehmen, Name der Sensorgruppe soll in Sensorgroup intern abgespeichert sein
+            Datasave.SaveTree(Sensorgroup, "Fisch", AppDomain.CurrentDomain.BaseDirectory);
 
           // LabelTopic.Content = sensor.Topic;
 

@@ -22,7 +22,8 @@ namespace SensorAndSensorgroup
             //Ordnerpfad von die Sensorgruppen gespeichert
             string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"SensorGroups\");
 
-           
+            // Name der Sensorgruppe
+            public string Name { get; set; }
 
             //List von Sensoren und ihren Node
             public Dictionary<string, List<string>> SensorIds
