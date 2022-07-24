@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,6 +13,8 @@ using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
 using DummySensorandSensorgroups;
+using SensorAndSensorgroup;
+using SensorDataSimulator;
 
 
 namespace IIoTSimulatorUI
@@ -19,11 +22,27 @@ namespace IIoTSimulatorUI
     /// <summary>
     /// Interaktionslogik für SimulationUI.xaml
     /// </summary>
-    public partial class SimulationUI : Window
+    public partial class SimulationUI : Window 
     {
-        public SimulationUI()
+        Sensorgroups Sensorgroup;
+        
+        public SimulationUI(Sensorgroups ExistingSensorgroup)
         {
+            this.Sensorgroup = ExistingSensorgroup;
             InitializeComponent();
+
+            //
+            /*
+             * Alle Sensoren in eine Liste übertragen
+             * Sensorgroup.allchildren.Values.ToList();
+             * oder:
+             * foreach(Sensor<double> item in Sensorgroup.allchildren.Values)
+             * {
+             *      item.GetValues()
+             * }
+             * foreach Sensor<double> in            
+             * 
+             */
 
 
             //Die geladene Sensorgreupe
