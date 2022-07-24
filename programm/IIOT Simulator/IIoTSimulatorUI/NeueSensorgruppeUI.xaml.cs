@@ -29,6 +29,35 @@ namespace IIoTSimulatorUI
         public NeueSensorgruppeUI(ref Sensorgroups NewSensorgroup)
         {
             this.Sensorgroup = NewSensorgroup;
+            TreeView1 = new TreeView();
+            //Stamme laden
+            foreach (string Base in Sensorgroup.basenames)
+            {
+                string stammText = Base; //Benutzer Eingabe in einem string speichern
+                TreeViewItem stamm = new TreeViewItem(); //Neues Treeviewtem für den Stamm erstellen
+                stamm.Header = stammText; //Dem TreeViewItem den Header übergeben
+                
+                TreeView1.Items.Add(stamm); //Der TreeView den Stamm hinzufügen
+               // textBoxEingabe.Clear(); //TextBox Eingabe wieder löschen
+               //HakenStamm.Foreground = System.Windows.Media.Brushes.Green; //Grünen Haken erscheinen lassen
+               //LabelInfo.Foreground = System.Windows.Media.Brushes.White; //Info ausblenden
+            }
+            //UnterOrdner laden
+            /*foreach (string Unterordner in Sensorgroup.allchildren.Keys)
+            {
+                switch (Sensorgroup.allchildren[Unterordner].path.Count)
+                {  case 2:
+                       
+                        string Oberordner = Sensorgroup.basenames[Sensorgroup.allchildren[Unterordner].path[0]];//Das ausgewählte Objekt in String speichern
+                    TreeViewItem selectedTVI = (TreeViewItem)TreeView1.FindName(Oberordner) as TreeViewItem; //Ein TreeViewItem vom ausgewählten Item erstellen
+                    TreeViewItem unterordner = new TreeViewItem(); //Ein TreeViewItem vom Unterordner erstellen
+                    string unterordnerText = Unterordner; //Benutzereingabe in einem string speichern
+                    textBoxEingabe2.Clear(); //TextBox Eingabe wieder löschen
+                    unterordner.Header = unterordnerText;
+                    selectedTVI.Items.Add(unterordner);// Dem ausgewählten Item den Unterordner hinzufügen
+                    break;
+                }
+            }*/
             InitializeComponent();
         }
         
@@ -152,7 +181,7 @@ namespace IIoTSimulatorUI
                 string Filename = saveDialog.FileName;
 
                 // TODO: Die Methode sollte nur Sensorgroup und Path entgegennehmen, Name der Sensorgruppe soll in Sensorgroup intern abgespeichert sein
-                Datasave.SaveTree(Sensorgroup, "Fisch", Filename);
+                Datasave.SaveTree(Sensorgroup,  Filename);
 
                 MessageBox.Show("Sensorgruppe wurde gespeichert");
                 

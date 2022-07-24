@@ -182,7 +182,7 @@
                     Grid.ColumnSpan="2" 
                     Margin="-51,360,0,-360"
                     HorizontalAlignment="Left"
-                    Width="394">
+                    Width="394" Cursor="Hand">
 
                 <Button.Style>
                     <Style TargetType="Button">

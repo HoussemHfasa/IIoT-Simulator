@@ -267,6 +267,7 @@ namespace SensorAndSensorgroup
             if (allTree.ContainsKey(Mother))
             {
                 TreeNode ch = new TreeNode(new_Sensor);
+                ch.name = new_Sensor.Sensor_id;
                 allTree[Mother].root.addChild(ch);
                 ch.path.Add(basenames.IndexOf(Mother));
                 ch.path.Add(basenames_children[Mother]);
@@ -277,6 +278,7 @@ namespace SensorAndSensorgroup
             else
             {
                 TreeNode ch = new TreeNode(new_Sensor);
+                ch.name = new_Sensor.Sensor_id;
                 allchildren.Add(new_Sensor.Sensor_id, ch);
                 List<int> path = allchildren[Mother].path;
                 int i = allchildren[Mother].path.Count;

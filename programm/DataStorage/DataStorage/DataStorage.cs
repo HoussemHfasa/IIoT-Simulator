@@ -136,7 +136,7 @@ namespace DataStorage
                 var serializer = new JsonSerializer();
                 List<string> basenames = new List<string>();
 
-                using (TextReader reader = File.OpenText(Filepath + "Basenames"))
+                using (TextReader reader = File.OpenText(Filepath + @"\Basenames"))
                 {
                     basenames = ((List<string>)serializer.Deserialize(reader, typeof(List<string>)));
                 }
@@ -148,7 +148,7 @@ namespace DataStorage
             var serializer = new JsonSerializer();
             Dictionary<string, NAryTree> alltree = new Dictionary<string, NAryTree>();
 
-            using (TextReader reader = File.OpenText(Filepath + "alltree"))
+            using (TextReader reader = File.OpenText(Path.Combine(Filepath + @"\alltree")))
             {
                 alltree = ((Dictionary<string, NAryTree>)serializer.Deserialize(reader, typeof(Dictionary<string, NAryTree>)));
             }
@@ -160,7 +160,7 @@ namespace DataStorage
                 var serializer = new JsonSerializer();
                 Dictionary<string, TreeNode> alltree = new Dictionary<string, TreeNode>();
 
-                using (TextReader reader = File.OpenText(Filepath + "allchildren"))
+                using (TextReader reader = File.OpenText(Filepath + @"\allchildren"))
                 {
                     alltree = ((Dictionary<string, TreeNode>)serializer.Deserialize(reader, typeof(Dictionary<string, TreeNode>)));
                 }
@@ -173,7 +173,7 @@ namespace DataStorage
             var serializer = new JsonSerializer();
             Dictionary<string, int> basenames = new Dictionary<string, int>();
 
-            using (TextReader reader = File.OpenText(Filepath + "basenames_children"))
+            using (TextReader reader = File.OpenText(Filepath + @"\basenames_children"))
             {
                 basenames = ((Dictionary<string, int>)serializer.Deserialize(reader, typeof(Dictionary<string, int>)));
             }
@@ -184,8 +184,9 @@ namespace DataStorage
         {
             var serializer = new JsonSerializer();
             string basenames;
-
-            using (TextReader reader = File.OpenText(Filepath + "Sensorgroupname"))
+            string Folderpath = (Filepath.Remove(Filepath.LastIndexOf("\\") + 1));
+            string Sensorgroupname = Filepath.Remove(0, Filepath.LastIndexOf("\\") + 1);
+            using (TextReader reader = File.OpenText(Path.Combine(Folderpath + @"\Load " + Sensorgroupname + " From Here")))
             {
                 basenames = ((string)serializer.Deserialize(reader, typeof(string)));
             }

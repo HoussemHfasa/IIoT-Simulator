@@ -23,6 +23,7 @@ namespace IIoTSimulatorUI
     public partial class MainWindow : Window
     {
         Sensorgroups Sensorgroup;
+        DataStorage.DataStorage Datasave = new DataStorage.DataStorage();
         public MainWindow()
         {
             this.Sensorgroup = new Sensorgroups();
@@ -58,9 +59,18 @@ namespace IIoTSimulatorUI
         private void PresentSensorGroupClick(object sender, RoutedEventArgs e)
         {
 
+            string Filepath;
             OpenFileDialog fileDialog = new OpenFileDialog();
             Nullable<bool> dialogOK = fileDialog.ShowDialog();
-            //Es muss noch programmiert werden was mit der geöffneten Datei passiert
+            if (dialogOK==true)
+            {
+                 Filepath = fileDialog.FileName;
+                Sensorgroup = Datasave.LoadTree(Filepath);
+            }
+            NeueSensorgruppeUI objectNeueSensorGruppe = new NeueSensorgruppeUI(ref Sensorgroup);
+            this.Visibility = Visibility.Hidden;
+            objectNeueSensorGruppe.Show();
+
         }
 
         //Button um auf die Seite der Simulation zu gelangen
