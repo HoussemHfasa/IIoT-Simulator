@@ -34,7 +34,7 @@ namespace IIoTSimulatorUI
             StandardDeviation DataGeneratorStdDev = new StandardDeviation(Convert.ToDouble(textBoxMittelwert.Text), Convert.ToDouble(textBoxStandardabweichung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
             TransientNoise DataGenerator = new TransientNoise(DataGeneratorStdDev.GetSimulatorValues(), Convert.ToInt32(textBoxAbklingzeit.Text));
             DoubleSensor.SetValues(DataGenerator.GetSensorDataWithErrors(DoubleSensor.GetValues()));
-
+            
             Close();
 
         }

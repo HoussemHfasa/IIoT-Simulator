@@ -106,8 +106,10 @@ namespace DataStorage
                 serializer.Serialize(writer, Data);
             }
         }
-        public void SaveTree(Sensorgroups Sensorgroup,string Sensorgroupname,string Folderpath)
+        public void SaveTree(Sensorgroups Sensorgroup,string Filepath)
             {
+            string Folderpath=(Filepath.Remove(Filepath.LastIndexOf("\\") + 1));
+            string Sensorgroupname= Filepath.Remove(0, Filepath.LastIndexOf("\\") + 1);
             if (!Directory.Exists(Folderpath + Sensorgroupname))
             {
                 Directory.CreateDirectory(Folderpath + Sensorgroupname);
