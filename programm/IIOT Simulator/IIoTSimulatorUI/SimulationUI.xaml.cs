@@ -106,7 +106,7 @@ namespace IIoTSimulatorUI
                     xAxisLine = new Line()
                     {
                         X1 = xAxisStart ,
-                        Y1 = this.ActualHeight - yAxisStart,
+                        Y1 = this.ActualHeight ,
                         X2 = this.ActualWidth - xAxisStart,
                         Y2 = this.ActualHeight - yAxisStart,
                         Stroke = Brushes.LightGray,
@@ -234,14 +234,14 @@ namespace IIoTSimulatorUI
                         Ellipse oEllipse = new Ellipse()
                         {
                             Fill = Brushes.Red,
-                            Width = 10,
-                            Height = 10,
+                            Width = 5,
+                            Height = 5,
                             Opacity = 0,
                         };
 
                         chartCanvas.Children.Add(oEllipse);
-                        Canvas.SetLeft(oEllipse, holder.Point.X - 5);
-                        Canvas.SetTop(oEllipse, holder.Point.Y - 5);
+                        Canvas.SetLeft(oEllipse, holder.Point.X +20);
+                        Canvas.SetTop(oEllipse, holder.Point.Y +50);
                     }
 
                     // add connection points to polyline
@@ -303,7 +303,7 @@ namespace IIoTSimulatorUI
             objectBrokerEinstellungen.Show();
         }
 
-        private void Verbinden(object sender, RoutedEventArgs e)
+        private void DatenSenden(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Die Sensordaten wurden an den Broker gesendet.");
         }

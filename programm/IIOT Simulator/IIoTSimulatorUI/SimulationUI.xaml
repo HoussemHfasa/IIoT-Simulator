@@ -142,13 +142,12 @@
 
             <!-- Button Daten Senden-->
             <Button Content="Daten senden"
-                    Click="Verbinden"
+                    Click="DatenSenden"
                 Foreground="White"
                     FontSize="16" 
-                    Margin="0,466,0,-481" 
-                    HorizontalAlignment="Center"
+                    Margin="32,516,0,-531" 
+                    HorizontalAlignment="Left"
                     Width="192"
-                    Grid.Column="3"
                     Cursor="Hand">
 
                 <Button.Style>
@@ -181,13 +180,15 @@
                 </Button.Template>
             </Button>
 
+            
+
             <!-- Button um abzubrechen um zurück zur Startseite zu gelangen-->
             <Button Content="Abbrechen"
                     Click="Abbrechen"
                 Foreground="White"
                     FontSize="16" 
-                    Margin="0,519,0,-528" 
-                    HorizontalAlignment="Center"
+                    Margin="2,519,-50,-528" 
+                    HorizontalAlignment="Left"
                     Width="184"
                     Grid.Column="3">
 
@@ -224,7 +225,7 @@
 
             <!--Visualisierung-->
             <Canvas x:Name="chartCanvas"
-                Background="#FF7492A4" Grid.ColumnSpan="3" Margin="45,91,-2,-375" Grid.Column="1"
+                Background="#FF7492A4" Grid.ColumnSpan="3" Margin="49,142,-6,-426" Grid.Column="1"
              >
                 <ToolBarPanel Height="244" Width="582"/>
             </Canvas>
@@ -234,10 +235,10 @@
                     Click="Sensorauswaehlen"
                 Foreground="White"
                     FontSize="16" 
-                    Margin="35,524,0,-533" 
+                    Margin="9,63,0,-72" 
                     HorizontalAlignment="Left"
                     Width="190"
-                    Cursor="Hand" Grid.Column="1">
+                    Cursor="Hand" Grid.Column="2">
 
                 <Button.Style>
                     <Style TargetType="Button">
@@ -273,7 +274,7 @@
             <ComboBox 
                 Name="SensortypBox"
                 Grid.Column="1" 
-                Margin="55,475,30,-470"
+                Margin="49,71,36,-66"
                 Width="150"
                 Height="30" >
                 <ComboBoxItem 
@@ -301,11 +302,18 @@
             <!-- Label Sensor-->
             <Label
                 Content="Wählen Sie einen Sensor aus."
-                Margin="38,472,180,-473"
+                Margin="32,68,186,-69"
                 FontSize="18"
                 Foreground="White"
                 FontFamily="Fonts/#Dosis" Grid.ColumnSpan="2"/>
 
+            <!-- Label Senden-->
+            <Label
+                Content="Sensordaten an den Broker senden."
+                Margin="32,466,186,-467"
+                FontSize="18"
+                Foreground="White"
+                FontFamily="Fonts/#Dosis" Grid.ColumnSpan="2"/>
 
 
         </Grid>
