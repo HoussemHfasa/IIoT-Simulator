@@ -165,7 +165,6 @@ namespace SensorAndSensorgroup
         // Änderungen im Gruppenmeeting
 
         //die Methode Basename/Nodename/Sensor nicht geeignet für unsere Programm ,da der Nutzer mehrere Unterordner erstellen kann
-        public Dictionary<string, NAryTree> allTree = new Dictionary<string, NAryTree>();
         public Dictionary<string, TreeNode> allchildren = new Dictionary<string, TreeNode>();
         public Dictionary<string, int> basenames_children = new Dictionary<string, int>();
         public List<string> basenames = new List<string>();
@@ -174,7 +173,6 @@ namespace SensorAndSensorgroup
         {
             var Tree = new NAryTree();
             Tree.root = new TreeNode(basename);
-            allTree.Add(basename, Tree);
             basenames.Add(basename);
             Tree.root.path.Add(basenames.IndexOf(basename));
             basenames_children.Add(basename, 0);
@@ -182,10 +180,9 @@ namespace SensorAndSensorgroup
         public void Add_new_Node(string Mother, string Node)
         {
 
-            if (allTree.ContainsKey(Mother))
+            if (basenames.Contains(Mother))
             {
                 TreeNode ch1 = new TreeNode(Node);
-                allTree[Mother].root.addChild(ch1);
                 ch1.path.Add(basenames.IndexOf(Mother));
                 ch1.path.Add(basenames_children[Mother]);
                 basenames_children[Mother] += 1;
@@ -200,75 +197,15 @@ namespace SensorAndSensorgroup
                 allchildren[Node].path.AddRange(allchildren[Mother].path);
                 allchildren[Node].path.Add(allchildren[Mother].childnumber);
                 allchildren[Mother].childnumber += 1;
-                /*{
-                    List<int> path = allchildren[Mother].path;
-                    int i = allchildren[Mother].path.Count;
-                    switch (i)
-                    {
-                        case 2:
-                            allchildren[Node].path = new List<int>();
-                            allchildren[Node].path.AddRange(allchildren[Mother].path);
-                            allchildren[Node].path.Add(allchildren[Mother].childnumber);
-                            allchildren[Mother].childnumber += 1;
-
-                            allTree[basenames[path[0]]].root.child[path[1]].addChild(ch);
-
-                            break;
-                        case 3:
-                            allchildren[Node].path = new List<int>();
-                            allchildren[Node].path.AddRange(allchildren[Mother].path);
-
-                            ch.path.Add(allchildren[Mother].childnumber);
-                            allchildren[Mother].childnumber += 1;
-
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].addChild(ch);
-                            break;
-                        case 4:
-                            allchildren[Node].path = new List<int>();
-                            allchildren[Node].path.AddRange(allchildren[Mother].path);
-
-                            ch.path.Add(allchildren[Mother].childnumber);
-                            allchildren[Mother].childnumber += 1;
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].addChild(ch);
-                            break;
-                        case 5:
-                            allchildren[Node].path = new List<int>();
-                            allchildren[Node].path.AddRange(allchildren[Mother].path);
-
-                            ch.path.Add(allchildren[Mother].childnumber);
-                            allchildren[Mother].childnumber += 1;
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].addChild(ch);
-                            break;
-                        case 6:
-                            allchildren[Node].path = new List<int>();
-                            allchildren[Node].path.AddRange(allchildren[Mother].path);
-                            ch.path.Add(allchildren[Mother].childnumber);
-                            allchildren[Mother].childnumber += 1;
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].child[path[5]].addChild(ch);
-                            break;
-                        case 7:
-                            allchildren[Node].path = new List<int>();
-                            allchildren[Node].path.AddRange(allchildren[Mother].path);
-                            ch.path.Add(allchildren[Mother].childnumber);
-                            allchildren[Mother].childnumber += 1;
-                            allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].child[path[5]].child[path[6]].addChild(ch);
-                            break;
-
-                    }
-                }*/
+               
             }
         }
         public void  Add_new_Sensor(string Mother, dynamic new_Sensor)
         {
-            
-          //  ch.name = new_Sensor.Sensor_id;
-            //ch.Sensordaten = new_Sensor;
-           
-            if (allTree.ContainsKey(Mother))
+            if (basenames.Contains(Mother))
             {
                 TreeNode ch = new TreeNode(new_Sensor);
                 ch.name = new_Sensor.Sensor_id;
-                allTree[Mother].root.addChild(ch);
                 ch.path.Add(basenames.IndexOf(Mother));
                 ch.path.Add(basenames_children[Mother]);
                 basenames_children[Mother] += 1;
@@ -286,35 +223,7 @@ namespace SensorAndSensorgroup
                 allchildren[new_Sensor.Sensor_id].path.AddRange(allchildren[Mother].path);
                 ch.path.Add(allchildren[Mother].childnumber);
                 allchildren[Mother].childnumber += 1;
-                /*switch (i)
-                {
-                    case 2:
-                      
-
-                        allTree[basenames[path[0]]].root.child[path[1]].addChild(ch);
-
-                        break;
-                    case 3:
-                        
-
-                        allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].addChild(ch);
-                        break;
-                    case 4:
-                       
-                        allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].addChild(ch);
-                        break;
-                    case 5:
-                       
-                        allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].addChild(ch);
-                        break;
-                    case 6:
-                        allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].child[path[5]].addChild(ch);
-                        break;
-                    case 7:
-                        allTree[basenames[path[0]]].root.child[path[1]].child[path[2]].child[path[3]].child[path[4]].child[path[5]].child[path[6]].addChild(ch);
-                        break;
-
-                }*/
+                
             }
         }
         }
