@@ -30,8 +30,14 @@ namespace IIoTSimulatorUI
         TreeViewItem selectedTVI;
         TreeViewItem unterordner;
         string unterordnerText;
-        public void Unterordnerladen( string Oberordner,string Unterordner, TreeViewItem selectedTVI,TreeViewItem unterordner, string unterordnerText)
+        public void Unterordnerladen( int level,string Oberordner,string Unterordner, TreeViewItem selectedTVI,TreeViewItem unterordner, string unterordnerText)
         {
+            selectedTVI = (TreeViewItem)TreeView1.Items[Sensorgroup.allchildren[Unterordner].path[0]] as TreeViewItem;
+            for(int i=1;i<level-1;i++)
+            {
+                selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[i]] as TreeViewItem;
+
+            }
             Oberordner = Sensorgroup.basenames[Sensorgroup.allchildren[Unterordner].path[0]];//Das ausgewählte Objekt in String speichern
             selectedTVI.IsSelected = true;
             unterordner = new TreeViewItem(); //Ein TreeViewItem vom Unterordner erstellen
@@ -39,6 +45,7 @@ namespace IIoTSimulatorUI
             textBoxEingabe2.Clear(); //TextBox Eingabe wieder löschen
             unterordner.Header = unterordnerText;
             selectedTVI.Items.Add(unterordner);// Dem ausgewählten Item den Unterordner hinzufügen
+
         }
         public NeueSensorgruppeUI(ref Sensorgroups NewSensorgroup)
         {
@@ -58,110 +65,8 @@ namespace IIoTSimulatorUI
             
             foreach (string Unterordner in Sensorgroup.allchildren.Keys)
             {
-                switch (Sensorgroup.allchildren[Unterordner].path.Count)
-                { 
-                    case 2:     
-                     selectedTVI = (TreeViewItem)TreeView1.Items[Sensorgroup.allchildren[Unterordner].path[0]] as TreeViewItem; 
-                        Unterordnerladen(Oberordner, Unterordner, selectedTVI, unterordner, unterordnerText);
-                        break;
-                    case 3:
-                         selectedTVI = (TreeViewItem)TreeView1.Items[Sensorgroup.allchildren[Unterordner].path[0]] as TreeViewItem; 
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[1]] as TreeViewItem;
-                        Unterordnerladen( Oberordner,Unterordner,selectedTVI,unterordner,unterordnerText);
-                        
-                        break;
-                    case 4:
-                        selectedTVI = (TreeViewItem)TreeView1.Items[Sensorgroup.allchildren[Unterordner].path[0]] as TreeViewItem; 
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[1]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[2]] as TreeViewItem;
-                        Unterordnerladen(Oberordner, Unterordner, selectedTVI, unterordner, unterordnerText);
-                        break;
-                    case 5:
-                        selectedTVI = (TreeViewItem)TreeView1.Items[Sensorgroup.allchildren[Unterordner].path[0]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[1]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[2]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[3]] as TreeViewItem;
-                        Unterordnerladen(Oberordner, Unterordner, selectedTVI, unterordner, unterordnerText);
-                        break;
-                    case 6:
-                        selectedTVI = (TreeViewItem)TreeView1.Items[Sensorgroup.allchildren[Unterordner].path[0]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[1]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[2]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[3]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[4]] as TreeViewItem;
-                        Unterordnerladen(Oberordner, Unterordner, selectedTVI, unterordner, unterordnerText);
-                        break;
-                    case 7:
-                        selectedTVI = (TreeViewItem)TreeView1.Items[Sensorgroup.allchildren[Unterordner].path[0]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[1]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[2]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[3]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[4]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[5]] as TreeViewItem;
-                        Unterordnerladen(Oberordner, Unterordner, selectedTVI, unterordner, unterordnerText);
-                        break;
-                    case 8:
-                        selectedTVI = (TreeViewItem)TreeView1.Items[Sensorgroup.allchildren[Unterordner].path[0]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[1]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[2]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[3]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[4]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[5]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[6]] as TreeViewItem;
-                        Unterordnerladen(Oberordner, Unterordner, selectedTVI, unterordner, unterordnerText);
-                        break;
-                    case 9:
-                        selectedTVI = (TreeViewItem)TreeView1.Items[Sensorgroup.allchildren[Unterordner].path[0]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[1]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[2]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[3]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[4]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[5]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[6]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[7]] as TreeViewItem;
-                        Unterordnerladen(Oberordner, Unterordner, selectedTVI, unterordner, unterordnerText);
-                        break;
-                    case 10:
-                        selectedTVI = (TreeViewItem)TreeView1.Items[Sensorgroup.allchildren[Unterordner].path[0]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[1]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[2]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[3]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[4]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[5]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[6]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[7]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[8]] as TreeViewItem;
-                        Unterordnerladen(Oberordner, Unterordner, selectedTVI, unterordner, unterordnerText);
-                        break;
-                    case 11:
-                        selectedTVI = (TreeViewItem)TreeView1.Items[Sensorgroup.allchildren[Unterordner].path[0]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[1]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[2]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[3]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[4]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[5]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[6]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[7]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[8]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[9]] as TreeViewItem;
-                        Unterordnerladen(Oberordner, Unterordner, selectedTVI, unterordner, unterordnerText);
-                        break;
-                    case 12:
-                        selectedTVI = (TreeViewItem)TreeView1.Items[Sensorgroup.allchildren[Unterordner].path[0]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[1]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[2]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[3]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[4]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[5]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[6]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[7]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[8]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[9]] as TreeViewItem;
-                        selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[10]] as TreeViewItem;
-                        Unterordnerladen(Oberordner, Unterordner, selectedTVI, unterordner, unterordnerText);
-                        break;
-                }
-                
+                Unterordnerladen(Sensorgroup.allchildren[Unterordner].path.Count, Oberordner, Unterordner, selectedTVI, unterordner, unterordnerText);
+             
             }
         }
         
