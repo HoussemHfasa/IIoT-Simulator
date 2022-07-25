@@ -20,6 +20,8 @@
         </Grid.Background>
 
 
+
+
         <Grid.RowDefinitions>
             <RowDefinition Height="35">
             </RowDefinition>
@@ -129,15 +131,6 @@
                            FontSize="12" 
                            BorderBrush="#FF0F0F2D" VerticalContentAlignment="Bottom"/>
 
-            <!--Visualisierung-->
-            <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Grid.ColumnSpan="3" Grid.Column="1" Margin="76,109,-20,-427" >
-                <lvc:CartesianChart.AxisY>
-                    <lvc:Axis Title="Y" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
-                </lvc:CartesianChart.AxisY>
-                <lvc:CartesianChart.AxisX>
-                    <lvc:Axis Title="X" Labels="{Binding Labels}"></lvc:Axis>
-                </lvc:CartesianChart.AxisX>
-            </lvc:CartesianChart>
 
 
             <TextBlock
@@ -147,16 +140,16 @@
                 Foreground="White"
                 FontSize="18"/>
 
-            <!-- Button um zu Verbinden-->
+            <!-- Button Daten Senden-->
             <Button Content="Daten senden"
                     Click="Verbinden"
                 Foreground="White"
                     FontSize="16" 
-                    Margin="209,447,0,-511" 
-                    HorizontalAlignment="Left"
-                    Width="191"
-                    Grid.Column="1"
-                    Cursor="Hand" Grid.ColumnSpan="2">
+                    Margin="0,466,0,-481" 
+                    HorizontalAlignment="Center"
+                    Width="192"
+                    Grid.Column="3"
+                    Cursor="Hand">
 
                 <Button.Style>
                     <Style TargetType="Button">
@@ -193,7 +186,7 @@
                     Click="Abbrechen"
                 Foreground="White"
                     FontSize="16" 
-                    Margin="0,447,0,-511" 
+                    Margin="0,519,0,-528" 
                     HorizontalAlignment="Center"
                     Width="184"
                     Grid.Column="3">
@@ -227,6 +220,93 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
+
+
+            <!--Visualisierung-->
+            <Canvas x:Name="chartCanvas"
+                Background="#FF7492A4" Grid.ColumnSpan="3" Margin="45,91,-2,-375" Grid.Column="1"
+             >
+                <ToolBarPanel Height="244" Width="582"/>
+            </Canvas>
+
+            <!-- Button um Sensor auszuwählen-->
+            <Button Content="Auswählen"
+                    Click="Sensorauswaehlen"
+                Foreground="White"
+                    FontSize="16" 
+                    Margin="35,524,0,-533" 
+                    HorizontalAlignment="Left"
+                    Width="190"
+                    Cursor="Hand" Grid.Column="1">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                        <Setter Property="Background" 
+                                Value="#008080"/>
+                        <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                                <Setter Property="Background"
+                                        Value="Aqua"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="180" Height="30"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!-- ComboBox Sensortyp-->
+            <ComboBox 
+                Name="SensortypBox"
+                Grid.Column="1" 
+                Margin="55,475,30,-470"
+                Width="150"
+                Height="30" >
+                <ComboBoxItem 
+                     Content="Temperatursensor">
+                </ComboBoxItem>
+                <ComboBoxItem 
+                     Content="Helligkeitssensor"></ComboBoxItem>
+                <ComboBoxItem 
+                     Content="Stromsensor"></ComboBoxItem>
+                <ComboBoxItem 
+                     Content="Rauchmelder"></ComboBoxItem>
+                <ComboBoxItem 
+                     Content="Feuchtigkeitssensor"></ComboBoxItem>
+                <ComboBoxItem 
+                     Content="Füllstandsensor"></ComboBoxItem>
+                <ComboBoxItem 
+                     Content="Dehnungssensor"></ComboBoxItem>
+                <ComboBoxItem 
+                     Content="Drehmomentsensor"></ComboBoxItem>
+                <ComboBoxItem 
+                     Content="Spannungssensor"></ComboBoxItem>
+
+            </ComboBox>
+
+            <!-- Label Sensor-->
+            <Label
+                Content="Wählen Sie einen Sensor aus."
+                Margin="38,472,180,-473"
+                FontSize="18"
+                Foreground="White"
+                FontFamily="Fonts/#Dosis" Grid.ColumnSpan="2"/>
+
+
 
         </Grid>
 
