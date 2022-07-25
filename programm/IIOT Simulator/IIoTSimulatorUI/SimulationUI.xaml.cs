@@ -22,26 +22,70 @@ namespace IIoTSimulatorUI
     /// <summary>
     /// Interaktionslogik für SimulationUI.xaml
     /// </summary>
-    public partial class SimulationUI : Window 
+    public partial class SimulationUI : Window
     {
         Sensorgroups Sensorgroup;
 
         private Line xAxisLine, yAxisLine;
         private double xAxisStart = 30, yAxisStart = 30, interval = 40;
         private Polyline chartPolyline;
-
         private Point origin;
         private List<Holder> holders;
         private List<Value> values;
-
+        private Dictionary<string, Value> SensorValues;
+        
+        public List<Value> EinzelneSensorDaten(Sensorgroups Sensorgroup, TreeNode Sensor)
+        {
+            double intervall = 0;
+            List<Value> Values = new List<Value>();
+            if (Sensor.Sensordaten.Sensortype == "Rauchmelder")
+            {
+                List<bool> SensorValues = new List<bool>();
+                SensorValues = Sensor.Sensordaten.GetValues();
+                for (int i = 0; i < Sensor.Sensordaten.AmmountofValues; i++)
+                {
+                    values.Add(new Value(interval, SensorValues[i]));
+                    intervall += 1;
+                }
+                
+            }
+            else
+            {
+                List<double> SensorValues = new List<double>();
+                SensorValues = Sensor.Sensordaten.GetValues();
+                for (int i = 0; i < Sensor.Sensordaten.AmmountofValues; i++)
+                {
+                    values.Add(new Value(interval, SensorValues[i]));
+                    intervall += 1;
+                }
+            }
+            return Values;
+        }
+    
         public SimulationUI(Sensorgroups ExistingSensorgroup)
         {
             this.Sensorgroup = ExistingSensorgroup;
             InitializeComponent();
 
+            foreach(TreeNode Sensor in Sensorgroup.allchildren.Values)
+            {
+                if(!Sensor.Sensordaten.Equals(null))
+                {
+                    if(Sensor.Sensordaten.Sensortype== "Rauchmelder")
+                    {
+                        EinzelneSensorDaten(this.Sensorgroup, Sensor);
+                    }
+                    else
+                    {
+                        EinzelneSensorDaten(this.Sensorgroup, Sensor);
 
+                    }
+
+                }
+
+            }
             holders = new List<Holder>();
-            values = new List<Value>()
+           /* values = new List<Value>()
             {
                 //new Value(0,0),
                 //new Value(100,100),
@@ -85,7 +129,7 @@ namespace IIoTSimulatorUI
                 new Value(1100,0),
                 new Value(1200,100),
                 new Value(1300,100),
-            };
+            };*/
 
             Paint();
 
@@ -106,7 +150,7 @@ namespace IIoTSimulatorUI
                     xAxisLine = new Line()
                     {
                         X1 = xAxisStart ,
-                        Y1 = this.ActualHeight ,
+                        Y1 = this.ActualHeight - yAxisStart,
                         X2 = this.ActualWidth - xAxisStart,
                         Y2 = this.ActualHeight - yAxisStart,
                         Stroke = Brushes.LightGray,
@@ -234,14 +278,14 @@ namespace IIoTSimulatorUI
                         Ellipse oEllipse = new Ellipse()
                         {
                             Fill = Brushes.Red,
-                            Width = 5,
-                            Height = 5,
+                            Width = 10,
+                            Height = 10,
                             Opacity = 0,
                         };
 
                         chartCanvas.Children.Add(oEllipse);
-                        Canvas.SetLeft(oEllipse, holder.Point.X +20);
-                        Canvas.SetTop(oEllipse, holder.Point.Y +50);
+                        Canvas.SetLeft(oEllipse, holder.Point.X - 5);
+                        Canvas.SetTop(oEllipse, holder.Point.Y - 5);
                     }
 
                     // add connection points to polyline
@@ -303,7 +347,7 @@ namespace IIoTSimulatorUI
             objectBrokerEinstellungen.Show();
         }
 
-        private void DatenSenden(object sender, RoutedEventArgs e)
+        private void Verbinden(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Die Sensordaten wurden an den Broker gesendet.");
         }
@@ -340,11 +384,17 @@ namespace IIoTSimulatorUI
     {
         public double X { get; set; }
         public double Y { get; set; }
+        public bool Z { get; set; }
 
         public Value(double x, double y)
         {
             X = x;
             Y = y;
+        }
+        public Value(double x, bool z)
+        {
+            X = x;
+            Z=z;
         }
     }
 }
