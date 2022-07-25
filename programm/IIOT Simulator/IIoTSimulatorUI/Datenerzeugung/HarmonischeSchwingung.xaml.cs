@@ -52,7 +52,7 @@ namespace IIoTSimulatorUI
         private void SensordatenSpeichern(object sender, RoutedEventArgs e)
         {
             // Objekt der Datenerzeugungsmethode erstellen, Daten erzeugen und in DoubleSensor abspeichern
-            DataGenerator = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude.Text), Convert.ToDouble(textBoxPeriodendauer), Convert.ToDouble(textBoxPhasenverschiebung), Convert.ToUInt32(textBoxWerteanzahl));
+            DataGenerator = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude.Text), Convert.ToDouble(textBoxPeriodendauer.Text), Convert.ToDouble(textBoxPhasenverschiebung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
             DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
             Close();
         }

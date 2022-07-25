@@ -85,7 +85,7 @@ namespace IIoTSimulatorUI
         //Button um zurück zur Startseite zu gelangen
         private void StartseiteButton(object sender, RoutedEventArgs e)
         {
-             MainWindow objectStartseite2 = new MainWindow();
+             MainWindow objectStartseite2 = new MainWindow(Sensorgroup);
              this.Visibility = Visibility.Hidden; 
              objectStartseite2.Show(); 
             
@@ -194,7 +194,7 @@ namespace IIoTSimulatorUI
 
                 MessageBox.Show("Sensorgruppe wurde gespeichert");
                 
-                MainWindow objectStartseite2 = new MainWindow(ref Sensorgroup);
+                MainWindow objectStartseite2 = new MainWindow(Sensorgroup);
                 this.Visibility = Visibility.Hidden;
                 objectStartseite2.Show();
             }

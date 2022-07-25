@@ -30,7 +30,7 @@ namespace IIoTSimulatorUI
             InitializeComponent();
         }
 
-        public MainWindow(ref Sensorgroups ExistingSensorgroup)
+        public MainWindow(Sensorgroups ExistingSensorgroup)
         {
             this.Sensorgroup = ExistingSensorgroup;
             InitializeComponent();

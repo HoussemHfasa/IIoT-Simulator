@@ -352,6 +352,12 @@ namespace IIoTSimulatorUI
             MessageBox.Show("Die Sensordaten wurden an den Broker gesendet.");
         }
 
+        private void DatenSenden(object sender, RoutedEventArgs e)
+        {
+
+            MessageBox.Show("Die Sensordaten wurden an den Broker gesendet.");
+        }
+
         private void Abbrechen(object sender, RoutedEventArgs e)
         {
                 MainWindow objectStartseite2 = new MainWindow();
