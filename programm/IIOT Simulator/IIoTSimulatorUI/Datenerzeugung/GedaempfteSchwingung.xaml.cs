@@ -28,6 +28,7 @@ namespace IIoTSimulatorUI
         {
             this.DoubleSensor = NewSensor;
             InitializeComponent();
+
         }
 
         private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
@@ -57,6 +58,11 @@ namespace IIoTSimulatorUI
             DataGenerator = new DampedOscillation(Convert.ToDouble(textBoxAmplitude.Text), Convert.ToDouble(textBoxDaempfungsrate.Text), Convert.ToDouble(textBoxPeriodendauer.Text), Convert.ToDouble(textBoxPhasenverschiebung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
             DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
             Close();
+        }
+
+        private void Aktualisieren(object sender, RoutedEventArgs e)
+        {
+            //Hier werden die Sensordaten nach der Eingabe aktualisiert
         }
     }
 }

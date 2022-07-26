@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:local="clr-namespace:IIoTSimulatorUI"
         mc:Ignorable="d"
         Title="UeberlagerteSchwingung" 
@@ -26,37 +27,37 @@
         <!-- Label Amplitude-->
         <Label
                 Content="Amplitude:"
-                Margin="102,95,0,298"
-                FontSize="18"
+                Margin="29,95,0,298"
+                FontSize="16"
                 Foreground="#FFFFF8F8"
                 HorizontalAlignment="Left" 
-                Width="83"
+                Width="156"
                 FontFamily="Fonts/#Dosis"/>
         <!-- Label für Schwingung1-->
         <Label
                 Content="Schwingung 1:"
-                Margin="244,45,0,348"
-                FontSize="18"
+                Margin="151,58,0,361"
+                FontSize="12"
                 Foreground="#FFFFF8F8"
                 HorizontalAlignment="Left" 
-                Width="167"
+                Width="119"
                 FontFamily="Fonts/#Dosis"/>
 
         <!-- Label für Schwingung2-->
         <Label
                 Content="Schwingung 2:"
-                Margin="490,45,0,348"
-                FontSize="18"
+                Margin="270,58,0,348"
+                FontSize="12"
                 Foreground="#FFFFF8F8"
                 HorizontalAlignment="Left" 
-                Width="167"
+                Width="130"
                 FontFamily="Fonts/#Dosis"/>
 
 
         <!-- TextBox für die Amplitude1-->
         <TextBox x:Name="textBoxAmplitude1" 
                 Text="0.00"
-                Margin="244,95,334,0"
+                Margin="181,95,568,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -69,7 +70,7 @@
         <!-- TextBox für die Amplitude2-->
         <TextBox x:Name="textBoxAmplitude2" 
                 Text="0.00"
-                Margin="490,95,88,0"
+                Margin="277,95,477,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -83,17 +84,17 @@
         <!-- Label für die Periodendauer-->
         <Label
                 Content="Periodendauer:"
-                Margin="80,152,0,242"
-                FontSize="18"
+                Margin="29,152,0,242"
+                FontSize="16"
                 Foreground="#FFFAF9F9"
                 HorizontalAlignment="Left" 
-                Width="119"
+                Width="155"
                 FontFamily="Fonts/#Dosis"/>
 
         <!-- TextBox für die Periodendauer1 -->
         <TextBox x:Name="textBoxPeriodendauer1" 
                 Text="0.00"
-                Margin="244,160,334,0"
+                Margin="181,160,568,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -107,7 +108,7 @@
         <!-- TextBox für die Periodendauer2 -->
         <TextBox x:Name="textBoxPeriodendauer2" 
                 Text="0.00"
-                Margin="490,160,88,0"
+                Margin="277,160,477,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -120,18 +121,18 @@
 
         <!-- Label für die Phasenverschiebung-->
         <Label
-                Content="Phasenverschiebung:"
-                Margin="45,217,0,176"
-                FontSize="18"
+                Content="Phase:&#xD;&#xA;"
+                Margin="29,217,0,176"
+                FontSize="16"
                 Foreground="#FFFCF6F6"
                 HorizontalAlignment="Left" 
-                Width="163"
+                Width="140"
                 FontFamily="Fonts/#Dosis"/>
 
         <!-- TextBox für die Phasenverschiebung1-->
         <TextBox x:Name="textBoxPhasenverschiebung1" 
                 Text="0.00"
-                Margin="244,221,334,0"
+                Margin="181,221,568,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -145,7 +146,7 @@
         <!-- TextBox für die Phasenverschiebung2-->
         <TextBox x:Name="textBoxPhasenverschiebung2" 
                 Text="0.00"
-                Margin="490,221,88,0"
+                Margin="277,221,477,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -159,17 +160,17 @@
         <!-- Label für die Werteanzahl-->
         <Label
                 Content="Werteanzahl:"
-                Margin="102,281,0,112"
-                FontSize="18"
+                Margin="29,281,0,112"
+                FontSize="16"
                 Foreground="#FFFDFDFD"
                 HorizontalAlignment="Left" 
-                Width="106"
+                Width="164"
                 FontFamily="Fonts/#Dosis"/>
 
         <!-- TextBox für die Werteanzahl1-->
         <TextBox x:Name="textBoxWerteanzahl1" 
                 Text="1"
-                Margin="244,283,334,0"
+                Margin="181,283,568,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -183,7 +184,7 @@
         <!-- TextBox für die Werteanzahl2-->
         <TextBox x:Name="textBoxWerteanzahl2" 
                 Text="1"
-                Margin="490,283,88,0"
+                Margin="277,281,477,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -199,7 +200,7 @@
                     Click="SensordatenSpeichern"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="565,347,0,24" 
+                    Margin="586,366,0,7" 
                     HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand">
@@ -239,7 +240,7 @@
                     Click="FehlerHinzufuegen"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="365,347,0,24" 
+                    Margin="365,364,0,7" 
                     HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand">
@@ -318,12 +319,62 @@
         <!-- Label- Überschrift Überlagerte Schwingung-->
         <Label
                 Content="Überlagerte Schwingung"
-                Margin="29,4,0,394"
+                Margin="29,4,0,398"
                 FontSize="25"
                 Foreground="#FFFFF8F8"
                 HorizontalAlignment="Left" 
-                Width="506"
+                Width="393"
                 FontWeight="Medium"
                 FontFamily="Fonts/#Dosis"/>
+
+        <!-- Button Aktualisieren-->
+        <Button Content="Aktualisieren"
+                    Click="Aktualisieren"
+                    Foreground="White"
+                    FontSize="16" 
+                    Margin="144,375,0,24" 
+                    HorizontalAlignment="Left"
+                    Width="184" 
+                    Cursor="Hand" RenderTransformOrigin="-0.401,1.587">
+
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                    <Setter Property="Background" 
+                                Value="#008080"/>
+                    <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                            <Setter Property="Background"
+                                     Value="Aqua"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="180" Height="30"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+
+        <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Name ="Ingrid" Margin="365,68,30,82" >
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+        </lvc:CartesianChart>
     </Grid>
 </Window>

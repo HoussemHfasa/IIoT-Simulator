@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IIoTSimulatorUI"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="FehlerAbklingendesRauschen"
          Height="450" Width="800"
@@ -26,7 +27,7 @@
         <Label
                 Content="Rauschen Mittelwert:"
                 Margin="34,90,0,304"
-                FontSize="18"
+                FontSize="16"
                 Foreground="#FFFFF8F8"
                 HorizontalAlignment="Left" 
                 Width="185"
@@ -34,7 +35,7 @@
 
         <!-- TextBox für Rauschen Mittelwert-->
         <TextBox x:Name="textBoxMittelwert"
-                Margin="244,95,334,0"
+                Margin="224,90,420,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -49,7 +50,7 @@
         <Label
                 Content="Minimaler Fehlerwert:"
                 Margin="34,152,0,243"
-                FontSize="18"
+                FontSize="16"
                 Foreground="#FFFAF9F9"
                 HorizontalAlignment="Left" 
                 Width="189"
@@ -58,7 +59,7 @@
         <!-- TextBox für die Standardabweichung -->
         <TextBox x:Name="textBoxStandardabweichung" 
                 Text="0.00"
-                Margin="244,160,334,0"
+                Margin="223,152,421,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -73,7 +74,7 @@
         <Label
                 Content="Werteanzahl:"
                 Margin="34,221,0,172"
-                FontSize="18"
+                FontSize="16"
                 Foreground="#FFFCF6F6"
                 HorizontalAlignment="Left" 
                 Width="142"
@@ -82,7 +83,7 @@
         <!-- TextBox für die Werteanzahl-->
         <TextBox x:Name="textBoxWerteanzahl" 
                 Text="0.00"
-                Margin="244,221,334,0"
+                Margin="224,221,420,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -97,7 +98,7 @@
         <Label
                 Content="Abklingzeit:"
                 Margin="34,283,0,110"
-                FontSize="18"
+                FontSize="16"
                 Foreground="#FFFDFDFD"
                 HorizontalAlignment="Left" 
                 Width="106"
@@ -106,7 +107,7 @@
         <!-- TextBox für die Abklingzeit-->
         <TextBox x:Name="textBoxAbklingzeit" 
                 Text="1"
-                Margin="244,283,334,0"
+                Margin="223,283,421,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -122,7 +123,7 @@
                     Click="Hinzufügen"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="565,347,0,24" 
+                    Margin="565,356,0,15" 
                     HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand">
@@ -199,6 +200,47 @@
             </Button.Template>
         </Button>
 
+        <!-- Button Aktualisieren-->
+        <Button Content="Aktualisieren"
+                    Click="Aktualisieren"
+                    Foreground="White"
+                    FontSize="16" 
+                    Margin="351,370,0,29" 
+                    HorizontalAlignment="Left"
+                    Width="184" 
+                    Cursor="Hand" RenderTransformOrigin="-0.401,1.587">
+
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                    <Setter Property="Background" 
+                                Value="#008080"/>
+                    <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                            <Setter Property="Background"
+                                     Value="Aqua"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="180" Height="30"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+
         <!-- Label- Überschrift -->
         <Label
                 Content="Abklingendes Rauschen"
@@ -209,5 +251,15 @@
                 Width="492"
                 FontWeight="Medium"
                 FontFamily="Fonts/#Dosis"/>
+
+        <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Name ="Ingrid" Margin="400,68,30,82" >
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+        </lvc:CartesianChart>
+
     </Grid>
 </Window>

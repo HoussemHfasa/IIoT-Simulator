@@ -58,5 +58,10 @@ namespace IIoTSimulatorUI
         {
             Close();
         }
+
+        private void Aktualisieren(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -448,8 +448,8 @@
 
             <Label
                 x:Name="LabelInfo"
-                Content="Bevor Sie einen Unterordner hinzufügen, stellen Sie sicher das ein Element ausgewählt ist."
-                Margin="56,217,0,-224"
+                Content="Bevor Sie einen Unterordner hinzufügen, stellen Sie sicher, dass ein Element ausgewählt ist."
+                Margin="54,225,0,-232"
                 FontSize="12"
                 Foreground="#00000000"
                 HorizontalAlignment="Left"

@@ -305,12 +305,19 @@
             <Label
                 Content="Ausgewählte Sensordaten an den Broker senden:"
                 Margin="18,162,127,-165"
-                FontSize="15"
+                FontSize="14"
                 Foreground="White"
                 FontFamily="Fonts/#Dosis" Grid.ColumnSpan="2"/>
 
-
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="3" Margin="113,448,-20,-545" Grid.Column="1">
+            <ScrollViewer
+                          BorderThickness="10"
+                HorizontalScrollBarVisibility="Auto" Margin="348,442,-651,-517">
+                <ScrollViewer.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </ScrollViewer.BorderBrush>
                 <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
                     <TextBlock 
                         x:Name="ScrollTextBlock"
@@ -318,8 +325,8 @@
                         FontSize="12"
                         FontFamily="Fonts/#Dosis"
                         TextWrapping="Wrap" 
-                        Margin="0,0,0,20">
-                        Hier werden die gesendeten Sensordaten angezeigt.
+                        Margin="0,0,0,20" Height="1408" Width="519">
+                         Hier werden die gesendeten Sensordaten angezeigt.
                     </TextBlock>
 
                 </StackPanel>
