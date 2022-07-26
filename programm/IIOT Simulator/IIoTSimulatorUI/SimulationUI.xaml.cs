@@ -27,24 +27,14 @@ namespace IIoTSimulatorUI
     public partial class SimulationUI : Window
     {
         Sensorgroups Sensorgroup;
-
-      /*  private Line xAxisLine, yAxisLine;
-        private double xAxisStart = 30, yAxisStart = 30, interval = 40;
-        private Polyline chartPolyline;
-        private Point origin;
-        private List<Holder> holders;*/
-        private ChartValues<double> values;
-        
-        private Dictionary<string, ChartValues<double>> SensorValues;
-
-
-
         //
         //
         // Für neue Linechart
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
+        private ChartValues<double> values;
+        private Dictionary<string, ChartValues<double>> SensorValues;
         //
         //
         //
@@ -53,7 +43,8 @@ namespace IIoTSimulatorUI
 
         public SimulationUI(ref Sensorgroups ExistingSensorgroup)
         {
-
+            int AmmountofValuesMax=0;
+            int[] Labelsint=null;
             this.Sensorgroup = ExistingSensorgroup;
             InitializeComponent();
             SensorValues = new Dictionary<string, ChartValues<double>>();
@@ -62,6 +53,15 @@ namespace IIoTSimulatorUI
                 if (!(Sensorgroup.allchildren[Sensor].Sensordaten == null))
                 {
                     SensorValues.Add(Sensor, EinzelneSensorDaten(Sensorgroup.allchildren[Sensor]));
+                    if(Convert.ToInt16(Sensorgroup.allchildren[Sensor].Sensordaten.AmmountofValues)>AmmountofValuesMax)
+                    {
+                        AmmountofValuesMax = Convert.ToInt16(Sensorgroup.allchildren[Sensor].Sensordaten.AmmountofValues);
+                         Labelsint = new int[AmmountofValuesMax];
+                        for(int i=0;i<AmmountofValuesMax;i++)
+                        {
+                            Labelsint[i] = i;
+                        }
+                    }
                 }
 
             }
@@ -69,10 +69,14 @@ namespace IIoTSimulatorUI
             SeriesCollection = new SeriesCollection
             {
             };
-
-            Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May" };
-            YFormatter = value => value.ToString("C");
-
+             
+            Labels = new string[AmmountofValuesMax];
+            if (!(Labelsint==null))
+            {
+                Labels= Array.ConvertAll(Labelsint, x => x.ToString());
+            }
+            YFormatter = value => value.ToString("");
+            Ingrid.
 
 
 
