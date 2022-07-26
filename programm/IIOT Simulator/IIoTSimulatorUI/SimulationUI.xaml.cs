@@ -82,7 +82,7 @@ namespace IIoTSimulatorUI
              {
                  if (!(Sensorgroup.allchildren[Sensor].Sensordaten == null))
                  {
-                     SensorValues.Add(Sensor, EinzelneSensorDaten(Sensorgroup.allchildren[Sensor]));
+                    SensorValues.Add(Sensor, EinzelneSensorDaten(Sensorgroup.allchildren[Sensor]));
 
              SeriesCollection.Add(new LineSeries
             {
@@ -150,14 +150,12 @@ namespace IIoTSimulatorUI
             foreach(string sensor in SensorValues.Keys)
             {
                 // Logbuch, welche Daten gesendet wurden
-                k += $"\nDer Sensor {sensor} hat {SensorValues[sensor].Count} Wert an den Broker gesendet";
+                    
+                k += $"\nDer Sensor {sensor} hat {SensorValues[sensor].Count} Wert an den Broker gesendet und den Topic ist {Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic)}";
                 for (int i = 0; i < SensorValues[sensor].Count; i++)
                 {
-
-                    ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat" + (SensorValues[sensor][i]) + "Wert an den Broker gesendet";
-
-                    //MQTT.BrokerCom.PublishToTopic(SensorValues[sensor][i].Y)
-                    
+                    ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat das Wert " + (SensorValues[sensor][i]) + " an den Broker gesendet";
+                    MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic),Convert.ToString(SensorValues[sensor][i]));
                 }
                 // Hier müssten Daten an Broker gesendet werden
             }
