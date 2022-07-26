@@ -83,7 +83,7 @@ namespace IIoTSimulatorUI
             }
             else
             {
-                SimulationUI objectSimulation = new SimulationUI(ref Sensorgroup);
+                SimulationUI objectSimulation = new SimulationUI( Sensorgroup);
                 this.Visibility = Visibility.Hidden;
                 objectSimulation.Show();
             }

@@ -46,7 +46,7 @@ namespace IIoTSimulatorUI
         int CurrentValueNumber = 0;
 
 
-        public SimulationUI(ref Sensorgroups ExistingSensorgroup)
+        public SimulationUI( Sensorgroups ExistingSensorgroup)
         {
             int AmmountofValuesMax=0;
             int[] Labelsint=null;
