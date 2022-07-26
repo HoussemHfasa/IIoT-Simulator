@@ -340,6 +340,18 @@
                     <lvc:Axis Title="Werteanzahl" Labels="{Binding Labels}"></lvc:Axis>
                 </lvc:CartesianChart.AxisX>
             </lvc:CartesianChart>
+
+            <!-- Label Globus-->
+            <Label
+                Content="🌍"
+                Margin="107,40,-50,-106"
+                FontSize="70"
+                Foreground="#59254B6F"
+                FontFamily="Fonts/#Dosis" 
+                HorizontalContentAlignment="Center" 
+                VerticalContentAlignment="Center"
+                Grid.Column="3"/>
+
         </Grid>
 
     </Grid>

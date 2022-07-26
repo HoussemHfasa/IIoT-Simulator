@@ -79,7 +79,7 @@
                     FontSize="20" 
                     Height="35" 
                 
-                    VerticalAlignment="Top" Cursor="Hand" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="57" Margin="423,-5,0,0">
+                    VerticalAlignment="Top" Cursor="Hand" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="57" Margin="413,0,0,0">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -136,5 +136,7 @@
             <ComboBoxItem 
                      Content="Überlagerte Schwingung"></ComboBoxItem>
         </ComboBox>
+
+       
     </Grid>
 </Window>

@@ -90,7 +90,11 @@ namespace IIoTSimulatorUI
             //werden diese beim Haken setzen aufhellen
             var bc = new BrushConverter();
 
-            PortText.Background = (Brush)bc.ConvertFrom("#ff1f4663");
+            (sender as Button).Foreground = new SolidColorBrush(Colors.White);
+
+            (sender as Button).Background = new SolidColorBrush(Colors.Green);
+
+            NutzernameText.Background = (Brush)bc.ConvertFrom("#ff1f4663");
 
             PassswortBox.Background = (Brush)bc.ConvertFrom("#ff1f4663");
 
