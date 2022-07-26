@@ -161,7 +161,7 @@ namespace IIoTSimulatorUI
 
                     Style test = new Style();
                     unterordner.IsExpanded = true;
-                    
+
 
                     string unterordnerText = textBoxEingabe2.Text; //Benutzereingabe in einem string speichern
                     
@@ -265,6 +265,11 @@ namespace IIoTSimulatorUI
 
                 sensorname.Header = textSensorname;
                 textBoxEingabeSensor.Clear(); //TextBox Eingabe wieder löschen
+
+                // Sensoren mit anderer Farbe
+                SolidColorBrush brush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+                sensorname.Foreground = brush;
+                
 
                 selectedTVI.Items.Add(sensorname);
 
