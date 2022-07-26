@@ -18,7 +18,6 @@
     <ProjectReference Include="..\..\DummyKomponenten\DataAnalysisDummy\DataAnalysisDummy\DataAnalysisDummy.csproj" />
     <ProjectReference Include="..\..\DummyKomponenten\DataStorageDummy\DataStorageDummy\DataStorageDummy.csproj" />
     <ProjectReference Include="..\..\DummyKomponenten\DummySensorandSensorgroups\DummySensorandSensorgroups\DummySensorandSensorgroups.csproj" />
-    <ProjectReference Include="..\..\DummyKomponenten\MQTTCommunicatorDummy\MQTTCommunicatorDummy\MQTTCommunicatorDummy.csproj" />
     <ProjectReference Include="..\..\DummyKomponenten\SensorDataSimulatorDummy\SensorDataSimulatorDummy\SensorDataSimulatorDummy.csproj" />
     <ProjectReference Include="..\..\MQTTCommunicator\MQTTCommunicator\MQTTCommunicator.csproj" />
     <ProjectReference Include="..\..\SensorDataSimulator\SensorDataSimulator\SensorDataSimulator.csproj" />

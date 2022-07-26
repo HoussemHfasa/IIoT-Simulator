@@ -28,14 +28,14 @@ namespace IIoTSimulatorUI
     {
         Sensorgroups Sensorgroup;
 
-        private Line xAxisLine, yAxisLine;
+      /*  private Line xAxisLine, yAxisLine;
         private double xAxisStart = 30, yAxisStart = 30, interval = 40;
         private Polyline chartPolyline;
         private Point origin;
-        private List<Holder> holders;
-        private List<Value> values;
+        private List<Holder> holders;*/
+        private ChartValues<double> values;
         
-        private Dictionary<string,List<Value>> SensorValues;
+        private Dictionary<string, ChartValues<double>> SensorValues;
 
 
 
@@ -49,360 +49,76 @@ namespace IIoTSimulatorUI
         //
         //
 
-       
-    
+
+
         public SimulationUI(ref Sensorgroups ExistingSensorgroup)
         {
-            
+
             this.Sensorgroup = ExistingSensorgroup;
             InitializeComponent();
-            SensorValues = new Dictionary<string,List<Value>>();
-            foreach(string Sensor in Sensorgroup.allchildren.Keys)
+            SensorValues = new Dictionary<string, ChartValues<double>>();
+            foreach (string Sensor in Sensorgroup.allchildren.Keys)
             {
-                if (!(Sensorgroup.allchildren[Sensor].Sensordaten==null))
+                if (!(Sensorgroup.allchildren[Sensor].Sensordaten == null))
                 {
-                   SensorValues.Add(Sensor,EinzelneSensorDaten(Sensorgroup.allchildren[Sensor]));
+                    SensorValues.Add(Sensor, EinzelneSensorDaten(Sensorgroup.allchildren[Sensor]));
                 }
-                
+
             }
-            
-            // old Linechart :   holders = new List<Holder>();
-
-            /* values = new List<Value>()
-             {
-                 //new Value(0,0),
-                 //new Value(100,100),
-                 //new Value(200,200),
-                 //new Value(300,300),
-                 //new Value(400,200),
-                 //new Value(500,500),
-                 //new Value(600,500),
-                 //new Value(700,500),
-                 //new Value(800,500),
-                 //new Value(900,600),
-                 //new Value(1000,200),
-                 //new Value(1100,100),
-                 //new Value(1200,400),
-
-                 //new Value(0,0),
-                 //new Value(100,200),
-                 //new Value(200,100),
-                 //new Value(300,200),
-                 //new Value(400,300),
-                 //new Value(500,400),
-                 //new Value(600,500),
-                 //new Value(700,400),
-                 //new Value(800,500),
-                 //new Value(900,600),
-                 //new Value(1000,300),
-                 //new Value(1100,100),
-                 //new Value(1200,400),
-
-                 new Value(0,0),
-                 new Value(100,100),
-                 new Value(200,400),
-                 new Value(300,200),
-                 new Value(400,400),
-                 new Value(500,300),
-                 new Value(600,100),
-                 new Value(700,700),
-                 new Value(800,200),
-                 new Value(900,600),
-                 new Value(1000,600),
-                 new Value(1100,0),
-                 new Value(1200,100),
-                 new Value(1300,100),
-             };*/
-
 
             SeriesCollection = new SeriesCollection
             {
-                /* new LineSeries
-                 {
-                     Title = "Series 1",
-                     Values = new ChartValues<double> { 4, 6, 5, 2 ,4 }
-                 },
-                 new LineSeries
-                 {
-                     Title = "Series 2",
-                     Values = new ChartValues<double> { 6, 7, 3, 4 ,6 },
-                     PointGeometry = null
-                 },
-                 new LineSeries
-                 {
-                     Title = "Series 3",
-                     Values = new ChartValues<double> { 110,-30,25,13,7 },
-                     PointGeometry = DefaultGeometries.Square,
-                     PointGeometrySize = 15
-                 } */
             };
 
             Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May" };
             YFormatter = value => value.ToString("C");
 
-            
 
 
 
-            //modifying the series collection will animate and update the chart
-            SeriesCollection.Add(new LineSeries
+             SensorValues = new Dictionary<string, ChartValues<double>>();
+             //modifying the series collection will animate and update the chart
+             foreach (string Sensor in Sensorgroup.allchildren.Keys)
+             {
+                 if (!(Sensorgroup.allchildren[Sensor].Sensordaten == null))
+                 {
+                    SensorValues.Add(Sensor, EinzelneSensorDaten(Sensorgroup.allchildren[Sensor]));
+
+             SeriesCollection.Add(new LineSeries
             {
-                Title = "Series 4",
-                Values = new ChartValues<double> { 0, 17, -3, 55.7,1,3,4,7,89,65,4,46,68,4,65,6 },
+                Title = Sensor,
+                Values = SensorValues[Sensor],
                 LineSmoothness = 0, //0: straight lines, 1: really smooth lines
                                     //    PointGeometry = Geometry.Parse("m 25 70.36218 20 -28 -20 22 -8 -6 z"),
                                     //    PointGeometrySize = 50,
                 PointForeground = Brushes.Gray
             });
-
-            //modifying any series values will also animate and update the chart
-            //SeriesCollection[3].Values.Add(5d);
-            
             DataContext = this;
-
-
-
-
-
-
-
-
-            /*   Old Linechart
-             *   Paint();
-
-            this.StateChanged += (sender, e) => Paint();
-            this.SizeChanged += (sender, e) => Paint();
-            */
+                 }
+             }
         }
-        /* Old Linechart
-                public void Paint()
-                {
-                    try
-                    {
-                        if (this.ActualWidth > 0 && this.ActualHeight > 0)
-                        {
-                            chartCanvas.Children.Clear();
-                            holders.Clear();
-
-                            // axis lines
-                            xAxisLine = new Line()
-                            {
-                                X1 = xAxisStart ,
-                                Y1 = this.ActualHeight - yAxisStart,
-                                X2 = this.ActualWidth - xAxisStart,
-                                Y2 = this.ActualHeight - yAxisStart,
-                                Stroke = Brushes.LightGray,
-                                StrokeThickness = 0.5,
-                            };
-                            yAxisLine = new Line()
-                            {
-                                X1 = xAxisStart,
-                                Y1 = yAxisStart ,
-                                X2 = xAxisStart,
-                                Y2 = this.ActualHeight - yAxisStart,
-                                Stroke = Brushes.LightGray,
-                                StrokeThickness = 0.5,
-                            };
-
-                            chartCanvas.Children.Add(xAxisLine);
-                            chartCanvas.Children.Add(yAxisLine);
-
-                            origin = new Point(xAxisLine.X1, yAxisLine.Y2);
-
-                            var xTextBlock0 = new TextBlock() { Text = $"{0}" };
-                            chartCanvas.Children.Add(xTextBlock0);
-                            Canvas.SetLeft(xTextBlock0, origin.X);
-                            Canvas.SetTop(xTextBlock0, origin.Y + 5);
-
-                            // y axis lines
-                            var xValue = xAxisStart;
-                            double xPoint = origin.X + interval;
-                            while (xPoint < xAxisLine.X2)
-                            {
-                                var line = new Line()
-                                {
-                                    X1 = xPoint,
-                                    Y1 = yAxisStart,
-                                    X2 = xPoint,
-                                    Y2 = this.ActualHeight - yAxisStart,
-                                    Stroke = Brushes.LightGray,
-                                    StrokeThickness = 2,
-                                    Opacity = 1,
-                                };
-
-                                chartCanvas.Children.Add(line);
-
-                                var textBlock = new TextBlock { Text = $"{xValue}", };
-
-                                chartCanvas.Children.Add(textBlock);
-                                Canvas.SetLeft(textBlock, xPoint - 12.5);
-                                Canvas.SetTop(textBlock, line.Y2 + 5);
-
-                                xPoint += interval;
-                                xValue += interval;
-                            }
-
-
-                            var yTextBlock0 = new TextBlock() { Text = $"{0}" };
-                            chartCanvas.Children.Add(yTextBlock0);
-                            Canvas.SetLeft(yTextBlock0, origin.X - 20);
-                            Canvas.SetTop(yTextBlock0, origin.Y - 10);
-
-                            // x axis lines
-                            var yValue = yAxisStart;
-                            double yPoint = origin.Y - interval;
-                            while (yPoint > yAxisLine.Y1)
-                            {
-                                var line = new Line()
-                                {
-                                    X1 = xAxisStart,
-                                    Y1 = yPoint,
-                                    X2 = this.ActualWidth - xAxisStart,
-                                    Y2 = yPoint,
-                                    Stroke = Brushes.LightGray,
-                                    StrokeThickness = 2,
-                                    Opacity = 0,
-                                };
-
-                                chartCanvas.Children.Add(line);
-
-                                var textBlock = new TextBlock() { Text = $"{yValue}" };
-                                chartCanvas.Children.Add(textBlock);
-                                Canvas.SetLeft(textBlock, line.X1 - 30);
-                                Canvas.SetTop(textBlock, yPoint - 10);
-
-                                yPoint -= interval;
-                                yValue += interval;
-                            }
-
-                            // connections
-                            double x = 0, y = 0;
-                            xPoint = origin.X;
-                            yPoint = origin.Y;
-                            while (xPoint < xAxisLine.X2)
-                            {
-                                while (yPoint > yAxisLine.Y1)
-                                {
-                                    var holder = new Holder()
-                                    {
-                                        X = x,
-                                        Y = y,
-                                        Point = new Point(xPoint, yPoint),
-                                    };
-
-                                    holders.Add(holder);
-
-                                    yPoint -= interval;
-                                    y += interval;
-                                }
-
-                                xPoint += interval;
-                                yPoint = origin.Y;
-                                x += 100;
-                                y = 0;
-                            }
-
-                            // polyline
-                            chartPolyline = new Polyline()
-                            {
-                                Stroke = new SolidColorBrush(Color.FromRgb(68, 114, 196)),
-                                StrokeThickness = 10,
-                            };
-                            chartCanvas.Children.Add(chartPolyline);
-
-                            // showing where are the connections points
-                            foreach (var holder in holders)
-                            {
-                                Ellipse oEllipse = new Ellipse()
-                                {
-                                    Fill = Brushes.Red,
-                                    Width = 10,
-                                    Height = 10,
-                                    Opacity = 0,
-                                };
-
-                                chartCanvas.Children.Add(oEllipse);
-                                Canvas.SetLeft(oEllipse, holder.Point.X - 5);
-                                Canvas.SetTop(oEllipse, holder.Point.Y - 5);
-                            }
-
-                            // add connection points to polyline
-                            foreach (var value in values)
-                            {
-                                var holder = holders.FirstOrDefault(h => h.X == value.X && h.Y == value.Y);
-                                if (holder != null)
-                                    chartPolyline.Points.Add(holder.Point);
-                            }
-                        }
-                    }
-                    catch (Exception)
-                    {
-
-                        throw;
-                    }
-
-                    //
-                    /*
-                     * Alle Sensoren in eine Liste übertragen
-                     * Sensorgroup.allchildren.Values.ToList();
-                     * oder:
-                     * foreach(Sensor<double> item in Sensorgroup.allchildren.Values)
-                     * {
-                     *      item.GetValues()
-                     * }
-                     * foreach Sensor<double> in            
-                     * 
-                     */
-        /* Alte Chart
-
-                    //Die geladene Sensorgreupe
-                    Sensorbeispiel sensor = new Sensorbeispiel();
-
-                    LabelTopicSimulation.Text = sensor.Topic;
-
-                    //Label für das Topic in der Leiste
-                    LabelTopic.Content = sensor.Topic;
-
-
-                }
-            */
-
-        public List<Value> EinzelneSensorDaten(TreeNode Sensor)
-        {
-
-            double intervall = 0;
-            // Sensor.Sensordaten.Values.Add(0);
-            values = new List<Value>();
-
-            if (Convert.ToString(Sensor.Sensordaten.Sensortype) == "Rauchmelder")
+        public ChartValues<double> EinzelneSensorDaten(TreeNode Sensor)
             {
-                for (int i = 0; i < Convert.ToInt16(Sensor.Sensordaten.AmmountofValues); i++)
+            values = new ChartValues<double>();
+
+                if (Convert.ToString(Sensor.Sensordaten.Sensortype) == "Rauchmelder")
                 {
-                    if (Sensor.Sensordaten.Values[i] == "true")
+                    for (int i = 0; i < Convert.ToInt16(Sensor.Sensordaten.AmmountofValues); i++)
                     {
-                        values.Add(new Value(intervall, true));
-                    }
-                    else
-                    {
-                        values.Add(new Value(intervall, false));
-                    }
-
-                    intervall += 1;
+                    values.Add(Convert.ToBoolean(Sensor.Sensordaten.Values[i]) ? 1:0);
                 }
-
-            }
-            else
-            {
-
-                for (int i = 0; i < Convert.ToInt16(Sensor.Sensordaten.AmmountofValues); i++)
+                }
+                else
                 {
-                    values.Add(new Value(intervall, Convert.ToDouble(Sensor.Sensordaten.Values[i])));
-                    intervall += 1;
+                    for (int i = 0; i < Convert.ToInt16(Sensor.Sensordaten.AmmountofValues); i++)
+                    {
+                        values.Add(Convert.ToDouble(Sensor.Sensordaten.Values[i]));
+                    }
                 }
-            }
-            return values;
-
+                return values;
         }
+
+        
         private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
         {
             Close();
@@ -434,10 +150,12 @@ namespace IIoTSimulatorUI
             foreach(string sensor in SensorValues.Keys)
             {
                 // Logbuch, welche Daten gesendet wurden
-                k += $"\nDer Sensor {sensor} hat {SensorValues[sensor].Count} Wert an den Broker gesendet";
+                    
+                k += $"\nDer Sensor {sensor} hat {SensorValues[sensor].Count} Wert an den Broker gesendet und den Topic ist {Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic)}";
                 for (int i = 0; i < SensorValues[sensor].Count; i++)
                 {
-                    ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat" + (SensorValues[sensor][i].Y) + "Wert an den Broker gesendet";
+                    ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat das Wert " + (SensorValues[sensor][i]) + " an den Broker gesendet";
+                    MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic),Convert.ToString(SensorValues[sensor][i]));
                 }
                 // Hier müssten Daten an Broker gesendet werden
             }
@@ -462,32 +180,5 @@ namespace IIoTSimulatorUI
             
         }
     }
-    public class Holder
-    {
-        public double X { get; set; }
-        public double Y { get; set; }
-        public Point Point { get; set; }
 
-        public Holder()
-        {
-        }
-    }
-
-    public class Value
-    {
-        public double X { get; set; }
-        public double Y { get; set; }
-        public bool Z { get; set; }
-
-        public Value(double x, double y)
-        {
-            X = x;
-            Y = y;
-        }
-        public Value(double x, bool z)
-        {
-            X = x;
-            Z=z;
-        }
-    }
 }

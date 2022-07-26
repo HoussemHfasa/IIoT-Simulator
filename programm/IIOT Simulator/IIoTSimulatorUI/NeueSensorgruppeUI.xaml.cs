@@ -33,10 +33,17 @@ namespace IIoTSimulatorUI
         public void Unterordnerladen( int level,string Oberordner,string Unterordner, TreeViewItem selectedTVI,TreeViewItem unterordner, string unterordnerText)
         {
             selectedTVI = (TreeViewItem)TreeView1.Items[Sensorgroup.allchildren[Unterordner].path[0]] as TreeViewItem;
-            for(int i=1;i<level-1;i++)
+            if(!(Sensorgroup.allchildren[Unterordner].Sensordaten==null))
+            {
+                Sensorgroup.allchildren[Unterordner].Sensordaten.Topic += selectedTVI.Name;
+            }
+            for (int i=1;i<level-1;i++)
             {
                 selectedTVI = (TreeViewItem)selectedTVI.Items[Sensorgroup.allchildren[Unterordner].path[i]] as TreeViewItem;
-
+                if (!(Sensorgroup.allchildren[Unterordner].Sensordaten == null))
+                {
+                  Sensorgroup.allchildren[Unterordner].Sensordaten.Topic += "/"+selectedTVI.Name;
+                }
             }
             Oberordner = Sensorgroup.basenames[Sensorgroup.allchildren[Unterordner].path[0]];//Das ausgewählte Objekt in String speichern
             selectedTVI.IsSelected = true;
@@ -45,7 +52,10 @@ namespace IIoTSimulatorUI
             textBoxEingabe2.Clear(); //TextBox Eingabe wieder löschen
             unterordner.Header = unterordnerText;
             selectedTVI.Items.Add(unterordner);// Dem ausgewählten Item den Unterordner hinzufügen
-
+            if (!(Sensorgroup.allchildren[Unterordner].Sensordaten == null))
+            {
+                Sensorgroup.allchildren[Unterordner].Sensordaten.Topic += "/" + Sensorgroup.allchildren[Unterordner].name;
+            }
         }
         public NeueSensorgruppeUI(ref Sensorgroups NewSensorgroup)
         {
@@ -317,6 +327,7 @@ namespace IIoTSimulatorUI
 
                     ZufallsBool ObjectZufallsBool;
                     ObjectZufallsBool = new ZufallsBool(ref BoolSensor);
+                        ObjectZufallsBool.Show();
                 }
                 else if (SensortypAuswahl == "Feuchtigkeitssensor")
                 {

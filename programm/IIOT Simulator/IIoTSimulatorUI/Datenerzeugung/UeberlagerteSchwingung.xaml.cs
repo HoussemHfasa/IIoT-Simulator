@@ -63,10 +63,10 @@ namespace IIoTSimulatorUI
 
             // Erzeugung der Harmonischen Schwingungen
             DataGeneratorOsc = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude1.Text), Convert.ToDouble(textBoxPeriodendauer1.Text), Convert.ToDouble(textBoxPhasenverschiebung1.Text), Convert.ToUInt32(textBoxWerteanzahl1.Text));
-            Oscillation1 = DataGenerator.GetSimulatorValues();
+            Oscillation1 = DataGeneratorOsc.GetSimulatorValues();
 
             DataGeneratorOsc = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude2.Text), Convert.ToDouble(textBoxPeriodendauer2.Text), Convert.ToDouble(textBoxPhasenverschiebung2.Text), Convert.ToUInt32(textBoxWerteanzahl2.Text));
-            Oscillation2 = DataGenerator.GetSimulatorValues();
+            Oscillation2 = DataGeneratorOsc.GetSimulatorValues();
 
             //Erzeugung der Überlagerten Schwingung und abspeichern in Sensor
             DataGenerator = new Superposition(Oscillation1, Oscillation2);

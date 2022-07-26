@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStorageDummy", "..\Dumm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DummySensorandSensorgroups", "..\DummyKomponenten\DummySensorandSensorgroups\DummySensorandSensorgroups\DummySensorandSensorgroups.csproj", "{9399D1BB-18DD-4E85-8804-ACE99589982C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQTTCommunicatorDummy", "..\DummyKomponenten\MQTTCommunicatorDummy\MQTTCommunicatorDummy\MQTTCommunicatorDummy.csproj", "{CEF6D2FB-F22C-4CD1-9282-272631BE9C3D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonInterfaces", "..\CommonInterfaces\CommonInterfaces\CommonInterfaces.csproj", "{7485072B-9208-4EB1-A78B-86FCFEF04F80}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAnalysisDummy", "..\DummyKomponenten\DataAnalysisDummy\DataAnalysisDummy\DataAnalysisDummy.csproj", "{170C9C9F-19EF-44DD-846B-E5F266636931}"
@@ -44,10 +42,6 @@ Global
 		{9399D1BB-18DD-4E85-8804-ACE99589982C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9399D1BB-18DD-4E85-8804-ACE99589982C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9399D1BB-18DD-4E85-8804-ACE99589982C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CEF6D2FB-F22C-4CD1-9282-272631BE9C3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CEF6D2FB-F22C-4CD1-9282-272631BE9C3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CEF6D2FB-F22C-4CD1-9282-272631BE9C3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CEF6D2FB-F22C-4CD1-9282-272631BE9C3D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7485072B-9208-4EB1-A78B-86FCFEF04F80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7485072B-9208-4EB1-A78B-86FCFEF04F80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7485072B-9208-4EB1-A78B-86FCFEF04F80}.Release|Any CPU.ActiveCfg = Release|Any CPU
