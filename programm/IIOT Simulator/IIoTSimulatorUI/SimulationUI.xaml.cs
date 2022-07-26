@@ -30,11 +30,14 @@ namespace IIoTSimulatorUI
         //
         //
         // Für neue Linechart
+               
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
         private ChartValues<double> values;
         private Dictionary<string, ChartValues<double>> SensorValues;
+
+        
         //
         //
         //
@@ -77,7 +80,12 @@ namespace IIoTSimulatorUI
             {
                 Labels= Array.ConvertAll(Labelsint, x => x.ToString());
             }
+
+            // Beschriftung der Werte YAchse
             YFormatter = value => value.ToString("");
+
+
+
 
 
              SensorValues = new Dictionary<string, ChartValues<double>>();
@@ -154,10 +162,15 @@ namespace IIoTSimulatorUI
                     
                 k += $"\nDer Sensor {sensor} hat {SensorValues[sensor].Count} Wert an den Broker gesendet und den Topic ist {Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic)}";
 
+                //ArgumentoutofRange mit iF Abfrage abfangen
+                if (CurrentValueNumber < SensorValues[sensor].Count)
+                {
+                    // 1 Datenpaket über Broker senden und Sensorwert in Scrollbox schreiben
+                    ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat das Wert " + (SensorValues[sensor][CurrentValueNumber]) + " an den Broker gesendet";
+                    MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic), Convert.ToString(SensorValues[sensor][CurrentValueNumber]));
+                    CurrentValueNumber += 1;
+                }
 
-                ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat das Wert " + (SensorValues[sensor][CurrentValueNumber]) + " an den Broker gesendet";
-                MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic), Convert.ToString(SensorValues[sensor][CurrentValueNumber]));
-                CurrentValueNumber += 1;
 
                 /* Für alle Daten gleichzeitig
                 for (int i = 0; i < SensorValues[sensor].Count; i++)

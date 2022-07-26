@@ -235,7 +235,8 @@ namespace IIoTSimulatorUI
         //Löscht die ganze Sensorgruppe
         private void SensorgruppeLoeschen(object sender, RoutedEventArgs e)
         {
-            
+            // Sensorgruppe und Treeview löschen/überschreiben
+            Sensorgroup = new Sensorgroups();
             TreeView1.Items.Clear();
         }
 
