@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IIoTSimulatorUI"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="Standardabweichung"
         Height="450" 
@@ -26,17 +27,17 @@
         <!-- Label Mittelwert-->
         <Label
                 Content="Mittelwert:"
-                Margin="114,97,0,296"
-                FontSize="18"
+                Margin="29,97,0,296"
+                FontSize="16"
                 Foreground="#FFFFF8F8"
                 HorizontalAlignment="Left" 
-                Width="125"
+                Width="210"
                 FontFamily="Fonts/#Dosis"/>
 
         <!-- TextBox für die Mittelwert-->
         <TextBox x:Name="textBoxMittelwert" 
                 Text="0.00"
-                Margin="244,95,334,0"
+                Margin="215,95,450,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -50,17 +51,17 @@
         <!-- Label für die Standardabweichung-->
         <Label
                 Content="Standardabweichung:"
-                Margin="45,160,0,235"
-                FontSize="18"
+                Margin="29,160,0,235"
+                FontSize="16"
                 Foreground="#FFFAF9F9"
                 HorizontalAlignment="Left" 
-                Width="189"
+                Width="205"
                 FontFamily="Fonts/#Dosis"/>
 
         <!-- TextBox für die Standartabweichung -->
         <TextBox x:Name="textBoxStandartabweichung" 
                 Text="0.00"
-                Margin="244,160,334,0"
+                Margin="215,160,450,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -74,17 +75,17 @@
         <!-- Label für die Werteanzahl-->
         <Label
                 Content="Werteanzahl:"
-                Margin="103,225,0,168"
-                FontSize="18"
+                Margin="29,225,0,168"
+                FontSize="16"
                 Foreground="#FFFCF6F6"
                 HorizontalAlignment="Left" 
-                Width="147"
+                Width="191"
                 FontFamily="Fonts/#Dosis"/>
 
         <!-- TextBox für die Werteanzahl-->
         <TextBox x:Name="textBoxWerteanzahl" 
                 Text="1"
-                Margin="244,225,334,0"
+                Margin="215,225,450,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -102,7 +103,7 @@
                     Click="SensordatenSpeichern"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="565,347,0,24" 
+                    Margin="565,368,0,3" 
                     HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand">
@@ -142,7 +143,7 @@
                     Click="FehlerHinzufuegen"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="565,285,0,86" 
+                    Margin="565,327,0,44" 
                     HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand">
@@ -228,6 +229,57 @@
                 Width="492"
                 FontWeight="Medium"
                 FontFamily="Fonts/#Dosis"/>
+
+        <!-- Button Aktualisieren-->
+        <Button Content="Aktualisieren"
+                    Click="Aktualisieren"
+                    Foreground="White"
+                    FontSize="16" 
+                    Margin="565,298,0,101" 
+                    HorizontalAlignment="Left"
+                    Width="184" 
+                    Cursor="Hand">
+
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                    <Setter Property="Background" 
+                                Value="#008080"/>
+                    <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                            <Setter Property="Background"
+                                     Value="Aqua"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="180" Height="30"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+
+        <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Name ="Ingrid" Margin="382,40,30,150" >
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+        </lvc:CartesianChart>
+
 
     </Grid>
 </Window>

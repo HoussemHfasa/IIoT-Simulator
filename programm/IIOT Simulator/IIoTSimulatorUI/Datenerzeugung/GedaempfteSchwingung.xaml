@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IIoTSimulatorUI"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="GedaempfteSchwingung" 
         Height="450" Width="800"
@@ -39,17 +40,17 @@
         <!-- Label Amplitude-->
         <Label
                 Content="Amplitude:"
-                Margin="114,95,0,298"
-                FontSize="18"
+                Margin="29,95,0,298"
+                FontSize="16"
                 Foreground="#FFFFF8F8"
                 HorizontalAlignment="Left" 
-                Width="82"
+                Width="167"
                 FontFamily="Fonts/#Dosis"/>
 
         <!-- TextBox für die Amplitude-->
         <TextBox x:Name="textBoxAmplitude" 
-                Text="0.00"
-                Margin="244,95,334,0"
+                Text="0,00"
+                Margin="225,95,414,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -63,17 +64,17 @@
         <!-- Label für die Dämpfungsrate-->
         <Label
                 Content="Dämnpfungsrate:"
-                Margin="66,152,0,243"
-                FontSize="18"
+                Margin="29,160,0,238"
+                FontSize="16"
                 Foreground="#FFFAF9F9"
                 HorizontalAlignment="Left" 
-                Width="154"
+                Width="191"
                 FontFamily="Fonts/#Dosis"/>
 
         <!-- TextBox für die Dämpfungsrate -->
         <TextBox x:Name="textBoxDaempfungsrate" 
-                Text="0.00"
-                Margin="244,160,334,0"
+                Text="0,00"
+                Margin="225,160,414,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -87,17 +88,17 @@
         <!-- Label für die Periodendauer-->
         <Label
                 Content="Periodendauer:"
-                Margin="81,213,0,181"
-                FontSize="18"
+                Margin="29,225,0,165"
+                FontSize="16"
                 Foreground="#FFFCF6F6"
                 HorizontalAlignment="Left" 
-                Width="163"
+                Width="215"
                 FontFamily="Fonts/#Dosis"/>
 
         <!-- TextBox für die Periodendauer-->
         <TextBox x:Name="textBoxPeriodendauer" 
-                Text="0.00"
-                Margin="244,221,334,0"
+                Text="0,00"
+                Margin="225,221,414,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -111,17 +112,17 @@
         <!-- Label für die Phasenverschiebung-->
         <Label
                 Content="Phasenverschiebung:"
-                Margin="42,283,0,110"
-                FontSize="18"
+                Margin="29,283,0,110"
+                FontSize="16"
                 Foreground="#FFFDFDFD"
                 HorizontalAlignment="Left" 
-                Width="166"
+                Width="210"
                 FontFamily="Fonts/#Dosis"/>
 
         <!-- TextBox für die Werteanzahl-->
         <TextBox x:Name="textBoxPhasenverschiebung" 
-                Text="0.00"
-                Margin="244,283,334,0"
+                Text="0,00"
+                Margin="225,283,414,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -135,17 +136,17 @@
         <!-- Label für die Werteanzahl-->
         <Label
                 Content="Werteanzahl:"
-                Margin="102,347,0,47"
-                FontSize="18"
+                Margin="29,347,0,47"
+                FontSize="16"
                 Foreground="#FFFDFDFD"
                 HorizontalAlignment="Left" 
-                Width="106"
+                Width="179"
                 FontFamily="Fonts/#Dosis"/>
 
         <!-- TextBox für die Werteanzahl-->
         <TextBox x:Name="textBoxWerteanzahl" 
                 Text="1"
-                Margin="244,347,334,0"
+                Margin="225,347,414,0"
                 Height="30"
                   Background="#ff1f4663"
                       TextAlignment="Right"
@@ -161,7 +162,7 @@
                     Click="SensordatenSpeichern"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="565,347,0,24" 
+                    Margin="561,384,0,10" 
                     HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand">
@@ -201,7 +202,7 @@
                     Click="FehlerHinzufuegen"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="565,285,0,86" 
+                    Margin="561,338,0,58" 
                     HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand">
@@ -276,5 +277,54 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+
+        <!-- Button Aktualisieren-->
+        <Button Content="Aktualisieren"
+                    Click="Aktualisieren"
+                    Foreground="White"
+                    FontSize="16" 
+                    Margin="561,288,0,110" 
+                    HorizontalAlignment="Left"
+                    Width="184" 
+                    Cursor="Hand">
+
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                    <Setter Property="Background" 
+                                Value="#008080"/>
+                    <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                            <Setter Property="Background"
+                                     Value="Aqua"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="180" Height="30"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Name ="Ingrid" Margin="428,95,30,150" >
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+        </lvc:CartesianChart>
     </Grid>
 </Window>
