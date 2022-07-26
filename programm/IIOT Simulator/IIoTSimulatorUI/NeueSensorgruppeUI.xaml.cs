@@ -57,20 +57,22 @@ namespace IIoTSimulatorUI
             {
                 string stammText = Base; //Benutzer Eingabe in einem string speichern
                 TreeViewItem stamm = new TreeViewItem(); //Neues Treeviewtem für den Stamm erstellen
+                stamm.IsExpanded = true;
                 stamm.Header = stammText; //Dem TreeViewItem den Header übergeben
                 stamm.Name = stammText;
                 TreeView1.Items.Add(stamm); //Der TreeView den Stamm hinzufügen
+                
             }
             //UnterOrdner laden
             
             foreach (string Unterordner in Sensorgroup.allchildren.Keys)
             {
                 Unterordnerladen(Sensorgroup.allchildren[Unterordner].path.Count, Oberordner, Unterordner, selectedTVI, unterordner, unterordnerText);
-             
+                                
             }
         }
-        
 
+        
         //Menü Leiste:
 
         //Button um zu den Broker Einstellungen zu gelangen
@@ -113,6 +115,8 @@ namespace IIoTSimulatorUI
 
                 TreeViewItem stamm = new TreeViewItem(); //Neues Treeviewtem für den Stamm erstellen
 
+                stamm.IsExpanded = true;
+
                 stamm.Header = stammText; //Dem TreeViewItem den Header übergeben
 
                 TreeView1.Items.Add(stamm); //Der TreeView den Stamm hinzufügen
@@ -154,6 +158,10 @@ namespace IIoTSimulatorUI
                     string oberordner = selectedTVI.Header.ToString();//Das ausgewählte Objekt in String speichern
 
                     TreeViewItem unterordner = new TreeViewItem(); //Ein TreeViewItem vom Unterordner erstellen
+
+                    Style test = new Style();
+                    unterordner.IsExpanded = true;
+                    
 
                     string unterordnerText = textBoxEingabe2.Text; //Benutzereingabe in einem string speichern
                     
