@@ -18,6 +18,7 @@ using SensorDataSimulator;
 using System.Threading.Tasks;
 
 
+
 namespace IIoTSimulatorUI
 {
     /// <summary>
@@ -35,6 +36,18 @@ namespace IIoTSimulatorUI
         private List<Value> values;
         
         private Dictionary<string,List<Value>> SensorValues;
+
+
+
+        //
+        //
+        // Für neue Linechart
+        public SeriesCollection SeriesCollection { get; set; }
+        public string[] Labels { get; set; }
+        public Func<double, string> YFormatter { get; set; }
+        //
+        //
+        //
 
         public List<Value> EinzelneSensorDaten(TreeNode Sensor)
         {
@@ -87,60 +100,112 @@ namespace IIoTSimulatorUI
                 }
                 
             }
-            holders = new List<Holder>();
-           /* values = new List<Value>()
+            
+            // old Linechart :   holders = new List<Holder>();
+
+            /* values = new List<Value>()
+             {
+                 //new Value(0,0),
+                 //new Value(100,100),
+                 //new Value(200,200),
+                 //new Value(300,300),
+                 //new Value(400,200),
+                 //new Value(500,500),
+                 //new Value(600,500),
+                 //new Value(700,500),
+                 //new Value(800,500),
+                 //new Value(900,600),
+                 //new Value(1000,200),
+                 //new Value(1100,100),
+                 //new Value(1200,400),
+
+                 //new Value(0,0),
+                 //new Value(100,200),
+                 //new Value(200,100),
+                 //new Value(300,200),
+                 //new Value(400,300),
+                 //new Value(500,400),
+                 //new Value(600,500),
+                 //new Value(700,400),
+                 //new Value(800,500),
+                 //new Value(900,600),
+                 //new Value(1000,300),
+                 //new Value(1100,100),
+                 //new Value(1200,400),
+
+                 new Value(0,0),
+                 new Value(100,100),
+                 new Value(200,400),
+                 new Value(300,200),
+                 new Value(400,400),
+                 new Value(500,300),
+                 new Value(600,100),
+                 new Value(700,700),
+                 new Value(800,200),
+                 new Value(900,600),
+                 new Value(1000,600),
+                 new Value(1100,0),
+                 new Value(1200,100),
+                 new Value(1300,100),
+             };*/
+
+
+            SeriesCollection = new SeriesCollection
             {
-                //new Value(0,0),
-                //new Value(100,100),
-                //new Value(200,200),
-                //new Value(300,300),
-                //new Value(400,200),
-                //new Value(500,500),
-                //new Value(600,500),
-                //new Value(700,500),
-                //new Value(800,500),
-                //new Value(900,600),
-                //new Value(1000,200),
-                //new Value(1100,100),
-                //new Value(1200,400),
+                /* new LineSeries
+                 {
+                     Title = "Series 1",
+                     Values = new ChartValues<double> { 4, 6, 5, 2 ,4 }
+                 },
+                 new LineSeries
+                 {
+                     Title = "Series 2",
+                     Values = new ChartValues<double> { 6, 7, 3, 4 ,6 },
+                     PointGeometry = null
+                 },
+                 new LineSeries
+                 {
+                     Title = "Series 3",
+                     Values = new ChartValues<double> { 110,-30,25,13,7 },
+                     PointGeometry = DefaultGeometries.Square,
+                     PointGeometrySize = 15
+                 } */
+            };
 
-                //new Value(0,0),
-                //new Value(100,200),
-                //new Value(200,100),
-                //new Value(300,200),
-                //new Value(400,300),
-                //new Value(500,400),
-                //new Value(600,500),
-                //new Value(700,400),
-                //new Value(800,500),
-                //new Value(900,600),
-                //new Value(1000,300),
-                //new Value(1100,100),
-                //new Value(1200,400),
+            Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May" };
+            YFormatter = value => value.ToString("C");
 
-                new Value(0,0),
-                new Value(100,100),
-                new Value(200,400),
-                new Value(300,200),
-                new Value(400,400),
-                new Value(500,300),
-                new Value(600,100),
-                new Value(700,700),
-                new Value(800,200),
-                new Value(900,600),
-                new Value(1000,600),
-                new Value(1100,0),
-                new Value(1200,100),
-                new Value(1300,100),
-            };*/
+            //modifying the series collection will animate and update the chart
+            SeriesCollection.Add(new LineSeries
+            {
+                Title = "Series 4",
+                Values = new ChartValues<double> { 0, 17, -3, 55.7,1,3,4,7,89,65,4,46,68,4,65,6 },
+                LineSmoothness = 0, //0: straight lines, 1: really smooth lines
+                                    //    PointGeometry = Geometry.Parse("m 25 70.36218 20 -28 -20 22 -8 -6 z"),
+                                    //    PointGeometrySize = 50,
+                PointForeground = Brushes.Gray
+            });
 
-            Paint();
+            //modifying any series values will also animate and update the chart
+            //SeriesCollection[3].Values.Add(5d);
+            
+            DataContext = this;
+
+
+
+
+
+
+
+
+            /*   Old Linechart
+             *   Paint();
 
             this.StateChanged += (sender, e) => Paint();
             this.SizeChanged += (sender, e) => Paint();
-            
+            */
         }
-
+/* Old Linechart
         public void Paint()
         {
             try
@@ -319,7 +384,7 @@ namespace IIoTSimulatorUI
              * foreach Sensor<double> in            
              * 
              */
-
+/* Alte Chart
 
             //Die geladene Sensorgreupe
             Sensorbeispiel sensor = new Sensorbeispiel();
@@ -328,10 +393,10 @@ namespace IIoTSimulatorUI
 
             //Label für das Topic in der Leiste
             LabelTopic.Content = sensor.Topic;
-
+            
 
         }
-    
+    */
         private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
         {
             Close();
