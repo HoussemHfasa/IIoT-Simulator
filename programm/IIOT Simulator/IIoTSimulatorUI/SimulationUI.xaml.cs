@@ -166,7 +166,7 @@ namespace IIoTSimulatorUI
                 if (CurrentValueNumber < SensorValues[sensor].Count)
                 {
                     // 1 Datenpaket über Broker senden und Sensorwert in Scrollbox schreiben
-                    ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat das Wert " + (SensorValues[sensor][CurrentValueNumber]) + " an den Broker gesendet";
+                    ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat den Wert " + (SensorValues[sensor][CurrentValueNumber]) + " an den Broker gesendet";
                     MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic), Convert.ToString(SensorValues[sensor][CurrentValueNumber]));
                     CurrentValueNumber += 1;
                 }
