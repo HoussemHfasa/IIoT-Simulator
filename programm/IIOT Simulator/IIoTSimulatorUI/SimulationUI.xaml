@@ -146,8 +146,8 @@
                     Click="DatenSenden"
                 Foreground="White"
                     FontSize="16" 
-                    Margin="18,354,0,-369" 
-                    HorizontalAlignment="Left"
+                    Margin="0,205,0,-220" 
+                    HorizontalAlignment="Center"
                     Width="192"
                     Cursor="Hand">
 
@@ -188,10 +188,9 @@
                     Click="Abbrechen"
                 Foreground="White"
                     FontSize="16" 
-                    Margin="2,519,-50,-528" 
-                    HorizontalAlignment="Left"
-                    Width="184"
-                    Grid.Column="3">
+                    Margin="0,514,0,-523" 
+                    HorizontalAlignment="Center"
+                    Width="184">
 
                 <Button.Style>
                     <Style TargetType="Button">
@@ -304,33 +303,25 @@
 
             <!-- Label Senden-->
             <Label
-                Content="Sensordaten an den Broker senden."
-                Margin="18,311,186,-314"
+                Content="Ausgewählte Sensordaten an den Broker senden:"
+                Margin="18,162,127,-165"
                 FontSize="15"
                 Foreground="White"
                 FontFamily="Fonts/#Dosis" Grid.ColumnSpan="2"/>
 
 
-            <ScrollViewer 
-                HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="3" Margin="32,473,79,-528" Foreground="{x:Null}" Background="#FFFCECEC">
-                <StackPanel Width="556" Height="90" >
-                    <TextBlock x:Name="ScrollTextBlockUrsprünglich"
-                      TextWrapping="Wrap" 
-                               Height="786" Foreground="#FFF7EDED" FontSize="14" Background="#FF323B55"><Run 
-                                   Text="Gesendete Sensordaten werden hier angezeigt."/></TextBlock>
-                    <Rectangle 
-                        Fill="Transparent" 
-                        Width="480" Height="795"/>
-                </StackPanel>
-            </ScrollViewer>
-
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="4" Margin="159,409,124,-553">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="3" Margin="113,448,-20,-545" Grid.Column="1">
                 <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
                     <TextBlock 
                         x:Name="ScrollTextBlock"
-                        TextWrapping="Wrap" Margin="0,0,0,20">Scrolling is enabled when it is necessary. 
-      Resize the window, making it larger and smaller.</TextBlock>
-                    <Rectangle Fill="Red" Width="569" Height="105"></Rectangle>
+                        Foreground="White"
+                        FontSize="12"
+                        FontFamily="Fonts/#Dosis"
+                        TextWrapping="Wrap" 
+                        Margin="0,0,0,20">
+                        Hier werden die gesendeten Sensordaten angezeigt.
+                    </TextBlock>
+
                 </StackPanel>
             </ScrollViewer>
 
