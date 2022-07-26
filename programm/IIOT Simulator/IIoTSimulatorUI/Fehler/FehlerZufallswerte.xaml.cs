@@ -115,10 +115,6 @@ namespace IIoTSimulatorUI
                     // Fehlerdatengenerator erzeugen, Sensordaten mit Fehlern versehen
                     RandomValuesError DataGenerator = new RandomValuesError(Convert.ToDouble(textBoxErrorRate.Text), Convert.ToInt32(textBoxErrorLength.Text), Convert.ToDouble(textBoxMaxError.Text), Convert.ToDouble(textBoxMinError.Text));
                     Datenliste= DataGenerator.GetSensorDataWithErrors(DoubleSensor.GetValues());
-                    /*textBoxErrorRate.Clear();
-                    textBoxErrorLength.Clear();
-                    textBoxMaxError.Clear();
-                    textBoxMinError.Clear();*/
                     FehlerZufallswerte Aktualisirung = new FehlerZufallswerte(ref DoubleSensor, Datenliste);
                     this.Visibility = Visibility.Hidden;
                     Aktualisirung.Show();
