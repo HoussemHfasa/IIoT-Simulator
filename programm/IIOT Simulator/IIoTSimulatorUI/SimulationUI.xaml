@@ -314,9 +314,9 @@
             <ScrollViewer 
                 HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="3" Margin="32,473,79,-528" Foreground="{x:Null}" Background="#FFFCECEC">
                 <StackPanel Width="556" Height="90" >
-                    <TextBlock x:Name="ScrollTextBlock"
+                    <TextBlock x:Name="ScrollTextBlockUrsprünglich"
                       TextWrapping="Wrap" 
-                               Height="1226" Foreground="#FFF7EDED" FontSize="14" Background="#FF323B55"><Run 
+                               Height="786" Foreground="#FFF7EDED" FontSize="14" Background="#FF323B55"><Run 
                                    Text="Gesendete Sensordaten werden hier angezeigt."/></TextBlock>
                     <Rectangle 
                         Fill="Transparent" 
@@ -324,6 +324,15 @@
                 </StackPanel>
             </ScrollViewer>
 
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="4" Margin="159,409,124,-553">
+                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <TextBlock 
+                        x:Name="ScrollTextBlock"
+                        TextWrapping="Wrap" Margin="0,0,0,20">Scrolling is enabled when it is necessary. 
+      Resize the window, making it larger and smaller.</TextBlock>
+                    <Rectangle Fill="Red" Width="569" Height="105"></Rectangle>
+                </StackPanel>
+            </ScrollViewer>
 
             <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Name ="Ingrid" Margin="76,146,-33,-391" Grid.ColumnSpan="3" Grid.Column="1" >
                 <lvc:CartesianChart.AxisY>
