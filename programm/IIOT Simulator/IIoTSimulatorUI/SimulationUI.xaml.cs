@@ -162,10 +162,16 @@ namespace IIoTSimulatorUI
                     
                 k += $"\nDer Sensor {sensor} hat {SensorValues[sensor].Count} Wert an den Broker gesendet und den Topic ist {Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic)}";
 
-
-                ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat das Wert " + (SensorValues[sensor][CurrentValueNumber]) + " an den Broker gesendet";
-                MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic), Convert.ToString(SensorValues[sensor][CurrentValueNumber]));
-                CurrentValueNumber += 1;
+                if (CurrentValueNumber < SensorValues[sensor].Count)
+                {
+                    ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat das Wert " + (SensorValues[sensor][CurrentValueNumber]) + " an den Broker gesendet";
+                    MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic), Convert.ToString(SensorValues[sensor][CurrentValueNumber]));
+                    CurrentValueNumber += 1;
+                }
+                else
+                {
+                    MessageBox.Show("Alle Sensordaten sind bereits gesendet worden");
+                }
 
                 /* Für alle Daten gleichzeitig
                 for (int i = 0; i < SensorValues[sensor].Count; i++)
