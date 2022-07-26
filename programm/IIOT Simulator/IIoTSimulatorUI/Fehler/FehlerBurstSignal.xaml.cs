@@ -29,7 +29,8 @@ namespace IIoTSimulatorUI
         private void Hinzufügen(object sender, RoutedEventArgs e)
         {
             
-
+            try
+            { 
             //Nutzereingabe ErrorRate überprüfen
             if((Convert.ToDouble(textBoxErrorRate.Text) < 0.0) || (Convert.ToDouble(textBoxErrorRate.Text) > 1))
             {
@@ -41,13 +42,16 @@ namespace IIoTSimulatorUI
             }
             else
             {
-
-            
             // Fehlerdatengenerator erzeugen, Sensordaten mit Fehlern versehen
             BurstNoise DataGenerator = new BurstNoise(Convert.ToDouble(textBoxBurstvalue.Text), Convert.ToInt32(textBoxBurstduration.Text), Convert.ToDouble(textBoxErrorRate.Text));
             DoubleSensor.SetValues(DataGenerator.GetSensorDataWithErrors(DoubleSensor.GetValues()));
 
             Close();
+                }
+            }
+            catch (System.FormatException)
+            {
+                MessageBox.Show("Ungültige Eingabe");
             }
 
         }

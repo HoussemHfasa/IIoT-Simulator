@@ -28,13 +28,27 @@ namespace IIoTSimulatorUI
 
         private void Hinzufügen(object sender, RoutedEventArgs e)
         {
-            // TODO Nutzereingaben überprüfen
-            // Rauschen erzeugen, Fehlerdatengenerator erzeugen, Sensordaten mit Fehlern versehen
-            StandardDeviation DataGeneratorStdDev = new StandardDeviation(Convert.ToDouble(textBoxMittelwert.Text), Convert.ToDouble(textBoxStandardabweichung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
-            AdditiveNoise DataGenerator = new AdditiveNoise(DataGeneratorStdDev.GetSimulatorValues());
-            DoubleSensor.SetValues(DataGenerator.GetSensorDataWithErrors(DoubleSensor.GetValues()));
+            try
+            { 
+            // Nutzereingaben überprüfen
+            if (Convert.ToInt16(textBoxWerteanzahl.Text) < 0)
+            {
+                MessageBox.Show("Werteanzahl darf nicht negativ sein.");
+            }
+            else
+            {
+                // Rauschen erzeugen, Fehlerdatengenerator erzeugen, Sensordaten mit Fehlern versehen
+                StandardDeviation DataGeneratorStdDev = new StandardDeviation(Convert.ToDouble(textBoxMittelwert.Text), Convert.ToDouble(textBoxStandardabweichung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
+                AdditiveNoise DataGenerator = new AdditiveNoise(DataGeneratorStdDev.GetSimulatorValues());
+                DoubleSensor.SetValues(DataGenerator.GetSensorDataWithErrors(DoubleSensor.GetValues()));
 
-            Close();
+                Close();
+            }
+            }
+            catch (System.FormatException)
+            {
+                MessageBox.Show("Ungültige Eingabe");
+            }
         }
 
         private void ProgrammSchließenClick(object sender, RoutedEventArgs e)

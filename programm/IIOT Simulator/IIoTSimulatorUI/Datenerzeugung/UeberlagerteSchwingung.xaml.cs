@@ -32,46 +32,71 @@ namespace IIoTSimulatorUI
 
         private void FehlerHinzufuegen(object sender, RoutedEventArgs e)
         {
-            //TODO: Es fehlt hier noch die Überprüfung Nutzereingaben. Bitte noch spezifizieren welche Überprüfungen stattfinden müssen
+            try { 
+            // Überprüfung Nutzereingaben.
+            if (Convert.ToDouble(textBoxAmplitude1.Text) < 0.0 || Convert.ToDouble(textBoxPeriodendauer1.Text) < 0.0 || Convert.ToInt32(textBoxWerteanzahl1.Text) < 0 || Convert.ToDouble(textBoxAmplitude2.Text) < 0.0 || Convert.ToDouble(textBoxPeriodendauer2.Text) < 0.0 || Convert.ToInt32(textBoxWerteanzahl2.Text) < 0)
+            {
+                MessageBox.Show("Amplitude, Periodendauer und Werteanzahl dürfen nicht negativ sein.");
+            }
+            else
+            {
+                List<double> Oscillation1;
+                List<double> Oscillation2;
 
-            List<double> Oscillation1;
-            List<double> Oscillation2;
-            
-            // Erzeugung der Harmonischen Schwingungen
-            DataGeneratorOsc = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude1.Text), Convert.ToDouble(textBoxPeriodendauer1.Text), Convert.ToDouble(textBoxPhasenverschiebung1.Text), Convert.ToUInt32(textBoxWerteanzahl1.Text));
-            Oscillation1 = DataGenerator.GetSimulatorValues();
+                // Erzeugung der Harmonischen Schwingungen
+                DataGeneratorOsc = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude1.Text), Convert.ToDouble(textBoxPeriodendauer1.Text), Convert.ToDouble(textBoxPhasenverschiebung1.Text), Convert.ToUInt32(textBoxWerteanzahl1.Text));
+                Oscillation1 = DataGeneratorOsc.GetSimulatorValues();
 
-            DataGeneratorOsc = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude2.Text), Convert.ToDouble(textBoxPeriodendauer2.Text), Convert.ToDouble(textBoxPhasenverschiebung2.Text), Convert.ToUInt32(textBoxWerteanzahl2.Text));
-            Oscillation2 = DataGenerator.GetSimulatorValues();
+                DataGeneratorOsc = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude2.Text), Convert.ToDouble(textBoxPeriodendauer2.Text), Convert.ToDouble(textBoxPhasenverschiebung2.Text), Convert.ToUInt32(textBoxWerteanzahl2.Text));
+                Oscillation2 = DataGeneratorOsc.GetSimulatorValues();
 
-            //Erzeugung der Überlagerten Schwingung und abspeichern in Sensor
-            DataGenerator = new Superposition(Oscillation1, Oscillation2);
-            DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
+                //Erzeugung der Überlagerten Schwingung und abspeichern in Sensor
+                DataGenerator = new Superposition(Oscillation1, Oscillation2);
+                DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
 
-            // Aufufen des Folgefensters; TODO: Hier wieder close?
-            SensordatenFehler objectFehler = new SensordatenFehler(ref DoubleSensor);
-            this.Visibility = Visibility.Hidden;
-            objectFehler.Show();
+                // Aufufen des Folgefensters; TODO: Hier wieder close?
+                SensordatenFehler objectFehler = new SensordatenFehler(ref DoubleSensor);
+                this.Visibility = Visibility.Hidden;
+                objectFehler.Show();
+            }
+            }
+            catch (System.FormatException)
+            {
+                MessageBox.Show("Ungültige Eingabe");
+            }
         }
 
         private void SensordatenSpeichern(object sender, RoutedEventArgs e)
         {
-            //TODO: Es fehlt hier noch die Überprüfung Nutzereingaben. Bitte noch spezifizieren welche Überprüfungen stattfinden müssen
+            try
+            { 
+            // Überprüfung Nutzereingaben.
+            if (Convert.ToDouble(textBoxAmplitude1.Text) < 0.0 || Convert.ToDouble(textBoxPeriodendauer1.Text) < 0.0 || Convert.ToInt32(textBoxWerteanzahl1.Text) < 0 || Convert.ToDouble(textBoxAmplitude2.Text) < 0.0 || Convert.ToDouble(textBoxPeriodendauer2.Text) < 0.0 || Convert.ToInt32(textBoxWerteanzahl2.Text) < 0)
+            {
+                MessageBox.Show("Amplitude, Periodendauer und Werteanzahl dürfen nicht negativ sein.");
+            }
+            else
+            {
+                List<double> Oscillation1;
+                List<double> Oscillation2;
 
-            List<double> Oscillation1;
-            List<double> Oscillation2;
+                // Erzeugung der Harmonischen Schwingungen
+                DataGeneratorOsc = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude1.Text), Convert.ToDouble(textBoxPeriodendauer1.Text), Convert.ToDouble(textBoxPhasenverschiebung1.Text), Convert.ToUInt32(textBoxWerteanzahl1.Text));
+                Oscillation1 = DataGeneratorOsc.GetSimulatorValues();
 
-            // Erzeugung der Harmonischen Schwingungen
-            DataGeneratorOsc = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude1.Text), Convert.ToDouble(textBoxPeriodendauer1.Text), Convert.ToDouble(textBoxPhasenverschiebung1.Text), Convert.ToUInt32(textBoxWerteanzahl1.Text));
-            Oscillation1 = DataGeneratorOsc.GetSimulatorValues();
+                DataGeneratorOsc = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude2.Text), Convert.ToDouble(textBoxPeriodendauer2.Text), Convert.ToDouble(textBoxPhasenverschiebung2.Text), Convert.ToUInt32(textBoxWerteanzahl2.Text));
+                Oscillation2 = DataGeneratorOsc.GetSimulatorValues();
 
-            DataGeneratorOsc = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude2.Text), Convert.ToDouble(textBoxPeriodendauer2.Text), Convert.ToDouble(textBoxPhasenverschiebung2.Text), Convert.ToUInt32(textBoxWerteanzahl2.Text));
-            Oscillation2 = DataGeneratorOsc.GetSimulatorValues();
-
-            //Erzeugung der Überlagerten Schwingung und abspeichern in Sensor
-            DataGenerator = new Superposition(Oscillation1, Oscillation2);
-            DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
-            Close();
+                //Erzeugung der Überlagerten Schwingung und abspeichern in Sensor
+                DataGenerator = new Superposition(Oscillation1, Oscillation2);
+                DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
+                Close();
+            }
+            }
+            catch (System.FormatException)
+            {
+                MessageBox.Show("Ungültige Eingabe");
+            }
         }
 
         private void ProgrammSchlievßenClick(object sender, RoutedEventArgs e)

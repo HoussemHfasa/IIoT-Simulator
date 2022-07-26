@@ -28,13 +28,26 @@ namespace IIoTSimulatorUI
 
         private void SensordatenSpeichern(object sender, RoutedEventArgs e)
         {
-            // TODO Nutzereingaben überprüfen
+            try
+            { 
+            // Nutzereingaben überprüfen
+            if (Convert.ToDouble(textBoxFehlerrate.Text) < 0.0 || Convert.ToDouble(textBoxFehlerrate.Text) > 1.0)
+            {
+                MessageBox.Show("Fehlerrate darf nicht unter 0 oder über 1 liegen.");
+            }
+            else
+            {
+                // Fehlerdatengenerator erzeugen, Sensordaten mit Fehlern versehen
+                RandomZeroesError DataGenerator = new RandomZeroesError(Convert.ToDouble(textBoxFehlerrate.Text), Convert.ToInt32(textBoxFehlerlänge.Text));
+                BoolSensor.SetValues(DataGenerator.GetSensorDataWithBoolErrors(BoolSensor.GetValues()));
 
-            // Fehlerdatengenerator erzeugen, Sensordaten mit Fehlern versehen
-            RandomZeroesError DataGenerator = new RandomZeroesError(Convert.ToDouble(textBoxFehlerrate.Text), Convert.ToInt32(textBoxFehlerlänge.Text));
-            BoolSensor.SetValues(DataGenerator.GetSensorDataWithBoolErrors(BoolSensor.GetValues()));
-
-            Close();
+                Close();
+            }
+            }
+            catch (System.FormatException)
+            {
+                MessageBox.Show("Ungültige Eingabe");
+            }
         }
 
         private void ProgrammSchlievßenClick(object sender, RoutedEventArgs e)

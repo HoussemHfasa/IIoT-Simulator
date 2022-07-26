@@ -34,24 +34,51 @@ namespace IIoTSimulatorUI
 
         private void FehlerHinzufuegen(object sender, RoutedEventArgs e)
         {
-            //TODO: Es fehlt hier noch die Überprüfung Nutzereingaben. Bitte noch spezifizieren welche Überprüfungen stattfinden müssen
+            try { 
+            //Überprüfung Nutzereingaben. 
+            if (Convert.ToInt16(textBoxWerteanzahl.Text)<0)
+            {
+                MessageBox.Show("Werteanzahl darf nicht negativ sein.");
+            }
+            else
+            {
+                // Objekt der Datenerzeugungsmethode erstellen
+                DataGenerator = new StandardDeviation(Convert.ToDouble(textBoxMittelwert.Text), Convert.ToDouble(textBoxStandartabweichung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
+                DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
 
-            // Objekt der Datenerzeugungsmethode erstellen
-            DataGenerator = new StandardDeviation(Convert.ToDouble(textBoxMittelwert.Text), Convert.ToDouble(textBoxStandartabweichung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
-            DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
+                SensordatenFehler objectFehler = new SensordatenFehler(ref DoubleSensor);
 
-            SensordatenFehler objectFehler = new SensordatenFehler(ref DoubleSensor);
-
-            // TODO Hier wieder close?
-            this.Visibility = Visibility.Hidden;
-            objectFehler.Show();
+                // TODO Hier wieder close?
+                this.Visibility = Visibility.Hidden;
+                objectFehler.Show();
+                }
+            }
+            catch (System.FormatException)
+            {
+                MessageBox.Show("Ungültige Eingabe");
+            }
         }
 
         private void SensordatenSpeichern(object sender, RoutedEventArgs e)
         {
-            DataGenerator = new StandardDeviation(Convert.ToDouble(textBoxMittelwert.Text), Convert.ToDouble(textBoxStandartabweichung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
-            DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
-            Close();
+            try
+            { 
+            //Überprüfung Nutzereingaben. 
+            if (Convert.ToInt16(textBoxWerteanzahl.Text) < 0)
+            {
+                MessageBox.Show("Werteanzahl darf nicht negativ sein.");
+            }
+            else
+            {
+                DataGenerator = new StandardDeviation(Convert.ToDouble(textBoxMittelwert.Text), Convert.ToDouble(textBoxStandartabweichung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
+                DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
+                Close();
+            }
+            }
+            catch (System.FormatException)
+            {
+                MessageBox.Show("Ungültige Eingabe");
+            }
         }
 
         private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
