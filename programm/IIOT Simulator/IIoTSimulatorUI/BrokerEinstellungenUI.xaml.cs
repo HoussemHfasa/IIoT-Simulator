@@ -20,6 +20,7 @@ namespace IIoTSimulatorUI
         public static Communicator BrokerCom = new Communicator();
     }
 
+
     /// <summary>
     /// Interaktionslogik für BrokerEinstellungenUI.xaml
     /// </summary>
@@ -30,6 +31,7 @@ namespace IIoTSimulatorUI
         {
             InitializeComponent();
         }
+
 
         //Methode für den Button 'Verbinden'
         //Hat die Verbindung mit dem Broker funktioniert wird hier über eine MessageBox
