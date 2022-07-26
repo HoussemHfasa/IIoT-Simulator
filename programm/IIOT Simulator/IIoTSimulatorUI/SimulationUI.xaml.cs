@@ -153,12 +153,11 @@ namespace IIoTSimulatorUI
                 k += $"\nDer Sensor {sensor} hat {SensorValues[sensor].Count} Wert an den Broker gesendet";
                 for (int i = 0; i < SensorValues[sensor].Count; i++)
                 {
-<<<<<<< HEAD
+
                     ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat" + (SensorValues[sensor][i]) + "Wert an den Broker gesendet";
-=======
+
                     //MQTT.BrokerCom.PublishToTopic(SensorValues[sensor][i].Y)
-                    ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat" + (SensorValues[sensor][i].Y) + "Wert an den Broker gesendet";
->>>>>>> 12eeb040f784a0875bb8a7e9c638138f17aecbd6
+                    
                 }
                 // Hier müssten Daten an Broker gesendet werden
             }
