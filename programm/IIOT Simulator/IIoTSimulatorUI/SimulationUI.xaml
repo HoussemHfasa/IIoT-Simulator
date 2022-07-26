@@ -145,7 +145,7 @@
                     Click="DatenSenden"
                 Foreground="White"
                     FontSize="16" 
-                    Margin="32,516,0,-531" 
+                    Margin="33,394,0,-409" 
                     HorizontalAlignment="Left"
                     Width="192"
                     Cursor="Hand">
@@ -180,7 +180,7 @@
                 </Button.Template>
             </Button>
 
-            
+
 
             <!-- Button um abzubrechen um zurück zur Startseite zu gelangen-->
             <Button Content="Abbrechen"
@@ -310,14 +310,24 @@
             <!-- Label Senden-->
             <Label
                 Content="Sensordaten an den Broker senden."
-                Margin="32,466,186,-467"
+                Margin="18,353,200,-354"
                 FontSize="18"
                 Foreground="White"
                 FontFamily="Fonts/#Dosis" Grid.ColumnSpan="2"/>
 
 
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="3" Margin="54,473,15,-528">
+                <StackPanel Width="556">
+                    <TextBlock Name="ScrollTextBlock" Background="#FF7492A4" TextWrapping="Wrap" Margin="0,0,0,20">Scrolling is enabled when it is necessary. 
+      Resize the window, making it larger and smaller.</TextBlock>
+                    <Rectangle Fill="Transparent" Width="480" Height="792"/>
+                </StackPanel>
+            </ScrollViewer>
+
         </Grid>
 
     </Grid>
+
+
 
 </Window>

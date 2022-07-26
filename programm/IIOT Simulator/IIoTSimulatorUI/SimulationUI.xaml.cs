@@ -41,7 +41,8 @@ namespace IIoTSimulatorUI
             
             double intervall = 0;
            // Sensor.Sensordaten.Values.Add(0);
-             values = new List<Value>();
+            values = new List<Value>();      
+            
             if (Convert.ToString(Sensor.Sensordaten.Sensortype) == "Rauchmelder")
             {
                 for (int i = 0; i < Convert.ToInt16(Sensor.Sensordaten.AmmountofValues); i++)
@@ -357,11 +358,19 @@ namespace IIoTSimulatorUI
 
         private void DatenSenden(object sender, RoutedEventArgs e)
         {
+            
             string k = "Die Sensordaten wurden an den Broker gesendet.";
             foreach(string sensor in SensorValues.Keys)
             {
+                // Logbuch, welche Daten gesendet wurden
                 k += $"\nDer Sensor {sensor} hat {SensorValues[sensor].Count} Wert an den Broker gesendet";
+                for (int i = 0; i < SensorValues[sensor].Count; i++)
+                {
+                    ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat" + (SensorValues[sensor][i].Y) + "Wert an den Broker gesendet";
+                }
+                // Hier müssten Daten an Broker gesendet werden
             }
+
             MessageBox.Show(k);
         }
 
