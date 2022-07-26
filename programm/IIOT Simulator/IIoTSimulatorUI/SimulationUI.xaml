@@ -137,7 +137,7 @@
             <TextBlock
                 x:Name="LabelTopicSimulation"
                 TextWrapping="WrapWithOverflow" 
-                Margin="54,182,0,-401"
+                Margin="32,182,0,-241"
                 Foreground="White"
                 FontSize="18"/>
 
@@ -146,7 +146,7 @@
                     Click="DatenSenden"
                 Foreground="White"
                     FontSize="16" 
-                    Margin="33,394,0,-409" 
+                    Margin="18,354,0,-369" 
                     HorizontalAlignment="Left"
                     Width="192"
                     Cursor="Hand">
@@ -305,22 +305,26 @@
             <!-- Label Senden-->
             <Label
                 Content="Sensordaten an den Broker senden."
-                Margin="18,353,200,-354"
-                FontSize="18"
+                Margin="18,311,186,-314"
+                FontSize="15"
                 Foreground="White"
                 FontFamily="Fonts/#Dosis" Grid.ColumnSpan="2"/>
 
 
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="3" Margin="54,473,15,-528">
-                <StackPanel Width="556">
-                    <TextBlock Name="ScrollTextBlock" Background="#FF7492A4" TextWrapping="Wrap" Margin="0,0,0,20">Scrolling is enabled when it is necessary. 
-      Resize the window, making it larger and smaller.</TextBlock>
-                    <Rectangle Fill="Transparent" Width="480" Height="792"/>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="3" Margin="32,473,79,-528" Foreground="{x:Null}" Background="#FFFCECEC">
+                <StackPanel Width="556" Height="90" >
+                    <TextBlock x:Name="ScrollTextBlock"
+                      TextWrapping="Wrap" 
+                               Height="92" Foreground="#FFF7EDED" FontSize="14" Background="#FF323B55"><Run 
+                                   Text="Gesendete Sensordaten werden hier angezeigt."/></TextBlock>
+                    <Rectangle 
+                        Fill="Transparent" 
+                        Width="480" Height="795"/>
                 </StackPanel>
             </ScrollViewer>
-            
-            
-            <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Name ="Ingrid" Margin="49,143,-6,-388" Grid.ColumnSpan="3" Grid.Column="1" >
+
+
+            <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Name ="Ingrid" Margin="76,146,-33,-391" Grid.ColumnSpan="3" Grid.Column="1" >
                 <lvc:CartesianChart.AxisY>
                     <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
                 </lvc:CartesianChart.AxisY>
