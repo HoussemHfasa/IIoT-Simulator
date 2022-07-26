@@ -28,13 +28,19 @@ namespace IIoTSimulatorUI
 
         private void Hinzufügen(object sender, RoutedEventArgs e)
         {
-            // TODO Nutzereingaben überprüfen
-
+            //Nutzereingabe überprüfen
+            if(Convert.ToDouble(textBoxErrorRate.Text) < 0.0 || Convert.ToDouble(textBoxErrorRate.Text) > 1.0)
+            {
+                MessageBox.Show("Die Fehlerrate muss zwischen 0,0 und 1,0 liegen.");
+            }
+            else
+            { 
             // Fehlerdatengenerator erzeugen, Sensordaten mit Fehlern versehen
             RandomValuesError DataGenerator = new RandomValuesError(Convert.ToDouble(textBoxErrorRate.Text), Convert.ToInt32(textBoxErrorLength.Text), Convert.ToDouble(textBoxMaxError.Text), Convert.ToDouble(textBoxMinError.Text));
             DoubleSensor.SetValues(DataGenerator.GetSensorDataWithErrors(DoubleSensor.GetValues()));
 
             Close();
+            }
         }
 
         private void ProgrammSchließenClick(object sender, RoutedEventArgs e)

@@ -39,7 +39,11 @@ namespace IIoTSimulatorUI
         private void FehlerHinzufuegen(object sender, RoutedEventArgs e)
         {
             //TODO: Es fehlt hier noch die Überprüfung Nutzereingaben. Bitte noch spezifizieren welche Überprüfungen stattfinden müssen
-
+            if(Convert.ToDouble(textBoxAmplitude.Text) < 0.0 || Convert.ToDouble(textBoxPeriodendauer.Text) < 0.0 || Convert.ToInt32(textBoxWerteanzahl.Text) < 0)
+            {
+                MessageBox.Show("Amplitude, Periodendauer und Werteanzahl dürfen nicht negativ sein.");
+            }
+            { 
             // Objekt der Datenerzeugungsmethode erstellen und Werte übergeben
             DataGenerator = new DampedOscillation(Convert.ToDouble(textBoxAmplitude.Text), Convert.ToDouble(textBoxDaempfungsrate.Text), Convert.ToDouble(textBoxPeriodendauer.Text),Convert.ToDouble(textBoxPhasenverschiebung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
             DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
@@ -50,6 +54,7 @@ namespace IIoTSimulatorUI
             // TODO: Hier wieder close?
             this.Visibility = Visibility.Hidden;
             objectFehler.Show();
+            }
         }
 
         private void SensordatenSpeichern(object sender, RoutedEventArgs e)

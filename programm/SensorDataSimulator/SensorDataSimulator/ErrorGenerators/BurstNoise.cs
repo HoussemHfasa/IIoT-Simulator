@@ -39,8 +39,16 @@ namespace SensorDataSimulator
                     // Fehler erzeugen auf gesamter Fehlerlänge
                     for (int z = 0; z < ErrorLength; z++)
                     {
+                        try
+                        { 
                         TempList[i + z] = BurstValue;
+                        }
+                        catch(ArgumentOutOfRangeException e)
+                        {
+                            TempList.Add(BurstValue);
+                        }
                     }
+                    
                     i += ErrorLength - 1;
                 }
             }
