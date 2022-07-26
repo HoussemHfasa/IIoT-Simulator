@@ -38,11 +38,13 @@ namespace IIoTSimulatorUI
 
         private void FehlerHinzufuegen(object sender, RoutedEventArgs e)
         {
-            //TODO: Es fehlt hier noch die Überprüfung Nutzereingaben. Bitte noch spezifizieren welche Überprüfungen stattfinden müssen
-            if(Convert.ToDouble(textBoxAmplitude.Text) < 0.0 || Convert.ToDouble(textBoxPeriodendauer.Text) < 0.0 || Convert.ToInt32(textBoxWerteanzahl.Text) < 0)
+            try { 
+            // Überprüfung Nutzereingaben
+            if(Convert.ToDouble(textBoxAmplitude.Text) < 0.0 || Convert.ToDouble(textBoxPeriodendauer.Text) < 0.0 || Convert.ToInt32(textBoxWerteanzahl.Text) < 0|| Convert.ToDouble(textBoxDaempfungsrate.Text)<0.0)
             {
-                MessageBox.Show("Amplitude, Periodendauer und Werteanzahl dürfen nicht negativ sein.");
+                MessageBox.Show("Amplitude,Dämpfungsrate, Periodendauer und Werteanzahl dürfen nicht negativ sein.");
             }
+            else
             { 
             // Objekt der Datenerzeugungsmethode erstellen und Werte übergeben
             DataGenerator = new DampedOscillation(Convert.ToDouble(textBoxAmplitude.Text), Convert.ToDouble(textBoxDaempfungsrate.Text), Convert.ToDouble(textBoxPeriodendauer.Text),Convert.ToDouble(textBoxPhasenverschiebung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
@@ -56,14 +58,34 @@ namespace IIoTSimulatorUI
             objectFehler.Show();
             }
         }
+            catch (System.FormatException)
+            {
+                MessageBox.Show("Ungültige Eingabe");
+            }
+}
 
         private void SensordatenSpeichern(object sender, RoutedEventArgs e)
         {
-            // Objekt der Datenerzeugungsmethode erstellen und Werte übergeben
-            DataGenerator = new DampedOscillation(Convert.ToDouble(textBoxAmplitude.Text), Convert.ToDouble(textBoxDaempfungsrate.Text), Convert.ToDouble(textBoxPeriodendauer.Text), Convert.ToDouble(textBoxPhasenverschiebung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
-            DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
-            Close();
+            try
+            { 
+            // Überprüfung Nutzereingaben.
+            if (Convert.ToDouble(textBoxAmplitude.Text) < 0.0 || Convert.ToDouble(textBoxPeriodendauer.Text) < 0.0 || Convert.ToInt32(textBoxWerteanzahl.Text) < 0 || Convert.ToDouble(textBoxDaempfungsrate.Text) < 0.0)
+            {
+                MessageBox.Show("Amplitude,Dämpfungsrate, Periodendauer und Werteanzahl dürfen nicht negativ sein.");
+            }
+            else
+            {
+                // Objekt der Datenerzeugungsmethode erstellen und Werte übergeben
+                DataGenerator = new DampedOscillation(Convert.ToDouble(textBoxAmplitude.Text), Convert.ToDouble(textBoxDaempfungsrate.Text), Convert.ToDouble(textBoxPeriodendauer.Text), Convert.ToDouble(textBoxPhasenverschiebung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
+                DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
+                Close();
+            }
         }
+            catch (System.FormatException)
+            {
+                MessageBox.Show("Ungültige Eingabe");
+            }
+}
 
         private void Aktualisieren(object sender, RoutedEventArgs e)
         {

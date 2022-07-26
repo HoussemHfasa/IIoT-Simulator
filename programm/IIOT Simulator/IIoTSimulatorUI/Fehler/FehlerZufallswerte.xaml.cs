@@ -28,6 +28,8 @@ namespace IIoTSimulatorUI
 
         private void Hinzufügen(object sender, RoutedEventArgs e)
         {
+            try
+            { 
             //Nutzereingabe überprüfen
             if(Convert.ToDouble(textBoxErrorRate.Text) < 0.0 || Convert.ToDouble(textBoxErrorRate.Text) > 1.0)
             {
@@ -40,6 +42,11 @@ namespace IIoTSimulatorUI
             DoubleSensor.SetValues(DataGenerator.GetSensorDataWithErrors(DoubleSensor.GetValues()));
 
             Close();
+            }
+            }
+            catch (System.FormatException)
+            {
+                MessageBox.Show("Ungültige Eingabe");
             }
         }
 

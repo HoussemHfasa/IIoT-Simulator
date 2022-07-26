@@ -29,33 +29,62 @@ namespace IIoTSimulatorUI
         }
 
         //TODO Harmonische sollte keinen Konstruktor mit bool haben, kann entfernt werden, vorher überprüfen ob dann noch alles funktioniert
-        public HarmonischeSchwingung(ref SensorAndSensorgroup.Sensor<bool> NewSensor)
+      /*  public HarmonischeSchwingung(ref SensorAndSensorgroup.Sensor<bool> NewSensor)
         {
             this.BoolSensor = NewSensor;
             InitializeComponent();
-        }
+        }*/
 
         private void FehlerHinzufuegen(object sender, RoutedEventArgs e)
         {
-            //TODO: Es fehlt hier noch die Überprüfung Nutzereingaben. Bitte noch spezifizieren welche Überprüfungen stattfinden müssen
+            try
+            {
+                //die Überprüfung Nutzereingaben. 
+                if (Convert.ToDouble(textBoxAmplitude.Text) < 0.0 || Convert.ToDouble(textBoxPeriodendauer.Text) < 0.0 || Convert.ToInt32(textBoxWerteanzahl.Text) < 0)
+                {
+                    MessageBox.Show("Amplitude,Dämpfungsrate, Periodendauer und Werteanzahl dürfen nicht negativ sein.");
+                }
+                else
+                {
 
-            // Objekt der Datenerzeugungsmethode erstellen, Daten erzeugen und in DoubleSensor abspeichern
-            DataGenerator = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude.Text), Convert.ToDouble(textBoxPeriodendauer.Text), Convert.ToDouble(textBoxPhasenverschiebung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
-            DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
-            SensordatenFehler objectFehler = new SensordatenFehler(ref DoubleSensor);
+                    // Objekt der Datenerzeugungsmethode erstellen, Daten erzeugen und in DoubleSensor abspeichern
+                    DataGenerator = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude.Text), Convert.ToDouble(textBoxPeriodendauer.Text), Convert.ToDouble(textBoxPhasenverschiebung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
+                    DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
+                    SensordatenFehler objectFehler = new SensordatenFehler(ref DoubleSensor);
 
-            //TODO: Hier wieder close?
-            this.Visibility = Visibility.Hidden;
-            objectFehler.Show();
+                    //TODO: Hier wieder close?
+                    this.Visibility = Visibility.Hidden;
+                    objectFehler.Show();
+                }
+            }
+            catch (System.FormatException)
+            {
+                MessageBox.Show("Ungültige Eingabe");
+            }
+            
         }
 
         private void SensordatenSpeichern(object sender, RoutedEventArgs e)
         {
-            // Objekt der Datenerzeugungsmethode erstellen, Daten erzeugen und in DoubleSensor abspeichern
-            DataGenerator = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude.Text), Convert.ToDouble(textBoxPeriodendauer.Text), Convert.ToDouble(textBoxPhasenverschiebung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
-            DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
-            Close();
+            try { 
+            //die Überprüfung Nutzereingaben. 
+            if (Convert.ToDouble(textBoxAmplitude.Text) < 0.0 || Convert.ToDouble(textBoxPeriodendauer.Text) < 0.0 || Convert.ToInt32(textBoxWerteanzahl.Text) < 0)
+            {
+                MessageBox.Show("Amplitude,Dämpfungsrate, Periodendauer und Werteanzahl dürfen nicht negativ sein.");
+            }
+            else
+            {
+                // Objekt der Datenerzeugungsmethode erstellen, Daten erzeugen und in DoubleSensor abspeichern
+                DataGenerator = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude.Text), Convert.ToDouble(textBoxPeriodendauer.Text), Convert.ToDouble(textBoxPhasenverschiebung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
+                DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
+                Close();
+            }
         }
+            catch (System.FormatException)
+            {
+                MessageBox.Show("Ungültige Eingabe");
+            }
+}
 
         private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
         {
