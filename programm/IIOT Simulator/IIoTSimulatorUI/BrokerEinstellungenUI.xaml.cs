@@ -20,6 +20,7 @@ namespace IIoTSimulatorUI
         public static Communicator BrokerCom = new Communicator();
     }
 
+
     /// <summary>
     /// Interaktionslogik für BrokerEinstellungenUI.xaml
     /// </summary>
@@ -30,6 +31,7 @@ namespace IIoTSimulatorUI
         {
             InitializeComponent();
         }
+
 
         //Methode für den Button 'Verbinden'
         //Hat die Verbindung mit dem Broker funktioniert wird hier über eine MessageBox
@@ -90,7 +92,11 @@ namespace IIoTSimulatorUI
             //werden diese beim Haken setzen aufhellen
             var bc = new BrushConverter();
 
-            PortText.Background = (Brush)bc.ConvertFrom("#ff1f4663");
+            (sender as Button).Foreground = new SolidColorBrush(Colors.White);
+
+            (sender as Button).Background = new SolidColorBrush(Colors.Green);
+
+            NutzernameText.Background = (Brush)bc.ConvertFrom("#ff1f4663");
 
             PassswortBox.Background = (Brush)bc.ConvertFrom("#ff1f4663");
 

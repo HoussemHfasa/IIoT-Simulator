@@ -78,7 +78,7 @@
             <Label
                 Content="Stamm:"
                 Margin="22,80,0,-78"
-                FontSize="18"
+                FontSize="16"
                 Foreground="White"
                 HorizontalAlignment="Left"
                 Width="96"
@@ -88,7 +88,7 @@
             <Label
                 Content="Unterordner:"
                 Margin="0,82,0,-85"
-                FontSize="18"
+                FontSize="16"
                 Foreground="White"
                 HorizontalAlignment="Center" 
                 Width="112" 
@@ -99,7 +99,7 @@
             <Label
                 Content="Sensorname:"
                 Margin="139,82,0,-83"
-                FontSize="18"
+                FontSize="16"
                 Foreground="White"
                 HorizontalAlignment="Left" 
                 Width="126" 
@@ -155,8 +155,8 @@
                 VerticalAlignment="Top"
                 Foreground="#FFd5d5d5"
                 BorderThickness="2,2,2,2"
-                     
                      />
+
 
 
             <!-- Sensor erstellen-->
@@ -204,15 +204,17 @@
             <TreeView
                 Name="TreeView1"
                 Grid.ColumnSpan="2" 
-                Margin="52,286,76,-518" 
+                Margin="66,260,62,-499" 
                 Opacity="0.785" 
+                BorderThickness="4,4,4,4"
                 FontSize="14"
                 Foreground="#FFD1EFF0" 
                 FontStyle="Normal" 
                 FontStretch="Medium" 
                 Background="#FFB5D6EE" 
                 FontWeight="Bold"
-                FontFamily="Fonts/#Dosis" BorderBrush="#FF4D6A94"
+                FontFamily="Fonts/#Dosis"
+                BorderBrush="#FF4D6A94"
                 />
 
             <!-- Button um das Programm zu schließen -->
@@ -385,7 +387,7 @@
                     Click="SensorgruppeLoeschen"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="0,495,0,-536" 
+                    Margin="0,495,-50,-536" 
                     HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand" 
@@ -438,9 +440,9 @@
             <!-- Label für den grünen Haken beim Stamm-->
             <Label
                 x:Name="HakenStamm"
-                Content="✔"
+                Content="🗸"
                 Margin="21,86,0,-93"
-                FontSize="18"
+                FontSize="19"
                 Foreground="#0035B51F"
                 HorizontalAlignment="Left" 
                 Grid.Column="1"
@@ -449,7 +451,7 @@
             <Label
                 x:Name="LabelInfo"
                 Content="Bevor Sie einen Unterordner hinzufügen, stellen Sie sicher, dass ein Element ausgewählt ist."
-                Margin="54,225,0,-232"
+                Margin="66,218,0,-225"
                 FontSize="12"
                 Foreground="#00000000"
                 HorizontalAlignment="Left"
@@ -463,7 +465,7 @@
             <Label
                 Content="Sensortyp:"
                 Margin="139,148,0,-149"
-                FontSize="18"
+                FontSize="16"
                 Foreground="White"
                 HorizontalAlignment="Left" 
                 Width="99" 
@@ -499,6 +501,60 @@
                      Content="Spannungssensor"></ComboBoxItem>
 
             </ComboBox>
+
+
+            <!-- Label Globus-->
+            <Label
+                Content="🌐"
+                Margin="120,290,0,-460"
+                FontSize="150"
+                Foreground="#06695BDD"
+                HorizontalAlignment="Left" 
+                Width="277" 
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                FontFamily="Fonts/#Dosis" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+
+
+            <!-- Label Globus-->
+            <Label
+                Content="🌐"
+                Margin="61,96,0,-163"
+                FontSize="50"
+                Foreground="#06695BDD"
+                HorizontalAlignment="Left" 
+                Width="106" 
+                Grid.Column="1"
+                FontFamily="Fonts/#Dosis" 
+                VerticalContentAlignment="Center" 
+                HorizontalContentAlignment="Center"/>
+
+            <!-- Label Globus-->
+            <Label
+                Content="🌐"
+                Margin="124,260,-50,-327"
+                FontSize="50"
+                Foreground="#07695BDD"
+                HorizontalAlignment="Left" 
+                Width="106" 
+                Grid.Column="3"
+                FontFamily="Fonts/#Dosis" 
+                VerticalContentAlignment="Center" 
+                HorizontalContentAlignment="Center"/>
+
+
+            <!-- Label Globus-->
+            <Label
+                Content="🌐"
+                Margin="217,403,0,-470"
+                FontSize="50"
+                Foreground="#0A695BDD"
+                HorizontalAlignment="Left" 
+                Width="106"
+                FontFamily="Fonts/#Dosis" 
+                VerticalContentAlignment="Center" 
+                HorizontalContentAlignment="Center" Grid.ColumnSpan="2" Grid.Column="1"/>
+
 
         </Grid>
 

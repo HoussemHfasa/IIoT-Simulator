@@ -216,11 +216,6 @@ namespace IIoTSimulatorUI
                 this.Visibility = Visibility.Hidden;
                 objectStartseite2.Show();
             }
-
-            
-
-          // LabelTopic.Content = sensor.Topic;
-
             
         }
 
@@ -235,7 +230,8 @@ namespace IIoTSimulatorUI
         //Löscht die ganze Sensorgruppe
         private void SensorgruppeLoeschen(object sender, RoutedEventArgs e)
         {
-            
+            // Sensorgruppe und Treeview löschen/überschreiben
+            Sensorgroup = new Sensorgroups();
             TreeView1.Items.Clear();
         }
 
@@ -248,7 +244,7 @@ namespace IIoTSimulatorUI
             //Nutzer hat keinen Namen eingegeben
             if (textSensorname.Equals(""))
             {
-                MessageBox.Show("Geben Sie einen Namen für den Sensor ein");
+                MessageBox.Show("Geben Sie einen Namen für den Sensor ein.");
             }
             else if(SensortypAuswahl.Equals(""))
             {
@@ -257,7 +253,7 @@ namespace IIoTSimulatorUI
             else if (Sensorgroup.basenames.Contains(textSensorname) || (Sensorgroup.allchildren.ContainsKey(textSensorname)))
             {
                 // Sensor doppelte Name
-                MessageBox.Show("Den Name ist schon ausgewählt");
+                MessageBox.Show("Der Name wurde bereits verwendet.");
             }
             //Nutzer hat Namen und einen Sensortypen ausgewählt eingegeben
             else

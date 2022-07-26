@@ -213,20 +213,23 @@
                      Foreground="#FFd5d5d5"
                      BorderThickness="2,2,2,2"/>
 
-            <!-- TextBox für den Port-->
+
+            <!-- TextBox zum Broker Namen eingeben-->
             <TextBox x:Name="NutzernameText"
                      Width="220"
-                     Height="35" 
-                     Grid.ColumnSpan="2" 
-                     Margin="174,318,76,-318"
-                     Background="#331F4663"
+                     Height="35"
+                     Grid.ColumnSpan="2"
+                     Margin="174,323,76,-323"
+                     
                      TextAlignment="Left"
+                     Background="#331F4663"
                      BorderBrush="#FF020E52"
                      FontSize="21"
                      VerticalAlignment="Top"
                      Foreground="#FFd5d5d5"
-                     BorderThickness="2,2,2,2" >
-            </TextBox>
+                     BorderThickness="2,2,2,2"
+                    />
+
 
 
             <!-- TextBox fpr den Nutzernamen -->
@@ -313,58 +316,35 @@
                            FontSize="22" 
                            BorderBrush="#FF0F0F2D"/>
 
-
-            <!--Häckchen setzen-->
-            <Button Content="🗸"
-                    Name="hakenSetzenName"
-                    Click="HakenSetzen"
-                Foreground="White"
-                    FontSize="20" 
-                    Margin="134,235,0,-253" 
-                    HorizontalAlignment="Center"
-                    Width="47"
-                    Grid.Column="3" Cursor="Hand" VerticalAlignment="Center">
-
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="TextElement.FontFamily" 
-                                Value ="Fonts/Dosis"/>
-                        <Setter Property="Background" 
-                                Value="#008080"/>
-                        <Setter Property="Cursor" 
-                                Value="Hand"/>
-
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" 
-                                     Value="True">
-                                <Setter Property="Background"
-                                        Value=" #92a8D1"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border Width="30" Height="35"
-                                CornerRadius="12"
-                                Background= "{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center"
-                                HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+            <Button 
+                x:Name="HakenSetzenName"
+                Grid.Column="3" 
+                Margin="156,259,-1,-252"
+                Content="🗸"
+                FontSize="20" 
+                Height="28"
+                Width="25"
+                FontWeight="Bold" 
+                Foreground="#FF467953" 
+                Background="#FF132C83" 
+                BorderBrush="#FF060B4C"
+                Click="HakenSetzen"
+                BorderThickness="2,2,2,2"/>
 
 
             <!-- Label für die Häckchen setzen Information-->
             <Label
                 Content="Nutzernamen und Passwort für die Anmeldung verwenden."
-                Margin="139,244,0,-258"
-                FontSize="18"
+                Margin="201,253,0,-268"
+                FontSize="15"
                 Foreground="White"
                 HorizontalAlignment="Left" 
-                Width="423"
-                FontFamily="Fonts/#Dosis" Grid.ColumnSpan="3" Grid.Column="1"/>
+                Width="405"
+                FontFamily="Fonts/#Dosis"
+                Grid.Column="1"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Left" 
+                Grid.ColumnSpan="3"/>
 
         </Grid>
 
