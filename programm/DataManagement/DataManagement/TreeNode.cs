@@ -15,6 +15,7 @@ namespace SensorAndSensorgroup
 		public List<int> path = new List<int> { };
 		public int childnumber = 0;
 		public dynamic Sensordaten=null;
+		public Sensor<dynamic> Sensor;
 		public List<TreeNode> child;
 		[JsonConstructor]
 		public TreeNode(dynamic sensor)

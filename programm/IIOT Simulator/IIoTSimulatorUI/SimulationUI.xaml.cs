@@ -17,6 +17,7 @@ using SensorAndSensorgroup;
 using SensorDataSimulator;
 using System.Threading.Tasks;
 
+
 namespace IIoTSimulatorUI
 {
     /// <summary>
@@ -32,57 +33,58 @@ namespace IIoTSimulatorUI
         private Point origin;
         private List<Holder> holders;
         private List<Value> values;
-        private Dictionary<string, Value> SensorValues;
         
-        public List<Value> EinzelneSensorDaten(Sensorgroups Sensorgroup, TreeNode Sensor)
-        {
-            double intervall = 0;
-            List<Value> Values = new List<Value>();
-            if (Sensor.Sensordaten.Sensortype == "Rauchmelder")
-            {
-                List<bool> SensorValues = new List<bool>();
-                SensorValues = Sensor.Sensordaten.GetValues();
-                for (int i = 0; i < Sensor.Sensordaten.AmmountofValues; i++)
-                {
-                    values.Add(new Value(interval, SensorValues[i]));
-                    intervall += 1;
-                }
-                
-            }
-            else
-            {
-                List<double> SensorValues = new List<double>();
-                SensorValues = Sensor.Sensordaten.GetValues();
-                for (int i = 0; i < Sensor.Sensordaten.AmmountofValues; i++)
-                {
-                    values.Add(new Value(interval, SensorValues[i]));
-                    intervall += 1;
-                }
-            }
-            return Values;
-        }
-    
-        public SimulationUI(Sensorgroups ExistingSensorgroup)
-        {
-            this.Sensorgroup = ExistingSensorgroup;
-            InitializeComponent();
+        private Dictionary<string,List<Value>> SensorValues;
 
-            foreach(TreeNode Sensor in Sensorgroup.allchildren.Values)
+        public List<Value> EinzelneSensorDaten(TreeNode Sensor)
+        {
+            
+            double intervall = 0;
+           // Sensor.Sensordaten.Values.Add(0);
+             values = new List<Value>();
+            if (Convert.ToString(Sensor.Sensordaten.Sensortype) == "Rauchmelder")
             {
-                if(!Sensor.Sensordaten.Equals(null))
+                for (int i = 0; i < Convert.ToInt16(Sensor.Sensordaten.AmmountofValues); i++)
                 {
-                    if(Sensor.Sensordaten.Sensortype== "Rauchmelder")
+                    if(Sensor.Sensordaten.Values[i]=="true")
                     {
-                        EinzelneSensorDaten(this.Sensorgroup, Sensor);
+                        values.Add(new Value(intervall, true));
                     }
                     else
                     {
-                        EinzelneSensorDaten(this.Sensorgroup, Sensor);
-
+                        values.Add(new Value(intervall, false));
                     }
-
+                    
+                    intervall += 1;
                 }
 
+            }
+            else
+            {
+                
+                for (int i = 0; i < Convert.ToInt16(Sensor.Sensordaten.AmmountofValues); i++)
+                {
+                    values.Add(new Value(intervall, Convert.ToDouble(Sensor.Sensordaten.Values[i])));
+                    intervall += 1;
+                }
+            }
+                return values;
+            
+        }
+    
+        public SimulationUI(ref Sensorgroups ExistingSensorgroup)
+        {
+            
+            this.Sensorgroup = ExistingSensorgroup;
+            InitializeComponent();
+            SensorValues = new Dictionary<string,List<Value>>();
+            foreach(string Sensor in Sensorgroup.allchildren.Keys)
+            {
+                if (!(Sensorgroup.allchildren[Sensor].Sensordaten==null))
+                {
+                   SensorValues.Add(Sensor,EinzelneSensorDaten(Sensorgroup.allchildren[Sensor]));
+                }
+                
             }
             holders = new List<Holder>();
            /* values = new List<Value>()
@@ -135,6 +137,7 @@ namespace IIoTSimulatorUI
 
             this.StateChanged += (sender, e) => Paint();
             this.SizeChanged += (sender, e) => Paint();
+            
         }
 
         public void Paint()
@@ -354,8 +357,12 @@ namespace IIoTSimulatorUI
 
         private void DatenSenden(object sender, RoutedEventArgs e)
         {
-
-            MessageBox.Show("Die Sensordaten wurden an den Broker gesendet.");
+            string k = "Die Sensordaten wurden an den Broker gesendet.";
+            foreach(string sensor in SensorValues.Keys)
+            {
+                k += $"\nDer Sensor {sensor} hat {SensorValues[sensor].Count} Wert an den Broker gesendet";
+            }
+            MessageBox.Show(k);
         }
 
         private void Abbrechen(object sender, RoutedEventArgs e)
@@ -372,7 +379,7 @@ namespace IIoTSimulatorUI
 
         private void Sensorauswaehlen(object sender, RoutedEventArgs e)
         {
-
+            
         }
     }
     public class Holder
