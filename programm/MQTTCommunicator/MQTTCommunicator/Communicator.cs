@@ -18,6 +18,10 @@ namespace MQTTCommunicator
         //private Dictionary<String, Client> clients;
         private List<String> Topic { get; set; }
         private List<String> TopicMessage { get; set; }
+        string host;
+        int port;
+        string username;
+        string password;
         /// <summary>
         /// Konstruktor des Communicators
         /// </summary>
@@ -28,6 +32,8 @@ namespace MQTTCommunicator
             this.Topic = new List<string>();
 
             this.TopicMessage = new List<string>();
+
+            
 
         }
         /// <summary>
@@ -41,6 +47,11 @@ namespace MQTTCommunicator
         /// <param name="Password">Dazugehörige Kennwort</param>
         public string ConnectToBroker(string Host, int Port, string Username = null, string Password = null)
         {
+            this.host = Host;
+            this.port = Port;
+            this.username = Username;
+            this.password = Password;
+
             string message = "";
             
             //Console.WriteLine("Connecting to " + Host + " : " + Port);
@@ -94,27 +105,7 @@ namespace MQTTCommunicator
             {
                 message += "-Connection failed\n-";
             }
-            mqttClient.UseDisconnectedHandler(async e =>
-            {
-                message += "-Connected to the broker, try again\n-";
-                await Task.Delay(TimeSpan.FromSeconds(5));
 
-                try
-                {
-                    var options = new MqttClientOptionsBuilder()
-                        .WithClientId("TestClient")
-                        .WithTcpServer(Host, Port)
-                        .WithCleanSession()
-                        .WithProtocolVersion(MQTTnet.Formatter.MqttProtocolVersion.V311)
-                        .Build();
-                    Task t = Task.Run(() => mqttClient.ConnectAsync(options));
-                    Task.WaitAll(t);
-                }
-                catch
-                {
-                    message += "-FAILED\n-";
-                }
-            });
             return message;
         }
 
@@ -148,6 +139,7 @@ namespace MQTTCommunicator
         /// <param name="messagePayload">Ubersendete Nachrichten an den Broker</param>
         public async void PublishToTopic(string topicName, String messagePayload)
         {
+            /*
              if(mqttClient.IsConnected)
              {                                      
                      try
@@ -167,10 +159,40 @@ namespace MQTTCommunicator
                      catch (Exception e)
                      {
                           Console.WriteLine("Something went wrong: " + e.Message);
-                          Console.ReadKey();
+                          //Console.ReadKey();
                      }
              }
+             else if(mqttClient.IsConnected == false)
+            {
+                ConnectToBroker(host, port, username, password);
+            }*/
+
+            if (mqttClient.IsConnected == false)
+            {
+                ConnectToBroker(host, port, username, password);
+            }
+            try
+            {
+                var message = new MqttApplicationMessageBuilder()
+                .WithTopic(topicName)
+                .WithPayload(messagePayload)
+                .WithExactlyOnceQoS()
+                .WithRetainFlag(true)
+                .Build();
+                AddTopic(topicName);
+                AddTopicMessage(messagePayload);
+                Console.WriteLine("Publishing message -" + messagePayload + "- from: " + "TestClient" + " to Topic " + topicName);
+                Task t = Task.Run(() => mqttClient.PublishAsync(message));
+                Task.WaitAll(t);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Something went wrong: " + e.Message);
+                //Console.ReadKey();
+            }
         }
+
+    
         /// <summary>
         /// Falls Benutzer eine neue Verbindung braucht, wird bestehende abgebrochen. Dann nochmal die Methode
         /// ConnectToBroker ausgeführt.
@@ -194,6 +216,7 @@ namespace MQTTCommunicator
         {
             this.TopicMessage.Add(TopicMessage);
         }
+        
 
     }
 }

@@ -18,6 +18,7 @@ namespace SensorDataSimulator
             //DecayTime in Dämpfung umrechnen. Gedämpfte Schwingung e-Funktion wird nie 0,
             //daher soll die Pulsamplitude auf mindestens 1 Hunderttausenstel bis zur Decyatime gedämpft werden.
             DampingRatio = Math.Log(0.00001) / (DecayTime * -1);
+            Result = new List<double> { };
         }
 
         //Fehlererzeugungsmethode
