@@ -24,7 +24,7 @@ namespace SensorAndSensorgroup
         // Sensordaten, Zugriff nur über GetValues und SetValues
         //JsonProperty für den Zugriff zu Jsonserialization
         [JsonProperty]
-        private List<T> Values;
+        public List<T> Values;
 
         // gibt die Sensordaten zurück
         public List<T> GetValues()
