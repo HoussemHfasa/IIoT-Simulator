@@ -311,11 +311,12 @@
                 FontFamily="Fonts/#Dosis" Grid.ColumnSpan="2"/>
 
 
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="3" Margin="32,473,79,-528" Foreground="{x:Null}" Background="#FFFCECEC">
+            <ScrollViewer 
+                HorizontalScrollBarVisibility="Auto" Grid.ColumnSpan="3" Margin="32,473,79,-528" Foreground="{x:Null}" Background="#FFFCECEC">
                 <StackPanel Width="556" Height="90" >
                     <TextBlock x:Name="ScrollTextBlock"
                       TextWrapping="Wrap" 
-                               Height="92" Foreground="#FFF7EDED" FontSize="14" Background="#FF323B55"><Run 
+                               Height="1226" Foreground="#FFF7EDED" FontSize="14" Background="#FF323B55"><Run 
                                    Text="Gesendete Sensordaten werden hier angezeigt."/></TextBlock>
                     <Rectangle 
                         Fill="Transparent" 
