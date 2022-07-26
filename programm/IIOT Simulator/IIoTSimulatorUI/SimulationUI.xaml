@@ -223,13 +223,7 @@
             </Button>
 
 
-            <!--Visualisierung-->
-            <Canvas x:Name="chartCanvas"
-                Background="#FF7492A4" Grid.ColumnSpan="3" Margin="49,142,-6,-426" Grid.Column="1"
-             >
-                <ToolBarPanel Height="244" Width="582"/>
-            </Canvas>
-
+          
             <!-- Button um Sensor auszuwählen-->
             <Button Content="Auswählen"
                     Click="Sensorauswaehlen"
