@@ -317,6 +317,7 @@ namespace IIoTSimulatorUI
 
                     ZufallsBool ObjectZufallsBool;
                     ObjectZufallsBool = new ZufallsBool(ref BoolSensor);
+                        ObjectZufallsBool.Show();
                 }
                 else if (SensortypAuswahl == "Feuchtigkeitssensor")
                 {
