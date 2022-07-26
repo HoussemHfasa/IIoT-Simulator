@@ -39,6 +39,8 @@ namespace IIoTSimulatorUI
         //
         //
 
+        // Variable zum Abspeichern des aktuellen Sensorwertes
+        int CurrentValueNumber = 0;
 
 
         public SimulationUI(ref Sensorgroups ExistingSensorgroup)
@@ -140,10 +142,7 @@ namespace IIoTSimulatorUI
             objectBrokerEinstellungen.Show();
         }
 
-        private void Verbinden(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Die Sensordaten wurden an den Broker gesendet.");
-        }
+
 
         private void DatenSenden(object sender, RoutedEventArgs e)
         {
@@ -154,15 +153,23 @@ namespace IIoTSimulatorUI
                 // Logbuch, welche Daten gesendet wurden
                     
                 k += $"\nDer Sensor {sensor} hat {SensorValues[sensor].Count} Wert an den Broker gesendet und den Topic ist {Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic)}";
+
+
+                ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat das Wert " + (SensorValues[sensor][CurrentValueNumber]) + " an den Broker gesendet";
+                MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic), Convert.ToString(SensorValues[sensor][CurrentValueNumber]));
+                CurrentValueNumber += 1;
+
+                /* Für alle Daten gleichzeitig
                 for (int i = 0; i < SensorValues[sensor].Count; i++)
                 {
                     ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat das Wert " + (SensorValues[sensor][i]) + " an den Broker gesendet";
                     MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic),Convert.ToString(SensorValues[sensor][i]));
                 }
+                */
                 // Hier müssten Daten an Broker gesendet werden
             }
 
-            MessageBox.Show(k);
+            
         }
 
         private void Abbrechen(object sender, RoutedEventArgs e)
