@@ -30,11 +30,14 @@ namespace IIoTSimulatorUI
         //
         //
         // Für neue Linechart
+               
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
         private ChartValues<double> values;
         private Dictionary<string, ChartValues<double>> SensorValues;
+
+        
         //
         //
         //
@@ -77,7 +80,12 @@ namespace IIoTSimulatorUI
             {
                 Labels= Array.ConvertAll(Labelsint, x => x.ToString());
             }
+
+            // Beschriftung der Werte YAchse
             YFormatter = value => value.ToString("");
+
+
+
 
 
              SensorValues = new Dictionary<string, ChartValues<double>>();

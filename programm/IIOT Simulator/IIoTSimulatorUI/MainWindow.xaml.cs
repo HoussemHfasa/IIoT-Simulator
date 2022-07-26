@@ -76,17 +76,17 @@ namespace IIoTSimulatorUI
         //Button um auf die Seite der Simulation zu gelangen
         private void StartSimulationClick(object sender, RoutedEventArgs e)
         {
-            /*if (ExistingSensorgroup == null)
-            {
-                MessageBox.Show("laden Sie Einen SensorGroupe oder erstellen Sie einen neuer");
-            }*/
-            // Fallunterscheidung falls noch keine Sensorgroup besteht..
 
-            // TODO prüfen ob hier eine Liste der erzeugt wird Sensoren enthält
-            //Sensorgroup.allchildren.Values.ToList();
-            SimulationUI objectSimulation = new SimulationUI(ref Sensorgroup);
-            this.Visibility = Visibility.Hidden;
-            objectSimulation.Show();
+            if (Sensorgroup.allchildren.Count == 0)
+            {
+                MessageBox.Show("Erstellen oder laden Sie eine Sensorgruppe");
+            }
+            else
+            {
+                SimulationUI objectSimulation = new SimulationUI(ref Sensorgroup);
+                this.Visibility = Visibility.Hidden;
+                objectSimulation.Show();
+            }
         }
 
 
