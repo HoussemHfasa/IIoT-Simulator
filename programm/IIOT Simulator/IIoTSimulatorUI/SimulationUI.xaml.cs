@@ -76,8 +76,6 @@ namespace IIoTSimulatorUI
                 Labels= Array.ConvertAll(Labelsint, x => x.ToString());
             }
             YFormatter = value => value.ToString("");
-            Ingrid.
-
 
 
              SensorValues = new Dictionary<string, ChartValues<double>>();
