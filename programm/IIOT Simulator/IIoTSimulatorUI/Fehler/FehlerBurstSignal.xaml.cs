@@ -28,13 +28,27 @@ namespace IIoTSimulatorUI
 
         private void Hinzufügen(object sender, RoutedEventArgs e)
         {
-            // TODO Nutzereingaben überprüfen
+            
 
+            //Nutzereingabe ErrorRate überprüfen
+            if((Convert.ToDouble(textBoxErrorRate.Text) < 0.0) || (Convert.ToDouble(textBoxErrorRate.Text) > 1))
+            {
+                MessageBox.Show("Die Fehlerrate muss zwischen 0,0 und 1,0 liegen.");
+            }
+            else if(Convert.ToInt32(textBoxBurstduration.Text) < 0)
+            {
+                MessageBox.Show("Die Fehlerdauer darf nicht kleiner als 0 sein.");
+            }
+            else
+            {
+
+            
             // Fehlerdatengenerator erzeugen, Sensordaten mit Fehlern versehen
             BurstNoise DataGenerator = new BurstNoise(Convert.ToDouble(textBoxBurstvalue.Text), Convert.ToInt32(textBoxBurstduration.Text), Convert.ToDouble(textBoxErrorRate.Text));
             DoubleSensor.SetValues(DataGenerator.GetSensorDataWithErrors(DoubleSensor.GetValues()));
 
             Close();
+            }
 
         }
 

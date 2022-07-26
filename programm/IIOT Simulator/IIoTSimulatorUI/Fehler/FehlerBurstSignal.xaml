@@ -43,7 +43,7 @@
                 FontSize="16"
                 VerticalAlignment="Top"
                 Foreground="AliceBlue"
-                BorderThickness="2,2,2,2" Text="0.00"   
+                BorderThickness="2,2,2,2" Text="15"   
                 />
 
         <!-- Label für Impuls/Burst Dauer-->
@@ -58,7 +58,7 @@
 
         <!-- TextBox für die Impuls/Burst Dauer -->
         <TextBox x:Name="textBoxBurstduration" 
-                Text="0.00"
+                Text="3"
                 Margin="224,152,420,0"
                 Height="30"
                   Background="#ff1f4663"
@@ -82,7 +82,7 @@
 
         <!-- TextBox für Die Fehlerrate-->
         <TextBox x:Name="textBoxErrorRate" 
-                Text="0.00"
+                Text="0,2"
                 Margin="224,221,420,0"
                 Height="30"
                   Background="#ff1f4663"
