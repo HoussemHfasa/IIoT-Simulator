@@ -13,6 +13,7 @@ using MQTTCommunicator;
 
 namespace IIoTSimulatorUI
 {
+    // statische Klasse die ein Communicator Objekt enhält, damit Simulation UI auf das Objekt zugreifen kann
     public static class MQTT
     {
         public static Communicator BrokerCom = new Communicator();
@@ -46,6 +47,7 @@ namespace IIoTSimulatorUI
 
             if (button1WasClicked==false)//Hier wird die Verbindung hergestellt nur mit Broker-Namen und dem Port
             {
+                // Verbindung mit Broker herstellen
                 string verbunden = MQTT.BrokerCom.ConnectToBroker(brokerNameEingabe, portEingabe);
 
                 if (verbunden.Equals("-Connected\n-"))
@@ -59,6 +61,7 @@ namespace IIoTSimulatorUI
             }
             else//Sollte der Haken gesetzt werden, wird mit dem Broker Namen, Port, Nutzernamen und dem Passwort eine Verbindung hergestellt
             {
+                // Verbindung mit dem Broker herstellen
                 string verbunden2 = MQTT.BrokerCom.ConnectToBroker(brokerNameEingabe, portEingabe, nutzernameEingabe, passwortEingabe);
 
                 if (verbunden2.Equals("-Connected\n-"))
@@ -97,6 +100,7 @@ namespace IIoTSimulatorUI
             Close();
         }
 
+        // Der Haken in der UI wurde gesetzt -> Nutzername und Passwort werden hell
         private void HakenSetzen(object sender, RoutedEventArgs e)
         {
             //Sollte noch der Nutzername und das Passwort benötigt werden, 
