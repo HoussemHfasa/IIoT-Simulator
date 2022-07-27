@@ -270,7 +270,7 @@ namespace IIoTSimulatorUI
                 textBoxEingabeSensor.Clear(); //TextBox Eingabe wieder löschen
 
                 // Sensoren mit anderer Farbe
-                SolidColorBrush brush = new SolidColorBrush(Color.FromRgb(0, 102, 102));
+                SolidColorBrush brush = new SolidColorBrush(Color.FromRgb(102,0, 102));
                 sensorname.Foreground = brush;
                 
 
