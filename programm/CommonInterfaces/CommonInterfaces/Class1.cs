@@ -116,7 +116,6 @@ namespace CommonInterfaces
         /// deserialise Textdatei zu Json datei ,um die gespeicherte sensorgruppe zu laden
         /// </summary>
         /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
-       // public IBrokerProfile LoadBrokerProfile(string filepath);
         /// <summary>
         /// speichern die Sensorgruppe
         /// </summary>
@@ -128,11 +127,6 @@ namespace CommonInterfaces
         /// </summary>
         /// <param name="filepath"> Dateipfad, wo die SensorListe wird gespeichert </param>
         //Das Tree speichern
-        //public void SaveTree(Sensorgroups Sensorgroup, string Filepath);
-        
-        //Ladung der Sensorgruppe
-        //public Sensorgroups LoadTree(string Filepath);
-
     }
 
 
