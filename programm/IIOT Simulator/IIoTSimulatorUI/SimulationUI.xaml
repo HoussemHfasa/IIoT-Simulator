@@ -146,7 +146,7 @@
                     Click="DatenSenden"
                 Foreground="White"
                     FontSize="16" 
-                    Margin="0,205,0,-220" 
+                    Margin="0,152,0,-167" 
                     HorizontalAlignment="Center"
                     Width="192"
                     Cursor="Hand">
@@ -222,76 +222,17 @@
                 </Button.Template>
             </Button>
 
-
-
-            <!-- Button um Sensor auszuwählen-->
-            <Button Content="Auswählen"
-                    Click="Sensorauswaehlen"
-                Foreground="White"
-                    FontSize="16" 
-                    Margin="9,63,0,-72" 
-                    HorizontalAlignment="Left"
-                    Width="190"
-                    Cursor="Hand" Grid.Column="2">
-
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="TextElement.FontFamily" 
-                                Value ="Fonts/Dosis"/>
-                        <Setter Property="Background" 
-                                Value="#008080"/>
-                        <Setter Property="Cursor" 
-                                Value="Hand"/>
-
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" 
-                                     Value="True">
-                                <Setter Property="Background"
-                                        Value="Aqua"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border Width="180" Height="30"
-                                CornerRadius="12"
-                                Background= "{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center"
-                                HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-
-            <!-- ComboBox Sensortyp-->
-            <ComboBox 
-                Name="SensortypBox"
-                Grid.Column="1" 
-                Margin="49,71,36,-66"
-                Width="150"
-                Height="30">
-            </ComboBox>
-
-            <!-- Label Sensor-->
-            <Label
-                Content="Wählen Sie einen Sensor aus."
-                Margin="32,68,186,-69"
-                FontSize="18"
-                Foreground="White"
-                FontFamily="Fonts/#Dosis" Grid.ColumnSpan="2"/>
-
             <!-- Label Senden-->
             <Label
                 Content="Einzelwerte an den Broker senden."
-                Margin="28,162,149,-165"
+                Margin="28,103,149,-106"
                 FontSize="14"
                 Foreground="White"
                 FontFamily="Fonts/#Dosis" Grid.ColumnSpan="2"/>
 
             <ScrollViewer
                           BorderThickness="10"
-                HorizontalScrollBarVisibility="Auto" Margin="348,442,-651,-517">
+                HorizontalScrollBarVisibility="Auto" Margin="76,411,-16,-523" Grid.ColumnSpan="3" Grid.Column="1">
                 <ScrollViewer.BorderBrush>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black"/>
@@ -305,14 +246,14 @@
                         FontSize="12"
                         FontFamily="Fonts/#Dosis"
                         TextWrapping="Wrap" 
-                        Margin="0,0,0,20" Height="1408" Width="519">
+                        Margin="0,0,0,20" Height="1481" Width="554">
                          Hier werden die gesendeten Sensordaten angezeigt.
                     </TextBlock>
 
                 </StackPanel>
             </ScrollViewer>
 
-            <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Name ="Ingrid" Margin="76,146,-33,-391" Grid.ColumnSpan="3" Grid.Column="1" >
+            <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Name ="Ingrid" Margin="49,90,-6,-371" Grid.ColumnSpan="3" Grid.Column="1" >
                 <lvc:CartesianChart.AxisY>
                     <lvc:Axis Title="Wert" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
                 </lvc:CartesianChart.AxisY>
@@ -324,7 +265,7 @@
             <!-- Label Globus-->
             <Label
                 Content="🌍"
-                Margin="107,40,-50,-106"
+                Margin="115,35,-58,-101"
                 FontSize="70"
                 Foreground="#59254B6F"
                 FontFamily="Fonts/#Dosis" 
@@ -336,7 +277,7 @@
             <!-- Label Daten mit Zeit-->
             <Label
                 Content="Daten mit "
-                Margin="18,295,140,-298"
+                Margin="22,233,137,-236"
                 FontSize="14"
                 Foreground="White"
                 FontFamily="Fonts/#Dosis" 
@@ -346,7 +287,7 @@
             <!--TextBox für die Zeit Eingabe-->
             <TextBox 
                 x:Name="TextBoxZeit"
-                Margin="108,300,77,-287" 
+                Margin="108,237,77,-224" 
                 Background="Transparent" 
                 BorderBrush="#FF656A77" 
                 BorderThickness="0,0,0,1"
@@ -358,7 +299,7 @@
             <!-- Label Daten mit Zeit Pt.2-->
             <Label
                 Content="Sekunden "
-                Margin="163,295,186,-298"
+                Margin="163,233,186,-236"
                 FontSize="14"
                 Foreground="White"
                 FontFamily="Fonts/#Dosis" 
@@ -369,7 +310,7 @@
             <!-- Label Daten mit Zeit Pt.3-->
             <Label
                 Content="Zeitintervallen senden."
-                Margin="28,338,11,-341"
+                Margin="28,276,11,-279"
                 FontSize="14"
                 Foreground="White"
                 FontFamily="Fonts/#Dosis"/>
@@ -379,7 +320,7 @@
                     Click="DatenSendenZeit"
                 Foreground="White"
                     FontSize="16" 
-                    Margin="0,381,0,-396" 
+                    Margin="0,320,0,-335" 
                     HorizontalAlignment="Center"
                     Width="192"
                     Cursor="Hand">

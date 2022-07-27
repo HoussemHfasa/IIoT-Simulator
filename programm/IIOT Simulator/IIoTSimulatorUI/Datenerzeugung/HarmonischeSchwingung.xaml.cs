@@ -21,37 +21,56 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class HarmonischeSchwingung : Window
     {
-        HarmonicOscillation DataGenerator;
+        // Sensor der simuliert wird
         Sensor<double> DoubleSensor = null;
+        
+        //Datengenerator harmonische Schwingung
+        HarmonicOscillation DataGenerator;
+
+        //Liste enhält die generierten Werte
         List<double> Datenliste;
         bool Boolconstructor;
-        // Für neue Linechart
-
+        
+        // Für Linechart
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
         private ChartValues<double> values;
 
+        // Konstruktor bekommt die Referenz des neu erstellten Double Sensors übergeben
         public HarmonischeSchwingung(ref SensorAndSensorgroup.Sensor<double> NewSensor)
         {
+            //Marker, welcher Konstruktor verwendet wurde
             Boolconstructor = true;
+
             this.DoubleSensor = NewSensor;
-            //this.DoubleSensor_aktualisierung = NewSensor;
             InitializeComponent();
         }
+
+        //Konstruktor der bei Button Aktualisieren aufgerufen wird. Es wird zusätzlich noch das Berechnungsergebnis übergeben
         public HarmonischeSchwingung(ref SensorAndSensorgroup.Sensor<double> NewSensor, List<double> Sensordaten)
         {
+            //Marker, welcher Konstruktor verwendet wurde
             Boolconstructor = false;
+
+            // Parameter abspeichern
             this.DoubleSensor = NewSensor;
             this.Datenliste = Sensordaten;
-            values = new ChartValues<double>();
+
+            
             int[] Labelsint = null;
+
+            //Seite inizialisieren
             InitializeComponent();
+
+            // Neue Collection mit LineSeries
             SeriesCollection = new SeriesCollection
             {
             };
+
             Labelsint = new int[Datenliste.Count];
             Labels = new string[Datenliste.Count];
+
             for (int i = 0; i < Datenliste.Count; i++)
             {
                 Labelsint[i] = i;
@@ -60,13 +79,15 @@ namespace IIoTSimulatorUI
             {
                 Labels = Array.ConvertAll(Labelsint, x => x.ToString());
             }
+
             values = new ChartValues<double>();
             values.AddRange(Datenliste);
 
             // Beschriftung der Werte YAchse
             YFormatter = value => value.ToString("");
-            //modifying the series collection will animate and update the chart
+            
 
+            // neue LineSeries hinzufügen
             SeriesCollection.Add(new LineSeries
             {
                 Title = DoubleSensor.Sensor_id,
@@ -76,10 +97,11 @@ namespace IIoTSimulatorUI
             });
             DataContext = this;
         }
-      
 
+        // Butten Fehler Hinzufügen
         private void FehlerHinzufuegen(object sender, RoutedEventArgs e)
         {
+            // try-catch auf ungültiges Format in der Eingabe
             try
             {
                 //die Überprüfung Nutzereingaben. 
@@ -89,21 +111,25 @@ namespace IIoTSimulatorUI
                 }
                 else
                 {
-
-                    // Objekt der Datenerzeugungsmethode erstellen, Daten erzeugen und in DoubleSensor abspeichern
+                    //Wenn keine vorheringen Daten vorhanden
                     if(Boolconstructor==true)
                     {
+                        // Objekt der Datenerzeugungsmethode erstellen, Daten erzeugen und in DoubleSensor abspeichern
                         DataGenerator = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude.Text), Convert.ToDouble(textBoxPeriodendauer.Text), Convert.ToDouble(textBoxPhasenverschiebung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
                         DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
                     }
-                    else
+                    else //Daten vorhanden (Anzeige in Linechart)
                     {
+                        // vorhandenen Daten in Sensor abspeichern
                         DoubleSensor.SetValues(Datenliste);
                     }
+
+                    //Folgefenster erstellen
                     SensordatenFehler objectFehler = new SensordatenFehler(ref DoubleSensor);
 
-                    //TODO: Hier wieder close?
-                    this.Visibility = Visibility.Hidden;
+
+                    Close();
+                    // Folgefenster öffnen
                     objectFehler.Show();
                 }
             }
@@ -114,45 +140,48 @@ namespace IIoTSimulatorUI
             
         }
 
+        // Sensordaten speichern Button
         private void SensordatenSpeichern(object sender, RoutedEventArgs e)
         {
-            try { 
-            //die Überprüfung Nutzereingaben. 
-            if (Convert.ToDouble(textBoxAmplitude.Text) < 0.0 || Convert.ToDouble(textBoxPeriodendauer.Text) < 0.0 || Convert.ToInt32(textBoxWerteanzahl.Text) < 0)
+            //try-catch auf ungültiges Format
+            try
+            {
+                //die Nutzereingaben Überprüfung
+                if (Convert.ToDouble(textBoxAmplitude.Text) < 0.0 || Convert.ToDouble(textBoxPeriodendauer.Text) < 0.0 || Convert.ToInt32(textBoxWerteanzahl.Text) < 0)
             {
                 MessageBox.Show("Amplitude,Dämpfungsrate, Periodendauer und Werteanzahl dürfen nicht negativ sein.");
             }
             else
             {
-                 
-                    // Objekt der Datenerzeugungsmethode erstellen, Daten erzeugen und in DoubleSensor abspeichern
+  
                 if (Boolconstructor==true)
                     {
-                       DataGenerator = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude.Text), Convert.ToDouble(textBoxPeriodendauer.Text), Convert.ToDouble(textBoxPhasenverschiebung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
+                        // Objekt der Datenerzeugungsmethode erstellen, Daten erzeugen und in DoubleSensor abspeichern
+                        DataGenerator = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude.Text), Convert.ToDouble(textBoxPeriodendauer.Text), Convert.ToDouble(textBoxPhasenverschiebung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
                         DoubleSensor.SetValues(DataGenerator.GetSimulatorValues());
                     }
-                    else
+                else// Daten aus angezeigten Daten speichern
                     {
                         DoubleSensor.SetValues(Datenliste);
                     }
                     Close();
                 }
-        }
+            }
             catch (System.FormatException)
             {
                 MessageBox.Show("Ungültige Eingabe");
             }
 }
-
+        //Seite schließen Button
         private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
         {
             Close();
         }
-       
 
+        // Aktualisieren Button erzeugt Linechart
         private void Aktualisieren(object sender, RoutedEventArgs e)
         {
-                       
+            //try-catch für ungültige Nutzereingaben           
             try
             {
                 //die Überprüfung Nutzereingaben. 
@@ -165,6 +194,8 @@ namespace IIoTSimulatorUI
                     // Objekt der Datenerzeugungsmethode erstellen, Daten erzeugen und in DoubleSensor abspeichern
                     DataGenerator = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude.Text), Convert.ToDouble(textBoxPeriodendauer.Text), Convert.ToDouble(textBoxPhasenverschiebung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
                     Datenliste= DataGenerator.GetSimulatorValues();
+
+                    // Seite neu aufrufen mit bestehender Datenliste -> Linechart baut sich auf
                     HarmonischeSchwingung Aktualisirung = new HarmonischeSchwingung(ref DoubleSensor, Datenliste);
                     this.Visibility = Visibility.Hidden;
                     Aktualisirung.Show();

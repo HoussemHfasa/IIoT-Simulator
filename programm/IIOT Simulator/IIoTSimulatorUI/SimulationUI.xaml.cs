@@ -189,12 +189,15 @@ namespace IIoTSimulatorUI
         }
 
 
+<<<<<<< HEAD
 
         private void Sensorauswaehlen(object sender, RoutedEventArgs e)
         {
 
         }
 
+=======
+>>>>>>> 66d1656f0792a4c128d00078a8fdcca944da4a80
         // Funktion, die einen Sensor als Parameter erhält und seine Daten als ChartValues<double> zurückgiebt. Boolwerte werden als 0 und 1 dargestellt.
         public ChartValues<double> EinzelneSensorDaten(TreeNode Sensor)
         {
