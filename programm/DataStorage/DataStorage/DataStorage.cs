@@ -49,7 +49,7 @@ namespace DataStorage
         public void SavebrokerProfile(IBrokerProfile data, string filepath)
         {
             var serializer = new JsonSerializer();
-            using (TextWriter writer = File.CreateText(filepath+ "BrokerProfileTest"))
+            using (TextWriter writer = File.CreateText(filepath+ @"\BrokerProfileTest"))
             {
                 serializer.Serialize(writer, data);
             }
@@ -61,7 +61,7 @@ namespace DataStorage
 
             IBrokerProfile data = new MQTTCommunicator.BrokerProfile();
             var serializer = new JsonSerializer();
-            using (TextReader reader = File.OpenText(filepath+"BrokerProfileTest"))
+            using (TextReader reader = File.OpenText(filepath+@"\BrokerProfileTest"))
             {
                data  = (MQTTCommunicator.BrokerProfile)serializer.Deserialize(reader, typeof(MQTTCommunicator.BrokerProfile));
             }

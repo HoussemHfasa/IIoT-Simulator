@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
 using MQTTCommunicator;
 
 namespace IIoTSimulatorUI
@@ -25,12 +26,21 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class BrokerEinstellungenUI : Window
     {
-
+        BrokerProfile Brokerdaten = new BrokerProfile();
+        DataStorage.DataStorage Datasave = new DataStorage.DataStorage(); 
         bool button1WasClicked = false;
 
         public BrokerEinstellungenUI()
         {
             InitializeComponent();
+            if(File.Exists(AppDomain.CurrentDomain.BaseDirectory+@"\BrokerProfileTest"))
+            {
+                Datasave.LoadBrokerProfile(AppDomain.CurrentDomain.BaseDirectory + @"\BrokerProfileTest");
+                 BrokerNameText.Text= Brokerdaten.HostName_IP;
+                 PortText.Text=Convert.ToString(Brokerdaten.Port);
+                 NutzernameText.Text= Brokerdaten.Username;
+                 PassswortBox.Password=Brokerdaten.Password;
+            }
         }
 
 
@@ -66,6 +76,11 @@ namespace IIoTSimulatorUI
 
                 if (verbunden2.Equals("-Connected\n-"))
                 {
+                    Brokerdaten.HostName_IP= BrokerNameText.Text;
+                    Brokerdaten.Port= uint.Parse(PortText.Text);
+                    Brokerdaten.Username = NutzernameText.Text;
+                    Brokerdaten.Password= PassswortBox.Password.ToString();
+                    Datasave.SavebrokerProfile(Brokerdaten, AppDomain.CurrentDomain.BaseDirectory);
                     MessageBox.Show("Erfolgreiche Broker-Verbindung");
                 }
                 else
