@@ -58,7 +58,7 @@
 
         <!-- TextBox für die Amplitude1-->
         <TextBox x:Name="textBoxAmplitude1" 
-                Text="0.00"
+                Text="0,00"
                 Margin="181,95,568,0"
                 Height="30"
                   Background="#ff1f4663"
@@ -72,7 +72,7 @@
         
         <!-- TextBox für die Amplitude2-->
         <TextBox x:Name="textBoxAmplitude2" 
-                Text="0.00"
+                Text="0,00"
                 Margin="277,95,472,0"
                 Height="30"
                   Background="#ff1f4663"
@@ -96,7 +96,7 @@
 
         <!-- TextBox für die Periodendauer1 -->
         <TextBox x:Name="textBoxPeriodendauer1" 
-                Text="0.00"
+                Text="0,00"
                 Margin="181,160,568,0"
                 Height="30"
                   Background="#ff1f4663"
@@ -110,7 +110,7 @@
 
         <!-- TextBox für die Periodendauer2 -->
         <TextBox x:Name="textBoxPeriodendauer2" 
-                Text="0.00"
+                Text="0,00"
                 Margin="277,160,472,0"
                 Height="30"
                   Background="#ff1f4663"
@@ -134,7 +134,7 @@
 
         <!-- TextBox für die Phasenverschiebung1-->
         <TextBox x:Name="textBoxPhasenverschiebung1" 
-                Text="0.00"
+                Text="0,00"
                 Margin="181,221,568,0"
                 Height="30"
                   Background="#ff1f4663"
@@ -148,7 +148,7 @@
 
         <!-- TextBox für die Phasenverschiebung2-->
         <TextBox x:Name="textBoxPhasenverschiebung2" 
-                Text="0.00"
+                Text="0,00"
                 Margin="277,221,472,0"
                 Height="30"
                   Background="#ff1f4663"
@@ -376,7 +376,7 @@
                 <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
             <lvc:CartesianChart.AxisX>
-                <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
+                <lvc:Axis Title="Werteanzahl" Labels="{Binding Labels}"></lvc:Axis>
             </lvc:CartesianChart.AxisX>
         </lvc:CartesianChart>
     </Grid>
