@@ -78,6 +78,7 @@ namespace DataStorage
             JsonSerialize(Folderpath, "Sensorgroupname", Sensorgroupname, Sensorgroup.Sensorgroupname);
             
         }
+        //Basenames des Baumes laden
              List<string> Load_Basenames(string Filepath)
             {
                 var serializer = new JsonSerializer();
@@ -90,8 +91,8 @@ namespace DataStorage
 
                 return basenames;
             }
-       
-         Dictionary<string, TreeNode> Load_allchildren(string Filepath)
+        //die Unterordner laden
+        Dictionary<string, TreeNode> Load_allchildren(string Filepath)
             {
                 var serializer = new JsonSerializer();
                 Dictionary<string, TreeNode> alltree = new Dictionary<string, TreeNode>();
@@ -103,7 +104,7 @@ namespace DataStorage
 
                 return alltree;
             }
-           
+           //die Basenames und ihre Unterordner laden
          Dictionary<string, int> Load_Basenames_children(string Filepath)
         {
             var serializer = new JsonSerializer();
@@ -116,6 +117,7 @@ namespace DataStorage
 
             return basenames;
         }
+        //die Sensorgroupname laden
         string Load_Sensorgroupname(string Filepath)
         {
             var serializer = new JsonSerializer();
@@ -129,6 +131,7 @@ namespace DataStorage
 
             return basenames;
         }
+        //das ganze Baum laden
         public Sensorgroups LoadTree(string Filepath)
         {
             Sensorgroups sensorgroup = new Sensorgroups();
