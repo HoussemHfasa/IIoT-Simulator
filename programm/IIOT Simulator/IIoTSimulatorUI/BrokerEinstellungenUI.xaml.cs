@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
 using MQTTCommunicator;
 
 namespace IIoTSimulatorUI
@@ -25,12 +26,21 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class BrokerEinstellungenUI : Window
     {
-
+        BrokerProfile Brokerdaten = new BrokerProfile();
+        DataStorage.DataStorage Datasave = new DataStorage.DataStorage(); 
         bool button1WasClicked = false;
 
         public BrokerEinstellungenUI()
         {
             InitializeComponent();
+            if(File.Exists(AppDomain.CurrentDomain.BaseDirectory+@"\BrokerProfileTest"))
+            {
+               Brokerdaten= Datasave.LoadBrokerProfile(AppDomain.CurrentDomain.BaseDirectory);
+                 BrokerNameText.Text= Brokerdaten.HostName_IP;
+                 PortText.Text=Convert.ToString(Brokerdaten.Port);
+                 NutzernameText.Text= Brokerdaten.Username;
+                 PassswortBox.Password=Brokerdaten.Password;
+            }
         }
 
 
@@ -39,10 +49,14 @@ namespace IIoTSimulatorUI
         //aufgefordert den Nutzernamen und das Passwort einzugeben.
         private void Verbinden(object sender, RoutedEventArgs e)
         {
-            string brokerNameEingabe = BrokerNameText.Text;
-            int portEingabe = Int32.Parse(PortText.Text);
-            string nutzernameEingabe = NutzernameText.Text;
-            string passwortEingabe = PassswortBox.Password.ToString();
+            try
+            {
+                string brokerNameEingabe = BrokerNameText.Text;
+                int portEingabe = Int32.Parse(PortText.Text);
+                string nutzernameEingabe = NutzernameText.Text;
+                string passwortEingabe = PassswortBox.Password.ToString();
+            
+
 
 
             if (button1WasClicked==false)//Hier wird die Verbindung hergestellt nur mit Broker-Namen und dem Port
@@ -52,6 +66,11 @@ namespace IIoTSimulatorUI
 
                 if (verbunden.Equals("-Connected\n-"))
                 {
+                    Brokerdaten.HostName_IP = BrokerNameText.Text;
+                    Brokerdaten.Port = uint.Parse(PortText.Text);
+                    Brokerdaten.Username = NutzernameText.Text;
+                    Brokerdaten.Password = PassswortBox.Password.ToString();
+                    Datasave.SavebrokerProfile(Brokerdaten, AppDomain.CurrentDomain.BaseDirectory);
                     MessageBox.Show("Erfolgreiche Broker-Verbindung");
                 }
                 else
@@ -66,12 +85,18 @@ namespace IIoTSimulatorUI
 
                 if (verbunden2.Equals("-Connected\n-"))
                 {
+                    
                     MessageBox.Show("Erfolgreiche Broker-Verbindung");
                 }
                 else
                 {
                     MessageBox.Show("Verbindung fehlgeschlagen: " + verbunden2);
                 }
+            }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Invalid Host and Port");
             }
         }
 

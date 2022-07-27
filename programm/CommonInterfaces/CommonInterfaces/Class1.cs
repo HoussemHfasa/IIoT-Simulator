@@ -31,48 +31,29 @@ namespace CommonInterfaces
         public void SetValues(List<T> Values);
      
     }
+   
     public interface ISensorGroups
     {
-        
-        // algemeine Adresse für die Sensorgruppe
-        string Base { get; set; }
-
+        //die Methode Basename/Nodename/Sensor nicht geeignet für unsere Programm ,da der Nutzer mehrere Unterordner erstellen kann
+        //deswegen haben wir eine andere Lösung implimentiert
        
-        // Unterordner Name
-        public string Node { get; set; }
-
-        //List von Sensoren und ihren Node
-        public Dictionary<string, List<string>> SensorIds { get; }
-
-
-
-        /// <summary>
-        /// Ein Sensor_Id in der SensorIds Liste hinzufügen
-        /// </summary>
-        /// <param name="sensorids"> die Liste von Sensorids </param>
-        /// <param name="sensorid"> das id zu hinzufugen zur Id_liste </param>
-        public void Sensorhinzufuegen(string sensorid, string NodeName, string Basename);
-
-        /// <summary>
-        /// Ein Sensor_Id von der SensorIds Liste loeschen
-        /// </summary>
-        /// <param name="sensorids"> die Liste von Sensorids </param>
-        /// <param name="sensorid"> das id zu loeschen von der Liste </param>
-        public void Sensorloeschen(string sensorid, string NodeName, string Basename);
-
-        //Stamm hinzufügen
-        public void AddBase(string BaseName);
-
-        // Unterordner hinzufügen
-        public void AddNode(string NodeName, string Basename);
-
-        //Löschen von Stamm/Unterordner
-        public void DeleteNode(string NodeName, string Basename);
-        public void DeleteBase(string BaseName);
-
+        //Dictionary enthalt die Unterordner- und Sensorenname und ihre Treenode
+       // public Dictionary<string, TreeNode> allchildren { get; set; }
+        //Dictionary enthalt die Basenames und ihre Unterordnername
+      /*  public Dictionary<string, int> basenames_children { get; set; }
+        //Liste von Basenames
+        public List<string> basenames { get; set; }
+        //sensorgroupname wichtig für die Speicherung und die Ladung der Sensorgruppe
+        public string Sensorgroupname { get; set; }
+        //Methode erstellt ein Basenames*/
+        public void Add_new_Base(string basename);
+        //Methode, die ein neues Unterordner hinzufügt
+        public void Add_new_Node(string Mother, string Node);
+        //Methode, die ein neues Sensor hinzufügt
+        public void Add_new_Sensor(string Mother, dynamic new_Sensor);
 
     }
-   
+
     public interface IMQTTCommunicator
     {
         
@@ -135,38 +116,26 @@ namespace CommonInterfaces
         /// deserialise Textdatei zu Json datei ,um die gespeicherte sensorgruppe zu laden
         /// </summary>
         /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
-        public Dictionary<string, List<string>> LoadSensorgroup(string Base, string Filepath);
-        /// <summary>
-        /// deserialise Textdatei zu Json datei ,um die gespeicherte BrockerProfile zu laden
-        /// </summary>
-        /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
-        public IBrokerProfile LoadBrokerProfile(string filepath);
+       // public IBrokerProfile LoadBrokerProfile(string filepath);
         /// <summary>
         /// speichern die Sensorgruppe
         /// </summary>
         ///  <param name="data"> die liste mit der Sensor_ids des gruppes </param>
         /// <param name="filepath"> Dateipfad, wo die Sensorgroup werden gespeichert </param>
-        public void SaveSensorgroup(Dictionary<string, List<string>> SensorListe, string Base, string Filepath);
-        /// <summary>
-        /// speichern die BrockerProfile
-        /// </summary>
-        ///  <param name="data"> die BrockerProfileDaten </param>
-        /// <param name="filepath"> Dateipfad, wo die BrockerProfileDaten werden gespeichert </param>
         public void SavebrokerProfile(IBrokerProfile data, string filepath);
         /// <summary>
         /// Ladung der Liste von Basenamen
         /// </summary>
         /// <param name="filepath"> Dateipfad, wo die SensorListe wird gespeichert </param>
-        public List<string> BasenameDeserialize(string filepath);
-        /// <summary>
-        /// Speicherung der Liste von Basenamen
-        /// </summary>
-        ///  <param name="data"> List der Basenamen </param>
-        /// <param name="filepath"> Dateipfad, wo die Basenameliste wird gespeichert </param>
-        public void BasenamSerialize(List<string> data, string filepath);
+        //Das Tree speichern
+        //public void SaveTree(Sensorgroups Sensorgroup, string Filepath);
+        
+        //Ladung der Sensorgruppe
+        //public Sensorgroups LoadTree(string Filepath);
+
     }
 
-  
+
     public interface ISensorDataErrors  
     {
         //Fehlerrate

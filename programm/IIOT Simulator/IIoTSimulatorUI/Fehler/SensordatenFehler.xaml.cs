@@ -17,15 +17,11 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class SensordatenFehler : Window
     {
-        Sensor<bool> BoolSensor;
+
+        // Deklaration Sensor<double um ref Sensor aus Konstruktor zu speichern
         Sensor<double> DoubleSensor;
 
-        //Konstruktor für bool Sensoren
-        public SensordatenFehler(ref Sensor<bool> newSensor)
-        {
-            this.BoolSensor = newSensor; 
-            InitializeComponent();
-        }
+
         //Konstruktor für double Sensoren
         public SensordatenFehler(ref Sensor<double> newSensor)
         {
@@ -33,27 +29,23 @@ namespace IIoTSimulatorUI
             InitializeComponent();
         }
 
-        // TODO: Dieser Konstruktor sollte nicht verwendet werden
-        public SensordatenFehler()
-        {
-            InitializeComponent();
-        }
-
-
+        // Button zum schließen der Seite
         private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+
+        // Button zum Auswahl der Fehlermethode
         private void Fehlermethode(object sender, RoutedEventArgs e)
         {
-            //TODO: Fallunterscheidung welches Combobox Contentitem ausgewählt wurde
-
+           
+            // Vom Nuter ausgewählten Text speichern
             string FehlerAuswahl = FehlerBox.Text;
 
+            // Fallunterscheidung für die verschiendenen Fehlererzeugungsmethoden öffnet die jeweilige Fehlererzeugungsseite
             if (FehlerAuswahl.Equals("Zufallswerte"))
-            {
-                // Für Zufallswerte
+            {                
                 FehlerZufallswerte objectFehlerZufall = new FehlerZufallswerte(ref DoubleSensor);
                 this.Visibility = Visibility.Hidden;
                 objectFehlerZufall.Show();
@@ -76,7 +68,7 @@ namespace IIoTSimulatorUI
                 this.Visibility = Visibility.Hidden;
                 objectAbklingend.Show();
             }
-            else
+            else // Wenn keine Methode ausgewählt wurde
             {
                 MessageBox.Show("Wählen Sie eine Fehlermethode aus.");
             }
