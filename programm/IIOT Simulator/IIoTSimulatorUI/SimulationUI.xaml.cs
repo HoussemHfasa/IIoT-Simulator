@@ -201,6 +201,11 @@ namespace IIoTSimulatorUI
         {
             
         }
+
+        private void DatenSendenZeit(object sender, RoutedEventArgs e)
+        {
+            // Die TextBox dazu heißt "TextBoxZeit" um die Eingabe zu übernehmen
+        }
     }
 
 }
