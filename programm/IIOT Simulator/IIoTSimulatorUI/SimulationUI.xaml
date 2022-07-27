@@ -270,27 +270,7 @@
                 Grid.Column="1" 
                 Margin="49,71,36,-66"
                 Width="150"
-                Height="30" >
-                <ComboBoxItem 
-                     Content="Temperatursensor">
-                </ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Helligkeitssensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Stromsensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Rauchmelder"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Feuchtigkeitssensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Füllstandsensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Dehnungssensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Drehmomentsensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Spannungssensor"></ComboBoxItem>
-
+                Height="30">
             </ComboBox>
 
             <!-- Label Sensor-->
