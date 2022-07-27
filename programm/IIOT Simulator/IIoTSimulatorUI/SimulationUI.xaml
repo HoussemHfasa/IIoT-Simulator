@@ -366,12 +366,13 @@
             <!--TextBox für die Zeit Eingabe-->
             <TextBox 
                 x:Name="TextBoxZeit"
-                Margin="108,286,77,-287" 
+                Margin="108,300,77,-287" 
                 Background="Transparent" 
                 BorderBrush="#FF656A77" 
                 BorderThickness="0,0,0,1"
                 Foreground="White"
-                FontSize="15"/>
+                FontSize="15" 
+                TextAlignment="Right"/>
 
 
             <!-- Label Daten mit Zeit Pt.2-->

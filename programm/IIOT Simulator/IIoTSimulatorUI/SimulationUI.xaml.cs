@@ -53,6 +53,13 @@ namespace IIoTSimulatorUI
             //Seite initialisieren
             InitializeComponent();
 
+            // foreach(var in Sensorliste)
+           /* {
+                cboxitem = new ComboBoxItem();
+                cboxitem.Content = var;
+                
+            }*/
+
             SensorValues = new Dictionary<string, ChartValues<double>>();
 
             // TODO : Mit Houssem: Kommentar, was hier passiert und die beiden foreach Schleifen zusammenfassen
