@@ -89,34 +89,37 @@ namespace IIoTSimulatorUI
         {
             try
             {
-                //Überprüfung Nutzereingaben
-                if (Convert.ToDouble(textBoxWechselwarscheinlichkeit.Text) > 1.0 || Convert.ToDouble(textBoxWechselwarscheinlichkeit.Text) < 0.0)
+
+                if (Boolconstructor == true)
                 {
-                    MessageBox.Show("Wechselwarscheinlichkeit darf nicht unter 0 oder über 1 liegen");
-                }
-                else if (Convert.ToInt16(textBoxWerteanzahl.Text) < 0)
-                {
-                    MessageBox.Show("Werteanzahl darf nicht negativ sein.");
-                }
-                else
-                {
-                    if (Boolconstructor == true)
+                    //Überprüfung Nutzereingaben
+                    if (Convert.ToDouble(textBoxWechselwarscheinlichkeit.Text) > 1.0 || Convert.ToDouble(textBoxWechselwarscheinlichkeit.Text) < 0.0)
+                    {
+                        MessageBox.Show("Wechselwarscheinlichkeit darf nicht unter 0 oder über 1 liegen");
+                    }
+                    else if (Convert.ToInt16(textBoxWerteanzahl.Text) < 0)
+                    {
+                        MessageBox.Show("Werteanzahl darf nicht negativ sein.");
+                    }
+
+                    else
                     {
                         // Objekt der Datenerzeugungsmethode erstellen, Daten erzeugen und in Boolsensor abspeichern
                         DataGenerator = new RandomBool(Convert.ToDouble(textBoxWechselwarscheinlichkeit.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
                         BoolSensor.SetValues(DataGenerator.GetSimulatorValues());
                     }
-                    else
-                    {
-                        BoolSensor.SetValues(Datenliste);
-                    }
-                    BoolFehlerwerte objectFehler = new BoolFehlerwerte(ref BoolSensor);
-                    this.Visibility = Visibility.Hidden;
-                    objectFehler.Show();
-                    Close();
-                
-                   }
+                }
+                else
+                {
+                    BoolSensor.SetValues(Datenliste);
+
+                }
+                BoolFehlerwerte objectFehler = new BoolFehlerwerte(ref BoolSensor);
+                this.Visibility = Visibility.Hidden;
+                objectFehler.Show();
+                Close();
             }
+
             catch (System.FormatException)
             {
                 MessageBox.Show("Ungültige Eingabe");
@@ -127,39 +130,39 @@ namespace IIoTSimulatorUI
         {
             try
             {
-                //Überprüfung Nutzereingaben
-                if (Convert.ToDouble(textBoxWechselwarscheinlichkeit.Text) > 1.0 || Convert.ToDouble(textBoxWechselwarscheinlichkeit.Text) < 0.0)
-                {
-                    MessageBox.Show("Wechselwarscheinlichkeit darf nicht unter 0 oder über 1 liegen");
-                }
-                else if (Convert.ToInt16(textBoxWerteanzahl.Text) < 0)
-                {
-                    MessageBox.Show("Werteanzahl darf nicht negativ sein.");
-                }
-                else
-                {
 
-              
                 if (Boolconstructor == true)
                 {
-                    // Objekt der Datenerzeugungsmethode erstellen, Daten erzeugen und in Boolsensor abspeichern
-                    DataGenerator = new RandomBool(Convert.ToDouble(textBoxWechselwarscheinlichkeit.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
-                    BoolSensor.SetValues(DataGenerator.GetSimulatorValues());
+                    //Überprüfung Nutzereingaben
+                    if (Convert.ToDouble(textBoxWechselwarscheinlichkeit.Text) > 1.0 || Convert.ToDouble(textBoxWechselwarscheinlichkeit.Text) < 0.0)
+                    {
+                        MessageBox.Show("Wechselwarscheinlichkeit darf nicht unter 0 oder über 1 liegen");
+                    }
+                    else if (Convert.ToInt16(textBoxWerteanzahl.Text) < 0)
+                    {
+                        MessageBox.Show("Werteanzahl darf nicht negativ sein.");
+                    }
+
+                    else
+                    {
+                        // Objekt der Datenerzeugungsmethode erstellen, Daten erzeugen und in Boolsensor abspeichern
+                        DataGenerator = new RandomBool(Convert.ToDouble(textBoxWechselwarscheinlichkeit.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
+                        BoolSensor.SetValues(DataGenerator.GetSimulatorValues());
+                    }
                 }
                 else
                 {
                     BoolSensor.SetValues(Datenliste);
                 }
-                }
                 Close();
-        }
-    
+            }
+
             catch (System.FormatException)
             {
                 MessageBox.Show("Ungültige Eingabe");
             }
         }
-        
+
 
         private void Aktualisieren(object sender, RoutedEventArgs e)
         {
@@ -176,15 +179,16 @@ namespace IIoTSimulatorUI
                     MessageBox.Show("Werteanzahl darf nicht negativ sein.");
                 }
                 else
+                {
                     // Objekt der Datenerzeugungsmethode erstellen, Daten erzeugen und in Boolsensor abspeichern
                     DataGenerator = new RandomBool(Convert.ToDouble(textBoxWechselwarscheinlichkeit.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
-                Datenliste = DataGenerator.GetSimulatorValues();
-                ZufallsBool Aktualisirung = new ZufallsBool(ref BoolSensor, Datenliste);
-                this.Visibility = Visibility.Hidden;
-                Aktualisirung.Show();
-
+                    Datenliste = DataGenerator.GetSimulatorValues();
+                    ZufallsBool Aktualisirung = new ZufallsBool(ref BoolSensor, Datenliste);
+                    this.Visibility = Visibility.Hidden;
+                    Aktualisirung.Show();
+                }
+                
             }
-
             catch (System.FormatException)
             {
                 MessageBox.Show("Ungültige Eingabe");
