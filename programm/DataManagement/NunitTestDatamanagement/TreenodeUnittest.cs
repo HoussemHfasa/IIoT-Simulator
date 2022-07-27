@@ -15,7 +15,9 @@ using Newtonsoft.Json;
 
 namespace NunitTestDatamanagement
 {
-  
+    //die Methode Basename/Nodename/Sensor nicht geeignet für unsere Programm ,da der Nutzer mehrere Unterordner erstellen kann
+    //deswegen haben wir eine andere Lösung implimentiert
+
     class TreenodeUnittest
     {
        
@@ -55,7 +57,7 @@ namespace NunitTestDatamanagement
             sensorgroupstest.Add_new_Sensor("Zimmer1",Sensor1);
             sensorgroupstest.Add_new_Sensor("Wohnzimmer", Sensor2);
             
-            Datastoragetest.SaveTree(sensorgroupstest,"testing",AppDomain.CurrentDomain.BaseDirectory);
+            Datastoragetest.SaveTree(sensorgroupstest,AppDomain.CurrentDomain.BaseDirectory);
 
             //Assert
             Assert.Pass();

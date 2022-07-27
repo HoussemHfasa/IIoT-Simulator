@@ -237,7 +237,7 @@ namespace IIoTSimulatorUI
                     if (MQTT.BrokerCom.IsConnected())
                     {
                         // Logbuch, welche Daten gesendet wurden
-                        ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat " + (SensorValues[sensor][CurrentValueNumber]) + " Werte an den Broker gesendet";
+                        ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat den Werte " + (SensorValues[sensor][CurrentValueNumber]) + " an den Broker gesendet";
 
                         // An Broker senden
                         MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic), Convert.ToString(SensorValues[sensor][CurrentValueNumber]));
@@ -249,7 +249,7 @@ namespace IIoTSimulatorUI
                        // test1();
                         //ScrollTextBlock.Text += $"\n pause timer";
                         //dispatcherTimer.Stop();
-                        ScrollTextBlock.Text += $"\n Der Sensor { sensor} konnte " + (SensorValues[sensor][CurrentValueNumber]) + " Werte nicht an den Broker senden- Keine Verbindung zum Broker";
+                        ScrollTextBlock.Text += $"\n Der Sensor { sensor} konnte den Wert " + (SensorValues[sensor][CurrentValueNumber]) + " nicht an den Broker senden- Keine Verbindung zum Broker";
                         CurrentValueNumber += 1;
                     }
                     
