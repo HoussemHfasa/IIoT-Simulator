@@ -56,6 +56,10 @@ namespace MQTTCommunicator
             //Console.WriteLine("Connecting to " + Host + " : " + Port);
             try
             {
+                if(string.IsNullOrEmpty(Host))
+                {
+                    message += "Host is empty\n";
+                }
                 if (Port > 65535 || Port < 0)
                 {
                     message += "Invalid Port\n";
@@ -102,6 +106,7 @@ namespace MQTTCommunicator
             }
             catch
             {
+                throw new FormatException(message);
                 message += "-Connection failed\n-";
             }
 

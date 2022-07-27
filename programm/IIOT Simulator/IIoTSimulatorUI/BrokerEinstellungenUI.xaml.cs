@@ -49,10 +49,14 @@ namespace IIoTSimulatorUI
         //aufgefordert den Nutzernamen und das Passwort einzugeben.
         private void Verbinden(object sender, RoutedEventArgs e)
         {
-            string brokerNameEingabe = BrokerNameText.Text;
-            int portEingabe = Int32.Parse(PortText.Text);
-            string nutzernameEingabe = NutzernameText.Text;
-            string passwortEingabe = PassswortBox.Password.ToString();
+            try
+            {
+                string brokerNameEingabe = BrokerNameText.Text;
+                int portEingabe = Int32.Parse(PortText.Text);
+                string nutzernameEingabe = NutzernameText.Text;
+                string passwortEingabe = PassswortBox.Password.ToString();
+            
+
 
 
             if (button1WasClicked==false)//Hier wird die Verbindung hergestellt nur mit Broker-Namen und dem Port
@@ -88,6 +92,11 @@ namespace IIoTSimulatorUI
                 {
                     MessageBox.Show("Verbindung fehlgeschlagen: " + verbunden2);
                 }
+            }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Invalid Host and Port");
             }
         }
 
