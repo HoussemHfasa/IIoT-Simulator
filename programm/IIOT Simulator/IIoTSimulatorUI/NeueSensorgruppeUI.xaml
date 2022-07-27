@@ -211,7 +211,7 @@
                 Foreground="#FFD1EFF0" 
                 FontStyle="Normal" 
                 FontStretch="Medium" 
-                Background="#66B5D6EE" 
+                Background="#FFB5D6EE" 
                 FontWeight="Bold"
                 FontFamily="Fonts/#Dosis"
                 BorderBrush="#FF4D6A94"

@@ -37,7 +37,7 @@
 
         <!-- TextBox für die Amplitude-->
         <TextBox x:Name="textBoxAmplitude" 
-                Text="0,00"
+                Text="70"
                 Margin="213,95,453,0"
                 Height="30"
                   Background="#ff1f4663"
@@ -61,7 +61,7 @@
 
         <!-- TextBox für die Periodendauer -->
         <TextBox x:Name="textBoxPeriodendauer" 
-                Text="0,00"
+                Text="14"
                 Margin="213,160,453,0"
                 Height="30"
                   Background="#ff1f4663"
@@ -85,7 +85,7 @@
 
         <!-- TextBox für die Phasenverschiebung-->
         <TextBox x:Name="textBoxPhasenverschiebung" 
-                Text="0,00"
+                Text="100"
                 Margin="213,221,453,0"
                 Height="30"
                   Background="#ff1f4663"
@@ -109,7 +109,7 @@
 
         <!-- TextBox für die Werteanzahl-->
         <TextBox x:Name="textBoxWerteanzahl" 
-                Text="1"
+                Text="70"
                 Margin="213,283,453,0"
                 Height="30"
                   Background="#ff1f4663"
@@ -296,7 +296,7 @@
 
         <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Name ="Ingrid" Margin="400,68,30,82" >
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                <lvc:Axis Title="Werte" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Title="Werteanzahl" Labels="{Binding Labels}"></lvc:Axis>
