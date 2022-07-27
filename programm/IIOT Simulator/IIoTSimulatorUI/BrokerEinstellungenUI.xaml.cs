@@ -26,7 +26,9 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class BrokerEinstellungenUI : Window
     {
-        
+
+        bool button1WasClicked = false;
+
         public BrokerEinstellungenUI()
         {
             InitializeComponent();
@@ -43,22 +45,33 @@ namespace IIoTSimulatorUI
             string nutzernameEingabe = NutzernameText.Text;
             string passwortEingabe = PassswortBox.Password.ToString();
 
-            //bool hakenGesetzt = HakenSetzen.Click -hier ncoh eine If-Abfrage die überprüft ob der Haken gesetzt wurde
 
-            string verbunden = MQTT.BrokerCom.ConnectToBroker(brokerNameEingabe, portEingabe);
-            
-            string verbunden2 = MQTT.BrokerCom.ConnectToBroker(brokerNameEingabe, portEingabe, nutzernameEingabe, passwortEingabe);
-
-            if (verbunden.Equals("-Connected\n-"))
+            if (button1WasClicked==false)//Hier wird die Verbindung hergestellt nur mit Broker-Namen und dem Port
             {
-                MessageBox.Show("Erfolgreiche Broker-Verbindung" );
-            }
-            else
-            {
-                MessageBox.Show("Verbindung fehlgeschlagen: " + verbunden);
-            }
-            
+                string verbunden = MQTT.BrokerCom.ConnectToBroker(brokerNameEingabe, portEingabe);
 
+                if (verbunden.Equals("-Connected\n-"))
+                {
+                    MessageBox.Show("Erfolgreiche Broker-Verbindung");
+                }
+                else
+                {
+                    MessageBox.Show("Verbindung fehlgeschlagen: " + verbunden);
+                }
+            }
+            else//Sollte der Haken gesetzt werden, wird mit dem Broker Namen, Port, Nutzernamen und dem Passwort eine Verbindung hergestellt
+            {
+                string verbunden2 = MQTT.BrokerCom.ConnectToBroker(brokerNameEingabe, portEingabe, nutzernameEingabe, passwortEingabe);
+
+                if (verbunden2.Equals("-Connected\n-"))
+                {
+                    MessageBox.Show("Erfolgreiche Broker-Verbindung");
+                }
+                else
+                {
+                    MessageBox.Show("Verbindung fehlgeschlagen: " + verbunden2);
+                }
+            }
         }
 
 
@@ -105,6 +118,9 @@ namespace IIoTSimulatorUI
             PasswortLabel.Foreground = System.Windows.Media.Brushes.White;
 
             Foreground = (Brush)bc.ConvertFrom("#ffffff");
+
+
+            button1WasClicked = true;
         }
     }
 

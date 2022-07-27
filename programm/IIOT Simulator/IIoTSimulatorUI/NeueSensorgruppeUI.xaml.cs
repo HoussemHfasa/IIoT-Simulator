@@ -112,12 +112,12 @@ namespace IIoTSimulatorUI
             if ((textBoxEingabe.Text).Equals(""))
             {
                 // Kein Name eingetragen
-                MessageBox.Show("Tragen Sie einen Namen für den Stamm ein");
+                MessageBox.Show("Tragen Sie einen Namen für den Stamm ein.");
             }
             else if (Sensorgroup.basenames.Contains(textBoxEingabe.Text) || (Sensorgroup.allchildren.ContainsKey(textBoxEingabe.Text)))
             {
                 // Stamm doppelte Name
-                MessageBox.Show("Den Name ist schon ausgewählt");
+                MessageBox.Show("Der Name existiert bereits.");
             }
             else
             {
@@ -149,12 +149,12 @@ namespace IIoTSimulatorUI
             if ((textBoxEingabe2.Text).Equals(""))
             {
                 // Kein Name eingetragen
-                MessageBox.Show("Tragen Sie einen Namen für den Unterordner ein");
+                MessageBox.Show("Tragen Sie einen Namen für den Unterordner ein.");
             }
             else if (Sensorgroup.basenames.Contains(textBoxEingabe2.Text) ||(Sensorgroup.allchildren.ContainsKey(textBoxEingabe2.Text)))
             {
                 // Unterordner doppelte Name
-                MessageBox.Show("Den Name ist schon ausgewählt");
+                MessageBox.Show("Der Name existiert bereits.");
             }
             else
             {
@@ -187,7 +187,7 @@ namespace IIoTSimulatorUI
                 }
                 catch (System.NullReferenceException)
                 {
-                    MessageBox.Show("Wählen Sie zuerst einen übergeordnet Ordner für den neuen Ordner aus.");
+                    MessageBox.Show("Wählen Sie vorerst einen übergeordneten Ordner für den neuen Ordner aus.");
 
                 }
             }
@@ -210,7 +210,7 @@ namespace IIoTSimulatorUI
                 // TODO: Die Methode sollte nur Sensorgroup und Path entgegennehmen, Name der Sensorgruppe soll in Sensorgroup intern abgespeichert sein
                 Datasave.SaveTree(Sensorgroup,  Filename);
 
-                MessageBox.Show("Sensorgruppe wurde gespeichert");
+                MessageBox.Show("Die Sensorgruppe wurde gespeichert.");
                 
                 MainWindow objectStartseite2 = new MainWindow(Sensorgroup);
                 this.Visibility = Visibility.Hidden;
@@ -253,7 +253,7 @@ namespace IIoTSimulatorUI
             else if (Sensorgroup.basenames.Contains(textSensorname) || (Sensorgroup.allchildren.ContainsKey(textSensorname)))
             {
                 // Sensor doppelte Name
-                MessageBox.Show("Der Name wurde bereits verwendet.");
+                MessageBox.Show("Der Name existiert bereits.");
             }
             //Nutzer hat Namen und einen Sensortypen ausgewählt eingegeben
             else
@@ -379,7 +379,7 @@ namespace IIoTSimulatorUI
                 }
                 catch (System.NullReferenceException f)
                 {
-                    MessageBox.Show("Wählen Sie zuerst einen Ordner aus, in dem der Sensor erstellt werden soll. ");
+                    MessageBox.Show("Wählen Sie vorerst einen Ordner aus, in dem der Sensor erstellt werden soll. ");
                 }
 
             }
