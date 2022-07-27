@@ -53,12 +53,15 @@ namespace IIoTSimulatorUI
             //Seite initialisieren
             InitializeComponent();
 
+            
+
             // foreach(var in Sensorliste)
-           /* {
-                cboxitem = new ComboBoxItem();
-                cboxitem.Content = var;
-                
-            }*/
+            /* {
+             * 
+             * - du kannst hier die Liste direkt mit ItemsSource übergeben -
+                SensortypBox.ItemsSource = new List<string> { "Item1", "Item2", "Item3"};
+
+             }*/
 
             SensorValues = new Dictionary<string, ChartValues<double>>();
 
