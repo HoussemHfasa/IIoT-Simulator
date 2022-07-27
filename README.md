@@ -73,11 +73,11 @@ Null-Referece-Exception wenn man keinen Oberordner erstellt
 Erstellt man eine neue Sensorgruppe, wird eine Info-Text angezeigt
 der darauf hinweist ein übergeordnetes Element auszuwählen um dem ein
 untergeordnetes Element hinzuzufügen. Wird dennoch kein Element ausgewählt,
-bekommt man eine Null-referece-Exception, das Programm stürzt jedoch nicht ab,
+bekommt man eine Null-referece-Exception, das Programm stürzt jedoch nicht ab (wird mit try-catch abgefangen),
 man kann mit F5 wieder zurück auf das Fenster gelangen und das Programm
 weiter ausführen. -Der Fehler wurde aufgefangen und es wird eine Fehlermeldung 
 ausgegeben, das Programm
-gibt jedoch trotzdem diese Exception.
+gibt jedoch trotzdem diese Exception. (Dieses verhalten wird durch Debugg Einstellungen ausgelöst)
 
 1. Markdown Syntax: https://docs.gitlab.com/ee/user/markdown.html
 2. Git fuer Windows: https://git-scm.com/download/win
