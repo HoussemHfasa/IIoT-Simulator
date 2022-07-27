@@ -23,6 +23,7 @@ namespace IIoTSimulatorUI
     {
         Sensor<double> DoubleSensor;
         List<double> Datenliste;
+        bool Boolconstructor;
         // Für neue Linechart
 
         public SeriesCollection SeriesCollection { get; set; }
@@ -32,6 +33,7 @@ namespace IIoTSimulatorUI
 
         public FehlerZufallswerte(ref Sensor<double> NewSensor)
         {
+            Boolconstructor = true;
             this.DoubleSensor = NewSensor;
             InitializeComponent();
         }
@@ -75,20 +77,26 @@ namespace IIoTSimulatorUI
         private void Hinzufügen(object sender, RoutedEventArgs e)
         {
             try
-            { 
-            //Nutzereingabe überprüfen
-            if(Convert.ToDouble(textBoxErrorRate.Text) < 0.0 || Convert.ToDouble(textBoxErrorRate.Text) > 1.0)
             {
-                MessageBox.Show("Die Fehlerrate muss zwischen 0,0 und 1,0 liegen.");
-            }
-            else
-            { 
-            // Fehlerdatengenerator erzeugen, Sensordaten mit Fehlern versehen
-            RandomValuesError DataGenerator = new RandomValuesError(Convert.ToDouble(textBoxErrorRate.Text), Convert.ToInt32(textBoxErrorLength.Text), Convert.ToDouble(textBoxMaxError.Text), Convert.ToDouble(textBoxMinError.Text));
-            DoubleSensor.SetValues(DataGenerator.GetSensorDataWithErrors(DoubleSensor.GetValues()));
-
-            Close();
-            }
+                if (Boolconstructor == true)
+                {
+                    //Nutzereingabe überprüfen
+                    if (Convert.ToDouble(textBoxErrorRate.Text) < 0.0 || Convert.ToDouble(textBoxErrorRate.Text) > 1.0)
+                    {
+                        MessageBox.Show("Die Fehlerrate muss zwischen 0,0 und 1,0 liegen.");
+                    }
+                    else
+                    {
+                        // Fehlerdatengenerator erzeugen, Sensordaten mit Fehlern versehen
+                        RandomValuesError DataGenerator = new RandomValuesError(Convert.ToDouble(textBoxErrorRate.Text), Convert.ToInt32(textBoxErrorLength.Text), Convert.ToDouble(textBoxMaxError.Text), Convert.ToDouble(textBoxMinError.Text));
+                        DoubleSensor.SetValues(DataGenerator.GetSensorDataWithErrors(DoubleSensor.GetValues()));
+                    }
+                }
+                else
+                {
+                    DoubleSensor.SetValues(Datenliste);
+                }
+                Close();
             }
             catch (System.FormatException)
             {
@@ -115,10 +123,6 @@ namespace IIoTSimulatorUI
                     // Fehlerdatengenerator erzeugen, Sensordaten mit Fehlern versehen
                     RandomValuesError DataGenerator = new RandomValuesError(Convert.ToDouble(textBoxErrorRate.Text), Convert.ToInt32(textBoxErrorLength.Text), Convert.ToDouble(textBoxMaxError.Text), Convert.ToDouble(textBoxMinError.Text));
                     Datenliste= DataGenerator.GetSensorDataWithErrors(DoubleSensor.GetValues());
-                    /*textBoxErrorRate.Clear();
-                    textBoxErrorLength.Clear();
-                    textBoxMaxError.Clear();
-                    textBoxMinError.Clear();*/
                     FehlerZufallswerte Aktualisirung = new FehlerZufallswerte(ref DoubleSensor, Datenliste);
                     this.Visibility = Visibility.Hidden;
                     Aktualisirung.Show();
@@ -128,31 +132,6 @@ namespace IIoTSimulatorUI
             {
                 MessageBox.Show("Ungültige Eingabe");
             }
-            /* try
-             {
-                 //die Überprüfung Nutzereingaben. 
-                 if (Convert.ToDouble(textBoxAmplitude.Text) < 0.0 || Convert.ToDouble(textBoxPeriodendauer.Text) < 0.0 || Convert.ToInt32(textBoxWerteanzahl.Text) < 0)
-                 {
-                     MessageBox.Show("Amplitude,Dämpfungsrate, Periodendauer und Werteanzahl dürfen nicht negativ sein.");
-                 }
-                 else
-                 {
-                     // Objekt der Datenerzeugungsmethode erstellen, Daten erzeugen und in DoubleSensor abspeichern
-                     DataGenerator = new HarmonicOscillation(Convert.ToDouble(textBoxAmplitude.Text), Convert.ToDouble(textBoxPeriodendauer.Text), Convert.ToDouble(textBoxPhasenverschiebung.Text), Convert.ToUInt32(textBoxWerteanzahl.Text));
-                     Datenliste = DataGenerator.GetSimulatorValues();
-                     textBoxAmplitude.Clear();
-                     textBoxPeriodendauer.Clear();
-                     textBoxPhasenverschiebung.Clear();
-                     textBoxWerteanzahl.Clear();
-                     HarmonischeSchwingung Aktualisirung = new HarmonischeSchwingung(ref DoubleSensor, Datenliste);
-                     this.Visibility = Visibility.Hidden;
-                     Aktualisirung.Show();
-                 }
-             }
-             catch (System.FormatException)
-             {
-                 MessageBox.Show("Ungültige Eingabe");
-             }*/
         }
     }
 }

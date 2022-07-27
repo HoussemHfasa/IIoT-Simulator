@@ -15,6 +15,9 @@ using SensorAndSensorgroup;
 namespace NunitTestDatamanagement
 {
     public class Sensorgroupsnunittest
+    //die Methode Basename/Nodename/Sensor nicht geeignet für unsere Programm ,da der Nutzer mehrere Unterordner erstellen kann
+    //deswegen haben wir eine andere Lösung implimentiert
+
     {/*
         private SensorAndSensorgroup.Sensorgroups SensorgroupsTests = new Sensorgroups();
         DataStorage.DataStorage store = new DataStorage.DataStorage();

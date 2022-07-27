@@ -13,58 +13,29 @@ using SensorAndSensorgroup;
 
 namespace IIoTSimulatorUI
 {
-    public static class TestVariables
-    {
-        public static double Pfad;
-    }
+
     /// <summary>
     /// Interaktionslogik für PopUpSensoren.xaml
     /// </summary>
     public partial class PopUpSensoren : Window
     {
+        // Sensor aus Konstruktor
         Sensor<double> DoubleSensor = null;
-        Sensor<bool> BoolSensor = null;
+       
         // Konstruktor, der einen double Sensor übergeben bekommt
         public PopUpSensoren(ref Sensor<double> newSensor)
         {
             DoubleSensor = newSensor;
             InitializeComponent();
         }
-        // Konstruktor, der einen bool Sensor übergeben bekommt
-        public PopUpSensoren(ref Sensor<bool> newSensor)
-        {
-            BoolSensor = newSensor;
-            InitializeComponent();
-        }
-        /*public PopUpSensoren()
-        {
-            InitializeComponent();
-        } */
 
 
+        // Auswählen Button, Nutzer hat in Combobox eine Datenerzeugungsmethode ausgewählt
         private void Schwingung(object sender, RoutedEventArgs e)
         {
             
-           
-            /* if (!DoubleSensor.Equals(null))
-            {
-                TestVariables.Pfad = 1;
-                objectSchwingung = new HarmonischeSchwingung(ref DoubleSensor);
-            }
-            else if(!BoolSensor.Equals(null))
-            {
-                TestVariables.Pfad = 2;
-                objectSchwingung = new HarmonischeSchwingung(ref BoolSensor);
-            }
-            else
-            {
-                TestVariables.Pfad = 3;
-                // in diesem else wäre eine Fehlererkennung nötig. Hier darf das Programm nicht hin
-                objectSchwingung = new HarmonischeSchwingung(ref DoubleSensor);
-            }
-            */
 
-            //Weiterer Pfad zu den Fenstern je nach Auswahl - Harmonische Schwingung...
+            //Weiterer Pfad zu den Fenstern je nach Auswahl, übergabe der Referenz des Sensors
             string DatenerzeugungAuswahl = DatenerzeugungBox.Text;
             if (DatenerzeugungAuswahl.Equals("Harmonische Schwingung"))
             {
@@ -95,12 +66,13 @@ namespace IIoTSimulatorUI
                 this.Visibility = Visibility.Hidden;
                 objectDatenerzeugung.Show();
             }
-            else
+            else  // Keine Datenerzeugungsmethode ausgewählt
             {
                 MessageBox.Show("Wählen Sie eine Datenerzeugungsmethode aus.");
             }
         }
 
+        // Schließt das Fenster
         private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
         {
             Close();

@@ -129,6 +129,12 @@ namespace MQTTCommunicator
             throw new NotImplementedException();
         }
 
+        public bool IsConnected()
+        {
+            if(mqttClient.IsConnected)
+            { return true; }
+            return false;
+        }
 
         /// <summary>
         /// Versendug von Messages an den Broker mit Voreinstellungen. Wird ausführbar, erst dann wenn der eine Verbindung zum

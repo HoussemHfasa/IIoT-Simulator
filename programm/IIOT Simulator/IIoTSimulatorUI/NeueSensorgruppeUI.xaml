@@ -346,7 +346,7 @@
                     Click="SensorgruppeSpeichernClick"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="3,492,0,-541" 
+                    Margin="21,375,0,-424" 
                     HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand" 
@@ -387,7 +387,7 @@
                     Click="SensorgruppeLoeschen"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="0,495,-50,-536" 
+                    Margin="28,379,-50,-420" 
                     HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand" 
@@ -423,7 +423,47 @@
                 </Button.Template>
             </Button>
 
-            <!-- TextBox um den Zopic festzulegen -->
+            <!-- Button um zur Simulation zu gelangen-->
+            <Button Content="Simulation starten"
+                    Click="SimulationButton"
+                    Foreground="White"
+                    FontSize="16"
+                    Grid.ColumnSpan="2" 
+                    Margin="26,455,0,-520"
+                    HorizontalAlignment="Left"
+                    Width="394" Cursor="Hand" Grid.Column="2">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                        <Setter Property="Background" 
+                                Value="#39285D"/>
+                        <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                                <Setter Property="Background"
+                                        Value="Aqua"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="200" Height="50"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!-- TextBox um den Topic festzulegen -->
             <Label x:Name="LabelTopic" 
                            Foreground="LightGray"
                            Background="#0F0F2D"
@@ -506,13 +546,13 @@
             <!-- Label Globus-->
             <Label
                 Content="🌐"
-                Margin="120,290,0,-460"
+                Margin="209,189,0,-359"
                 FontSize="150"
                 Foreground="#06695BDD"
                 HorizontalAlignment="Left" 
-                Width="277" 
-                Grid.Column="2"
-                Grid.ColumnSpan="2"
+                Width="278" 
+                Grid.Column="1"
+                Grid.ColumnSpan="3"
                 FontFamily="Fonts/#Dosis" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 
 
@@ -532,7 +572,7 @@
             <!-- Label Globus-->
             <Label
                 Content="🌐"
-                Margin="124,260,-50,-327"
+                Margin="125,304,-50,-371"
                 FontSize="50"
                 Foreground="#07695BDD"
                 HorizontalAlignment="Left" 
@@ -546,7 +586,7 @@
             <!-- Label Globus-->
             <Label
                 Content="🌐"
-                Margin="217,403,0,-470"
+                Margin="178,484,0,-551"
                 FontSize="50"
                 Foreground="#0A695BDD"
                 HorizontalAlignment="Left" 

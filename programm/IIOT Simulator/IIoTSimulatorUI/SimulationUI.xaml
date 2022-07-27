@@ -142,11 +142,11 @@
                 FontSize="18"/>
 
             <!-- Button Daten Senden-->
-            <Button Content="Daten senden"
+            <Button Content="Senden"
                     Click="DatenSenden"
                 Foreground="White"
                     FontSize="16" 
-                    Margin="0,205,0,-220" 
+                    Margin="0,152,0,-167" 
                     HorizontalAlignment="Center"
                     Width="192"
                     Cursor="Hand">
@@ -222,17 +222,108 @@
                 </Button.Template>
             </Button>
 
+            <!-- Label Senden-->
+            <Label
+                Content="Einzelwerte an den Broker senden."
+                Margin="28,103,149,-106"
+                FontSize="14"
+                Foreground="White"
+                FontFamily="Fonts/#Dosis" Grid.ColumnSpan="2"/>
+
+            <ScrollViewer
+                          BorderThickness="10"
+                HorizontalScrollBarVisibility="Auto" Margin="76,411,-16,-523" Grid.ColumnSpan="3" Grid.Column="1">
+                <ScrollViewer.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </ScrollViewer.BorderBrush>
+                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <TextBlock 
+                        x:Name="ScrollTextBlock"
+                        Foreground="White"
+                        FontSize="12"
+                        FontFamily="Fonts/#Dosis"
+                        TextWrapping="Wrap" 
+                        Margin="0,0,0,20" Height="1481" Width="554">
+                         Hier werden die gesendeten Sensordaten angezeigt.
+                    </TextBlock>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Name ="Ingrid" Margin="49,90,-6,-371" Grid.ColumnSpan="3" Grid.Column="1" >
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Wert" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Werteanzahl" Labels="{Binding Labels}"></lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+            </lvc:CartesianChart>
+
+            <!-- Label Globus-->
+            <Label
+                Content="🌍"
+                Margin="115,35,-58,-101"
+                FontSize="70"
+                Foreground="#59254B6F"
+                FontFamily="Fonts/#Dosis" 
+                HorizontalContentAlignment="Center" 
+                VerticalContentAlignment="Center"
+                Grid.Column="3"/>
 
 
-            <!-- Button um Sensor auszuwählen-->
-            <Button Content="Auswählen"
-                    Click="Sensorauswaehlen"
+            <!-- Label Daten mit Zeit-->
+            <Label
+                Content="Daten mit "
+                Margin="22,233,137,-236"
+                FontSize="14"
+                Foreground="White"
+                FontFamily="Fonts/#Dosis" 
+                VerticalContentAlignment="Center" 
+                HorizontalContentAlignment="Center"/>
+
+            <!--TextBox für die Zeit Eingabe-->
+            <TextBox 
+                x:Name="TextBoxZeit"
+                Margin="108,237,77,-224" 
+                Background="Transparent" 
+                BorderBrush="#FF656A77" 
+                BorderThickness="0,0,0,1"
+                Foreground="White"
+                FontSize="15" 
+                TextAlignment="Right"/>
+
+
+            <!-- Label Daten mit Zeit Pt.2-->
+            <Label
+                Content="Sekunden "
+                Margin="163,233,186,-236"
+                FontSize="14"
+                Foreground="White"
+                FontFamily="Fonts/#Dosis" 
+                VerticalContentAlignment="Center" 
+                HorizontalContentAlignment="Left" 
+                Grid.ColumnSpan="2"/>
+
+            <!-- Label Daten mit Zeit Pt.3-->
+            <Label
+                Content="Zeitintervallen senden."
+                Margin="28,276,11,-279"
+                FontSize="14"
+                Foreground="White"
+                FontFamily="Fonts/#Dosis"/>
+
+            <!-- Button Daten Senden mit Zeitintervall-->
+            <Button Content="Senden"
+                    Click="DatenSendenZeit"
                 Foreground="White"
                     FontSize="16" 
-                    Margin="9,63,0,-72" 
-                    HorizontalAlignment="Left"
-                    Width="190"
-                    Cursor="Hand" Grid.Column="2">
+                    Margin="0,320,0,-335" 
+                    HorizontalAlignment="Center"
+                    Width="192"
+                    Cursor="Hand">
 
                 <Button.Style>
                     <Style TargetType="Button">
@@ -264,93 +355,6 @@
                 </Button.Template>
             </Button>
 
-            <!-- ComboBox Sensortyp-->
-            <ComboBox 
-                Name="SensortypBox"
-                Grid.Column="1" 
-                Margin="49,71,36,-66"
-                Width="150"
-                Height="30" >
-                <ComboBoxItem 
-                     Content="Temperatursensor">
-                </ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Helligkeitssensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Stromsensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Rauchmelder"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Feuchtigkeitssensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Füllstandsensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Dehnungssensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Drehmomentsensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Spannungssensor"></ComboBoxItem>
-
-            </ComboBox>
-
-            <!-- Label Sensor-->
-            <Label
-                Content="Wählen Sie einen Sensor aus."
-                Margin="32,68,186,-69"
-                FontSize="18"
-                Foreground="White"
-                FontFamily="Fonts/#Dosis" Grid.ColumnSpan="2"/>
-
-            <!-- Label Senden-->
-            <Label
-                Content="Ausgewählte Sensordaten an den Broker senden:"
-                Margin="18,162,127,-165"
-                FontSize="14"
-                Foreground="White"
-                FontFamily="Fonts/#Dosis" Grid.ColumnSpan="2"/>
-
-            <ScrollViewer
-                          BorderThickness="10"
-                HorizontalScrollBarVisibility="Auto" Margin="348,442,-651,-517">
-                <ScrollViewer.BorderBrush>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black"/>
-                        <GradientStop Color="White" Offset="1"/>
-                    </LinearGradientBrush>
-                </ScrollViewer.BorderBrush>
-                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
-                    <TextBlock 
-                        x:Name="ScrollTextBlock"
-                        Foreground="White"
-                        FontSize="12"
-                        FontFamily="Fonts/#Dosis"
-                        TextWrapping="Wrap" 
-                        Margin="0,0,0,20" Height="1408" Width="519">
-                         Hier werden die gesendeten Sensordaten angezeigt.
-                    </TextBlock>
-
-                </StackPanel>
-            </ScrollViewer>
-
-            <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Name ="Ingrid" Margin="76,146,-33,-391" Grid.ColumnSpan="3" Grid.Column="1" >
-                <lvc:CartesianChart.AxisY>
-                    <lvc:Axis Title="Wert" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
-                </lvc:CartesianChart.AxisY>
-                <lvc:CartesianChart.AxisX>
-                    <lvc:Axis Title="Werteanzahl" Labels="{Binding Labels}"></lvc:Axis>
-                </lvc:CartesianChart.AxisX>
-            </lvc:CartesianChart>
-
-            <!-- Label Globus-->
-            <Label
-                Content="🌍"
-                Margin="107,40,-50,-106"
-                FontSize="70"
-                Foreground="#59254B6F"
-                FontFamily="Fonts/#Dosis" 
-                HorizontalContentAlignment="Center" 
-                VerticalContentAlignment="Center"
-                Grid.Column="3"/>
 
         </Grid>
 

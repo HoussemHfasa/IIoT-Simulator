@@ -12,12 +12,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
-using DummySensorandSensorgroups;
 using SensorAndSensorgroup;
 using SensorDataSimulator;
 using System.Threading.Tasks;
-
-
+using MQTTnet.Exceptions;
+using System.Timers;
+using System.Threading;
+using System.Windows.Threading;
+using System.Windows.Threading;
+//using System.Threading;
 
 namespace IIoTSimulatorUI
 {
@@ -26,43 +29,74 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class SimulationUI : Window
     {
+        // Object der Sensorgruppe
         Sensorgroups Sensorgroup;
-        //
-        //
-        // Für neue Linechart
-               
+
+        // Für neue Linechart, SeriesCollection beinhaltet alle "Linien"     
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
         private ChartValues<double> values;
+        // Sensordaten als Dictionary für Hinzufügen zur Lineseriens
         private Dictionary<string, ChartValues<double>> SensorValues;
 
-        
-        //
-        //
-        //
 
         // Variable zum Abspeichern des aktuellen Sensorwertes
         int CurrentValueNumber = 0;
 
-
-        public SimulationUI( Sensorgroups ExistingSensorgroup)
+        // Konstruktor für Simulationsseite, Sensorgruppe die angezeigt werden soll wird dem KOnstruktor übergeben
+        public SimulationUI(Sensorgroups ExistingSensorgroup)
         {
-            int AmmountofValuesMax=0;
-            int[] Labelsint=null;
+            int AmmountofValuesMax = 0;
+            int[] Labelsint = null;
             this.Sensorgroup = ExistingSensorgroup;
+
+            //Seite initialisieren
             InitializeComponent();
+
+
+
+            // foreach(var in Sensorliste)
+            /* {
+             * 
+             * - du kannst hier die Liste direkt mit ItemsSource übergeben -
+                SensortypBox.ItemsSource = new List<string> { "Item1", "Item2", "Item3"};
+
+             }*/
+
             SensorValues = new Dictionary<string, ChartValues<double>>();
+
+            // Sammlung von Linien
+            SeriesCollection = new SeriesCollection
+            {
+            };
+
+            // TODO : Mit Houssem: Kommentar, was hier passiert und die beiden foreach Schleifen zusammenfassen
+            //Für jedes Element in Allchildren
             foreach (string Sensor in Sensorgroup.allchildren.Keys)
             {
+                // Wenn Element ein Sensor ist: 
                 if (!(Sensorgroup.allchildren[Sensor].Sensordaten == null))
                 {
+                    // Sensordaten in Linechart Kompatibles Format abspeichern
                     SensorValues.Add(Sensor, EinzelneSensorDaten(Sensorgroup.allchildren[Sensor]));
-                    if(Convert.ToInt16(Sensorgroup.allchildren[Sensor].Sensordaten.AmmountofValues)>AmmountofValuesMax)
+
+                    // neue Lineseries erstellen
+                    SeriesCollection.Add(new LineSeries
+                    {
+                        Title = Sensor,
+                        Values = SensorValues[Sensor],
+                        LineSmoothness = 0, //0: straight lines, 1: really smooth lines
+
+                        PointForeground = Brushes.Gray
+                    });
+
+                    //Label entsprechend der Höchsten Werteanzahl in der Sensorgruppe abspeichern
+                    if (Convert.ToInt16(Sensorgroup.allchildren[Sensor].Sensordaten.AmmountofValues) > AmmountofValuesMax)
                     {
                         AmmountofValuesMax = Convert.ToInt16(Sensorgroup.allchildren[Sensor].Sensordaten.AmmountofValues);
-                         Labelsint = new int[AmmountofValuesMax];
-                        for(int i=0;i<AmmountofValuesMax;i++)
+                        Labelsint = new int[AmmountofValuesMax];
+                        for (int i = 0; i < AmmountofValuesMax; i++)
                         {
                             Labelsint[i] = i;
                         }
@@ -71,136 +105,174 @@ namespace IIoTSimulatorUI
 
             }
 
-            SeriesCollection = new SeriesCollection
-            {
-            };
-             
+
+            // Int werte des Labelsint in String umwandeln
             Labels = new string[AmmountofValuesMax];
-            if (!(Labelsint==null))
+            if (!(Labelsint == null))
             {
-                Labels= Array.ConvertAll(Labelsint, x => x.ToString());
+                Labels = Array.ConvertAll(Labelsint, x => x.ToString());
             }
 
-            // Beschriftung der Werte YAchse
+            // Beschriftung der Werte Y-Achse
             YFormatter = value => value.ToString("");
 
-
-
-
-
-             SensorValues = new Dictionary<string, ChartValues<double>>();
-             //modifying the series collection will animate and update the chart
-             foreach (string Sensor in Sensorgroup.allchildren.Keys)
-             {
-                 if (!(Sensorgroup.allchildren[Sensor].Sensordaten == null))
-                 {
-                    SensorValues.Add(Sensor, EinzelneSensorDaten(Sensorgroup.allchildren[Sensor]));
-
-             SeriesCollection.Add(new LineSeries
-            {
-                Title = Sensor,
-                Values = SensorValues[Sensor],
-                LineSmoothness = 0, //0: straight lines, 1: really smooth lines
-                                    //    PointGeometry = Geometry.Parse("m 25 70.36218 20 -28 -20 22 -8 -6 z"),
-                                    //    PointGeometrySize = 50,
-                PointForeground = Brushes.Gray
-            });
             DataContext = this;
-                 }
-             }
-        }
-        public ChartValues<double> EinzelneSensorDaten(TreeNode Sensor)
-            {
-            values = new ChartValues<double>();
 
-                if (Convert.ToString(Sensor.Sensordaten.Sensortype) == "Rauchmelder")
-                {
-                    for (int i = 0; i < Convert.ToInt16(Sensor.Sensordaten.AmmountofValues); i++)
-                    {
-                    values.Add(Convert.ToBoolean(Sensor.Sensordaten.Values[i]) ? 1:0);
-                }
-                }
-                else
-                {
-                    for (int i = 0; i < Convert.ToInt16(Sensor.Sensordaten.AmmountofValues); i++)
-                    {
-                        values.Add(Convert.ToDouble(Sensor.Sensordaten.Values[i]));
-                    }
-                }
-                return values;
         }
 
-        
+
+
+
+        // Button Programm schließen 
         private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        // Startseite Button
         private void StartseiteButton(object sender, RoutedEventArgs e)
         {
             MainWindow objectStartseite2 = new MainWindow();
-            this.Visibility = Visibility.Hidden; 
+            this.Visibility = Visibility.Hidden;
             objectStartseite2.Show();
         }
 
+        // BrokerSettings Button
         private void BrokerSettingsClick(object sender, RoutedEventArgs e)
         {
             BrokerEinstellungenUI objectBrokerEinstellungen = new BrokerEinstellungenUI();
-            this.Visibility = Visibility.Hidden; 
+            this.Visibility = Visibility.Hidden;
             objectBrokerEinstellungen.Show();
         }
 
 
-
+        // Daten einzeln Senden Button
         private void DatenSenden(object sender, RoutedEventArgs e)
         {
-            
-            string k = "Die Sensordaten wurden an den Broker gesendet.";
-            foreach(string sensor in SensorValues.Keys)
+            // Für jeden Schlüssel(Sensornamen) in SensorValues:
+            foreach (string sensor in SensorValues.Keys)
             {
-                // Logbuch, welche Daten gesendet wurden
-                    
-                k += $"\nDer Sensor {sensor} hat {SensorValues[sensor].Count} Wert an den Broker gesendet und den Topic ist {Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic)}";
 
                 //ArgumentoutofRange mit iF Abfrage abfangen
                 if (CurrentValueNumber < SensorValues[sensor].Count)
                 {
-                    // 1 Datenpaket über Broker senden und Sensorwert in Scrollbox schreiben
-                    ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat den Wert " + (SensorValues[sensor][CurrentValueNumber]) + " an den Broker gesendet";
-                    MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic), Convert.ToString(SensorValues[sensor][CurrentValueNumber]));
-                    CurrentValueNumber += 1;
-                }
+                    // Wenn Broker connected ist
+                    if (MQTT.BrokerCom.IsConnected())
+                    {
+                        // Logbuch, welche Daten gesendet wurden
+                        ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat den Wert " + (SensorValues[sensor][CurrentValueNumber]) + " an den Broker gesendet";
 
-
-                /* Für alle Daten gleichzeitig
-                for (int i = 0; i < SensorValues[sensor].Count; i++)
-                {
-                    ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat das Wert " + (SensorValues[sensor][i]) + " an den Broker gesendet";
-                    MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic),Convert.ToString(SensorValues[sensor][i]));
+                        // An Broker senden
+                        MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic), Convert.ToString(SensorValues[sensor][CurrentValueNumber]));
+                        CurrentValueNumber += 1;
+                    }
+                    else  // Broker nicht verbunden
+                    {
+                        ScrollTextBlock.Text += $"\n Der Sensor { sensor} konnte den Wert " + (SensorValues[sensor][CurrentValueNumber]) + " nicht an den Broker senden- Keine Verbindung zum Broker";
+                        CurrentValueNumber += 1;
+                    }
                 }
-                */
-                // Hier müssten Daten an Broker gesendet werden
             }
-
-            
         }
+
+
+
+
+
+
 
         private void Abbrechen(object sender, RoutedEventArgs e)
         {
-                MainWindow objectStartseite2 = new MainWindow();
-                this.Visibility = Visibility.Hidden; 
-                objectStartseite2.Show();
+            MainWindow objectStartseite2 = new MainWindow();
+            this.Visibility = Visibility.Hidden;
+            objectStartseite2.Show();
         }
 
-        private void CartesianChart_Loaded(object sender, RoutedEventArgs e)
-        {
 
-        }
+
 
         private void Sensorauswaehlen(object sender, RoutedEventArgs e)
         {
-            
+
         }
+
+
+        // Funktion, die einen Sensor als Parameter erhält und seine Daten als ChartValues<double> zurückgiebt. Boolwerte werden als 0 und 1 dargestellt.
+        public ChartValues<double> EinzelneSensorDaten(TreeNode Sensor)
+        {
+            values = new ChartValues<double>();
+
+            // Wenn Sensortyp mit Bool Werten arbeitet, Boolwerte in double umwandeln und Chartvalues abspeichern
+            if (Convert.ToString(Sensor.Sensordaten.Sensortype) == "Rauchmelder")
+            {
+                for (int i = 0; i < Convert.ToInt16(Sensor.Sensordaten.AmmountofValues); i++)
+                {
+                    values.Add(Convert.ToBoolean(Sensor.Sensordaten.Values[i]) ? 1 : 0);
+                }
+            }
+            // Sonst Double Werte in ChartValues abspeichern
+            else
+            {
+                for (int i = 0; i < Convert.ToInt16(Sensor.Sensordaten.AmmountofValues); i++)
+                {
+                    values.Add(Convert.ToDouble(Sensor.Sensordaten.Values[i]));
+                }
+            }
+            return values;
+        }
+        //TODO timeintervall
+        private void DatenSendenZeit(object sender, RoutedEventArgs e)
+        {
+            
+            // Für jeden Schlüssel(Sensornamen) in SensorValues:
+            foreach (string sensor in SensorValues.Keys)
+            {
+                // Die TextBox dazu heißt "TextBoxZeit" um die Eingabe zu übernehmen
+                //ArgumentoutofRange mit iF Abfrage abfangen
+                while (CurrentValueNumber < SensorValues[sensor].Count)
+                {
+                   
+                    // SetTimer(TextBoxZeit.Text,sensor);
+                    // Wenn Broker connected ist
+                    if (MQTT.BrokerCom.IsConnected())
+                    {
+                        // Logbuch, welche Daten gesendet wurden
+                        ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat den Werte " + (SensorValues[sensor][CurrentValueNumber]) + " an den Broker gesendet";
+
+                        // An Broker senden
+                        MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic), Convert.ToString(SensorValues[sensor][CurrentValueNumber]));
+                        CurrentValueNumber += 1;
+                    }
+                    else  // Broker nicht verbunden
+                    {
+                        //test2 = sensor;
+                       // test1();
+                        //ScrollTextBlock.Text += $"\n pause timer";
+                        //dispatcherTimer.Stop();
+                        ScrollTextBlock.Text += $"\n Der Sensor { sensor} konnte den Wert " + (SensorValues[sensor][CurrentValueNumber]) + " nicht an den Broker senden- Keine Verbindung zum Broker";
+                        CurrentValueNumber += 1;
+                    }
+                    
+                }
+            }
+
+        }
+        /* string test2;
+         private void test1()
+         {
+             dispatcherTimer.Tick -= new EventHandler(dispatcherTimer_Tick);
+             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+             dispatcherTimer.Start();
+
+         }
+         private void dispatcherTimer_Tick(object sender, EventArgs e)
+         {
+             this.Dispatcher.Invoke(() => ScrollTextBlock.Text += $"\n Der Sensor 2 konnte den Wert  nicht an den Broker senden- Keine Verbindung zum Broker");
+             CommandManager.InvalidateRequerySuggested();
+         }
+         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+     */
+        //https://docs.microsoft.com/de-de/dotnet/api/system.windows.threading.dispatchertimer?view=windowsdesktop-6.0
     }
 
 }

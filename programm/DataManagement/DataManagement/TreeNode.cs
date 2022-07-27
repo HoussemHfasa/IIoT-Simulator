@@ -8,7 +8,7 @@ namespace SensorAndSensorgroup
 
 	//NAryTree für die Datenspeicherung
 	//die Methode Basename/Nodename/Sensor nicht geeignet für unsere Programm ,da der Nutzer mehrere Unterordner erstellen kann
-	
+	//deswegen haben wir eine andere Lösung implimentiert
 	public class TreeNode
 	{
 		public string name;
@@ -47,7 +47,7 @@ namespace SensorAndSensorgroup
 	}
 
     //NAryTree für die Datenspeicherung
-    //die Methode Basename/Nodename/Sensor nicht geeignjet für unsere Programm ,da der Nutzer mehrere Unterordner erstellen kann
+    
     public class TreeNode<T>
     {
         public object key;

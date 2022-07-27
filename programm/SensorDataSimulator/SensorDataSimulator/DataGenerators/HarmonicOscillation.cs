@@ -22,7 +22,7 @@ namespace SensorDataSimulator
             this.AmmountofValues = AmmountofValues;
         }
 
-
+        // Methode gibt Simulatordaten als Liste zurück
         public override List<double> GetSimulatorValues()
         {
            
