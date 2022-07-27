@@ -12,12 +12,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
-using DummySensorandSensorgroups;
 using SensorAndSensorgroup;
 using SensorDataSimulator;
 using System.Threading.Tasks;
-
-
+using MQTTnet.Exceptions;
 
 namespace IIoTSimulatorUI
 {
@@ -26,15 +24,15 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class SimulationUI : Window
     {
+        // Object der Sensorgruppe
         Sensorgroups Sensorgroup;
-        //
-        //
-        // Für neue Linechart
-               
+
+        // Für neue Linechart, SeriesCollection beinhaltet alle "Linien"     
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
         private ChartValues<double> values;
+        // Sensordaten als Dictionary für Hinzufügen zur Lineseriens
         private Dictionary<string, ChartValues<double>> SensorValues;
 
         
@@ -45,23 +43,30 @@ namespace IIoTSimulatorUI
         // Variable zum Abspeichern des aktuellen Sensorwertes
         int CurrentValueNumber = 0;
 
-
+        // Konstruktor für Simulationsseite, Sensorgruppe die angezeigt werden soll wird dem KOnstruktor übergeben
         public SimulationUI( Sensorgroups ExistingSensorgroup)
         {
             int AmmountofValuesMax=0;
             int[] Labelsint=null;
             this.Sensorgroup = ExistingSensorgroup;
+
+            //Seite initialisieren
             InitializeComponent();
+
             SensorValues = new Dictionary<string, ChartValues<double>>();
+
+            // TODO : Mit Houssem: Kommentar, was hier passiert und die beiden foreach Schleifen zusammenfassen
+            //Für jedes Element in Allchildren
             foreach (string Sensor in Sensorgroup.allchildren.Keys)
             {
+                // Wenn Element ein Sensor ist: 
                 if (!(Sensorgroup.allchildren[Sensor].Sensordaten == null))
                 {
                     SensorValues.Add(Sensor, EinzelneSensorDaten(Sensorgroup.allchildren[Sensor]));
                     if(Convert.ToInt16(Sensorgroup.allchildren[Sensor].Sensordaten.AmmountofValues)>AmmountofValuesMax)
                     {
                         AmmountofValuesMax = Convert.ToInt16(Sensorgroup.allchildren[Sensor].Sensordaten.AmmountofValues);
-                         Labelsint = new int[AmmountofValuesMax];
+                        Labelsint = new int[AmmountofValuesMax];
                         for(int i=0;i<AmmountofValuesMax;i++)
                         {
                             Labelsint[i] = i;
@@ -81,7 +86,7 @@ namespace IIoTSimulatorUI
                 Labels= Array.ConvertAll(Labelsint, x => x.ToString());
             }
 
-            // Beschriftung der Werte YAchse
+            // Beschriftung der Werte Y-Achse
             YFormatter = value => value.ToString("");
 
 
@@ -101,34 +106,15 @@ namespace IIoTSimulatorUI
                 Title = Sensor,
                 Values = SensorValues[Sensor],
                 LineSmoothness = 0, //0: straight lines, 1: really smooth lines
-                                    //    PointGeometry = Geometry.Parse("m 25 70.36218 20 -28 -20 22 -8 -6 z"),
-                                    //    PointGeometrySize = 50,
+
                 PointForeground = Brushes.Gray
             });
             DataContext = this;
                  }
              }
         }
-        public ChartValues<double> EinzelneSensorDaten(TreeNode Sensor)
-            {
-            values = new ChartValues<double>();
 
-                if (Convert.ToString(Sensor.Sensordaten.Sensortype) == "Rauchmelder")
-                {
-                    for (int i = 0; i < Convert.ToInt16(Sensor.Sensordaten.AmmountofValues); i++)
-                    {
-                    values.Add(Convert.ToBoolean(Sensor.Sensordaten.Values[i]) ? 1:0);
-                }
-                }
-                else
-                {
-                    for (int i = 0; i < Convert.ToInt16(Sensor.Sensordaten.AmmountofValues); i++)
-                    {
-                        values.Add(Convert.ToDouble(Sensor.Sensordaten.Values[i]));
-                    }
-                }
-                return values;
-        }
+
 
         
         private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
@@ -154,36 +140,47 @@ namespace IIoTSimulatorUI
 
         private void DatenSenden(object sender, RoutedEventArgs e)
         {
-            
-            string k = "Die Sensordaten wurden an den Broker gesendet.";
-            foreach(string sensor in SensorValues.Keys)
-            {
-                // Logbuch, welche Daten gesendet wurden
-                    
-                k += $"\nDer Sensor {sensor} hat {SensorValues[sensor].Count} Wert an den Broker gesendet und den Topic ist {Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic)}";
 
-                //ArgumentoutofRange mit iF Abfrage abfangen
-                if (CurrentValueNumber < SensorValues[sensor].Count)
+                string k = "Die Sensordaten wurden an den Broker gesendet.";
+                foreach (string sensor in SensorValues.Keys)
                 {
-                    // 1 Datenpaket über Broker senden und Sensorwert in Scrollbox schreiben
-                    ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat den Wert " + (SensorValues[sensor][CurrentValueNumber]) + " an den Broker gesendet";
-                    MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic), Convert.ToString(SensorValues[sensor][CurrentValueNumber]));
-                    CurrentValueNumber += 1;
+                    // Logbuch, welche Daten gesendet wurden
+
+                    k += $"\nDer Sensor {sensor} hat {SensorValues[sensor].Count} Wert an den Broker gesendet und den Topic ist {Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic)}";
+
+                    //ArgumentoutofRange mit iF Abfrage abfangen
+                    if (CurrentValueNumber < SensorValues[sensor].Count)
+                    {
+                    if (MQTT.BrokerCom.IsConnected())
+                    {
+                        // 1 Datenpaket über Broker senden und Sensorwert in Scrollbox schreiben
+                        ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat den Wert " + (SensorValues[sensor][CurrentValueNumber]) + " an den Broker gesendet";
+                        MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic), Convert.ToString(SensorValues[sensor][CurrentValueNumber]));
+                        CurrentValueNumber += 1;
+                    }
+                    else
+                    {
+                        ScrollTextBlock.Text += $"\n Der Sensor { sensor} konnte den Wert " + (SensorValues[sensor][CurrentValueNumber]) + " nicht an den Broker senden- Keine Verbindung zum Broker";
+                    }
+                    }
+
+
+                    /* Für alle Daten gleichzeitig
+                    for (int i = 0; i < SensorValues[sensor].Count; i++)
+                    {
+                        ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat das Wert " + (SensorValues[sensor][i]) + " an den Broker gesendet";
+                        MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic),Convert.ToString(SensorValues[sensor][i]));
+                    }
+                    */
+                    // Hier müssten Daten an Broker gesendet werden
                 }
-
-
-                /* Für alle Daten gleichzeitig
-                for (int i = 0; i < SensorValues[sensor].Count; i++)
-                {
-                    ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat das Wert " + (SensorValues[sensor][i]) + " an den Broker gesendet";
-                    MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic),Convert.ToString(SensorValues[sensor][i]));
-                }
-                */
-                // Hier müssten Daten an Broker gesendet werden
-            }
-
-            
         }
+
+            
+
+      
+            
+        
 
         private void Abbrechen(object sender, RoutedEventArgs e)
         {
@@ -192,14 +189,35 @@ namespace IIoTSimulatorUI
                 objectStartseite2.Show();
         }
 
-        private void CartesianChart_Loaded(object sender, RoutedEventArgs e)
-        {
 
-        }
 
         private void Sensorauswaehlen(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        // Funktion, die einen Sensor als Parameter erhält und seine Daten als ChartValues<double> zurückgiebt. Boolwerte werden als 0 und 1 dargestellt.
+        public ChartValues<double> EinzelneSensorDaten(TreeNode Sensor)
+        {
+            values = new ChartValues<double>();
+
+            // Wenn Sensortyp mit Bool Werten arbeitet, Boolwerte in double umwandeln und Chartvalues abspeichern
+            if (Convert.ToString(Sensor.Sensordaten.Sensortype) == "Rauchmelder")
+            {
+                for (int i = 0; i < Convert.ToInt16(Sensor.Sensordaten.AmmountofValues); i++)
+                {
+                    values.Add(Convert.ToBoolean(Sensor.Sensordaten.Values[i]) ? 1 : 0);
+                }
+            }
+            // Sonst Double Werte in ChartValues abspeichern
+            else
+            {
+                for (int i = 0; i < Convert.ToInt16(Sensor.Sensordaten.AmmountofValues); i++)
+                {
+                    values.Add(Convert.ToDouble(Sensor.Sensordaten.Values[i]));
+                }
+            }
+            return values;
         }
     }
 
