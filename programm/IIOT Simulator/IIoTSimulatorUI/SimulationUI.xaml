@@ -284,7 +284,9 @@
                 BorderThickness="0,0,0,1"
                 Foreground="White"
                 FontSize="15" 
-                TextAlignment="Right"/>
+                TextAlignment="Right"
+                Text="5"
+                />
 
 
             <!-- Label Daten mit Zeit Pt.2-->

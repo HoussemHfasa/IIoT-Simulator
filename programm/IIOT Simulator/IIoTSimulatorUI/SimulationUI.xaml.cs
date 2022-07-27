@@ -208,12 +208,24 @@ namespace IIoTSimulatorUI
         // Button für in Zeitintervall senden startet den Timer
         private void DatenSendenZeit(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                if (!(TextBoxZeit.Text == null))
+                {
+                    timer.Interval = new TimeSpan(0, 0, Convert.ToInt32(TextBoxZeit.Text));
+                    timer.Tick += new EventHandler(timer_Tick);
+                    timer.Start();
+                }
+                else
+                {
+                    MessageBox.Show("Bitte geben Sie einen Zeitintervall ein");
+                }
+            }
+            catch(FormatException)
+            {
+                MessageBox.Show("Geben Sie eine Zahl für das Zeitintervall ein");
+            }
             
-            timer.Interval = new TimeSpan(0, 0, Convert.ToInt32(TextBoxZeit.Text));
-            timer.Tick += new EventHandler( timer_Tick);
-            timer.Start();
-
-            // Für jeden Schlüssel(Sensornamen) in SensorValues:
 
 
         }

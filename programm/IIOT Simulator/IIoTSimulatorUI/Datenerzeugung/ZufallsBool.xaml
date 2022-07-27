@@ -51,7 +51,7 @@
 
         <!-- Label für die Weteanzahl-->
         <Label
-                Content="Weteanzahl:"
+                Content="Werteanzahl:"
                 Margin="19,152,0,243"
                 FontSize="16"
                 Foreground="#FFFAF9F9"
