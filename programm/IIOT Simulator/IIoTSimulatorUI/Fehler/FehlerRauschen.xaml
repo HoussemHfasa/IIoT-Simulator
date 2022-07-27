@@ -43,7 +43,7 @@
                 FontSize="16"
                 VerticalAlignment="Top"
                 Foreground="AliceBlue"
-                BorderThickness="2,2,2,2" Text="0.00"   
+                BorderThickness="2,2,2,2" Text="15"   
                 />
 
         <!-- Label für Standardabweichung-->
@@ -58,7 +58,7 @@
 
         <!-- TextBox für die Standardabweichung -->
         <TextBox x:Name="textBoxStandardabweichung" 
-                Text="0.00"
+                Text="11"
                 Margin="223,152,421,0"
                 Height="30"
                   Background="#ff1f4663"
@@ -82,7 +82,7 @@
 
         <!-- TextBox für Die Werteanzahl-->
         <TextBox x:Name="textBoxWerteanzahl" 
-                Text="0.00"
+                Text="55"
                 Margin="224,221,420,0"
                 Height="30"
                   Background="#ff1f4663"
@@ -232,7 +232,7 @@
 
         <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Name ="Ingrid" Margin="400,68,30,82" >
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                <lvc:Axis Title="Werte" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Title="Werteanzahl" Labels="{Binding Labels}"></lvc:Axis>
