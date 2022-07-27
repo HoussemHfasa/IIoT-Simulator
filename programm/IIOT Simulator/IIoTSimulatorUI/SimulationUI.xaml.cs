@@ -16,6 +16,11 @@ using SensorAndSensorgroup;
 using SensorDataSimulator;
 using System.Threading.Tasks;
 using MQTTnet.Exceptions;
+using System.Timers;
+using System.Threading;
+using System.Windows.Threading;
+using System.Windows.Threading;
+//using System.Threading;
 
 namespace IIoTSimulatorUI
 {
@@ -40,16 +45,16 @@ namespace IIoTSimulatorUI
         int CurrentValueNumber = 0;
 
         // Konstruktor für Simulationsseite, Sensorgruppe die angezeigt werden soll wird dem KOnstruktor übergeben
-        public SimulationUI( Sensorgroups ExistingSensorgroup)
+        public SimulationUI(Sensorgroups ExistingSensorgroup)
         {
-            int AmmountofValuesMax=0;
-            int[] Labelsint=null;
+            int AmmountofValuesMax = 0;
+            int[] Labelsint = null;
             this.Sensorgroup = ExistingSensorgroup;
 
             //Seite initialisieren
             InitializeComponent();
 
-            
+
 
             // foreach(var in Sensorliste)
             /* {
@@ -87,11 +92,11 @@ namespace IIoTSimulatorUI
                     });
 
                     //Label entsprechend der Höchsten Werteanzahl in der Sensorgruppe abspeichern
-                    if (Convert.ToInt16(Sensorgroup.allchildren[Sensor].Sensordaten.AmmountofValues)>AmmountofValuesMax)
+                    if (Convert.ToInt16(Sensorgroup.allchildren[Sensor].Sensordaten.AmmountofValues) > AmmountofValuesMax)
                     {
                         AmmountofValuesMax = Convert.ToInt16(Sensorgroup.allchildren[Sensor].Sensordaten.AmmountofValues);
                         Labelsint = new int[AmmountofValuesMax];
-                        for(int i=0;i<AmmountofValuesMax;i++)
+                        for (int i = 0; i < AmmountofValuesMax; i++)
                         {
                             Labelsint[i] = i;
                         }
@@ -100,21 +105,21 @@ namespace IIoTSimulatorUI
 
             }
 
-            
-             // Int werte des Labelsint in String umwandeln
+
+            // Int werte des Labelsint in String umwandeln
             Labels = new string[AmmountofValuesMax];
-            if (!(Labelsint==null))
+            if (!(Labelsint == null))
             {
-                Labels= Array.ConvertAll(Labelsint, x => x.ToString());
+                Labels = Array.ConvertAll(Labelsint, x => x.ToString());
             }
 
             // Beschriftung der Werte Y-Achse
             YFormatter = value => value.ToString("");
 
             DataContext = this;
-                 
+
         }
-        
+
 
 
 
@@ -128,7 +133,7 @@ namespace IIoTSimulatorUI
         private void StartseiteButton(object sender, RoutedEventArgs e)
         {
             MainWindow objectStartseite2 = new MainWindow();
-            this.Visibility = Visibility.Hidden; 
+            this.Visibility = Visibility.Hidden;
             objectStartseite2.Show();
         }
 
@@ -136,7 +141,7 @@ namespace IIoTSimulatorUI
         private void BrokerSettingsClick(object sender, RoutedEventArgs e)
         {
             BrokerEinstellungenUI objectBrokerEinstellungen = new BrokerEinstellungenUI();
-            this.Visibility = Visibility.Hidden; 
+            this.Visibility = Visibility.Hidden;
             objectBrokerEinstellungen.Show();
         }
 
@@ -144,18 +149,16 @@ namespace IIoTSimulatorUI
         // Daten einzeln Senden Button
         private void DatenSenden(object sender, RoutedEventArgs e)
         {
+            // Für jeden Schlüssel(Sensornamen) in SensorValues:
+            foreach (string sensor in SensorValues.Keys)
+            {
 
-                // Für jeden Schlüssel(Sensornamen) in SensorValues:
-                foreach (string sensor in SensorValues.Keys)
+                //ArgumentoutofRange mit iF Abfrage abfangen
+                if (CurrentValueNumber < SensorValues[sensor].Count)
                 {
- 
-                    //ArgumentoutofRange mit iF Abfrage abfangen
-                    if (CurrentValueNumber < SensorValues[sensor].Count)
-                    {
                     // Wenn Broker connected ist
                     if (MQTT.BrokerCom.IsConnected())
                     {
-                      
                         // Logbuch, welche Daten gesendet wurden
                         ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat den Wert " + (SensorValues[sensor][CurrentValueNumber]) + " an den Broker gesendet";
 
@@ -168,29 +171,28 @@ namespace IIoTSimulatorUI
                         ScrollTextBlock.Text += $"\n Der Sensor { sensor} konnte den Wert " + (SensorValues[sensor][CurrentValueNumber]) + " nicht an den Broker senden- Keine Verbindung zum Broker";
                         CurrentValueNumber += 1;
                     }
-                    }
-              
                 }
+            }
         }
 
-            
 
-      
-            
-        
+
+
+
+
 
         private void Abbrechen(object sender, RoutedEventArgs e)
         {
-                MainWindow objectStartseite2 = new MainWindow();
-                this.Visibility = Visibility.Hidden; 
-                objectStartseite2.Show();
+            MainWindow objectStartseite2 = new MainWindow();
+            this.Visibility = Visibility.Hidden;
+            objectStartseite2.Show();
         }
 
 
 
         private void Sensorauswaehlen(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         // Funktion, die einen Sensor als Parameter erhält und seine Daten als ChartValues<double> zurückgiebt. Boolwerte werden als 0 und 1 dargestellt.
@@ -216,11 +218,59 @@ namespace IIoTSimulatorUI
             }
             return values;
         }
-
+        //TODO timeintervall
         private void DatenSendenZeit(object sender, RoutedEventArgs e)
         {
-            // Die TextBox dazu heißt "TextBoxZeit" um die Eingabe zu übernehmen
+            
+            // Für jeden Schlüssel(Sensornamen) in SensorValues:
+            foreach (string sensor in SensorValues.Keys)
+            {
+                // Die TextBox dazu heißt "TextBoxZeit" um die Eingabe zu übernehmen
+                //ArgumentoutofRange mit iF Abfrage abfangen
+                while (CurrentValueNumber < SensorValues[sensor].Count)
+                {
+                   
+                    // SetTimer(TextBoxZeit.Text,sensor);
+                    // Wenn Broker connected ist
+                    if (MQTT.BrokerCom.IsConnected())
+                    {
+                        // Logbuch, welche Daten gesendet wurden
+                        ScrollTextBlock.Text += $"\n Der Sensor { sensor} hat " + (SensorValues[sensor][CurrentValueNumber]) + " Werte an den Broker gesendet";
+
+                        // An Broker senden
+                        MQTT.BrokerCom.PublishToTopic(Convert.ToString(Sensorgroup.allchildren[sensor].Sensordaten.Topic), Convert.ToString(SensorValues[sensor][CurrentValueNumber]));
+                        CurrentValueNumber += 1;
+                    }
+                    else  // Broker nicht verbunden
+                    {
+                        //test2 = sensor;
+                       // test1();
+                        //ScrollTextBlock.Text += $"\n pause timer";
+                        //dispatcherTimer.Stop();
+                        ScrollTextBlock.Text += $"\n Der Sensor { sensor} konnte " + (SensorValues[sensor][CurrentValueNumber]) + " Werte nicht an den Broker senden- Keine Verbindung zum Broker";
+                        CurrentValueNumber += 1;
+                    }
+                    
+                }
+            }
+
         }
+        /* string test2;
+         private void test1()
+         {
+             dispatcherTimer.Tick -= new EventHandler(dispatcherTimer_Tick);
+             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+             dispatcherTimer.Start();
+
+         }
+         private void dispatcherTimer_Tick(object sender, EventArgs e)
+         {
+             this.Dispatcher.Invoke(() => ScrollTextBlock.Text += $"\n Der Sensor 2 konnte den Wert  nicht an den Broker senden- Keine Verbindung zum Broker");
+             CommandManager.InvalidateRequerySuggested();
+         }
+         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+     */
+        //https://docs.microsoft.com/de-de/dotnet/api/system.windows.threading.dispatchertimer?view=windowsdesktop-6.0
     }
 
 }
