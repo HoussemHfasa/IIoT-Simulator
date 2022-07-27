@@ -21,8 +21,6 @@
         </Grid.Background>
 
 
-
-
         <Grid.RowDefinitions>
             <RowDefinition Height="35">
             </RowDefinition>
@@ -75,9 +73,9 @@
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            FontFamily="Fonts/#Dosis"
-                           
                            FontSize="22" BorderBrush="#FF0F0F2D"
                            />
+            
             <!-- Button um das Programm zu schließen -->
             <Button Content="×"
                     Background="#0F0F2D"
@@ -130,16 +128,9 @@
                            Width="300"
                            Height="35"
                            FontSize="12" 
-                           BorderBrush="#FF0F0F2D" VerticalContentAlignment="Bottom"/>
+                           BorderBrush="#FF0F0F2D" 
+                           VerticalContentAlignment="Bottom"/>
 
-
-
-            <TextBlock
-                x:Name="LabelTopicSimulation"
-                TextWrapping="WrapWithOverflow" 
-                Margin="32,182,0,-241"
-                Foreground="White"
-                FontSize="18"/>
 
             <!-- Button Daten Senden-->
             <Button Content="Senden"
@@ -355,11 +346,8 @@
                 </Button.Template>
             </Button>
 
-
         </Grid>
 
     </Grid>
-
-
 
 </Window>

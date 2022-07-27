@@ -90,13 +90,13 @@ namespace IIoTSimulatorUI
             if (Sensorgroup.allchildren.Count == 0)
             {
                 // Messagebox anzeigen
-                MessageBox.Show("Erstellen oder laden Sie eine Sensorgruppe");
+                MessageBox.Show("Erstellen oder laden Sie eine Sensorgruppe.");
             }
             // Wenn Sensorgruppe besteht
             else
             {
                 // Simulationsseite starten und Sensorgruppe übergeben
-                SimulationUI objectSimulation = new SimulationUI( Sensorgroup);
+                SimulationUI objectSimulation = new SimulationUI(Sensorgroup);
                 this.Visibility = Visibility.Hidden;
                 objectSimulation.Show();
             }

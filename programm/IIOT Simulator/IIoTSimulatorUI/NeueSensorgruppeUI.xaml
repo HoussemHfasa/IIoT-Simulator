@@ -204,14 +204,14 @@
             <TreeView
                 Name="TreeView1"
                 Grid.ColumnSpan="2" 
-                Margin="66,260,62,-499" 
+                Margin="70,260,114,-499" 
                 Opacity="0.785" 
                 BorderThickness="4,4,4,4"
                 FontSize="14"
                 Foreground="#FFD1EFF0" 
                 FontStyle="Normal" 
                 FontStretch="Medium" 
-                Background="#FFB5D6EE" 
+                Background="#66B5D6EE" 
                 FontWeight="Bold"
                 FontFamily="Fonts/#Dosis"
                 BorderBrush="#FF4D6A94"
@@ -346,11 +346,11 @@
                     Click="SensorgruppeSpeichernClick"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="21,375,0,-424" 
+                    Margin="209,375,0,-424" 
                     HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand" 
-                    Grid.Column="2">
+                    Grid.Column="1" BorderBrush="{x:Null}" Grid.ColumnSpan="2">
 
                 <Button.Style>
                     <Style TargetType="Button">
@@ -387,11 +387,11 @@
                     Click="SensorgruppeLoeschen"
                     Foreground="White"
                     FontSize="16" 
-                    Margin="28,379,-50,-420" 
+                    Margin="206,379,0,-420" 
                     HorizontalAlignment="Left"
                     Width="184" 
                     Cursor="Hand" 
-                    Grid.Column="3">
+                    Grid.Column="2" Grid.ColumnSpan="2">
 
                 <Button.Style>
                     <Style TargetType="Button">
@@ -428,10 +428,10 @@
                     Click="SimulationButton"
                     Foreground="White"
                     FontSize="16"
-                    Grid.ColumnSpan="2" 
-                    Margin="26,455,0,-520"
+                    Grid.ColumnSpan="3" 
+                    Margin="209,455,0,-520"
                     HorizontalAlignment="Left"
-                    Width="394" Cursor="Hand" Grid.Column="2">
+                    Width="394" Cursor="Hand" Grid.Column="1">
 
                 <Button.Style>
                     <Style TargetType="Button">
@@ -586,7 +586,7 @@
             <!-- Label Globus-->
             <Label
                 Content="🌐"
-                Margin="178,484,0,-551"
+                Margin="147,463,0,-530"
                 FontSize="50"
                 Foreground="#0A695BDD"
                 HorizontalAlignment="Left" 
