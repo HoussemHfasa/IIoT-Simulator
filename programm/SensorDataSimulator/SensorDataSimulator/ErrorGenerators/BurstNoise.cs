@@ -43,7 +43,7 @@ namespace SensorDataSimulator
                         { 
                         TempList[i + z] = BurstValue;
                         }
-                        catch(ArgumentOutOfRangeException e)
+                        catch(ArgumentOutOfRangeException)
                         {
                             TempList.Add(BurstValue);
                         }

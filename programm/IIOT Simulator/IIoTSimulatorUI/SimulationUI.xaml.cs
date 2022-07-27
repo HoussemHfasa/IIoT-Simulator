@@ -117,8 +117,6 @@ namespace IIoTSimulatorUI
         }
 
 
-
-
         // Button Programm schließen 
         private void ProgrammSchließenClick(object sender, RoutedEventArgs e)
         {

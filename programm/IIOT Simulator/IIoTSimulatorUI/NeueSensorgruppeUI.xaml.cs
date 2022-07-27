@@ -374,7 +374,7 @@ namespace IIoTSimulatorUI
                 }
 
                 }
-                catch (System.NullReferenceException f)
+                catch (System.NullReferenceException)
                 {
                     MessageBox.Show("Wählen Sie vorerst einen Ordner aus, in dem der Sensor erstellt werden soll. ");
                 }

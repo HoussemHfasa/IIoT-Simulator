@@ -14,27 +14,27 @@ namespace MQTTCommunicator
     {
         private String id;
       //  private List<String> subscriptions { get; }
-        private List<String> publishing { get; }
+        private List<String> Publishing { get; }
         private string _clients { get; set; }
 
         public Client(string ClientId)
         {
             this.id = ClientId;
            // this.subscriptions = new List<String>();
-            this.publishing = new List<String>();
+            this.Publishing = new List<String>();
         }
 
 
         public void AddPublishing(String topic)
         {
-            this.publishing.Add(topic);
+            this.Publishing.Add(topic);
         }
 
         public void Unpublish(String topic)
         {
-            if (this.publishing.Contains(topic))
+            if (this.Publishing.Contains(topic))
             {
-                this.publishing.Remove(topic);
+                this.Publishing.Remove(topic);
             }
             else
             {
@@ -45,7 +45,7 @@ namespace MQTTCommunicator
 
         public bool IsPublishing(String topic)
         {
-            return this.publishing.Contains(topic);
+            return this.Publishing.Contains(topic);
         }
     }
 
