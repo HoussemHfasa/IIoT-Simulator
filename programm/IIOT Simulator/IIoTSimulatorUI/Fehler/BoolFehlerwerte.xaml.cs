@@ -39,6 +39,7 @@ namespace IIoTSimulatorUI
         {
             //Marker, welcher Konstruktor verwendet wurde
             Boolconstructor = true;
+
             this.BoolSensor = NewSensor;
             InitializeComponent();
         }
@@ -46,17 +47,27 @@ namespace IIoTSimulatorUI
         //Konstruktor der bei Button Aktualisieren aufgerufen wird. Es wird zusätzlich noch das Berechnungsergebnis übergeben
         public BoolFehlerwerte(ref SensorAndSensorgroup.Sensor<bool> NewSensor, List<bool> Sensordaten)
         {
+            //Marker, welcher Konstruktor verwendet wurde
             Boolconstructor = false;
+
+            // Parameter abspeichern
             this.BoolSensor = NewSensor;
             this.Datenliste = Sensordaten;
+
             values = new ChartValues<double>();
             int[] Labelsint = null;
+
+            //Seite inizialisieren
             InitializeComponent();
+
+            // Neue Collection mit Linien
             SeriesCollection = new SeriesCollection
             {
             };
+
             Labelsint = new int[Datenliste.Count];
             Labels = new string[Datenliste.Count];
+
             for (int i = 0; i < Datenliste.Count; i++)
             {
                 Labelsint[i] = i;
@@ -73,8 +84,8 @@ namespace IIoTSimulatorUI
 
             // Beschriftung der Werte YAchse
             YFormatter = value => value.ToString("");
-            //modifying the series collection will animate and update the chart
 
+            // neue LineSeries hinzufügen
             SeriesCollection.Add(new LineSeries
             {
                 Title = BoolSensor.Sensor_id,
@@ -85,11 +96,13 @@ namespace IIoTSimulatorUI
             DataContext = this;
         }
 
+
+        // Sensordaten speichern Button
         private void SensordatenSpeichern(object sender, RoutedEventArgs e)
         {
-            try
+            try //try-catch auf ungültiges Format
             {
-
+                //Daten aus Nutzereingaben speichern
                 if (Boolconstructor == true)
                 {
                     // Nutzereingaben überprüfen
@@ -104,7 +117,7 @@ namespace IIoTSimulatorUI
                         BoolSensor.SetValues(DataGenerator.GetSensorDataWithBoolErrors(BoolSensor.GetValues()));
                     }
                 }
-                else
+                else  // Daten aus angezeigten Daten speichern
                 {
                     BoolSensor.SetValues(Datenliste);
 
@@ -118,14 +131,16 @@ namespace IIoTSimulatorUI
             }
         }
 
+        // Button zum schließen der Seite
         private void ProgrammSchlievßenClick(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        // Aktualisieren Button erzeugt Linechart
         private void Aktualisieren(object sender, RoutedEventArgs e)
         {
-            try
+            try //try-catch für ungültige Nutzereingaben
             {
                 // Nutzereingaben überprüfen
                 if (Convert.ToDouble(textBoxFehlerrate.Text) < 0.0 || Convert.ToDouble(textBoxFehlerrate.Text) > 1.0)
@@ -137,6 +152,8 @@ namespace IIoTSimulatorUI
                     // Fehlerdatengenerator erzeugen, Sensordaten mit Fehlern versehen
                     RandomZeroesError DataGenerator = new RandomZeroesError(Convert.ToDouble(textBoxFehlerrate.Text), Convert.ToInt32(textBoxFehlerlänge.Text));
                     Datenliste = DataGenerator.GetSensorDataWithBoolErrors(BoolSensor.GetValues());
+
+                    // Seite neu aufrufen mit bestehender Datenliste -> Linechart baut sich auf
                     BoolFehlerwerte Aktualisirung = new BoolFehlerwerte(ref BoolSensor, Datenliste);
                     this.Visibility = Visibility.Hidden;
                     Aktualisirung.Show();
