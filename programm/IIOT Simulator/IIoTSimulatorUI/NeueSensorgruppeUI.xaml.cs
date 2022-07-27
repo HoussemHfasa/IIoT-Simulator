@@ -211,9 +211,7 @@ namespace IIoTSimulatorUI
 
                 MessageBox.Show("Die Sensorgruppe wurde gespeichert.");
                 
-                MainWindow objectStartseite2 = new MainWindow(Sensorgroup);
-                this.Visibility = Visibility.Hidden;
-                objectStartseite2.Show();
+                
             }
             
         }
@@ -383,6 +381,13 @@ namespace IIoTSimulatorUI
 
             }
 
+        }
+
+        private void SimulationButton(object sender, RoutedEventArgs e)
+        {
+            SimulationUI objectSimulation = new SimulationUI(Sensorgroup);
+            this.Visibility = Visibility.Hidden;
+            objectSimulation.Show();
         }
     }
 }

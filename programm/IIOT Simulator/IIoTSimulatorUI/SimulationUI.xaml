@@ -142,7 +142,7 @@
                 FontSize="18"/>
 
             <!-- Button Daten Senden-->
-            <Button Content="Daten senden"
+            <Button Content="Senden"
                     Click="DatenSenden"
                 Foreground="White"
                     FontSize="16" 
@@ -303,8 +303,8 @@
 
             <!-- Label Senden-->
             <Label
-                Content="Ausgewählte Sensordaten an den Broker senden:"
-                Margin="18,162,127,-165"
+                Content="Einzelwerte an den Broker senden."
+                Margin="28,162,149,-165"
                 FontSize="14"
                 Foreground="White"
                 FontFamily="Fonts/#Dosis" Grid.ColumnSpan="2"/>
@@ -351,6 +351,88 @@
                 HorizontalContentAlignment="Center" 
                 VerticalContentAlignment="Center"
                 Grid.Column="3"/>
+
+
+            <!-- Label Daten mit Zeit-->
+            <Label
+                Content="Daten mit "
+                Margin="18,295,140,-298"
+                FontSize="14"
+                Foreground="White"
+                FontFamily="Fonts/#Dosis" 
+                VerticalContentAlignment="Center" 
+                HorizontalContentAlignment="Center"/>
+
+            <!--TextBox für die Zeit Eingabe-->
+            <TextBox 
+                x:Name="TextBoxZeit"
+                Margin="108,286,77,-287" 
+                Background="Transparent" 
+                BorderBrush="#FF656A77" 
+                BorderThickness="0,0,0,1"
+                Foreground="White"
+                FontSize="15"/>
+
+
+            <!-- Label Daten mit Zeit Pt.2-->
+            <Label
+                Content="Sekunden "
+                Margin="163,295,186,-298"
+                FontSize="14"
+                Foreground="White"
+                FontFamily="Fonts/#Dosis" 
+                VerticalContentAlignment="Center" 
+                HorizontalContentAlignment="Left" 
+                Grid.ColumnSpan="2"/>
+
+            <!-- Label Daten mit Zeit Pt.3-->
+            <Label
+                Content="Zeitintervallen senden."
+                Margin="28,338,11,-341"
+                FontSize="14"
+                Foreground="White"
+                FontFamily="Fonts/#Dosis"/>
+
+            <!-- Button Daten Senden mit Zeitintervall-->
+            <Button Content="Senden"
+                    Click="DatenSendenZeit"
+                Foreground="White"
+                    FontSize="16" 
+                    Margin="0,381,0,-396" 
+                    HorizontalAlignment="Center"
+                    Width="192"
+                    Cursor="Hand">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="TextElement.FontFamily" 
+                                Value ="Fonts/Dosis"/>
+                        <Setter Property="Background" 
+                                Value="#008080"/>
+                        <Setter Property="Cursor" 
+                                Value="Hand"/>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" 
+                                     Value="True">
+                                <Setter Property="Background"
+                                        Value="Aqua"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="180" Height="30"
+                                CornerRadius="12"
+                                Background= "{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
 
         </Grid>
 
