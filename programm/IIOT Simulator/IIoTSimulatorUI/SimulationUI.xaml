@@ -270,27 +270,7 @@
                 Grid.Column="1" 
                 Margin="49,71,36,-66"
                 Width="150"
-                Height="30" >
-                <ComboBoxItem 
-                     Content="Temperatursensor">
-                </ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Helligkeitssensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Stromsensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Rauchmelder"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Feuchtigkeitssensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Füllstandsensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Dehnungssensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Drehmomentsensor"></ComboBoxItem>
-                <ComboBoxItem 
-                     Content="Spannungssensor"></ComboBoxItem>
-
+                Height="30">
             </ComboBox>
 
             <!-- Label Sensor-->
@@ -366,12 +346,13 @@
             <!--TextBox für die Zeit Eingabe-->
             <TextBox 
                 x:Name="TextBoxZeit"
-                Margin="108,286,77,-287" 
+                Margin="108,300,77,-287" 
                 Background="Transparent" 
                 BorderBrush="#FF656A77" 
                 BorderThickness="0,0,0,1"
                 Foreground="White"
-                FontSize="15"/>
+                FontSize="15" 
+                TextAlignment="Right"/>
 
 
             <!-- Label Daten mit Zeit Pt.2-->
