@@ -104,9 +104,9 @@ namespace MQTTCommunicator
                     });
                 }
             }
-            catch
+            catch(Exception)
             {
-                throw new FormatException(message);
+               
                 message += "-Connection failed\n-";
             }
 
