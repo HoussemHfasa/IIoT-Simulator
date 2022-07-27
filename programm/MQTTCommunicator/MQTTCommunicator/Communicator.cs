@@ -15,7 +15,6 @@ namespace MQTTCommunicator
     public class Communicator : IMQTTCommunicator
     {
         private IMqttClient mqttClient;
-        //private Dictionary<String, Client> clients;
         private List<String> Topic { get; set; }
         private List<String> TopicMessage { get; set; }
         string host;
@@ -145,34 +144,6 @@ namespace MQTTCommunicator
         /// <param name="messagePayload">Ubersendete Nachrichten an den Broker</param>
         public async void PublishToTopic(string topicName, String messagePayload)
         {
-            /*
-             if(mqttClient.IsConnected)
-             {                                      
-                     try
-                     {
-                          var message = new MqttApplicationMessageBuilder()
-                          .WithTopic(topicName)
-                          .WithPayload(messagePayload)
-                          .WithExactlyOnceQoS()
-                          .WithRetainFlag(true)
-                          .Build();
-                             AddTopic(topicName);
-                             AddTopicMessage(messagePayload);
-                             Console.WriteLine("Publishing message -" + messagePayload + "- from: " + "TestClient" + " to Topic " + topicName);
-                    Task t = Task.Run(() => mqttClient.PublishAsync(message));
-                    Task.WaitAll(t);                                      
-                } 
-                     catch (Exception e)
-                     {
-                          Console.WriteLine("Something went wrong: " + e.Message);
-                          //Console.ReadKey();
-                     }
-             }
-             else if(mqttClient.IsConnected == false)
-            {
-                ConnectToBroker(host, port, username, password);
-            }*/
-
             if (mqttClient.IsConnected == false)
             {
                 ConnectToBroker(host, port, username, password);
@@ -194,7 +165,6 @@ namespace MQTTCommunicator
             catch (Exception e)
             {
                 Console.WriteLine("Something went wrong: " + e.Message);
-                //Console.ReadKey();
             }
         }
 

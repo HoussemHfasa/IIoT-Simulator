@@ -86,7 +86,7 @@ namespace IIoTSimulatorUI
 
             // Beschriftung der Werte YAchse
             YFormatter = value => value.ToString("");
-            //modifying the series collection will animate and update the chart
+            
 
             // neue LineSeries hinzufügen
             SeriesCollection.Add(new LineSeries
