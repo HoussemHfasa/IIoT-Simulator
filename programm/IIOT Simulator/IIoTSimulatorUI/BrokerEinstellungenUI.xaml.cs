@@ -19,7 +19,7 @@ namespace IIoTSimulatorUI
     {
         public static Communicator BrokerCom = new Communicator();
     }
-
+    
 
     /// <summary>
     /// Interaktionslogik für BrokerEinstellungenUI.xaml
@@ -29,9 +29,10 @@ namespace IIoTSimulatorUI
         BrokerProfile Brokerdaten = new BrokerProfile();
         DataStorage.DataStorage Datasave = new DataStorage.DataStorage(); 
         bool button1WasClicked = false;
-
+        bool stillconnected=false;
         public BrokerEinstellungenUI()
         {
+             stillconnected = false;
             InitializeComponent();
             if(File.Exists(AppDomain.CurrentDomain.BaseDirectory+@"\BrokerProfileTest"))
             {
@@ -43,61 +44,71 @@ namespace IIoTSimulatorUI
             }
         }
 
-
+        string brokerNameEingabe;
+        int portEingabe;
+        string nutzernameEingabe;
+        string passwortEingabe;
         //Methode für den Button 'Verbinden'
         //Hat die Verbindung mit dem Broker funktioniert wird hier über eine MessageBox
         //aufgefordert den Nutzernamen und das Passwort einzugeben.
         private void Verbinden(object sender, RoutedEventArgs e)
         {
-            try
+            if(Brokerdaten.HostName_IP== BrokerNameText.Text.Replace(" ", "")&& Brokerdaten.Port== Int32.Parse(PortText.Text.Replace(" ", ""))&&stillconnected==true)
             {
-                string brokerNameEingabe = BrokerNameText.Text;
-                int portEingabe = Int32.Parse(PortText.Text);
-                string nutzernameEingabe = NutzernameText.Text;
-                string passwortEingabe = PassswortBox.Password.ToString();
+                MessageBox.Show("Sie sind schon mit dem Broker verbunden");
+            }
+            else
+            {
+                stillconnected = false;
+                try
+                {
+                    brokerNameEingabe = BrokerNameText.Text.Replace(" ", "");
+                    portEingabe = Int32.Parse(PortText.Text.Replace(" ", ""));
+                    nutzernameEingabe = NutzernameText.Text;
+                    passwortEingabe = PassswortBox.Password.ToString();
+                    if (button1WasClicked == false)//Hier wird die Verbindung hergestellt nur mit Broker-Namen und dem Port
+                    {
+                        // Verbindung mit Broker herstellen
+                        string verbunden = MQTT.BrokerCom.ConnectToBroker(brokerNameEingabe, portEingabe);
+                        if (verbunden.Equals("-Connected\n-"))
+                        {
+                            stillconnected = true;
+                            Brokerdaten.HostName_IP = BrokerNameText.Text.Replace(" ", "");
+                            Brokerdaten.Port = uint.Parse(PortText.Text.Replace(" ", ""));
+                            Brokerdaten.Username = NutzernameText.Text;
+                            Brokerdaten.Password = PassswortBox.Password.ToString();
+                            Datasave.SavebrokerProfile(Brokerdaten, AppDomain.CurrentDomain.BaseDirectory);
+                            MessageBox.Show("Erfolgreiche Broker-Verbindung");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Verbindung fehlgeschlagen: " + verbunden);
+                            stillconnected = false;
+                        }
+                    }
+                    else//Sollte der Haken gesetzt werden, wird mit dem Broker Namen, Port, Nutzernamen und dem Passwort eine Verbindung hergestellt
+                    {
+                        // Verbindung mit dem Broker herstellen
+                        string verbunden2 = MQTT.BrokerCom.ConnectToBroker(brokerNameEingabe, portEingabe, nutzernameEingabe, passwortEingabe);
+
+                        if (verbunden2.Equals("-Connected\n-"))
+                        {
+                            stillconnected = true;
+                            MessageBox.Show("Erfolgreiche Broker-Verbindung");
+                        }
+                        else
+                        {
+                            stillconnected = false;
+                            MessageBox.Show("Verbindung fehlgeschlagen: " + verbunden2);
+                        }
+                    }
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Invalid Host and Port");
+                }
+            }
             
-
-
-
-            if (button1WasClicked==false)//Hier wird die Verbindung hergestellt nur mit Broker-Namen und dem Port
-            {
-                // Verbindung mit Broker herstellen
-                string verbunden = MQTT.BrokerCom.ConnectToBroker(brokerNameEingabe, portEingabe);
-
-                if (verbunden.Equals("-Connected\n-"))
-                {
-                    Brokerdaten.HostName_IP = BrokerNameText.Text;
-                    Brokerdaten.Port = uint.Parse(PortText.Text);
-                    Brokerdaten.Username = NutzernameText.Text;
-                    Brokerdaten.Password = PassswortBox.Password.ToString();
-                    Datasave.SavebrokerProfile(Brokerdaten, AppDomain.CurrentDomain.BaseDirectory);
-                    MessageBox.Show("Erfolgreiche Broker-Verbindung");
-                }
-                else
-                {
-                    MessageBox.Show("Verbindung fehlgeschlagen: " + verbunden);
-                }
-            }
-            else//Sollte der Haken gesetzt werden, wird mit dem Broker Namen, Port, Nutzernamen und dem Passwort eine Verbindung hergestellt
-            {
-                // Verbindung mit dem Broker herstellen
-                string verbunden2 = MQTT.BrokerCom.ConnectToBroker(brokerNameEingabe, portEingabe, nutzernameEingabe, passwortEingabe);
-
-                if (verbunden2.Equals("-Connected\n-"))
-                {
-                    
-                    MessageBox.Show("Erfolgreiche Broker-Verbindung");
-                }
-                else
-                {
-                    MessageBox.Show("Verbindung fehlgeschlagen: " + verbunden2);
-                }
-            }
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Invalid Host and Port");
-            }
         }
 
 
