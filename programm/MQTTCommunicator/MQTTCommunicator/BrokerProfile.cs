@@ -22,15 +22,7 @@ namespace MQTTCommunicator
             {
                 //Der IP enthält nur Zahlen und Punkten
                 value = value.Replace(" ", "");
-
-                if (ulong.TryParse(value.Replace(".", ""), out ulong output))
-                {
                     this.hostName_IP = value;
-                }
-                else
-                {
-                    throw new Exception("Ungültige Eingabe000");
-                }
             }
         }
         public uint Port

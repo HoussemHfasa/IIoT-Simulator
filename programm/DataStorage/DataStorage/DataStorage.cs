@@ -30,10 +30,10 @@ namespace DataStorage
         }
         
         //Ladung der Brokerdaten
-        public IBrokerProfile LoadBrokerProfile(string filepath)
+        public MQTTCommunicator.BrokerProfile LoadBrokerProfile(string filepath)
         {
 
-            IBrokerProfile data = new MQTTCommunicator.BrokerProfile();
+            MQTTCommunicator.BrokerProfile data = new MQTTCommunicator.BrokerProfile();
             var serializer = new JsonSerializer();
             using (TextReader reader = File.OpenText(filepath+@"\BrokerProfileTest"))
             {

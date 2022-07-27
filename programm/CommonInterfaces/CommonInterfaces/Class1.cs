@@ -116,7 +116,7 @@ namespace CommonInterfaces
         /// deserialise Textdatei zu Json datei ,um die gespeicherte sensorgruppe zu laden
         /// </summary>
         /// <param name="filepath"> Dateipfad, wo die Daten sind gespeichert </param>
-        public IBrokerProfile LoadBrokerProfile(string filepath);
+       // public IBrokerProfile LoadBrokerProfile(string filepath);
         /// <summary>
         /// speichern die Sensorgruppe
         /// </summary>
