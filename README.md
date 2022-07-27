@@ -30,6 +30,7 @@ Wie verwendet man diese Software? Welches Programm muss man starten?
 ## Links, Hinweise etc.
 
 Das Programm 'IIoTSimulatorUI' beinhaltet die finale Software. 
+(IIoT_Simulator\programm\IIOT Simulator\IIOTSimulator.sln)
 
 Die Software wird über Visal Studio gestartet und der Benutzer gelangt vorerst 
 auf die Startseite in der man über die Startleiste zu den Broker-Einstellungen gelangen kann.
