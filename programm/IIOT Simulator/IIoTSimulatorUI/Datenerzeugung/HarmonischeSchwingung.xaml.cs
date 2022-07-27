@@ -57,7 +57,7 @@ namespace IIoTSimulatorUI
             this.DoubleSensor = NewSensor;
             this.Datenliste = Sensordaten;
 
-            values = new ChartValues<double>();
+            
             int[] Labelsint = null;
 
             //Seite inizialisieren
@@ -145,9 +145,9 @@ namespace IIoTSimulatorUI
         {
             //try-catch auf ungültiges Format
             try
-            { 
-            //die Überprüfung Nutzereingaben. 
-            if (Convert.ToDouble(textBoxAmplitude.Text) < 0.0 || Convert.ToDouble(textBoxPeriodendauer.Text) < 0.0 || Convert.ToInt32(textBoxWerteanzahl.Text) < 0)
+            {
+                //die Nutzereingaben Überprüfung
+                if (Convert.ToDouble(textBoxAmplitude.Text) < 0.0 || Convert.ToDouble(textBoxPeriodendauer.Text) < 0.0 || Convert.ToInt32(textBoxWerteanzahl.Text) < 0)
             {
                 MessageBox.Show("Amplitude,Dämpfungsrate, Periodendauer und Werteanzahl dürfen nicht negativ sein.");
             }
