@@ -73,14 +73,21 @@ namespace IIoTSimulatorUI
             if (dialogOK==true)
             {
                  Filepath = fileDialog.FileName;
-                //Datasave öffnet die Dateien und erzeugt daraus Sensorgruppe, Sensorgruppe abspeichern
-                Sensorgroup = Datasave.LoadTree(Filepath);
+                //Uberprüfung der Benutzerauswahl
+                if (!(fileDialog.FileName.Contains("Load")))
+                    {
+                    MessageBox.Show("das ausgewählte Datei muss mit Load beginnen");
+                }
+                else
+                {
+                    //Datasave öffnet die Dateien und erzeugt daraus Sensorgruppe, Sensorgruppe abspeichern
+                    Sensorgroup = Datasave.LoadTree(Filepath);
+                    // öffnet die Seite zum anschauen und editieren der Sensorgruppe
+                    NeueSensorgruppeUI objectNeueSensorGruppe = new NeueSensorgruppeUI(ref Sensorgroup);
+                    this.Visibility = Visibility.Hidden;
+                    objectNeueSensorGruppe.Show();
+                }
             }
-            // öffnet die Seite zum anschauen und editieren der Sensorgruppe
-            NeueSensorgruppeUI objectNeueSensorGruppe = new NeueSensorgruppeUI(ref Sensorgroup);
-            this.Visibility = Visibility.Hidden;
-            objectNeueSensorGruppe.Show();
-
         }
 
         //Button um auf die Seite der Simulation zu gelangen
