@@ -36,7 +36,7 @@
 
         <!-- TextBox Fehlerrate-->
         <TextBox x:Name="textBoxFehlerrate" 
-                Text="0,00"
+                Text="0,1"
                 Margin="182,95,462,0"
                 Height="30"
                   Background="#ff1f4663"
@@ -60,7 +60,7 @@
 
         <!-- TextBox für die Fehlerlänge -->
         <TextBox x:Name="textBoxFehlerlänge" 
-                Text="0,00"
+                Text="2"
                 Margin="182,161,462,0"
                 Height="30"
                   Background="#ff1f4663"
@@ -208,7 +208,7 @@
 
         <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Name ="Ingrid" Margin="400,68,30,82" >
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                <lvc:Axis Title="Wert" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Title="Werteanzahl" Labels="{Binding Labels}"></lvc:Axis>
