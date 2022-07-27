@@ -40,6 +40,7 @@ namespace IIoTSimulatorUI
         // Sensordaten als Dictionary für Hinzufügen zur Lineseriens
         private Dictionary<string, ChartValues<double>> SensorValues;
 
+        // Dispatcher Timer für Timerevent und Daten in Zeitintervallen an Broker senden
         DispatcherTimer timer;
 
         // Variable zum Abspeichern des aktuellen Sensorwertes
@@ -48,6 +49,7 @@ namespace IIoTSimulatorUI
         // Konstruktor für Simulationsseite, Sensorgruppe die angezeigt werden soll wird dem KOnstruktor übergeben
         public SimulationUI(Sensorgroups ExistingSensorgroup)
         {
+            // Timerobjekt erstellen
             timer = new DispatcherTimer();
 
             int AmmountofValuesMax = 0;
@@ -58,15 +60,6 @@ namespace IIoTSimulatorUI
             InitializeComponent();
 
 
-
-            // foreach(var in Sensorliste)
-            /* {
-             * 
-             * - du kannst hier die Liste direkt mit ItemsSource übergeben -
-                SensortypBox.ItemsSource = new List<string> { "Item1", "Item2", "Item3"};
-
-             }*/
-
             SensorValues = new Dictionary<string, ChartValues<double>>();
 
             // Sammlung von Linien
@@ -74,7 +67,7 @@ namespace IIoTSimulatorUI
             {
             };
 
-            // TODO : Mit Houssem: Kommentar, was hier passiert und die beiden foreach Schleifen zusammenfassen
+           
             //Für jedes Element in Allchildren
             foreach (string Sensor in Sensorgroup.allchildren.Keys)
             {
@@ -181,22 +174,12 @@ namespace IIoTSimulatorUI
 
 
 
-
-
-
+        // Button abbrechen geht zu Hauptseite
         private void Abbrechen(object sender, RoutedEventArgs e)
         {
             MainWindow objectStartseite2 = new MainWindow();
             this.Visibility = Visibility.Hidden;
             objectStartseite2.Show();
-        }
-
-
-
-
-        private void Sensorauswaehlen(object sender, RoutedEventArgs e)
-        {
-
         }
 
 
