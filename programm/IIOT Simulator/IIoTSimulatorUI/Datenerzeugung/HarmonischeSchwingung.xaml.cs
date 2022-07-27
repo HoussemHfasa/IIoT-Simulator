@@ -85,7 +85,7 @@ namespace IIoTSimulatorUI
 
             // Beschriftung der Werte YAchse
             YFormatter = value => value.ToString("");
-            //modifying the series collection will animate and update the chart
+            
 
             // neue LineSeries hinzufügen
             SeriesCollection.Add(new LineSeries
@@ -153,8 +153,7 @@ namespace IIoTSimulatorUI
             }
             else
             {
-                 
-                    
+  
                 if (Boolconstructor==true)
                     {
                         // Objekt der Datenerzeugungsmethode erstellen, Daten erzeugen und in DoubleSensor abspeichern
