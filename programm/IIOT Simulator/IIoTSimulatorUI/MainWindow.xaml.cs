@@ -22,14 +22,21 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        // Sensorgruppen Objekt
         Sensorgroups Sensorgroup;
+
+        //DataStorage Objekt, hier benötigt zum Laden bestehender Sensorgruppe
         DataStorage.DataStorage Datasave = new DataStorage.DataStorage();
+
+
+        // Standardkonstruktor der MainWindow
         public MainWindow()
         {
             this.Sensorgroup = new Sensorgroups();
             InitializeComponent();
         }
 
+        //Konstruktor der als Parameter die in NeueSensorgruppeUI erzeugte Sensorgruppe übergeben bekommt
         public MainWindow(Sensorgroups ExistingSensorgroup)
         {
             this.Sensorgroup = ExistingSensorgroup;
@@ -60,13 +67,16 @@ namespace IIoTSimulatorUI
         {
 
             string Filepath;
+            //OpenFileDialog zum auswählen der Datei.  "heißt open'name'fromhere" oder ähnlich
             OpenFileDialog fileDialog = new OpenFileDialog();
             Nullable<bool> dialogOK = fileDialog.ShowDialog();
             if (dialogOK==true)
             {
                  Filepath = fileDialog.FileName;
+                //Datasave öffnet die Dateien und erzeugt daraus Sensorgruppe, Sensorgruppe abspeichern
                 Sensorgroup = Datasave.LoadTree(Filepath);
             }
+            // öffnet die Seite zum anschauen und editieren der Sensorgruppe
             NeueSensorgruppeUI objectNeueSensorGruppe = new NeueSensorgruppeUI(ref Sensorgroup);
             this.Visibility = Visibility.Hidden;
             objectNeueSensorGruppe.Show();
@@ -76,13 +86,16 @@ namespace IIoTSimulatorUI
         //Button um auf die Seite der Simulation zu gelangen
         private void StartSimulationClick(object sender, RoutedEventArgs e)
         {
-
+            // Wenn keine Sensorgruppe besteht
             if (Sensorgroup.allchildren.Count == 0)
             {
+                // Messagebox anzeigen
                 MessageBox.Show("Erstellen oder laden Sie eine Sensorgruppe");
             }
+            // Wenn Sensorgruppe besteht
             else
             {
+                // Simulationsseite starten und Sensorgruppe übergeben
                 SimulationUI objectSimulation = new SimulationUI( Sensorgroup);
                 this.Visibility = Visibility.Hidden;
                 objectSimulation.Show();
