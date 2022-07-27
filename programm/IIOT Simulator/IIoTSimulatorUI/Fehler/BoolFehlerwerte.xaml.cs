@@ -21,22 +21,29 @@ namespace IIoTSimulatorUI
     /// </summary>
     public partial class BoolFehlerwerte : Window
     {
+        // Sensor der simuliert wird
         Sensor<bool> BoolSensor;
+
+        //Liste enhält die generierten Werte
         List<bool> Datenliste;
         bool Boolconstructor;
-        // Für neue Linechart
 
+        // Für Linechart
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
         private ChartValues<double> values;
 
+        // Konstruktor bekommt die Referenz des neu erstellten bool Sensors übergeben
         public BoolFehlerwerte(ref Sensor<bool> NewSensor)
         {
+            //Marker, welcher Konstruktor verwendet wurde
             Boolconstructor = true;
             this.BoolSensor = NewSensor;
             InitializeComponent();
         }
+
+        //Konstruktor der bei Button Aktualisieren aufgerufen wird. Es wird zusätzlich noch das Berechnungsergebnis übergeben
         public BoolFehlerwerte(ref SensorAndSensorgroup.Sensor<bool> NewSensor, List<bool> Sensordaten)
         {
             Boolconstructor = false;
